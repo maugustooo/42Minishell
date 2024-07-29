@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/29 11:20:52 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/29 12:43:46 by maugusto         ###   ########.fr       */
+/*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
+/*   Updated: 2024/07/29 12:04:58 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Includes/minishell.h"
+#include "Includes/minishell.h"
 
-int main(int argc, char **argv)
+t_token get_tokens()
 {
-	t_mini *mini;
-	
-	get_line(&mini);
+		
 }
