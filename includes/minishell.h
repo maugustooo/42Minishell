@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/29 13:11:16 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:45:18 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@
 
 typedef struct s_token
 {
+	char			*line;
 	int				type;
 	struct s_token	*next;
-	struct s_token	*prev;
 } t_token;
 
 
@@ -49,5 +49,6 @@ typedef struct s_mini
 
 
 void *get_line(t_mini *mini);
+t_token **get_tokens(t_mini *mini);
 
 #endif

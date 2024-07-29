@@ -6,12 +6,16 @@
 #    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 12:43:46 by gude-jes          #+#    #+#              #
-#    Updated: 2024/07/29 13:09:42 by maugusto         ###   ########.fr        #
+#    Updated: 2024/07/29 14:32:28 by maugusto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC 			= cc
 CFLAGS 		= -Wall -Wextra -Werror
+
+READLINE_PATH = vendor/readline/
+RLFLAG = -L$(READLINE_PATH)/lib -lreadline
+
 NAME		= minishell
 
 INC			= -I./includes
@@ -58,7 +62,7 @@ $(OBJ_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ_DIR) $(OBJS) $(DEPS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(RLFLAG) $(OBJS) $(LIBFT) -o $(NAME)
 
 clean:
 	@$(MAKE) clean -C $(LIBFT_PATH)
