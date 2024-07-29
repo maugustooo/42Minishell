@@ -6,11 +6,11 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:20:52 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/29 12:43:46 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/07/29 13:09:11 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Includes/minishell.h"
+# include "minishell.h"
 
 int main(int argc, char **argv)
 {

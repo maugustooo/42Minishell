@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+         #
+#    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 12:43:46 by gude-jes          #+#    #+#              #
-#    Updated: 2024/07/29 12:49:07 by gude-jes         ###   ########.fr        #
+#    Updated: 2024/07/29 13:09:42 by maugusto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,17 +18,19 @@ INC			= -I./includes
 RM			= rm -rf
 
 GENERAL		= main
+PARSE		= parse tokens
 
 #==============================================================================#
 #                                    PATHS                                     #
 #==============================================================================#
 
-VPATH		= src
+VPATH		= src src/parse
 
 LIBFT_PATH	= libft
 LIBFT		= $(LIBFT_PATH)/libft.a
 
 SRC			= $(addsuffix .c, $(GENERAL))\
+				$(addsuffix .c, $(PARSE))\
 
 
 OBJ_DIR		= obj
@@ -62,7 +64,7 @@ clean:
 	@$(MAKE) clean -C $(LIBFT_PATH)
 	@$(RM) $(OBJS)
 
-fclean: clean clean_bonus
+fclean: clean
 	@$(MAKE) fclean -C $(LIBFT_PATH) 
 	@$(RM) $(NAME) $(OBJ_DIR)
 
