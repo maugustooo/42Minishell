@@ -13,16 +13,12 @@
 #include "minishell.h"
 
 /**
- * @brief Set the values in the current node of the list
+ * @brief Set the values type of the node
  * 
- * @param line the word splited  
- * @param mini The struct of the minishell
- * @param token the current node to set the values
+ * @param token the current node to set the type
  */
-static void set_values(char *line, t_mini *mini, t_token *token)
+static void *set_type(t_token *token)
 {
-	token->line = line;
-	
 	if(ft_strncmp(token->line, "<", ft_strlen(token->line)))
 		token->type = INPUT;
 	else if(ft_strncmp(token->line, ">", ft_strlen(token->line)))
@@ -35,6 +31,24 @@ static void set_values(char *line, t_mini *mini, t_token *token)
 		token->type = PIPE;
 	else
 		token->type = ARG;
+}
+
+/**
+ * @brief init the current node of the list
+ * 
+ * @param line the word splited
+ * @return the node inited
+ */
+static t_token *init_token(char *line)
+{
+	t_token *token;
+
+	token = ft_calloc(1, sizeof(t_token));
+	if(!token)
+		return(NULL);
+	token->line = line;
+	set_type(token);
+	return(token);
 }
 
 /**
@@ -52,13 +66,13 @@ t_token **get_tokens(t_mini *mini)
 	
 	splited = ft_split(mini->line, ' ');
 	i = 0;
+	*token = init_token(splited[i]);
 	(*token)->type = CMD;
-	(*token)->line = *splited;
 	while (splited[++i])
 	{
-		next = get_next(token);
+		next = init_token(splited[i]);
+		(*token)->next = next;
 		*token = (*token)->next;
-		set_values(splited[i], mini, token);
 	}
-	
+	return(token);
 }
