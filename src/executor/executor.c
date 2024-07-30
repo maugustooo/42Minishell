@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/07/29 15:48:22 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/07/30 09:58:46 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@
 
 void    executor(t_token *token, t_token *next)
 {
-
+    if (is_built_in(token))
+        handle_built_in(token, next);
+    else
+    {
+        
+    }
 }
 
 /**@}*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/29 15:45:18 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/07/30 10:00:34 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define APPEND 6
 # define PIPE 7
 
+# define MAX_PATH_LEN 4096
+
+#define HOME "/home/$USER"
 
 typedef struct s_token
 {
@@ -47,8 +50,13 @@ typedef struct s_mini
 } t_mini;
 
 
+//--------------Parser------------//
 
-void *get_line(t_mini *mini);
-t_token **get_tokens(t_mini *mini);
+void	*get_line(t_mini *mini);
+t_token	**get_tokens(t_mini *mini);
 
+//------------Executor-----------//
+
+int	is_built_in(t_token *token);
+void	handle_built_in(t_token *token, t_token *next);
 #endif
