@@ -6,7 +6,7 @@
 #    By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 12:43:46 by gude-jes          #+#    #+#              #
-#    Updated: 2024/07/30 10:46:18 by gude-jes         ###   ########.fr        #
+#    Updated: 2024/07/30 16:49:56 by gude-jes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,18 +23,21 @@ RM			= rm -rf
 
 GENERAL		= main
 PARSE		= parse tokens
+EXECUTOR	= cd/handle_cd echo/handle_echo exit/handle_exit pwd/handle_pwd env/handle_pwd
 
 #==============================================================================#
 #                                    PATHS                                     #
 #==============================================================================#
 
-VPATH		= src src/parse
+VPATH		= src src/parse\
+				src/executor
 
 LIBFT_PATH	= libft
 LIBFT		= $(LIBFT_PATH)/libft.a
 
 SRC			= $(addsuffix .c, $(GENERAL))\
 				$(addsuffix .c, $(PARSE))\
+				$(addsuffix .c, $(EXECUTOR))\
 
 
 OBJ_DIR		= obj
