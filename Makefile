@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
+#    By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 12:43:46 by gude-jes          #+#    #+#              #
-#    Updated: 2024/07/29 14:32:28 by maugusto         ###   ########.fr        #
+#    Updated: 2024/07/30 10:46:18 by gude-jes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC 			= cc
 CFLAGS 		= -Wall -Wextra -Werror
 
-READLINE_PATH = vendor/readline/
-RLFLAG = -L$(READLINE_PATH)/lib -lreadline
+READLINE_PATH	= vendor/readline/
+RLFLAG 			= -L$(READLINE_PATH)/lib -lreadline
 
 NAME		= minishell
 

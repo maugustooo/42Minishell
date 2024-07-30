@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/30 10:00:34 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/07/30 15:19:27 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_token	**get_tokens(t_mini *mini);
 
 //------------Executor-----------//
 
-int	is_built_in(t_token *token);
-void	handle_built_in(t_token *token, t_token *next);
+void	handle_cd(t_token *arg, char *prev_dir);
+void    handle_exit(char *prev_dir);
+
 #endif
