@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   freedom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/29 11:20:52 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/31 10:40:24 by maugusto         ###   ########.fr       */
+/*   Created: 2024/07/31 11:22:02 by maugusto          #+#    #+#             */
+/*   Updated: 2024/07/31 11:36:50 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-int main(int argc, char **argv)
+void	free_split(char **split)
 {
-	(void)argc;
-	(void)argv;
-	t_mini mini;
-	t_token *token;
+	int	i;
 
-	token = NULL;
-	ft_memset(&mini, 0, sizeof(t_mini));
-	get_line(&mini, &token);
+	i = -1;
+	if (!split)
+		return ;
 }

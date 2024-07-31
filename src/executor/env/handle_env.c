@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:38:13 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/07/30 16:47:46 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:35:40 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	handle_env(t_token *next)
 	}
 	else
 	{
-		while(environ[i] != next && environ[i] != '\0')
+		while(environ[i] != next->text && environ[i])
 			i++;
-		if (environ[i] == '\0')
-			//TODO: NO ENV
-		else
-			ft_printf("%s\n", environ[i]);
+		// if (environ[i] == '\0')
+		// 	//TODO: NO ENV
+		// else
+		ft_printf("%s\n", environ[i]);
 	}
 }
 

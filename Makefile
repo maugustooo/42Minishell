@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+         #
+#    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/29 12:43:46 by gude-jes          #+#    #+#              #
-#    Updated: 2024/07/30 16:49:56 by gude-jes         ###   ########.fr        #
+#    Updated: 2024/07/31 12:34:49 by maugusto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC 			= cc
-CFLAGS 		= -Wall -Wextra -Werror
+CFLAGS 		= -Wall -Wextra -Werror -g
 
 READLINE_PATH	= vendor/readline/
 RLFLAG 			= -L$(READLINE_PATH)/lib -lreadline
@@ -22,15 +22,22 @@ INC			= -I./includes
 RM			= rm -rf
 
 GENERAL		= main
-PARSE		= parse tokens
-EXECUTOR	= cd/handle_cd echo/handle_echo exit/handle_exit pwd/handle_pwd env/handle_pwd
+PARSE		= parse tokens utils freedom
+EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env
 
 #==============================================================================#
 #                                    PATHS                                     #
 #==============================================================================#
 
 VPATH		= src src/parse\
-				src/executor
+				src/parse/utils\
+				src/executor\
+				src/executor/cd\
+				src/executor/pwd\
+				src/executor/env\
+				src/executor/exit\
+				src/executor/echo\
+				
 
 LIBFT_PATH	= libft
 LIBFT		= $(LIBFT_PATH)/libft.a
@@ -67,9 +74,13 @@ $(OBJ_DIR)/%.o: %.c
 $(NAME): $(OBJ_DIR) $(OBJS) $(DEPS) $(LIBFT)
 	@$(CC) $(CFLAGS) $(RLFLAG) $(OBJS) $(LIBFT) -o $(NAME)
 
+valgrind: 
+	@echo "{\n   leak readline\n   Memcheck:Leak\n...\n   fun:readline\n}\n{\n   leak add_history\n   Memcheck:Leak\n...\n   fun:add_history\n}" > readline.supp
+	@valgrind --suppressions=readline.supp --leak-check=full -s --show-leak-kinds=all ./$(NAME)
+
 clean:
 	@$(MAKE) clean -C $(LIBFT_PATH)
-	@$(RM) $(OBJS)
+	@$(RM) $(OBJS) readline.supp
 
 fclean: clean
 	@$(MAKE) fclean -C $(LIBFT_PATH) 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:06:31 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/07/30 15:23:55 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:34:24 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
  * 
  * @param prev_dir Free previous_dir
 */
-void    handle_exit(char *prev_dir)
+void    handle_exit(char **prev_dir)
 {
     //TODO: FREE LIST
     free(prev_dir);

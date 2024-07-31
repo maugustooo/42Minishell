@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/31 09:30:54 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:19:33 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,24 @@
  * 
  * @param token the current node to set the type
  */
-static void *set_type(t_token *token)
+int set_type(char	*text)
 {
-	if(ft_strncmp(token->text, "<", ft_strlen(token->text)))
-		token->type = INPUT;
-	else if(ft_strncmp(token->text, ">", ft_strlen(token->text)))
-		token->type = OUTPUT;
-	else if(ft_strncmp(token->text, ">>", ft_strlen(token->text)))
-		token->type = APPEND;
-	else if(ft_strncmp(token->text, "<<", ft_strlen(token->text)))
-		token->type = DELIMITER;
-	else if(ft_strncmp(token->text, "|", ft_strlen(token->text)))
-		token->type = PIPE;
+	int type;
+
+	type = 0;
+	if(ft_strncmp(text, "<", ft_strlen(text)) == 0)
+		type = INPUT;
+	else if(ft_strncmp(text, ">", ft_strlen(text)) == 0)
+		type = OUTPUT;
+	else if(ft_strncmp(text, ">>", ft_strlen(text)) == 0)
+		type = APPEND;
+	else if(ft_strncmp(text, "<<", ft_strlen(text)) == 0)
+		type = DELIMITER;
+	else if(ft_strncmp(text, "|", ft_strlen(text)) == 0)
+		type = PIPE;
 	else
-		token->type = ARG;
+		type = ARG;
+	return(type);
 }
 
 /**
@@ -39,16 +43,13 @@ static void *set_type(t_token *token)
  * @param text the word splited
  * @return the node inited
  */
-static t_token *init_token(char *text)
+static void init_token(t_token **token, char *text)
 {
-	t_token *token;
+	int type;
 
-	token = ft_calloc(1, sizeof(t_token));
-	if(!token)
-		return(NULL);
-	token->text = text;
-	set_type(token);
-	return(token);
+	type = 0;
+	type = set_type(text);
+	ft_tokenadd_back(token, ft_newnode(type, text));
 }
 
 /**
@@ -57,22 +58,12 @@ static t_token *init_token(char *text)
  * @param mini The struct of the minishell
  * @return List of tokens
  */
-t_token **get_tokens(t_mini *mini)
+void get_tokens(t_token	**token, char ***splited)
 {
-	char	**splited;
-	t_token **token;
-	t_token	*next;
-	int i;
-	
-	splited = ft_split(mini->line, ' ');
+	int i;	
+
 	i = 0;
-	*token = init_token(splited[i]);
-	(*token)->type = CMD;
-	while (splited[++i])
-	{
-		next = init_token(splited[i]);
-		(*token)->next = next;
-		*token = (*token)->next;
-	}
-	return(token);
+	ft_tokenadd_back(token, ft_newnode(CMD, (*splited)[i]));
+	while ( (*splited)[++i])
+		init_token(token,  (*splited)[i]);
 }

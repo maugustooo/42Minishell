@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/07/30 15:23:40 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:34:37 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,25 @@
  * @param target_dir Target Directory
  * @param prev_dir Pointer to previous directory
 */
-void	handle_dir(t_token *next, char *target_dir, char *prev_dir)
+void	handle_dir(t_token *next, char **target_dir, char **prev_dir)
 {
-    if (next == NULL || ft_strcmp(next, "~", ft_strlen(next)) == 0)
+    if (next->text == NULL || ft_strncmp(next->text, "~", ft_strlen(next->text)) == 0)
         {
-            target_dir = getenv("HOME");
-            if (!target_dir)
-                target_dir = HOME;
+            *target_dir = getenv("HOME");
+            if (!*target_dir)
+                *target_dir = HOME;
         }
-        else if (ft_strncmp(next, "-", ft_strlen(next)) == 0)
+        else if (ft_strncmp(next->text, "-", ft_strlen(next->text)) == 0)
         {
-            if (prev_dir == NULL)
-                target_dir = HOME;
+            if (*prev_dir == NULL)
+                *target_dir = HOME;
             else
-                target_dir = prev_dir;
+                *target_dir = *prev_dir;
         }
         else
-            target_dir = next;
-	else
-		//TODO: NO PATH FOUND
+            *target_dir = next->text;
+	// else
+	// 	//TODO: NO PATH FOUND
 }
 
 /**
@@ -46,7 +46,7 @@ void	handle_dir(t_token *next, char *target_dir, char *prev_dir)
  * @param arg Argument
  * @param prev_dir Pointer to handle previous directory
 */
-void	handle_cd(t_token *arg, char *prev_dir)
+void	handle_cd(t_token *arg, char **prev_dir)
 {
     char    *target_dir;
     char    current_dir[MAX_PATH_LEN];
@@ -56,12 +56,15 @@ void	handle_cd(t_token *arg, char *prev_dir)
         //TODO: HANDLE ERROR
         return;
     }
-    handle_dir(arg, &target_dir, &prev_dir);
+    handle_dir(arg, &target_dir, prev_dir);
     if (chdir(target_dir) != 0)
+	{
         //TODO: HANDLE ERROR
+		ft_printf("\n");
+	}
     else
     {
         free(prev_dir);
-        prev_dir = ft_strdup(current_dir);
+        *prev_dir = ft_strdup(current_dir);
     }    
 }
