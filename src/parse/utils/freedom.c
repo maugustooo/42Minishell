@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_echo.c                                      :+:      :+:    :+:   */
+/*   freedom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 15:33:54 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/07/31 18:25:02 by maugusto         ###   ########.fr       */
+/*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
+/*   Updated: 2024/07/31 18:21:41 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//Sus
-void	handle_echo(char *flag, t_token *next)
+/**
+ * @brief free the params
+ * 
+ * @param token the list of tokens
+ * @param splited the tokens splited
+ */
+void freethem(t_token **token, char **splited)
 {
-	int	nline;
-
-	nline = 0;
-	if (flag && ft_strncmp(flag, "-n", ft_strlen(flag)) == 0)
-		nline = 1;
-	ft_printf("%s", next->text);
-	if (nline)
-		ft_printf("\n");
+	if(token)
+		ft_tokenclear(token);	
+	if(splited)
+		free(splited);
 }

@@ -10,7 +10,7 @@ INC			= -I./includes
 RM			= rm -rf
 
 GENERAL		= main
-PARSE		= parse tokens utils
+PARSE		= parse tokens utils freedom
 EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env
 
 #==============================================================================#

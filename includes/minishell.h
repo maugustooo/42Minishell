@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/31 15:22:59 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:05:54 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <termios.h>
 # include <sys/ioctl.h>
 # include <dirent.h>
+#include <signal.h>
 # include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -34,7 +35,7 @@
 
 # define MAX_PATH_LEN 4096
 
-#define HOME "/home/$USER"
+# define HOME "/home/$USER"
 
 typedef enum e_error
 {
@@ -76,11 +77,14 @@ t_token	*ft_tokenlast(t_token *token);
 void	ft_tokenadd_back(t_token **token, t_token *new);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
-void	free_split(char **split);
+void	freethem(t_token **token, char **splited);
 //--------------Parser------------//
 
-int parse(t_mini *mini, t_token	**token);
+int parse(t_mini *mini, t_token	**token, char ***splited);
 void get_tokens(t_token	**token, char ***splited);
+void handle_sigint(int sig);
+void handle_sigquit(int sig);
+void handle_eof(void);
 
 //------------Executor-----------//
 

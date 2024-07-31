@@ -6,18 +6,47 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:35:32 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/31 15:22:37 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:19:20 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/**
+ * @brief will handle the ctrl+C to display a new line
+ * 
+ * @param sig SIGINT
+ */
+void handle_sigint(int sig)
+{
+    (void)sig;
+    rl_replace_line("", 0);
+    rl_on_new_line();
+    printf("\n"); 
+    rl_redisplay();
+}
+/**
+ * @brief Will handle the ctrl+D to exit
+ * 
+ */
+void handle_eof(void)
+{
+    printf("exit\n");
+    exit(0);
+}
+/**
+ * @brief check is a comand and if echo has the flag -n
+ * 
+ * @param cmd the command
+ * @param token the node with the informations
+ * @param mini the struct
+ * @return 1 if is a command 0 if is not
+ */
 int check(char	*cmd, t_token *token, t_mini *mini)
 {
 	t_token *current;
 
 	current = token;
-	if(ft_strncmp(cmd, "echo", 4) == 0)
+	if(ft_strncmp(cmd, "echo", 4) == 0 && token->next)
 		if(ft_strncmp(token->next->text, "-n", 2) == 0)
 			mini->echo_flag = true;
 	if(ft_strncmp(cmd, "cd", 2) == 0|| ft_strncmp(cmd, "echo", 4) == 0
@@ -28,33 +57,17 @@ int check(char	*cmd, t_token *token, t_mini *mini)
 	return(0);
 }
 /**
- * @brief Get the line in prompt
+ * @brief Will parse creating the tokens and checking commands
  * 
  * @param mini The struct of the minishell
- * @return void* 
+ * @param token the list of tokens
+ * @param splited the tokens splited
+ * @return 0 if ther's an error and 1 if not 
  */
-int parse(t_mini *mini, t_token	**token)
+int parse(t_mini *mini, t_token	**token, char ***splited)
 {
-	char *rl;
-	char **splited;
-	
-	splited = NULL;
-	while(1)
-	{
-		rl = readline("\nMiniShell: ");
-		mini->line = rl;
-		splited = ft_split(mini->line, ' ');
-		if(!*splited)
-			continue;
-		if(!check(*splited, *token, mini))
-		{
-			ft_printf(Error_Msg(ERROR_CMD), *splited);
-			continue;
-		}
-		get_tokens(token, &splited);
-		executor(token);
-		ft_tokenclear(token);	
-		free(splited);
-	}
+		get_tokens(token, splited);
+		if(!check(**splited, *token, mini))
+			return(ft_printf(Error_Msg(ERROR_CMD), **splited), 0);
 	return(1);
 }
