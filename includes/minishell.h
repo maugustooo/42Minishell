@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/30 15:19:27 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/07/31 09:30:58 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 
 typedef struct s_token
 {
-	char			*line;
+	char			*text;
 	int				type;
 	struct s_token	*next;
 } t_token;
@@ -59,5 +59,8 @@ t_token	**get_tokens(t_mini *mini);
 
 void	handle_cd(t_token *arg, char *prev_dir);
 void    handle_exit(char *prev_dir);
+void	handle_echo(t_token *flag, t_token *text);
+void	handle_env(t_token *next);
+void	handle_pwd();
 
 #endif
