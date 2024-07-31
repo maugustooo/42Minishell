@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:20:52 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/31 10:40:24 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/07/31 13:58:25 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@ int main(int argc, char **argv)
 
 	token = NULL;
 	ft_memset(&mini, 0, sizeof(t_mini));
-	get_line(&mini, &token);
+	parse(&mini, &token);
 }

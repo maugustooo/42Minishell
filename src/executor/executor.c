@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/07/31 12:33:16 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/07/31 12:45:51 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void    executor(t_token **token)
             handle_echo((*token)->next->text, (*token)->next->next);
 		else if (ft_strncmp((*token)->text, "env", ft_strlen((*token)->text)) == 0)
 			handle_env((*token)->next);
-		else if (ft_strncmp((*token)->text, "pwd", ft_strlen((*token)->text)) == 0)
+		else if (ft_strncmp((*token)->text, "pwd", 3) == 0)
 			handle_pwd();
         else if (ft_strncmp((*token)->text, "exit", ft_strlen((*token)->text)) == 0)
             handle_exit(&prev_dir);

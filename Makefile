@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/07/29 12:43:46 by gude-jes          #+#    #+#              #
-#    Updated: 2024/07/31 12:34:49 by maugusto         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 CC 			= cc
 CFLAGS 		= -Wall -Wextra -Werror -g
 
@@ -22,7 +10,7 @@ INC			= -I./includes
 RM			= rm -rf
 
 GENERAL		= main
-PARSE		= parse tokens utils freedom
+PARSE		= parse tokens utils
 EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env
 
 #==============================================================================#

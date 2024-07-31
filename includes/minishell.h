@@ -6,14 +6,14 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/31 12:34:16 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/07/31 15:22:59 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-
+# include <stdbool.h>
 # include <curses.h>
 # include <term.h>
 # include <termios.h>
@@ -36,6 +36,25 @@
 
 #define HOME "/home/$USER"
 
+typedef enum e_error
+{
+	ERROR_CMD,
+	ERROR_ENV
+}	t_error;
+
+// const char *Error_Msg[] =
+// {
+//     [ERROR_CMD] = "%s: command not found",
+//     /* etc. */  
+// };
+
+static inline const char *Error_Msg(enum e_error i)
+{
+    static const char *strings[] = { "%s: command not found", "orange", "grape", "banana", /* continue for rest of values */ };
+
+    return strings[i];
+}
+
 typedef struct s_token
 {
 	char			*text;
@@ -44,9 +63,11 @@ typedef struct s_token
 } t_token;
 
 
+
 typedef struct s_mini
 {
 	char	*line;
+	bool		echo_flag;
 } t_mini;
 
 //--------------Utils-------------//
@@ -58,7 +79,7 @@ void	ft_tokenclear(t_token **token);
 void	free_split(char **split);
 //--------------Parser------------//
 
-void get_line(t_mini *mini, t_token	**token);
+int parse(t_mini *mini, t_token	**token);
 void get_tokens(t_token	**token, char ***splited);
 
 //------------Executor-----------//

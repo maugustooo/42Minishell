@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:05:35 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/31 11:36:31 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/07/31 14:37:14 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_tokenclear(t_token **token)
 
 	if (!token || !*token)
 		return ;
-	while ((*token)->next)
+	while (*token)
 	{
 		tmp = (*token)->next;
 		free((*token)->text);
