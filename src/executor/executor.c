@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/07/31 18:09:34 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:42:26 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,26 @@ int	is_built_in(t_token *token)
     return(token->type == CMD);
 }
 
+void	handle_built_ins(t_token **token)
+{
+	static char *prev_dir = NULL;
+	
+	if (ft_strncmp((*token)->text, "cd", 2) == 0)
+		handle_cd(*token, &prev_dir);
+	else if (ft_strncmp((*token)->text, "echo", 4) == 0)
+		handle_echo((*token)->next->text, (*token)->next);
+	else if (ft_strncmp((*token)->text, "env", 3) == 0)
+		handle_env((*token)->next);
+	else if (ft_strncmp((*token)->text, "pwd", 3) == 0)
+		handle_pwd();
+	else if ((ft_strncmp((*token)->text, "export", 6) == 0))
+		handle_export();
+	// else if (ft_strncmp((*token)->text, "unset", 5) == 0)
+	// 	handle_unset();
+	else if (ft_strncmp((*token)->text, "exit", 4) == 0)
+		handle_exit(&prev_dir);
+}
+
 /**
  * @brief Handles the built in functions
  * 
@@ -40,20 +60,10 @@ int	is_built_in(t_token *token)
 */
 void    executor(t_token **token)
 {
-    char *prev_dir = NULL;
-
+	
     if (is_built_in(*token))
     {
-        if (ft_strncmp((*token)->text, "cd", ft_strlen((*token)->text)) == 0)
-            handle_cd(*token, &prev_dir);
-        else if (ft_strncmp((*token)->text, "echo", ft_strlen((*token)->text)) == 0)
-            handle_echo((*token)->next->text, (*token)->next);
-		else if (ft_strncmp((*token)->text, "env", ft_strlen((*token)->text)) == 0)
-			handle_env((*token)->next);
-		else if (ft_strncmp((*token)->text, "pwd", 3) == 0)
-			handle_pwd();
-        else if (ft_strncmp((*token)->text, "exit", ft_strlen((*token)->text)) == 0)
-            handle_exit(&prev_dir);
+		handle_built_ins(token);
     }
     else
     {

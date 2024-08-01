@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/31 18:05:54 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:43:18 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 
 # define MAX_PATH_LEN 4096
 
-# define HOME "/home/$USER"
+# define HOME "/home"
 
 typedef enum e_error
 {
@@ -93,6 +93,7 @@ void    handle_exit(char **prev_dir);
 void	handle_echo(char *flag, t_token *next);
 void	handle_env(t_token *next);
 void	handle_pwd();
+void	handle_export();
 void    executor(t_token **token);
 
 #endif

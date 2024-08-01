@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_echo.c                                      :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 15:33:54 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/01 09:10:25 by gude-jes         ###   ########.fr       */
+/*   Created: 2024/08/01 10:48:46 by gude-jes          #+#    #+#             */
+/*   Updated: 2024/08/01 10:56:11 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-//Sus
-void	handle_echo(char *flag, t_token *next)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	if(!flag && next == NULL)
-		ft_printf("\n");
-	else if (!flag)
-		ft_printf("%s\n", next->text);
-	else
-		ft_printf("%s", next->text);
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

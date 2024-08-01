@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/07/31 12:34:37 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/01 09:33:52 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@
 */
 void	handle_dir(t_token *next, char **target_dir, char **prev_dir)
 {
-    if (next->text == NULL || ft_strncmp(next->text, "~", ft_strlen(next->text)) == 0)
+    if (next->next->text == NULL 
+	|| ft_strncmp(next->next->text, "~", ft_strlen(next->next->text)) == 0)
         {
             *target_dir = getenv("HOME");
             if (!*target_dir)
                 *target_dir = HOME;
         }
-        else if (ft_strncmp(next->text, "-", ft_strlen(next->text)) == 0)
+        else if (ft_strncmp(next->next->text, "-",
+		 ft_strlen(next->next->text)) == 0)
         {
             if (*prev_dir == NULL)
                 *target_dir = HOME;
@@ -35,7 +37,7 @@ void	handle_dir(t_token *next, char **target_dir, char **prev_dir)
                 *target_dir = *prev_dir;
         }
         else
-            *target_dir = next->text;
+            *target_dir = next->next->text;
 	// else
 	// 	//TODO: NO PATH FOUND
 }
@@ -64,7 +66,7 @@ void	handle_cd(t_token *arg, char **prev_dir)
 	}
     else
     {
-        free(prev_dir);
+        free(*prev_dir);
         *prev_dir = ft_strdup(current_dir);
     }    
 }

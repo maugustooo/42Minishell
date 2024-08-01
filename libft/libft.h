@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 13:37:27 by dot               #+#    #+#             */
-/*   Updated: 2024/06/19 11:41:49 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:44:32 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t n);
 size_t	ft_strlen(char const *str);
 int		ft_strncmp(char const *s1, char const *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 

@@ -11,7 +11,7 @@ RM			= rm -rf
 
 GENERAL		= main
 PARSE		= parse tokens utils freedom
-EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env
+EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export
 
 #==============================================================================#
 #                                    PATHS                                     #
@@ -25,6 +25,7 @@ VPATH		= src src/parse\
 				src/executor/env\
 				src/executor/exit\
 				src/executor/echo\
+				src/executor/export\
 				
 
 LIBFT_PATH	= libft
