@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/01 11:43:18 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/01 16:57:00 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ void handle_eof(void);
 
 void	handle_cd(t_token *arg, char **prev_dir);
 void    handle_exit(char **prev_dir);
-void	handle_echo(char *flag, t_token *next);
+void	handle_echo(char *text, t_token *next, t_mini *mini);
 void	handle_env(t_token *next);
 void	handle_pwd();
 void	handle_export();
-void    executor(t_token **token);
+void    executor(t_token **token, t_mini *mini);
 
 #endif
