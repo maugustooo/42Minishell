@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 09:14:01 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/02 09:18:10 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/02 10:49:51 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,25 @@
 /**
  * @brief Duplicate environment variables
  * 
- * @return char** Duplicated matrix of environment variables
+ * @param mini the struct
 */
-char	**dup_env()
+void	dup_env(t_mini *mini)
 {
 	extern char **environ;
-	char		**penv;
 	int			count;
 	int			i;
 	
+	i = 0;
 	count = 0;
 	while(environ[count])
 		count++;
-	penv = malloc(sizeof(char *) * count);
-	if(!penv)
+	mini->penv = malloc(sizeof(char *) * count);
+	if(!mini->penv)
 		//TODO:HANDLE MALLOC ERROR
 	i = 0;
 	while (i < count)
 	{
-		penv[i] = environ[i];
+		mini->penv[i] = environ[i];
 		i++;
 	}
-	return (penv);
 }

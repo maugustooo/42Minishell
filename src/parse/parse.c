@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:35:32 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/31 18:19:20 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/02 10:52:30 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int check(char	*cmd, t_token *token, t_mini *mini)
 int parse(t_mini *mini, t_token	**token, char ***splited)
 {
 		get_tokens(token, splited);
+		dup_env(mini);
 		if(!check(**splited, *token, mini))
 			return(ft_printf(Error_Msg(ERROR_CMD), **splited), 0);
 	return(1);

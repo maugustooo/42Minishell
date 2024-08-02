@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/01 16:58:53 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/02 10:52:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	handle_built_ins(t_token **token, t_mini *mini)
 {
 	static char *prev_dir = NULL;
 	
-	ft_printf("%s - %s\n", (*token)->next->text, (*token)->next->text);
 	if (ft_strncmp((*token)->text, "cd", 2) == 0)
 		handle_cd(*token, &prev_dir);
 	else if (ft_strncmp((*token)->text, "echo", 4) == 0)

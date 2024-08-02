@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/01 16:57:00 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/02 10:47:53 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ typedef struct s_token
 typedef struct s_mini
 {
 	char	*line;
+	
+	char	**penv;
+
 	bool		echo_flag;
 } t_mini;
 
@@ -78,6 +81,7 @@ void	ft_tokenadd_back(t_token **token, t_token *new);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
 void	freethem(t_token **token, char **splited);
+void	dup_env(t_mini *mini);
 //--------------Parser------------//
 
 int parse(t_mini *mini, t_token	**token, char ***splited);

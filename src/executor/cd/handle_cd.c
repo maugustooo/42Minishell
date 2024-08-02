@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/01 09:33:52 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/02 10:55:30 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	handle_cd(t_token *arg, char **prev_dir)
         return;
     }
     handle_dir(arg, &target_dir, prev_dir);
-    if (chdir(target_dir) != 0)
+    if (chdir(	) != 0)
 	{
         //TODO: HANDLE ERROR
 		ft_printf("\n");
