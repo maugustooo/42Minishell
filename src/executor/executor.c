@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/02 13:50:08 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/02 15:52:36 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,19 @@ void    executor(t_token **token, t_mini *mini)
     }
     else
     {
-        
+       pid_t pid = fork();
+        if (pid == 0) {
+			char *argv[] = {(*token)->text, NULL};
+            if (execvp((*token)->text, argv) == -1) {
+                perror("execvp");
+            }
+            exit(EXIT_FAILURE);
+        } else if (pid < 0) {
+            perror("fork");
+        } else {
+            int status;
+            waitpid(pid, &status, 0);
+        } 
     }
 }
 

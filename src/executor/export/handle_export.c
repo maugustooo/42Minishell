@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/02 13:49:51 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:12:44 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	handle_export(t_mini *mini)
 {
 	char	**tmp_env;
 	char	**key;
-	//char	*value;
 	int		i;
 	int		j;
 

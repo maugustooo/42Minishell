@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:20:52 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/02 13:44:50 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/02 15:55:19 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void minishell(t_mini *mini, t_token	**token, char **envp)
 			freethem(token, splited);
 			continue;
 		}
+		add_history(mini->line);
 		executor(token, mini);
 		freethem(token, splited);
 	}
