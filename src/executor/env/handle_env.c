@@ -3,34 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   handle_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:38:13 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/07/31 12:35:40 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:07:57 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_env(t_token *next)
+void	handle_env(t_mini *mini, t_token *next)
 {
-	extern char **environ;
 	int i;
 
 	i = 0;
-	if(!next)
+	if (next)
 	{
-		while(environ[i])
-			ft_printf("%s\n", environ[i++]);
+		ft_printf("env: Options/Arguments not allowed by subject");
 	}
 	else
 	{
-		while(environ[i] != next->text && environ[i])
-			i++;
-		// if (environ[i] == '\0')
-		// 	//TODO: NO ENV
-		// else
-		ft_printf("%s\n", environ[i]);
+		// if(mini->penv) TODO: Check no env
+		// {
+			while(mini->penv[i])
+				ft_printf("%s\n", mini->penv[i++]);
+		//}	
 	}
 }
 

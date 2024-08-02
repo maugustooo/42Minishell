@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:35:32 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/02 10:52:30 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:31:42 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ int check(char	*cmd, t_token *token, t_mini *mini)
  * @param splited the tokens splited
  * @return 0 if ther's an error and 1 if not 
  */
-int parse(t_mini *mini, t_token	**token, char ***splited)
+int parse(t_mini *mini, t_token	**token, char ***splited, char **envp)
 {
 		get_tokens(token, splited);
-		dup_env(mini);
+		dup_env(mini, envp);
 		if(!check(**splited, *token, mini))
 			return(ft_printf(Error_Msg(ERROR_CMD), **splited), 0);
 	return(1);

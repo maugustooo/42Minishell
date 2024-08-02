@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/02 10:52:05 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:02:46 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	handle_built_ins(t_token **token, t_mini *mini)
 	else if (ft_strncmp((*token)->text, "echo", 4) == 0)
 		handle_echo((*token)->next->text, (*token)->next->next, mini);
 	else if (ft_strncmp((*token)->text, "env", 3) == 0)
-		handle_env((*token)->next);
+		handle_env(mini, (*token)->next);
 	else if (ft_strncmp((*token)->text, "pwd", 3) == 0)
 		handle_pwd();
 	else if ((ft_strncmp((*token)->text, "export", 6) == 0))

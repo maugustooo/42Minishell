@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 09:14:01 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/02 10:49:51 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/02 11:32:16 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@
  * 
  * @param mini the struct
 */
-void	dup_env(t_mini *mini)
+void	dup_env(t_mini *mini, char **envp)
 {
-	extern char **environ;
 	int			count;
 	int			i;
 	
 	i = 0;
 	count = 0;
-	while(environ[count])
+	while(envp[count])
 		count++;
 	mini->penv = malloc(sizeof(char *) * count);
 	if(!mini->penv)
@@ -33,7 +32,7 @@ void	dup_env(t_mini *mini)
 	i = 0;
 	while (i < count)
 	{
-		mini->penv[i] = environ[i];
+		mini->penv[i] = envp[i];
 		i++;
 	}
 }
