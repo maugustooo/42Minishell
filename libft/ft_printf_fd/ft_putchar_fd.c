@@ -5,30 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 10:06:41 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/02 11:16:14 by maugusto         ###   ########.fr       */
+/*   Created: 2024/08/02 12:40:13 by maugusto          #+#    #+#             */
+/*   Updated: 2024/08/02 12:40:48 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/**
- * @defgroup mandatory Mandatory
- * @{
- * @file ft_putchar.c
- * @brief Prints a character 
-*/
 
 #include "../libft.h"
 
 /**
- * @brief Print a character 
+ * @brief Writes the character c to the fd
  * 
- * @param c Character to be printed
- * @return int Length of character - 1
-*/
+ * @param c Character
+ * @param fd File Descriptor
+ */
 int	ft_printchar_fd(char c, int fd)
 {
 	write (fd, &c, 1);
-	return (1);
+	return(1);
 }
-
-/**@}*/

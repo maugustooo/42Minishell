@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 13:37:27 by dot               #+#    #+#             */
-/*   Updated: 2024/08/01 11:44:32 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/02 12:42:48 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,16 @@ void	ft_putstr(char *str);
 int		ft_printstr(char *str);
 int		ft_printnbr(int n);
 int		ft_printpercent(void);
+
+//-----------------------------FT PRINTF_FD-------------------//
+
+int		ft_printf_fd(int fd, const char *str, ...);
+int		ft_printchar_fd(char c, int fd);
+int		ft_putnbrhex_fd(unsigned int nbr, const char c, int fd);
+int		ft_putptr_fd(void *nbr, int fd);
+int		ft_uitoa_fd(unsigned int nbr, int fd);
+int		ft_printstr_fd(char *str, int fd);
+int		ft_printnbr_fd(int n, int fd);
+int		ft_printpercent_fd(int fd);
 
 #endif

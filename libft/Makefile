@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+         #
+#    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/09 12:18:36 by gude-jes          #+#    #+#              #
-#    Updated: 2024/08/01 11:44:55 by gude-jes         ###   ########.fr        #
+#    Updated: 2024/08/02 12:39:04 by maugusto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,10 @@ LIB_SRCS			=	ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
 					get_next_line/get_next_line_bonus.c get_next_line/get_next_line_utils_bonus.c\
 					ft_printf/ft_printf_utils.c ft_printf/ft_printf.c\
 					ft_printf/ft_putchar.c ft_printf/ft_putnbrhex.c\
-					ft_printf/ft_putptr.c ft_printf/ft_uitoa.c
+					ft_printf/ft_putptr.c ft_printf/ft_uitoa.c\
+					ft_printf_fd/ft_printf_utils_fd.c ft_printf_fd/ft_printf_fd.c\
+					ft_printf_fd/ft_putchar_fd.c ft_printf_fd/ft_putnbrhex_fd.c\
+					ft_printf_fd/ft_putptr_fd.c ft_printf_fd/ft_uitoa_fd.c
 OBJS			= $(LIB_SRCS:.c=.o)
 
 all:			$(NAME)
