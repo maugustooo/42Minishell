@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/01 11:48:09 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/02 09:18:50 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	handle_export()
 	j = 0;
 	while(environ[i])
 		i++;
-	if(!(tmp_env = malloc(i * sizeof(char *))))
+	tmp_env = malloc(i * sizeof(char *));
+	if(!tmp_env)
 	{
 		//TODO:Handle malloc error
 	}
