@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:20:52 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/02 11:30:37 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/02 13:44:50 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void minishell(t_mini *mini, t_token	**token, char **envp)
 	rl = NULL;
 	while(1)
 	{
-		rl = readline("\nMiniShell: ");
+		rl = readline("MiniShell: ");
 		if (!rl)
             handle_eof();
 		mini->line = rl;
