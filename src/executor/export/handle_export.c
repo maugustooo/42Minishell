@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/02 14:12:44 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/05 12:01:01 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ char	**handle_arr(t_mini *mini)
 		i++;
 	tmp_env = malloc(i * sizeof(char *));
 	if (!tmp_env)
-	{
-		//TODO:Handle malloc error
-	}
+		return(NULL);
 	while (j < i)
 	{
 		tmp_env[j] = mini->penv[j];

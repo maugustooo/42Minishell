@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/02 15:48:30 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/05 12:09:53 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef enum e_error
 
 static inline const char *Error_Msg(enum e_error i)
 {
-    static const char *strings[] = { "%s: command not found", "orange", "grape", "banana", /* continue for rest of values */ };
+    static const char *strings[] = { "%s: command not found\n", "orange", "grape", "banana", /* continue for rest of values */ };
 
     return strings[i];
 }
@@ -82,7 +82,7 @@ t_token	*ft_tokenlast(t_token *token);
 void	ft_tokenadd_back(t_token **token, t_token *new);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
-void	freethem(t_token **token, char **splited);
+void	freethem(t_token **token, char **splited, t_mini *mini);
 void	dup_env(t_mini *mini, char **envp);
 //--------------Parser------------//
 

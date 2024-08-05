@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/02 11:08:38 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/05 12:43:18 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,16 @@ void	handle_cd(t_token *arg, char **prev_dir)
         //TODO: HANDLE ERROR
         return;
     }
-    handle_dir(arg, &target_dir, prev_dir);
-    if (chdir(target_dir) != 0)
+	if(arg->next)
+		handle_dir(arg, &target_dir, prev_dir);
+	if (chdir(target_dir) != 0 && arg->next)
 	{
-        //TODO: HANDLE ERROR
+		//TODO: HANDLE ERROR
 		ft_printf("\n");
 	}
-    else
-    {
-        free(*prev_dir);
-        *prev_dir = ft_strdup(current_dir);
-    }    
+	else
+	{
+		free(*prev_dir);
+		*prev_dir = ft_strdup(current_dir);//Aqui e suposto dar free quando?
+	}
 }
