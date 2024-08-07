@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/05 12:09:53 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/07 09:43:07 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ typedef struct s_token
 typedef struct s_mini
 {
 	char	*line;
-	
 	char	**penv;
-
 	bool		echo_flag;
 } t_mini;
 

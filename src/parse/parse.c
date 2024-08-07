@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:35:32 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/02 15:54:31 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/07 09:43:00 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int parse(t_mini *mini, t_token	**token, char ***splited, char **envp)
 {
 		get_tokens(token, splited);
 		dup_env(mini, envp);
-		if(!check(**splited, *token, mini))
-			return(ft_printf(Error_Msg(ERROR_CMD), **splited), 0);
+		// if(!check(**splited, *token, mini))
+		// 	return(ft_printf(Error_Msg(ERROR_CMD), **splited), 0);
 	return(1);
 }

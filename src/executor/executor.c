@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/05 12:41:54 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/07 10:02:05 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,15 @@
 */
 int	is_built_in(t_token *token)
 {
-    return(token->type == CMD);
+    return(token->type == CMD
+	&& (ft_strcmp(token->text, "cd") == 0
+	|| ft_strcmp(token->text, "echo") == 0
+	|| ft_strcmp(token->text, "env") == 0
+	|| ft_strcmp(token->text, "pwd") == 0
+	|| ft_strcmp(token->text, "export") == 0
+	|| ft_strcmp(token->text, "unset") == 0
+	|| ft_strcmp(token->text, "exit") == 0));
+	
 }
 
 void	handle_built_ins(t_token **token, t_mini *mini)
@@ -40,9 +48,7 @@ void	handle_built_ins(t_token **token, t_mini *mini)
 		handle_cd(*token, &prev_dir);
 	else if (ft_strncmp((*token)->text, "echo", 4) == 0 && (*token)->next)
 		handle_echo((*token)->next->text, (*token)->next, mini);
-	else
-		ft_printf("\n");
-	if (ft_strncmp((*token)->text, "env", 3) == 0)
+	else if (ft_strncmp((*token)->text, "env", 3) == 0)
 		handle_env(mini, (*token)->next);
 	else if (ft_strncmp((*token)->text, "pwd", 3) == 0)
 		handle_pwd();
