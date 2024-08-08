@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:35:32 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/07 14:02:00 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:32:02 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,13 @@ void handle_eof(void)
  * @param splited the tokens splited
  * @return 0 if ther's an error and 1 if not 
  */
-int parse(t_mini *mini, t_token	**token, char ***splited, char **envp)
+int parse(t_mini *mini, t_token	**token, char **envp)
 {
-		get_tokens(token, splited);
+	get_tokens(token, mini);
+	if(!mini->penv)
 		dup_env(mini, envp);
+	if(ft_strncmp((*mini->splited), "echo", 4) == 0 && (*token)->next)
+		if(ft_strncmp((*token)->next->text, "-n", 2) == 0)
+			mini->echo_flag = true;
 	return(1);
 }

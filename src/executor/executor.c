@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/07 14:18:54 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:31:47 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	is_built_in(t_token *token)
 
 void	handle_built_ins(t_token **token, t_mini *mini)
 {
-	static char *prev_dir = NULL;//Bro em vez de declarar aqui, metemos na struct e trabalha com a struct para lidar com a memoria, e melhor ne?
-	
-	if (ft_strncmp((*token)->text, "cd", 2) == 0)
-		handle_cd(*token, &prev_dir);
-	else if (ft_strncmp((*token)->text, "echo", 4) == 0 && (*token)->next)
-		handle_echo((*token)->next->text, (*token)->next, mini);
+	if (ft_strncmp((*token)->text, "echo", 4) == 0 && (*token)->next)
+		handle_echo((*token)->next, mini);
+	else if (ft_strncmp((*token)->text, "echo", 4) == 0 && !(*token)->next)
+		ft_printf("\n");
+	else if (ft_strncmp((*token)->text, "cd", 2) == 0)
+		handle_cd(*token, mini);
 	else if (ft_strncmp((*token)->text, "env", 3) == 0)
 		handle_env(mini, (*token)->next);
 	else if (ft_strncmp((*token)->text, "pwd", 3) == 0)
@@ -57,7 +57,7 @@ void	handle_built_ins(t_token **token, t_mini *mini)
 	else if (ft_strncmp((*token)->text, "unset", 5) == 0)
 	 	handle_unset(*token, mini);
 	else if (ft_strncmp((*token)->text, "exit", 4) == 0)
-		handle_exit(&prev_dir);
+		handle_exit(token, mini);
 }
 
 /**

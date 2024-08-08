@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:20:52 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/08 11:07:07 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:33:10 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,25 @@
 static void minishell(t_mini *mini, t_token	**token, char **envp)
 {
 	char *rl;
-	char **splited;
-	
-	splited = NULL;
+
 	rl = NULL;
 	while(1)
 	{
-		rl = readline("MiniShell: ");
+		rl = readline("miniShell: ");
 		if (!rl)
             handle_eof();
 		mini->line = rl;
-		splited = ft_split(mini->line, ' ');
-		if(!*splited)
+		mini->splited = ft_split(mini->line, ' ');
+		if(!mini->splited)
 			continue;
-		if(!parse(mini, token, &splited, envp))
+		if(!parse(mini, token, envp))	
 		{
-			freethem(token, splited, mini);
+			freethem(token, mini);
 			continue;
 		}
 		add_history(mini->line);
 		executor(token, mini);
-		freethem(token, splited, mini);
+		freethem(token, mini);
 	}
 }
 

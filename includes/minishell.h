@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/07 15:25:49 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:31:52 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 typedef enum e_error
 {
 	ERROR_CMD,
+	ERROR_CD,
 	ERROR_ENV
 }	t_error;
 
@@ -53,7 +54,7 @@ typedef enum e_error
 
 static inline const char *Error_Msg(enum e_error i)
 {
-    static const char *strings[] = { "%s: command not found\n", "orange", "grape", "banana", /* continue for rest of values */ };
+    static const char *strings[] = { "%s: command not found\n", "minishell: cd: %s: No such file or directory", "grape", "banana", /* continue for rest of values */ };
     return strings[i];
 }
 
@@ -70,6 +71,8 @@ typedef struct s_mini
 {
 	char	*line;
 	char	**penv;
+	char	*prev_dir;
+	char	**splited;
 	bool		echo_flag;
 } t_mini;
 
@@ -79,21 +82,21 @@ t_token	*ft_tokenlast(t_token *token);
 void	ft_tokenadd_back(t_token **token, t_token *new);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
-void	freethem(t_token **token, char **splited, t_mini *mini);
+void		freethem(t_token **token, t_mini *mini);
 void	dup_env(t_mini *mini, char **envp);
 //--------------Parser------------//
 
-int		parse(t_mini *mini, t_token	**token, char ***splited, char **envp);
-void	get_tokens(t_token	**token, char ***splited);
+int		parse(t_mini *mini, t_token	**token, char **envp);
+void	get_tokens(t_token	**token, t_mini *mini);
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
 void	handle_eof(void);
 
 //------------Executor-----------//
 
-void	handle_cd(t_token *arg, char **prev_dir);
-void    handle_exit(char **prev_dir);
-void	handle_echo(char *text, t_token *next, t_mini *mini);
+void	handle_cd(t_token *arg, t_mini *mini);
+void    handle_exit(t_token **token, t_mini *mini);
+void	handle_echo(t_token *next, t_mini *mini);
 void	handle_env(t_mini *mini, t_token *next);
 void	handle_pwd();
 void	set_export(t_mini *mini, t_token *token);
