@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/02 11:31:54 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:25:49 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@
 # include <term.h>
 # include <termios.h>
 # include <sys/ioctl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
 # include <dirent.h>
 #include <signal.h>
-# include <sys/stat.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
@@ -51,8 +53,7 @@ typedef enum e_error
 
 static inline const char *Error_Msg(enum e_error i)
 {
-    static const char *strings[] = { "%s: command not found", "orange", "grape", "banana", /* continue for rest of values */ };
-
+    static const char *strings[] = { "%s: command not found\n", "orange", "grape", "banana", /* continue for rest of values */ };
     return strings[i];
 }
 
@@ -68,9 +69,7 @@ typedef struct s_token
 typedef struct s_mini
 {
 	char	*line;
-	
 	char	**penv;
-
 	bool		echo_flag;
 } t_mini;
 
@@ -80,7 +79,7 @@ t_token	*ft_tokenlast(t_token *token);
 void	ft_tokenadd_back(t_token **token, t_token *new);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
-void	freethem(t_token **token, char **splited);
+void	freethem(t_token **token, char **splited, t_mini *mini);
 void	dup_env(t_mini *mini, char **envp);
 //--------------Parser------------//
 
@@ -97,7 +96,9 @@ void    handle_exit(char **prev_dir);
 void	handle_echo(char *text, t_token *next, t_mini *mini);
 void	handle_env(t_mini *mini, t_token *next);
 void	handle_pwd();
-void	handle_export();
+void	set_export(t_mini *mini, t_token *token);
+void	handle_export(t_mini *mini, t_token *token);
+void	handle_unset(t_token *token, t_mini *mini);
 void    executor(t_token **token, t_mini *mini);
 
 #endif

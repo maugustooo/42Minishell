@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/02 09:18:50 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:26:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,32 +37,70 @@ void	bsort(char **arr, int n)
 	}
 }
 
-void	handle_export()
+char	**handle_arr(t_mini *mini)
 {
-	extern char **environ;
 	char		**tmp_env;
 	int 		i;
 	int 		j;
 
 	i = 0;
 	j = 0;
-	while(environ[i])
+	while (mini->penv[i])
 		i++;
 	tmp_env = malloc(i * sizeof(char *));
-	if(!tmp_env)
+	if (!tmp_env)
+		return(NULL);
+	while (j < i)
 	{
-		//TODO:Handle malloc error
-	}
-	while(j < i)
-	{
-		tmp_env[j] = environ[j];
+		tmp_env[j] = mini->penv[j];
 		j++;
 	}
+	tmp_env[j] = NULL;
 	bsort(tmp_env, j);
-	j = 0;
-	while(j < i)
+	return (tmp_env);
+}
+
+void	export_print(char **tmp_env, char **key, int i)
+{
+	if(key[1] != NULL)
 	{
-		ft_printf("declare -x %s\n", tmp_env[j]);
-		j++;
+		if (tmp_env[i + 1] != NULL)
+			ft_printf("declare -x %s=\"%s\"\n", key[0], key[1]);
+		else
+			ft_printf("declare -x %s=\"%s\"", key[0], key[1]);
 	}
+}
+
+void	export_no_args(t_mini *mini)
+{
+	char	**tmp_env;
+	char	**key;
+	int		i;
+	int		j;
+
+
+	tmp_env = handle_arr(mini);
+	i = 0;
+	j = 0;
+	while (tmp_env[i])
+	{
+		key = ft_split(tmp_env[i], '=');
+		if (ft_strcmp(key[0], "_") == 0)
+		{
+			i++;
+			continue;
+		}
+		export_print(tmp_env, key, i);
+		i++;
+	}
+	free(key);
+	free(tmp_env);
+}
+
+void	handle_export(t_mini *mini, t_token *token)
+{
+	if(token)
+		set_export(mini, token);
+	else
+		export_no_args(mini);
 }

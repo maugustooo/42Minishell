@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   handle_echo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:33:54 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/01 17:01:13 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/05 11:15:13 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//Sus
+//Not Sus
 void	handle_echo(char *flag, t_token *next, t_mini *mini)
 {
+	if (next && !mini->echo_flag)
+		ft_printf("%s", next->text);
+	else if (next->next)
+		ft_printf("%s", next->next->text);
+	else if(flag && next->next)
+		ft_printf("%s", next->next->text);
 	if(mini->echo_flag == false)
 		ft_printf("\n");
-	if(!flag && next == NULL)
-		ft_printf("\n");
-	else if (!flag)
-		ft_printf("%s\n", next->text);
-	else
-		ft_printf("%s", next->text);
+	mini->echo_flag = false;
 }
