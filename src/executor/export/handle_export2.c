@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/07 14:21:44 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/08 12:07:43 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	set_export(t_mini *mini, t_token *token)
 	i = 0;
 	while(mini->penv[i])
 		i++;
-	tenv = malloc(sizeof(char *) * (i + 2));
+	tenv = ft_calloc((i + 2), sizeof(char *));
 	//TODO: Handle malloc error
 	j = 0;
 	while (j < i)
@@ -43,8 +43,7 @@ void	set_export(t_mini *mini, t_token *token)
 		free(mini->penv[j]);
 		j++;
 	}
-	tenv[j + 1] = token->text;
-	tenv[j + 2] = NULL;
+	tenv[j] = ft_strdup(token->text);
 	free(mini->penv);
 	//resize_penv(mini, j);
 	dup_env(mini, tenv);
