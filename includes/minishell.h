@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/07 11:39:16 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:25:49 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef enum e_error
 static inline const char *Error_Msg(enum e_error i)
 {
     static const char *strings[] = { "%s: command not found\n", "orange", "grape", "banana", /* continue for rest of values */ };
-
     return strings[i];
 }
 
@@ -97,7 +96,8 @@ void    handle_exit(char **prev_dir);
 void	handle_echo(char *text, t_token *next, t_mini *mini);
 void	handle_env(t_mini *mini, t_token *next);
 void	handle_pwd();
-void	handle_export(t_mini *mini);
+void	set_export(t_mini *mini, t_token *token);
+void	handle_export(t_mini *mini, t_token *token);
 void	handle_unset(t_token *token, t_mini *mini);
 void    executor(t_token **token, t_mini *mini);
 

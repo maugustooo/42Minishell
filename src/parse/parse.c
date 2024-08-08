@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:35:32 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/07 09:43:00 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:02:00 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,7 @@ void handle_eof(void)
     printf("exit\n");
     exit(0);
 }
-/**
- * @brief check is a comand and if echo has the flag -n
- * 
- * @param cmd the command
- * @param token the node with the informations
- * @param mini the struct
- * @return 1 if is a command 0 if is not
- */
-int check(char	*cmd, t_token *token, t_mini *mini)
-{
-	t_token *current;
 
-	current = token;
-	if(ft_strncmp(cmd, "echo", 4) == 0 && token->next)
-		if(ft_strncmp(token->next->text, "-n", 2) == 0)
-			mini->echo_flag = true;
-	if(ft_strncmp(cmd, "cd", 2) == 0|| ft_strncmp(cmd, "echo", 4) == 0
-		|| ft_strncmp(cmd, "pwd", 3) == 0|| ft_strncmp(cmd, "export", 6) == 0
-		|| ft_strncmp(cmd, "unset", 5) == 0|| ft_strncmp(cmd, "exit", 4) == 0
-		|| ft_strncmp(cmd, "exit", 4) == 0 || ft_strncmp(cmd, "env", 4) == 0)
-			return(1);
-	return(0);
-}
 /**
  * @brief Will parse creating the tokens and checking commands
  * 
@@ -68,7 +46,5 @@ int parse(t_mini *mini, t_token	**token, char ***splited, char **envp)
 {
 		get_tokens(token, splited);
 		dup_env(mini, envp);
-		// if(!check(**splited, *token, mini))
-		// 	return(ft_printf(Error_Msg(ERROR_CMD), **splited), 0);
 	return(1);
 }

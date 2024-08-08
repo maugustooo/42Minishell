@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/07 11:39:21 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:18:54 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	handle_built_ins(t_token **token, t_mini *mini)
 	else if (ft_strncmp((*token)->text, "pwd", 3) == 0)
 		handle_pwd();
 	else if ((ft_strncmp((*token)->text, "export", 6) == 0))
-		handle_export(mini);
+		handle_export(mini, (*token)->next);
 	else if (ft_strncmp((*token)->text, "unset", 5) == 0)
 	 	handle_unset(*token, mini);
 	else if (ft_strncmp((*token)->text, "exit", 4) == 0)

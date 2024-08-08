@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/05 12:01:01 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:26:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,24 @@ char	**handle_arr(t_mini *mini)
 	return (tmp_env);
 }
 
-void	handle_export(t_mini *mini)
+void	export_print(char **tmp_env, char **key, int i)
+{
+	if(key[1] != NULL)
+	{
+		if (tmp_env[i + 1] != NULL)
+			ft_printf("declare -x %s=\"%s\"\n", key[0], key[1]);
+		else
+			ft_printf("declare -x %s=\"%s\"", key[0], key[1]);
+	}
+}
+
+void	export_no_args(t_mini *mini)
 {
 	char	**tmp_env;
 	char	**key;
 	int		i;
 	int		j;
+
 
 	tmp_env = handle_arr(mini);
 	i = 0;
@@ -78,12 +90,17 @@ void	handle_export(t_mini *mini)
 			i++;
 			continue;
 		}
-		if (tmp_env[i + 1] != NULL)
-			ft_printf("declare -x %s=\"%s\"\n", key[0], key[1]);
-		else
-			ft_printf("declare -x %s=\"%s\"", key[0], key[1]);
+		export_print(tmp_env, key, i);
 		i++;
 	}
 	free(key);
 	free(tmp_env);
+}
+
+void	handle_export(t_mini *mini, t_token *token)
+{
+	if(token)
+		set_export(mini, token);
+	else
+		export_no_args(mini);
 }
