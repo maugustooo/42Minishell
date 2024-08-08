@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/07 14:26:08 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:51:49 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,10 @@ char	**handle_arr(t_mini *mini)
 	return (tmp_env);
 }
 
-void	export_print(char **tmp_env, char **key, int i)
+void	export_print(char **key)
 {
 	if(key[1] != NULL)
-	{
-		if (tmp_env[i + 1] != NULL)
-			ft_printf("declare -x %s=\"%s\"\n", key[0], key[1]);
-		else
-			ft_printf("declare -x %s=\"%s\"", key[0], key[1]);
-	}
+		ft_printf("declare -x %s=\"%s\"\n", key[0], key[1]);
 }
 
 void	export_no_args(t_mini *mini)
@@ -90,7 +85,7 @@ void	export_no_args(t_mini *mini)
 			i++;
 			continue;
 		}
-		export_print(tmp_env, key, i);
+		export_print(key);
 		i++;
 	}
 	free(key);
