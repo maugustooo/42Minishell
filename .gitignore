@@ -6,3 +6,4 @@ libft/get_next_line/*.o
 libft/*.a
 obj/*
 minishell
+readline.supp

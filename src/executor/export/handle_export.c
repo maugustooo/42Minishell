@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/08 13:51:49 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:28:18 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,25 @@ char	**handle_arr(t_mini *mini)
 	return (tmp_env);
 }
 
-void	export_print(char **key)
+void	free_env(char **key, char **tmp_env)
 {
-	if(key[1] != NULL)
-		ft_printf("declare -x %s=\"%s\"\n", key[0], key[1]);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = -1;
+	while (tmp_env[i])
+		i++;
+	while (++j < i)
+		free(tmp_env[j]);
+	free(tmp_env);
+	i = 0;
+	j = -1;
+	while(key[i])
+		i++;
+	while (++j < i)
+		free(key[j]);
+	free(key);
 }
 
 void	export_no_args(t_mini *mini)
@@ -85,11 +100,11 @@ void	export_no_args(t_mini *mini)
 			i++;
 			continue;
 		}
-		export_print(key);
+		if(key[1] != NULL)
+			ft_printf("declare -x %s=\"%s\"\n", key[0], key[1]);
 		i++;
 	}
-	free(key);
-	free(tmp_env);
+	free_env(tmp_env, key);
 }
 
 void	handle_export(t_mini *mini, t_token *token)

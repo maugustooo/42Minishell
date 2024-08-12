@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:35:32 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/12 15:40:19 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:40:01 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ void	check_arg_export(t_token *token)
 			ft_printf(Error_Msg(ERROR_EXPORT), token->next->text);
 			return ;
 		}
-
 	}
+	//TODO: Check this
+	free(key[0]);
+	free(key[1]);
+	free(key);
 }
 
 /**
