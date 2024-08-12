@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/05 12:45:25 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/12 08:49:53 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ static void init_token(t_token **token, char *text)
  * @param mini The struct of the minishell
  * @return List of tokens
  */
-void get_tokens(t_token	**token, char ***splited)
+void	get_tokens(t_token	**token, t_mini *mini)
 {
-	int i;	
+	int	i;	
 
 	i = 0;
-	ft_tokenadd_back(token, ft_newnode(CMD, (*splited)[i]));
-	while ((*splited)[++i])
-		init_token(token,  (*splited)[i]);
+	ft_tokenadd_back(token, ft_newnode(CMD, mini->splited[i]));
+	while (mini->splited[++i])
+		init_token(token,  mini->splited[i]);
 }

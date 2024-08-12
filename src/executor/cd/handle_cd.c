@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/08 14:31:32 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/12 09:40:19 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,33 @@
  * @brief Handles directory change
  * 
  * @param next Argument
- * @param target_dir Target Directory
- * @param prev_dir Pointer to previous directory
+ * @param tgt_dir Target Directory
+ * @param mini Struct of minishel
+ * @param curr_dir Current directory
 */
-void	handle_dir(t_token *next, char **target_dir, t_mini *mini)
+void	handle_dir(t_token *next, char **tgt_dir, t_mini *mini, char *curr_dir)
 {
     if (next->next->text == NULL 
 	|| ft_strncmp(next->next->text, "~", ft_strlen(next->next->text)) == 0)
         {
-            *target_dir = getenv("HOME");
-            if (!*target_dir)
-				*target_dir = HOME;
+            *tgt_dir = getenv("HOME");
+            if (!*tgt_dir)
+				*tgt_dir = HOME;
 		}
 		else if (ft_strncmp(next->next->text, "-",
 			ft_strlen(next->next->text)) == 0)
 		{
 			if (mini->prev_dir == NULL)
-				*target_dir = HOME;
+				*tgt_dir = HOME;
             else
-				*target_dir = mini->prev_dir;
+				*tgt_dir = mini->prev_dir;
 		}
+		else if (ft_strncmp(next->next->text, "..", 2) == 0)
+			*tgt_dir = "..";
+		else if (ft_strncmp(next->next->text, ".", 1) == 0)
+			*tgt_dir = curr_dir;
 		else
-			*target_dir = next->next->text;
+			*tgt_dir = next->next->text;
 }
 
 /**
@@ -56,8 +61,7 @@ void	handle_cd(t_token *arg, t_mini *mini)
 		//TODO: HANDLE ERROR
 		return;
 	}
-	if(arg->next)
-		handle_dir(arg, &target_dir, mini);
+	handle_dir(arg, &target_dir, mini, current_dir);
 	if (chdir(target_dir) != 0 && arg->next)
 	{
 		ft_printf(Error_Msg(ERROR_CD), arg->next->text);

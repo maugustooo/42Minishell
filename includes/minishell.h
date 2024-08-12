@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/08 14:31:52 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/12 08:52:09 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_token	*ft_tokenlast(t_token *token);
 void	ft_tokenadd_back(t_token **token, t_token *new);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
-void		freethem(t_token **token, t_mini *mini);
+void	freethem(t_token **token, t_mini *mini);
 void	dup_env(t_mini *mini, char **envp);
 //--------------Parser------------//
 
@@ -95,7 +95,7 @@ void	handle_eof(void);
 //------------Executor-----------//
 
 void	handle_cd(t_token *arg, t_mini *mini);
-void    handle_exit(t_token **token, t_mini *mini);
+void    handle_exit(t_mini *mini);
 void	handle_echo(t_token *next, t_mini *mini);
 void	handle_env(t_mini *mini, t_token *next);
 void	handle_pwd();
