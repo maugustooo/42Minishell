@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_exit.c                                      :+:      :+:    :+:   */
+/*   ft_str_isalnum.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 15:06:31 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/12 14:25:51 by gude-jes         ###   ########.fr       */
+/*   Created: 2024/04/09 12:16:23 by gude-jes          #+#    #+#             */
+/*   Updated: 2024/08/12 15:04:27 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
  * @defgroup mandatory Mandatory
  * @{
- * @file handle_exit.c
- * @brief Handles the exit
+ * @file ft_str_isalnum.c
+ * @brief Check if str is alphanumeric
 */
 
-#include "minishell.h"
+#include "libft.h"
 
 /**
- * @brief Handles the exit command
+ * @brief Verifies if str is alphanumeric
  * 
- * @param prev_dir Free previous_dir
-*/
-void    handle_exit(t_token **token, t_mini *mini)
+ * @param str string
+ * @return int 1 if alphanumeric | 0 if not
+ */
+int	ft_str_isalnum(char *str)
 {
-    //TODO: FREE LIST
-	freethem(token, mini);
-    exit(EXIT_SUCCESS);
+	int i;
+	
+	i = -1;
+	while (str[++i])
+		if (!ft_isalnum(str[i]))
+			return (0);
+	return (1);
 }
 
 /**@}*/

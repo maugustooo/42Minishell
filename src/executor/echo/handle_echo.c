@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   handle_echo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:33:54 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/08 14:31:34 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:01:05 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void handle_input(t_token *token)
+{
+	int fd;
+	char *file;
+
+	token = token->next;
+	file = token->next->text;
+	fd = open(file, O_RDONLY);
+	ft_printf_fd(fd, token->text);
+}
 //Not Sus
 void	handle_echo(t_token *next, t_mini *mini)
 {
@@ -20,6 +30,8 @@ void	handle_echo(t_token *next, t_mini *mini)
 	first = 0;
 	while (next)
 	{
+		if(next->next->type == INPUT)
+			handle_input(next);
 		if(next && first == 2)
 		{
 			ft_printf("%s", next->text);
@@ -32,7 +44,7 @@ void	handle_echo(t_token *next, t_mini *mini)
 			next = next->next;
 			ft_printf("%s", next->text);
 			first = 2;
-		}	
+		}
 		next = next->next;
 		if(next)
 			ft_printf(" ");	

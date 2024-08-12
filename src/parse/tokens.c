@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/12 08:49:53 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:56:28 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int set_type(char	*text)
 
 	type = 0;
 	if(ft_strncmp(text, "<", ft_strlen(text)) == 0)
-		type = INPUT;
-	else if(ft_strncmp(text, ">", ft_strlen(text)) == 0)
 		type = OUTPUT;
+	else if(ft_strncmp(text, ">", ft_strlen(text)) == 0)
+		type = INPUT;
 	else if(ft_strncmp(text, ">>", ft_strlen(text)) == 0)
 		type = APPEND;
 	else if(ft_strncmp(text, "<<", ft_strlen(text)) == 0)

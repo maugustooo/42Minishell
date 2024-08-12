@@ -3,4 +3,6 @@ libft/*.o
 libft/ft_printf/*.o
 libft/ft_printf_fd/*.o
 libft/get_next_line/*.o
+libft/*.a
 obj/*
+minishell

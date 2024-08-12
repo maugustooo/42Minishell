@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/12 09:40:19 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/12 14:34:40 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 */
 void	handle_dir(t_token *next, char **tgt_dir, t_mini *mini, char *curr_dir)
 {
-    if (next->next->text == NULL 
+    if (next->next == NULL 
 	|| ft_strncmp(next->next->text, "~", ft_strlen(next->next->text)) == 0)
         {
             *tgt_dir = getenv("HOME");

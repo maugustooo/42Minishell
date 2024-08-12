@@ -6,24 +6,11 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/08 12:07:43 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/12 14:32:21 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// void	resize_penv(t_mini *mini, int count)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	mini->penv = malloc(sizeof(char *) * (count + 1));
-// 	//TODO: Handle malloc error
-// 	while (i < count)
-// 	{
-// 		mini->penv
-// 	}
-// }
 
 void	set_export(t_mini *mini, t_token *token)
 {
@@ -45,6 +32,5 @@ void	set_export(t_mini *mini, t_token *token)
 	}
 	tenv[j] = ft_strdup(token->text);
 	free(mini->penv);
-	//resize_penv(mini, j);
 	dup_env(mini, tenv);
 }

@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/12 08:52:09 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:05:26 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@
 
 # define MAX_PATH_LEN 4096
 
-# define HOME "/home"
+# define HOME "/home/$USER"
 
 typedef enum e_error
 {
 	ERROR_CMD,
 	ERROR_CD,
+	ERROR_EXPORT,
 	ERROR_ENV
 }	t_error;
 
@@ -54,7 +55,10 @@ typedef enum e_error
 
 static inline const char *Error_Msg(enum e_error i)
 {
-    static const char *strings[] = { "%s: command not found\n", "minishell: cd: %s: No such file or directory", "grape", "banana", /* continue for rest of values */ };
+    static const char *strings[] = { "%s: command not found\n",
+	"minishell: cd: %s: No such file or directory",
+	"minishell: export: `%s': not a valid identifier\n",
+	"banana", /* continue for rest of values */ };
     return strings[i];
 }
 
@@ -95,7 +99,7 @@ void	handle_eof(void);
 //------------Executor-----------//
 
 void	handle_cd(t_token *arg, t_mini *mini);
-void    handle_exit(t_mini *mini);
+void    handle_exit(t_token **token, t_mini *mini);
 void	handle_echo(t_token *next, t_mini *mini);
 void	handle_env(t_mini *mini, t_token *next);
 void	handle_pwd();
