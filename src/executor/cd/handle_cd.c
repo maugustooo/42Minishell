@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/13 13:54:09 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/13 16:22:30 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	handle_dir(t_token *next, char **tgt_dir, t_mini *mini, char *curr_dir)
 		else if (ft_strncmp(next->next->text, "-", ft_strlen(next->next->text)) == 0)
 		{
 			if (mini->prev_dir == NULL)
-				*tgt_dir = HOME;
+				*tgt_dir = curr_dir;
             else
 				*tgt_dir = mini->prev_dir;
 		}
@@ -70,5 +70,7 @@ void	handle_cd(t_token *arg, t_mini *mini)
 	{
 		free(mini->prev_dir);
 		mini->prev_dir = ft_strdup(current_dir);
+		if(target_dir == current_dir)
+			handle_pwd();
 	}
 }
