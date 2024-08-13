@@ -12,6 +12,7 @@ RM			= rm -rf
 GENERAL		= main
 PARSE		= parse tokens utils freedom env_utils
 EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export handle_export2 handle_unset
+EXPANDER	= expander
 
 #==============================================================================#
 #                                    PATHS                                     #
@@ -19,6 +20,7 @@ EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env hand
 
 VPATH		= src src/parse\
 				src/parse/utils\
+				src/expander\
 				src/executor\
 				src/executor/cd\
 				src/executor/pwd\
@@ -35,6 +37,8 @@ LIBFT		= $(LIBFT_PATH)/libft.a
 SRC			= $(addsuffix .c, $(GENERAL))\
 				$(addsuffix .c, $(PARSE))\
 				$(addsuffix .c, $(EXECUTOR))\
+				$(addsuffix .c, $(EXPANDER))\
+
 
 
 OBJ_DIR		= obj

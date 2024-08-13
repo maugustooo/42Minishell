@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/13 10:46:47 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/13 12:08:09 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ int		parse(t_mini *mini, t_token	**token, char **envp);
 void	get_tokens(t_token	**token, t_mini *mini);
 void	handle_sigint(int sig);
 void	handle_eof(t_token **token, t_mini *mini);
+
+//------------Expander-----------//
+
+char *expander(char *input);
 
 //------------Executor-----------//
 
