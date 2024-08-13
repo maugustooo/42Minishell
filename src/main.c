@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:20:52 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/13 10:45:37 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/13 12:14:40 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void minishell(t_mini *mini, t_token	**token, char **envp)
 		if (!rl)
             handle_eof(token, mini);
 		mini->line = rl;
-		mini->splited = ft_split(mini->line, ' '); //Se mandar o readline vazio ele crasha por causa deste split.
+		if(mini->line[0])
+			mini->splited = ft_split(mini->line, ' '); //Se mandar o readline vazio ele crasha por causa deste split.
 		if(!mini->splited)
 			continue;
 		if(!parse(mini, token, envp))	
