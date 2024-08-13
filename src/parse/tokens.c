@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/12 15:56:28 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/13 09:04:13 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@
  * 
  * @param token the current node to set the type
  */
-int set_type(char	*text)
+int set_type(char *text)
 {
 	int type;
 
 	type = 0;
-	if(ft_strncmp(text, "<", ft_strlen(text)) == 0)
+	if(ft_strcmp(text, "<") == 0)
 		type = OUTPUT;
-	else if(ft_strncmp(text, ">", ft_strlen(text)) == 0)
+	else if(ft_strcmp(text, ">") == 0)
 		type = INPUT;
-	else if(ft_strncmp(text, ">>", ft_strlen(text)) == 0)
+	else if(ft_strcmp(text, ">>") == 0)
 		type = APPEND;
-	else if(ft_strncmp(text, "<<", ft_strlen(text)) == 0)
+	else if(ft_strcmp(text, "<<") == 0)
 		type = DELIMITER;
-	else if(ft_strncmp(text, "|", ft_strlen(text)) == 0)
+	else if(ft_strcmp(text, "|") == 0)
 		type = PIPE;
 	else
 		type = ARG;

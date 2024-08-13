@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/12 15:05:26 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:46:47 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_mini
 	char	**penv;
 	char	*prev_dir;
 	char	**splited;
-	bool		echo_flag;
+	bool	echo_flag;
 } t_mini;
 
 //--------------Utils-------------//
@@ -87,14 +87,14 @@ void	ft_tokenadd_back(t_token **token, t_token *new);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
 void	freethem(t_token **token, t_mini *mini);
+void	free_penv(t_mini *mini);
 void	dup_env(t_mini *mini, char **envp);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
 void	get_tokens(t_token	**token, t_mini *mini);
 void	handle_sigint(int sig);
-void	handle_sigquit(int sig);
-void	handle_eof(void);
+void	handle_eof(t_token **token, t_mini *mini);
 
 //------------Executor-----------//
 

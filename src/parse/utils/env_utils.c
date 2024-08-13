@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 09:14:01 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/12 16:48:28 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/13 09:18:59 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	dup_env(t_mini *mini, char **envp)
 {
 	int			count;
 	int			i;
-	// bool		flag;
+	bool		flag;
 	
 	i = 0;
 	count = 0;
-	// flag = false;
-	// if(mini->penv)
-	// 	flag = true;
+	flag = false;
+	if(mini->penv)
+		flag = true;
 	while (envp[count])
 		count++;
 	mini->penv = malloc(sizeof(char *) * (count + 1));
@@ -53,6 +53,6 @@ void	dup_env(t_mini *mini, char **envp)
 		i++;
 	}
 	mini->penv[count] = NULL;
-	// if(flag)
-	// 	free_envp(envp);
+	if(flag)
+		free_envp(envp);
 }

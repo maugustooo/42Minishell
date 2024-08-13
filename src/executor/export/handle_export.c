@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/12 16:28:18 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/13 11:16:32 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ char	**handle_arr(t_mini *mini)
 	j = 0;
 	while (mini->penv[i])
 		i++;
-	tmp_env = malloc(i * sizeof(char *));
+	tmp_env = malloc((i + 1) * sizeof(char *));
 	if (!tmp_env)
-		return(NULL);
+		return(NULL); //TODO: Handle malloc error
 	while (j < i)
 	{
-		tmp_env[j] = mini->penv[j];
+		tmp_env[j] = ft_strdup(mini->penv[j]);
 		j++;
 	}
 	tmp_env[j] = NULL;
@@ -60,25 +60,33 @@ char	**handle_arr(t_mini *mini)
 	return (tmp_env);
 }
 
-void	free_env(char **key, char **tmp_env)
+void	free_env(char **tmp_env, char ***key)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	**casted_key;
 
 	i = 0;
 	j = -1;
-	while (tmp_env[i])
-		i++;
-	while (++j < i)
-		free(tmp_env[j]);
-	free(tmp_env);
+	if (tmp_env)
+	{
+		while (tmp_env[i])
+			i++;
+		while (++j < i)
+			free(tmp_env[j]);
+		free(tmp_env);
+	}
 	i = 0;
 	j = -1;
-	while(key[i])
-		i++;
-	while (++j < i)
-		free(key[j]);
-	free(key);
+	if (key && *key)
+	{
+		casted_key = *key;
+		while (casted_key[i])
+			i++;
+		while (++j < i)
+			free(casted_key[j]);
+		free(casted_key);
+	}
 }
 
 void	export_no_args(t_mini *mini)
@@ -90,21 +98,24 @@ void	export_no_args(t_mini *mini)
 
 
 	tmp_env = handle_arr(mini);
-	i = 0;
+	i = -1;
 	j = 0;
-	while (tmp_env[i])
+	key = NULL;
+	while (tmp_env[++i])
 	{
+		ft_printf("%d - %s\n", i, tmp_env[i]);
 		key = ft_split(tmp_env[i], '=');
 		if (ft_strcmp(key[0], "_") == 0)
 		{
-			i++;
+			free_env(NULL, &key);
 			continue;
 		}
 		if(key[1] != NULL)
 			ft_printf("declare -x %s=\"%s\"\n", key[0], key[1]);
-		i++;
+		free_env(NULL, &key);
+		key = NULL;
 	}
-	free_env(tmp_env, key);
+	free_env(tmp_env, NULL);
 }
 
 void	handle_export(t_mini *mini, t_token *token)

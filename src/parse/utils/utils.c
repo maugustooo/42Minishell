@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:05:35 by maugusto          #+#    #+#             */
-/*   Updated: 2024/07/31 18:21:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:42:00 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_token	*ft_newnode(int type, char *text)
 	if (!token)
 		return (NULL);
 	token->type = type;
-	token->text = text;
+	token->text = ft_strdup(text);
 	token->next = NULL;
 	return (token);
 }

@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:35:32 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/12 16:40:01 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:25:28 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void handle_sigint(int sig)
  * @brief Will handle the ctrl+D to exit
  * 
  */
-void handle_eof(void)
+void handle_eof(t_token **token , t_mini *mini)
 {
     printf("exit\n");
-    exit(0);
+    handle_exit(token, mini);
 }
 
 void	check_arg_export(t_token *token)

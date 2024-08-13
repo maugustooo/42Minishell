@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:06:31 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/12 14:25:51 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:46:37 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 void    handle_exit(t_token **token, t_mini *mini)
 {
     //TODO: FREE LIST
+	free_penv(mini);
 	freethem(token, mini);
     exit(EXIT_SUCCESS);
 }

@@ -6,11 +6,29 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/12 15:38:28 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:53:54 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_penv(t_mini *mini)
+{
+	int	i;
+
+	i = 0;
+	if (mini->penv)
+	{
+		while (mini->penv[i])
+		{
+			free(mini->penv[i]);
+			i++;
+		}
+		free(mini->penv);
+		mini->penv = NULL;
+	}
+}
+
 /**
  * @brief free the params
  * 
@@ -23,17 +41,12 @@ void	freethem(t_token **token, t_mini *mini)
 
 	i = 0;
 	if(token)
-		ft_tokenclear(token);	
+		ft_tokenclear(token);
 	if(mini->splited)
+	{
+		while (mini->splited[i])
+			free(mini->splited[i++]);
 		free(mini->splited);
-	// if (mini->penv)
-	// {
-	// 	while (mini->penv[i])
-	// 	{
-	// 		free(mini->penv[i]);
-	// 		i++;
-	// 	}
-	// 	free(mini->penv);
-	// 	mini->penv = NULL;
-	// }
+		mini->splited = NULL;
+	}
 }
