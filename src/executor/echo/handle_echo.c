@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:33:54 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/13 13:39:22 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:12:48 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,30 @@ static void handle_input(t_token *token)
 		ft_printf_fd(fd, token->text);
 }
 
-static void print_echo(t_token *next, t_mini *mini)
+static void print_echo(t_token **next, t_mini *mini)
 {
 	int first;
 
 	first = 0;
 	if(next && first == 2)
 		{
-			ft_printf("%s", next->text);
+			ft_printf("%s", (*next)->text);
 			first = 2;
 		}
 	if (next && !mini->echo_flag)
-			ft_printf("%s", next->text);
-	else if (next->next && !first)
+			ft_printf("%s", (*next)->text);
+	else if ((*next)->next && !first)
 		{
-			next = next->next;
-			ft_printf("%s", next->text);
+			(*next) = (*next)->next;
+			ft_printf("%s", (*next)->text);
 			first = 2;
 		}
-	next = next->next;
-	if(next)
-		ft_printf(" ");	
+	(*next) = (*next)->next;
+	if(*next)
+	{
+		if(ft_strcmp((*next)->text, "-n") != 0)
+			ft_printf(" ");
+	}
 }
 
 //Not Sus
@@ -57,7 +60,7 @@ void	handle_echo(t_token *next, t_mini *mini)
 				handle_input(next);
 				return ;
 			}
-		print_echo(next, mini);
+		print_echo(&next, mini);
 	}
 	if(mini->echo_flag == false)
 			ft_printf("\n");

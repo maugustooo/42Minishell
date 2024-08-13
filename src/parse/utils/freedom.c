@@ -6,13 +6,13 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/13 12:34:27 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:00:08 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_penv(t_mini *mini)
+void	free_things(t_mini *mini)
 {
 	int	i;
 
@@ -26,6 +26,11 @@ void	free_penv(t_mini *mini)
 		}
 		free(mini->penv);
 		mini->penv = NULL;
+	}
+	if(mini->prev_dir)
+	{
+		free(mini->prev_dir);
+		mini->prev_dir = NULL;
 	}
 }
 
@@ -48,10 +53,5 @@ void	freethem(t_token **token, t_mini *mini)
 			free(mini->splited[i++]);
 		free(mini->splited);
 		mini->splited = NULL;
-	}
-	if(mini->prev_dir)
-	{
-		free(mini->prev_dir);
-		mini->prev_dir = NULL;
 	}
 }

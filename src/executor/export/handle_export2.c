@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/12 16:33:26 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:59:54 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	set_export(t_mini *mini, t_token *token)
 	{
 		tenv[j] = ft_strdup(mini->penv[j]);
 		free(mini->penv[j]);
+		mini->penv[j] = NULL;
 		j++;
 	}
 	tenv[j] = ft_strdup(token->text);

@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/13 12:08:09 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:00:35 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_tokenadd_back(t_token **token, t_token *new);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
 void	freethem(t_token **token, t_mini *mini);
-void	free_penv(t_mini *mini);
+void	free_things(t_mini *mini);
 void	dup_env(t_mini *mini, char **envp);
 //--------------Parser------------//
 
