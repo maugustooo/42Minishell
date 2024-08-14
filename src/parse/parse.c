@@ -6,7 +6,11 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:35:32 by maugusto          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/08/14 13:56:55 by maugusto         ###   ########.fr       */
+=======
+/*   Updated: 2024/08/14 10:43:50 by gude-jes         ###   ########.fr       */
+>>>>>>> gude-jes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +24,28 @@ void	check_arg_export(t_token *token)
 	char	*check;
 
 	key = NULL;
-	check = ft_strchr(token->next->text, '=');
-	key = ft_split(token->next->text, '=');
-	if(check)
-		check++;
-	if (token->next)
+	while(token->next)
 	{
-		if(check != NULL)
-			value = check;
-		if(!ft_str_isalnum(key[0]) && !ft_strchr(key[0], '_'))
+		check = ft_strchr(token->next->text, '=');
+		key = ft_split(token->next->text, '=');
+		if(check)
+			check++;
+		if (token->next)
 		{
-			ft_printf(Error_Msg(ERROR_EXPORT), token->next->text);
-			return ;
+			if(check != NULL)
+				value = check;
+			if(!ft_str_isalpha(key[0]) && !ft_strchr(key[0], '_'))
+			{
+				ft_printf(Error_Msg(ERROR_EXPORT), token->next->text);
+				return ;
+			}
 		}
+		//TODO: Check this
+		free(key[0]);
+		free(key[1]);
+		free(key);
+		token = token->next;
 	}
-	//TODO: Check this
-	free(key[0]);
-	free(key[1]);
-	free(key);
 }
 
 // static void handle_pipe(t_token *token)

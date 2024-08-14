@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/13 11:16:32 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:36:06 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	export_no_args(t_mini *mini)
 	key = NULL;
 	while (tmp_env[++i])
 	{
-		ft_printf("%d - %s\n", i, tmp_env[i]);
 		key = ft_split(tmp_env[i], '=');
 		if (ft_strcmp(key[0], "_") == 0)
 		{
@@ -120,8 +119,14 @@ void	export_no_args(t_mini *mini)
 
 void	handle_export(t_mini *mini, t_token *token)
 {
-	if(token)
-		set_export(mini, token);
+	if (token)
+	{
+		while(token)
+		{
+			set_export(mini, token);
+			token = token->next;
+		}
+	}
 	else
 		export_no_args(mini);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 09:14:01 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/13 15:06:51 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:37:25 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,9 @@ void	dup_env(t_mini *mini, char **envp)
 {
 	int			count;
 	int			i;
-	bool		flag;
 	
 	i = 0;
 	count = 0;
-	flag = false;
-	if(mini->penv)
-		flag = true;
 	while (envp[count])
 		count++;
 	mini->penv = malloc(sizeof(char *) * (count + 1));
