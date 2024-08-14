@@ -7,3 +7,4 @@ libft/*.a
 obj/*
 minishell
 readline.supp
+*.txt

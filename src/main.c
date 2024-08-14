@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:20:52 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/13 14:16:09 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:04:39 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void minishell(t_mini *mini, t_token	**token, char **envp)
             handle_eof(token, mini);
 		mini->line = rl;
 		if(mini->line[0])
-			mini->splited = ft_split(mini->line, ' '); //Se mandar o readline vazio ele crasha por causa deste split.
+			mini->splited = ft_split(mini->line, ' ');
 		if(!mini->splited)
 			continue;
 		if(!parse(mini, token, envp))	

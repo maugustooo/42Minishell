@@ -3,36 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:35:32 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/13 10:25:28 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:56:55 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/**
- * @brief will handle the ctrl+C to display a new line
- * 
- * @param sig SIGINT
- */
-void handle_sigint(int sig)
-{
-    (void)sig;
-    rl_replace_line("", 0);
-    rl_on_new_line();
-    printf("\n"); 
-    rl_redisplay();
-}
-/**
- * @brief Will handle the ctrl+D to exit
- * 
- */
-void handle_eof(t_token **token , t_mini *mini)
-{
-    printf("exit\n");
-    handle_exit(token, mini);
-}
+
 
 void	check_arg_export(t_token *token)
 {
@@ -61,6 +40,25 @@ void	check_arg_export(t_token *token)
 	free(key);
 }
 
+// static void handle_pipe(t_token *token)
+// {
+// 	if(token->next->type == ARG)
+// 		ft_strlcat(token->text, token->next->text, ft_strlen(token->next->text));
+	
+// }
+// static int have_pipe(t_token *token)
+// {
+// 	int flag;
+
+// 	flag = 0;
+// 	while (token)
+// 	{
+// 		if(token->type == PIPE)
+// 			flag = 1;
+// 		token = token ->next;
+// 	}
+// 	return(flag);
+// }
 /**
  * @brief Will parse creating the tokens and checking commands
  * 
@@ -79,5 +77,7 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 			mini->echo_flag = true;
 	if(ft_strcmp((*mini->splited), "export") == 0 && (*token)->next)
 		check_arg_export(*token);
+	// if(have_pipe(*token))
+	// 	handle_pipe(*token);
 	return(1);
 }

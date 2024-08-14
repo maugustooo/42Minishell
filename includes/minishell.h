@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/13 14:00:35 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/14 11:51:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static inline const char *Error_Msg(enum e_error i)
 
 typedef struct s_token
 {
-	char			*text;
+	char			*text;	
 	int				type;
 	struct s_token	*next;
 } t_token;
