@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_echo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:33:54 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/13 14:12:48 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:34:11 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void print_echo(t_token **next, t_mini *mini)
 	}
 }
 
-//Not Sus
 void	handle_echo(t_token *next, t_mini *mini)
 {
 	while (next)
