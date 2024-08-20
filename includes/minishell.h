@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/14 11:51:05 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:33:28 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,11 @@ t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
 void	freethem(t_token **token, t_mini *mini);
 void	free_things(t_mini *mini);
-void	dup_env(t_mini *mini, char **envp);
+int		env_size(t_mini *mini, char **tenv);
+void	free_tenv(char **tenv);
+void	free_penv(t_mini *mini);
+void	dup_envp(t_mini *mini, char **envp);
+void	dup_tenv(t_mini *mini, char **tenv);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

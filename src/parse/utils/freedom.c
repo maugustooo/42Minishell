@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/19 10:39:46 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:26:28 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,7 @@ void	free_things(t_mini *mini)
 	i = 0;
 	if (mini->penv)
 	{
-		while (mini->penv[i])
-		{
-			free(mini->penv[i]);
-			i++;
-		}
-		free(mini->penv);
+		free_penv(mini);
 		mini->penv = NULL;
 	}
 	if(mini->prev_dir)

@@ -6,32 +6,77 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 09:14:01 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/14 14:37:25 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:44:07 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_envp(char **envp)
+void	free_tenv(char **tenv)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (envp[i])
-		i++;
+	i = env_size(NULL, tenv);
 	j = -1;
 	while (++j < i)
-		free(envp[j]);
-	free(envp);
+	{
+		free(tenv[j]);
+		tenv[j] = NULL;
+	}
+	free(tenv);
 }
 
-/**
- * @brief Duplicate environment variables
- * 
- * @param mini the struct
-*/
-void	dup_env(t_mini *mini, char **envp)
+void	free_penv(t_mini *mini)
+{
+	int	i;
+	int	j;
+
+	i = env_size(mini, NULL);
+	j = -1;
+	while (++j < i)
+	{
+		free(mini->penv[j]);
+		mini->penv[j] = NULL;
+	}
+	free(mini->penv);
+}
+int	env_size(t_mini *mini, char **tenv)
+{
+	int	i;
+
+	i = 0;
+	if(tenv)
+	{
+		while(tenv[i])
+			i++;
+		return(i);
+	}
+	while(mini->penv[i])
+		i++;
+	return(i);
+}
+
+void	dup_tenv(t_mini *mini, char **tenv)
+{
+	int			count;
+	int			i;
+	
+	i = 0;
+	count = env_size(mini, tenv);
+	mini->penv = malloc(sizeof(char *) * (count + 1));
+	//if(!mini->penv)
+		//TODO:HANDLE MALLOC ERROR
+	while (i < count)
+	{
+		mini->penv[i] = ft_strdup(tenv[i]);
+		i++;
+	}
+	mini->penv[count] = NULL;
+	free_tenv(tenv);
+}
+
+void	dup_envp(t_mini *mini, char **envp)
 {
 	int			count;
 	int			i;
