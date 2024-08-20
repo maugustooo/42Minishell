@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/19 08:50:26 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:33:10 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 {
 	get_tokens(token, mini);
 	if(!mini->penv)
-		dup_env(mini, envp);
+		dup_envp(mini, envp);
 	if(ft_strncmp((*mini->splited), "echo", 4) == 0 && (*token)->next)
 		if(ft_strncmp((*token)->next->text, "-n", 2) == 0)
 			mini->echo_flag = true;

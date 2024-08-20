@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/19 08:55:32 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/20 10:35:26 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,26 @@ void	handle_built_ins(t_token **token, t_mini *mini)
 */
 void executor(t_token **token, t_mini *mini)
 {
-	if(is_built_in(*token))
-	{
-		handle_built_ins(token, mini);
-	}
-	else
-	{
-		pid_t pid = fork();
-		if(pid == 0)
-		{
-			char *argv[] = {(*token)->text, NULL};
-			if(execvp((*token)->text, argv) == -1)
-				perror("execvp");
-		}
-	}
+	if (is_built_in(*token))
+    {
+        handle_built_ins(token, mini);
+    }
+    else
+    {
+       pid_t pid = fork();
+        if (pid == 0) {
+            char *argv[] = {(*token)->text, NULL};
+            if (execvp((*token)->text, argv) == -1) {
+                perror("execvp");
+            }
+            exit(EXIT_FAILURE);
+        } else if (pid < 0) {
+            perror("fork");
+        } else {
+            int status;
+            waitpid(pid, &status, 0);
+        }
+    }
     // int pipefd[2];
     // pid_t pid;
     // int fd_in = 0; // Entrada do comando anterior

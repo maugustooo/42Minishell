@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:36:43 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/19 10:49:17 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:06:27 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ void	dup_env_if(t_mini *mini, char *str)
 	int		j;
 	int		k;
 
-	i = 0;
+	i = env_size(mini, NULL);
 	j = 0;
 	k = 0;
-	while(mini->penv[i])
-		i++;
 	tenv = ft_calloc((i + 1), sizeof(char *));
 	//TODO:Handle malloc error
 	while (j < i)
@@ -57,11 +55,8 @@ void	dup_env_if(t_mini *mini, char *str)
 		k++;
 	}
 	tenv[k] = NULL;
-	dup_env(mini, tenv);
-	j = 0;
-	while(tenv[j])
-		free(tenv[j++]);
-	free(tenv);
+	free_penv(mini);
+	dup_tenv(mini, tenv);
 }
 
 void	handle_unset(t_token *token, t_mini *mini)
