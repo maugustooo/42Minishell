@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/19 08:55:32 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/20 11:41:09 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
 */
 
 #include "minishell.h"
+
+int	is_cmd(char *text)
+{
+    return((ft_strcmp(text, "cd") == 0
+	|| ft_strcmp(text, "echo") == 0
+	|| ft_strcmp(text, "env") == 0
+	|| ft_strcmp(text, "pwd") == 0
+	|| ft_strcmp(text, "export") == 0
+	|| ft_strcmp(text, "unset") == 0
+	|| ft_strcmp(text, "exit") == 0));
+	
+}
 
 /**
  * @brief Checks if token is command
@@ -68,102 +80,149 @@ void	handle_built_ins(t_token **token, t_mini *mini)
 */
 void executor(t_token **token, t_mini *mini)
 {
-	if(is_built_in(*token))
-	{
-		handle_built_ins(token, mini);
-	}
-	else
-	{
-		pid_t pid = fork();
-		if(pid == 0)
-		{
-			char *argv[] = {(*token)->text, NULL};
-			if(execvp((*token)->text, argv) == -1)
-				perror("execvp");
-		}
-	}
-    // int pipefd[2];
-    // pid_t pid;
-    // int fd_in = 0; // Entrada do comando anterior
-    // t_token *temp = *token;
-    // t_token *start;
-
-    // while (temp)
+    // if (is_built_in(*token))
     // {
-    //     start = temp;  // Início do comando atual
-
-    //     // Percorre os tokens até o próximo pipe ou o final
-    //     while (temp->next && strcmp(temp->next->text, "|") != 0)
-    //         temp = temp->next;
-
-    //     // Se pipe encontrado, cria o pipe
-    //     if (temp->next && strcmp(temp->next->text, "|") == 0)
-    //         pipe(pipefd);
-
-    //     pid = fork();
-    //     if (pid == 0)
-    //     {
-    //         // Redireciona a entrada do processo filho para o pipe anterior
-    //         if (fd_in != 0)
-    //         {
-    //             dup2(fd_in, 0);
-    //             close(fd_in);
-    //         }
-
-    //         // Redireciona a saída se houver um pipe para o próximo comando
-    //         if (temp->next && strcmp(temp->next->text, "|") == 0)
-    //         {
-    //             dup2(pipefd[1], 1);
-    //             close(pipefd[1]);
-    //         }
-
-    //         // Fecha o lado de leitura do pipe no filho
-    //         if (pipefd[0] > 0)
-    //         {
-    //             close(pipefd[0]);
-    //         }
-
-    //         // Cria uma lista de argumentos para execve
-    //         char *args[256];  // Buffer fixo para argumentos
-    //         int i = 0;
-
-    //         while (start != temp->next)  // Até o próximo pipe ou o final
-    //         {
-    //             args[i++] = start->text;
-    //             start = start->next;
-    //         }
-    //         args[i] = NULL;  // Termina a lista de argumentos
-
-    //         // Executa o comando
-    //         if (is_built_in(*token))
-    //         {
-    //             handle_built_ins(token, mini);
-    //         }
-    //         else
-    //         {
-    //             execve(args[0], args, mini->penv);
-    //             perror("execve"); // Apenas executa se não for built-in
-    //         }
-    //         exit(EXIT_FAILURE); // Se execve falhar ou built-in executar, sair
-    //     }
-    //     else
-    //     {
-    //         // No processo pai
-    //         waitpid(pid, NULL, 0);  // Espera o filho terminar
-    //         close(pipefd[1]);  // Fecha a escrita do pipe atual
-    //         fd_in = pipefd[0];  // Guarda o final da leitura do pipe atual
-
-    //         // Avança para o próximo comando, após o pipe
-    //         if (temp->next && strcmp(temp->next->text, "|") == 0)
-    //         {
-    //             temp = temp->next->next;  // Pula o pipe para o próximo comando
-    //         }
-    //         else
-    //         {
-    //             temp = temp->next;  // Continua no próximo token
-    //         }
-    //     }
+	// 	handle_built_ins(token, mini);
     // }
+    // else
+    // {
+    //    pid_t pid = fork();
+    //     if (pid == 0) {
+	// 		char *argv[] = {(*token)->text, NULL};
+    //         if (execvp((*token)->text, argv) == -1) {
+    //             perror("execvp");
+    //         }
+    //         exit(EXIT_FAILURE);
+    //     } else if (pid < 0) {
+    //         perror("fork");
+    //     } else {
+    //         int status;
+    //         waitpid(pid, &status, 0);
+	// 	}
+	// }
+    int pipefd[2];
+    pid_t pid;
+    int fd_in = 0; // Entrada do comando anterior
+    t_token *temp = *token;
+    t_token *start;
+
+    while (temp)
+    {
+        start = temp;  // Início do comando atual
+
+        // Percorre os tokens até o próximo pipe ou o final
+        while (temp->next && strcmp(temp->next->text, "|") != 0)
+            temp = temp->next;
+
+        // Se pipe encontrado, cria o pipe
+        if (temp->next && strcmp(temp->next->text, "|") == 0)
+        {
+            if (pipe(pipefd) == -1)
+            {
+                perror("pipe");
+                exit(EXIT_FAILURE);
+            }
+        }
+
+        pid = fork();
+        if (pid == 0)
+        {
+            // Redireciona a entrada do processo filho para o pipe anterior
+             if (fd_in != 0)
+            {
+                if (dup2(fd_in, STDIN_FILENO) == -1)
+                {
+                    perror("dup2 input");
+                    exit(EXIT_FAILURE);
+                }
+                close(fd_in);
+            }
+
+            // Redireciona a saída se houver um pipe para o próximo comando
+            if (temp->next && strcmp(temp->next->text, "|") == 0)
+            {
+                if (dup2(pipefd[1], STDOUT_FILENO) == -1)
+                {
+                    perror("dup2 output");
+                    exit(EXIT_FAILURE);
+                }
+                close(pipefd[1]); // Fecha o lado de escrita do pipe após redirecionar
+            }
+			else
+            {
+                // Se não há próximo comando, apenas fecha o pipe
+                if (pipefd[1] > 0)
+                    close(pipefd[1]);
+            }
+
+            // Fecha o lado de leitura do pipe no filho
+            if (pipefd[0] > 0)
+            {
+                close(pipefd[0]);
+            }
+
+            // Cria uma lista de argumentos para execve
+            char *args[256];  // Buffer fixo para argumentos
+            int i = 0;
+
+            while (start != temp->next)  // Até o próximo pipe ou o final
+            {
+                args[i++] = start->text;
+                start = start->next;
+            }
+            args[i] = NULL;  // Termina a lista de argumentos
+
+			ft_printf("args[0]: %s\n",args[0]);
+            // Executa o comando
+            if (is_cmd(args[0]))
+            {
+				if (temp->next && strcmp(temp->next->text, "|") == 0) 
+				{
+					if (dup2(pipefd[1], STDOUT_FILENO) == -1) 
+					{
+						perror("dup2");
+						exit(EXIT_FAILURE);
+					}
+					close(pipefd[1]);  // Fecha a extremidade de escrita após redirecionar
+				}
+
+				// Fecha a extremidade de leitura do pipe no processo filho, se aberta
+				if (pipefd[0] > 0) {
+					close(pipefd[0]);
+				}
+
+				// Executa o comando built-in
+
+				// Certifica-se de sair após a execução do built-in
+				exit(EXIT_SUCCESS);
+					// handle_built_ins(token, mini);
+            }
+            else
+            {
+                execve(args[0], args, mini->penv);
+                perror("execve"); // Apenas executa se não for built-in
+            }
+            exit(EXIT_FAILURE); // Se execve falhar ou built-in executar, sair
+        }
+        else // Processo pai
+        {
+            // Espera o filho terminar
+            waitpid(pid, NULL, 0);
+
+            // Fecha a escrita do pipe no processo pai se houver
+            if (pipefd[1] > 0)
+                close(pipefd[1]);
+
+            // Atualiza fd_in para o lado de leitura do pipe
+            fd_in = pipefd[0];
+
+            // Avança para o próximo comando, após o pipe
+            if (temp->next && strcmp(temp->next->text, "|") == 0)
+                temp = temp->next->next; // Pula o pipe para o próximo comando
+            else
+                temp = temp->next; // Continua no próximo token
+        }
+    }
 }
 
 
