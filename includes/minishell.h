@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/20 11:33:28 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:15:00 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	free_tenv(char **tenv);
 void	free_penv(t_mini *mini);
 void	dup_envp(t_mini *mini, char **envp);
 void	dup_tenv(t_mini *mini, char **tenv);
+char	*get_env_key(t_mini *mini, char *str);
+char	*get_env_value(t_mini *mini, char *str);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
@@ -102,7 +104,7 @@ void	handle_eof(t_token **token, t_mini *mini);
 
 //------------Expander-----------//
 
-char *expander(char *input);
+void	expander(t_token **token, t_mini *mini);
 
 //------------Executor-----------//
 
