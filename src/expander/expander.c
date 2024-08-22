@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/21 16:34:03 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/22 09:42:35 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	detect_expansion(t_token **token)
 	dq = false;
 	while((*token)->text[i])
 	{
-		if((*token)->text[i] == '\'' && !sq && !dq)
+		if((*token)->text[i] == '\'' && !dq)
 			sq = !sq;
-		else if ((*token)->text[i] == '"' && !dq && !sq)
+		else if ((*token)->text[i] == '"' && !sq)
 			dq = !dq;
 		else if ((*token)->text[i] == '$' && !sq)
 			contains_sign = true;
@@ -65,6 +65,20 @@ int	detect_expansion(t_token **token)
 // 	return(NULL);
 // }
 
+void	change_token_text(char **input, char *value)
+{
+	if(value)
+	{
+		free(*input);
+		*input = ft_strdup(value);
+	}
+	else
+	{
+		free(*input);
+		*input = ft_strdup("");
+	}
+}
+
 void	expand_input(t_mini *mini, char **input)
 {
 	char *key;
@@ -73,17 +87,14 @@ void	expand_input(t_mini *mini, char **input)
 	value = NULL;
 	key = get_env_key(mini, *input + 1);
 	if(!key)
-		ft_printf("\n");
+		change_token_text(input, value);
 	else
 	{
 		value = get_env_value(mini, *input + 1);
 		if(!value)
-			ft_printf("\n");
+			change_token_text(input, value);
 		else
-		{
-			free(*input);
-			*input = ft_strdup(value);
-		}
+			change_token_text(input, value);
 		free(value);
 	}
 	free(key);
@@ -125,5 +136,8 @@ void	expander(t_token **token, t_mini *mini)
 		handle_expansion(*token, mini);
 	}
 	else if(result == 1)
-		ft_printf("%s\n", "Due to subject rules NO unclosed quotes");
+	{
+		ft_printf("%s", "Due to subject rules NO unclosed quotes");
+		change_token_text(&(*token)->text, NULL);
+	}
 }
