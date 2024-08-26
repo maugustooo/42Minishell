@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/20 11:33:28 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:51:22 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ typedef struct s_mini
 	char	**penv;
 	char	*prev_dir;
 	char	**splited;
+	
 	bool	echo_flag;
+	bool	pipe;
 } t_mini;
 
 //--------------Utils-------------//
@@ -86,6 +88,7 @@ t_token	*ft_tokenlast(t_token *token);
 void	ft_tokenadd_back(t_token **token, t_token *new);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
+void	ft_tokendelone(t_token *token);
 void	freethem(t_token **token, t_mini *mini);
 void	free_things(t_mini *mini);
 int		env_size(t_mini *mini, char **tenv);
@@ -115,5 +118,4 @@ void	set_export(t_mini *mini, t_token *token);
 void	handle_export(t_mini *mini, t_token *token);
 void	handle_unset(t_token *token, t_mini *mini);
 void    executor(t_token **token, t_mini *mini);
-
 #endif
