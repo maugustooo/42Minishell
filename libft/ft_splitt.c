@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 09:01:42 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/26 10:31:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/26 11:42:19 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ int	ft_count_words(char const *str, char c)
 	while (str[i] != '\0')
 	{
 		if (str[i] == c)
+		{
+			count++;
 			i++;
+		}
 		else
 		{
 			count++;

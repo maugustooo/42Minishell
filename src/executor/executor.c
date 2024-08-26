@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/26 11:03:59 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:22:12 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,18 @@ void executor(t_token **token, t_mini *mini)
     char *args[256];
     int i = 0;
 	int pipefd[2];
-    pid_t pid;
     int fd_in = 0;
     t_token *temp = *token;
     t_token *start;
     int is_pipe;
-    pid_t pid = fork();
+    pid_t pid = 0;
     int status;
     char *argv[] = {(*token)->text, NULL};
 	if (is_built_in(*token) && !mini->pipe)
         handle_built_ins(token, mini);
     else if(!mini->pipe)
     {
+		pid = fork();
         if (pid == 0) 
 		{
             if (execvp((*token)->text, argv) == -1)
@@ -91,12 +91,11 @@ void executor(t_token **token, t_mini *mini)
 		else if (pid < 0)
             perror("fork");
         else
-		{
             waitpid(pid, &status, 0);
-        }
     }
 	else
 	{
+		
 		while (temp) 
 		{
 			start = temp;
