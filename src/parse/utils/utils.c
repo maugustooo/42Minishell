@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:05:35 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/14 15:50:34 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:51:01 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+
+/**
+ * @brief Delete a node from a list
+ * 
+ * @param token token
+ * @param del Function to delete node
+ */
+void	ft_tokendelone(t_token *token)
+{
+	if (token)
+	{
+		free(token->text);
+		free(token);
+	}
+}
+
 /**
  * @brief Clear the list
  * 

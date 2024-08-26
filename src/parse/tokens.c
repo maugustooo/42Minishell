@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/13 09:04:13 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:43:19 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,32 @@ static void init_token(t_token **token, char *text)
  * @param mini The struct of the minishell
  * @return List of tokens
  */
-void	get_tokens(t_token	**token, t_mini *mini)
+void get_tokens(t_token **token, t_mini *mini)
 {
-	int	i;	
+	int i;
+	char **new_splitedd;
+    int j;
 
-	i = 0;
-	ft_tokenadd_back(token, ft_newnode(CMD, mini->splited[i]));
-	while (mini->splited[++i])
-		init_token(token,  mini->splited[i]);
+    i = 0;
+	j = 0;
+    ft_tokenadd_back(token, ft_newnode(CMD, mini->splited[i]));
+    while (mini->splited[++i]) 
+	{
+		new_splitedd = ft_split(mini->splited[i], '|');
+        if (new_splitedd) 
+		{
+            j = 0;
+			if(ft_find_c('|', new_splitedd[j]))
+				ft_tokenadd_back(token, ft_newnode(PIPE, "|"));
+            while (new_splitedd[j]) 
+			{
+				if(j == 0)
+                	ft_tokenadd_back(token, ft_newnode(CMD, new_splitedd[j]));
+				else
+					init_token(token,  new_splitedd[j]);
+                j++;
+            }
+            free(new_splitedd);
+        }
+    }
 }
