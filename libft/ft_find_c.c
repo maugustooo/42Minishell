@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 14:10:20 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/20 14:10:45 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/26 10:51:01 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	ft_find_c(char c, char const *set)
 	size_t	i;
 
 	i = 0;
+	if(!set || !set[0])
+		return(0);
 	while (set[i])
 	{
 		if (set[i] == c)

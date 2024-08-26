@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/21 15:14:55 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/26 10:48:45 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,19 +103,19 @@ t_token *ft_tokenpenultimate(t_token *head)
 // 	mini->pipe = true;
 // }
 
-// static int have_pipe(t_token *token)
-// {
-// 	int flag;
+static int have_pipe(t_token *token)
+{
+	int flag;
 
-// 	flag = 0;
-// 	while (token)
-// 	{
-// 		if(token->type == PIPE || ft_find_c('|', token->text))
-// 			flag = 1;
-// 		token = token ->next;
-// 	}
-// 	return(flag);
-// }
+	flag = 0;
+	while (token)
+	{
+		if(token->type == PIPE || ft_find_c('|', token->text))
+			flag = 1;
+		token = token ->next;
+	}
+	return(flag);
+}
 /**
  * @brief Will parse creating the tokens and checking commands
  * 
@@ -134,13 +134,7 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 			mini->echo_flag = true;
 	if(ft_strcmp((*mini->splited), "export") == 0 && (*token)->next)
 		check_arg_export(*token);
-	// if(have_pipe(*token))
-	// 	handle_pipes(token, mini);
-	t_token *temp = *token;
-	while (temp != NULL) 
-	{
-        printf("temp: %s\n", temp->text);
-        temp = temp->next;
-    }
+	if(have_pipe(*token))
+		mini->pipe = true;
 	return(1);
 }
