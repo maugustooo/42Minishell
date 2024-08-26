@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 08:59:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/05/03 10:03:21 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:04:22 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,25 +81,6 @@ char	*gnl_ft_strjoin(char *s1, char *s2)
 	if (s1)
 		free (s1);
 	return (newstring);
-}
-
-/**
- * @brief Get the length of a string until a character
- * 
- * @param str String
- * @param c Character
- * @return int Length
-*/
-int	ft_strclen(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while ((str[i] && str[i] != c))
-		i++;
-	return (i);
 }
 
 /**

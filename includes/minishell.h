@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/08/26 15:05:03 by gude-jes         ###   ########.fr       */
+=======
+/*   Updated: 2024/08/26 10:42:53 by maugusto         ###   ########.fr       */
+>>>>>>> d8f26700cf73c41bdf14bd39e2c359c42ec48ae7
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +81,9 @@ typedef struct s_mini
 	char	**penv;
 	char	*prev_dir;
 	char	**splited;
+	
 	bool	echo_flag;
+	bool	pipe;
 	int		return_code;
 } t_mini;
 
@@ -87,6 +93,7 @@ t_token	*ft_tokenlast(t_token *token);
 void	ft_tokenadd_back(t_token **token, t_token *new);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
+void	ft_tokendelone(t_token *token);
 void	freethem(t_token **token, t_mini *mini);
 void	free_things(t_mini *mini);
 int		env_size(t_mini *mini, char **tenv);
@@ -119,5 +126,4 @@ void	set_export(t_mini *mini, t_token *token);
 void	handle_export(t_mini *mini, t_token *token);
 void	handle_unset(t_token *token, t_mini *mini);
 void    executor(t_token **token, t_mini *mini);
-
 #endif
