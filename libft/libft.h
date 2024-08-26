@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:49:51 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/19 08:49:54 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/21 11:18:43 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int		ft_strncmp(char const *s1, char const *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+int		ft_find_c(char c, char const *set);
+int		ft_strclen(char *str, char c);
 
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *s);
@@ -73,6 +75,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_str1dup(char *s, int len);
 
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstadd_back(t_list **lst, t_list *new);
