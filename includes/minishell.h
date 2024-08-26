@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/21 14:15:00 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:05:03 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_mini
 	char	*prev_dir;
 	char	**splited;
 	bool	echo_flag;
+	int		return_code;
 } t_mini;
 
 //--------------Utils-------------//
@@ -101,6 +102,7 @@ int		parse(t_mini *mini, t_token	**token, char **envp);
 void	get_tokens(t_token	**token, t_mini *mini);
 void	handle_sigint(int sig);
 void	handle_eof(t_token **token, t_mini *mini);
+void	split_to_token(char *line, t_mini *mini);
 
 //------------Expander-----------//
 
@@ -112,7 +114,7 @@ void	handle_cd(t_token *arg, t_mini *mini);
 void    handle_exit(t_token **token, t_mini *mini);
 void	handle_echo(t_token *next, t_mini *mini);
 void	handle_env(t_mini *mini, t_token *next);
-void	handle_pwd();
+void	handle_pwd(t_mini *mini);
 void	set_export(t_mini *mini, t_token *token);
 void	handle_export(t_mini *mini, t_token *token);
 void	handle_unset(t_token *token, t_mini *mini);

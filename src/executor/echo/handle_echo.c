@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:33:54 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/21 14:17:41 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:58:25 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,24 @@ static void print_echo(t_token **next, t_mini *mini)
 
 void	handle_echo(t_token *next, t_mini *mini)
 {
-	while (next)
+	if(next)
 	{
-		if(next->next)
-			if(next->next->type == INPUT)
-			{
-				handle_input(next);
-				return ;
-			}
-		print_echo(&next, mini);
+		while (next)
+		{
+			if(next->next)
+				if(next->next->type == INPUT)
+				{
+					handle_input(next);
+					return ;
+				}
+			print_echo(&next, mini);
+		}
+		if(mini->echo_flag == false)
+				ft_printf("\n");
+	
+		mini->echo_flag = false;
 	}
-	if(mini->echo_flag == false)
-			ft_printf("\n");
-	mini->echo_flag = false;
+	else
+		ft_printf("\n");
+	mini->return_code = 0;
 }

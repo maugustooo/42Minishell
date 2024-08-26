@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/22 09:42:35 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:47:05 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	detect_expansion(t_token **token)
 // 	return(NULL);
 // }
 
-void	change_token_text(char **input, char *value)
+void	change_token_text(char **input, char *value, t_mini *mini)
 {
 	if(value)
 	{
@@ -74,8 +74,16 @@ void	change_token_text(char **input, char *value)
 	}
 	else
 	{
-		free(*input);
-		*input = ft_strdup("");
+		if(ft_strcmp(*input,"$?") == 0)
+		{
+			free(*input);
+			*input = ft_itoa(mini->return_code);
+		}
+		else
+		{
+			free(*input);
+			*input = ft_strdup("");
+		}
 	}
 }
 
@@ -87,14 +95,14 @@ void	expand_input(t_mini *mini, char **input)
 	value = NULL;
 	key = get_env_key(mini, *input + 1);
 	if(!key)
-		change_token_text(input, value);
+		change_token_text(input, value, mini);
 	else
 	{
 		value = get_env_value(mini, *input + 1);
 		if(!value)
-			change_token_text(input, value);
+			change_token_text(input, value, NULL);
 		else
-			change_token_text(input, value);
+			change_token_text(input, value, NULL);
 		free(value);
 	}
 	free(key);
@@ -134,10 +142,12 @@ void	expander(t_token **token, t_mini *mini)
 	if (result == 0)
 	{
 		handle_expansion(*token, mini);
+		mini->return_code = 0;
 	}
 	else if(result == 1)
 	{
 		ft_printf("%s", "Due to subject rules NO unclosed quotes");
-		change_token_text(&(*token)->text, NULL);
+		change_token_text(&(*token)->text, NULL, mini);
+		mini->return_code = 1;
 	}
 }
