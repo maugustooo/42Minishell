@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+         #
+#    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 08:49:04 by gude-jes          #+#    #+#              #
-#    Updated: 2024/08/21 12:29:06 by gude-jes         ###   ########.fr        #
+#    Updated: 2024/08/26 15:00:42 by maugusto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INC			= -I./includes
 RM			= rm -rf
 
 GENERAL		= main
-PARSE		= parse tokens utils freedom env_utils env_utils2
+PARSE		= parse tokens utils freedom env_utils env_utils2 handle_spaces
 EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export handle_export2 handle_unset signals
 EXPANDER	= expander
 

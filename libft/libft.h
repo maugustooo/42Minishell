@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:49:51 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/21 11:18:43 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:21:51 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 int		ft_find_c(char c, char const *set);
 int		ft_strclen(char *str, char c);
+int		ft_isspace(char c);
 
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *s);
