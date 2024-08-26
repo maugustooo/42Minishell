@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/14 10:36:06 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:24:51 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,10 @@ void	export_no_args(t_mini *mini)
 	char	**tmp_env;
 	char	**key;
 	int		i;
-	int		j;
 
 
 	tmp_env = handle_arr(mini);
 	i = -1;
-	j = 0;
 	key = NULL;
 	while (tmp_env[++i])
 	{
@@ -111,6 +109,8 @@ void	export_no_args(t_mini *mini)
 		}
 		if(key[1] != NULL)
 			ft_printf("declare -x %s=\"%s\"\n", key[0], key[1]);
+		else
+			ft_printf("declare -x %s=\"\"\n", key[0]);
 		free_env(NULL, &key);
 		key = NULL;
 	}

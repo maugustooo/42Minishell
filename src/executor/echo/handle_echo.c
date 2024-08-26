@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:33:54 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/14 10:34:11 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:17:41 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void print_echo(t_token **next, t_mini *mini)
 	int first;
 
 	first = 0;
+	expander(next, mini);
 	if(next && first == 2)
 		{
 			ft_printf("%s", (*next)->text);

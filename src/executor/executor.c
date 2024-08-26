@@ -6,10 +6,9 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/26 10:33:47 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/26 10:43:12 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 /**
  * @defgroup mandatory Mandatory
