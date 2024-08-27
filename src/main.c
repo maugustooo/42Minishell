@@ -17,15 +17,7 @@ static void minishell(t_mini *mini, t_token	**token, char **envp)
             handle_eof(token, mini);
 		mini->line = rl;
 		if (mini->line[0])
-        {
             split_to_tokens(mini->line, mini);
-            int i = 0;
-            while (mini->splited && mini->splited[i])
-            {
-                printf("Token %d: %s\n", i, mini->splited[i]);
-                i++;
-            }
-        }
 		if(!mini->splited)
 			continue;
 		if(!parse(mini, token, envp))	

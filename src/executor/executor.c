@@ -29,10 +29,8 @@ int	is_built_in(t_token *token)
 
 void	handle_built_ins(t_token **token, t_mini *mini)
 {
-	if (ft_strncmp((*token)->text, "echo", 4) == 0 && (*token)->next)
+	if (ft_strncmp((*token)->text, "echo", 4) == 0)
 		handle_echo((*token)->next, mini);
-	else if (ft_strncmp((*token)->text, "echo", 4) == 0 && !(*token)->next)
-		ft_printf("\n");
 	else if (ft_strncmp((*token)->text, "cd", 2) == 0)
 		handle_cd(*token, mini);
 	else if (ft_strncmp((*token)->text, "env", 3) == 0)

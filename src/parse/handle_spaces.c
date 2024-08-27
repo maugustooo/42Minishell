@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_spaces.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/26 15:53:08 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/27 11:11:23 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ void split_to_tokens(char *line, t_mini *mini)
     if (!line || !line[0])
         return;
     token_count = count_tokens(line);
-	ft_printf("%d", token_count);
     if (mini->splited != NULL)
         free(mini->splited);
     mini->splited = ft_calloc((token_count + 1), sizeof(char *));
