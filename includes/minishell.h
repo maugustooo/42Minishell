@@ -105,8 +105,8 @@ int		count_tokens(char *line, t_mini *mini);
 //------------Expander-----------//
 
 void	expander(t_token **token, t_mini *mini);
-void	change_token_text(char **input, char *value);
-void	expand_input(t_mini *mini, char **input);
+void	change_token_text(t_token *token, char *value);
+void	expand_input(t_token *token, t_mini *mini, char **input);
 void	handle_not_sq(t_token **token,t_mini *mini,  int *i);
 void	change_quotes(t_token **token, t_mini *mini);
 

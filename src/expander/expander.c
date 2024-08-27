@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/27 14:43:29 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:17:06 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,21 @@ int	detect_expansion(t_token **token)
 // 	return(NULL);
 // }
 
-void	change_token_text(char **input, char *value)
+void	change_token_text(t_token *token, char *value)
 {
 	if(value)
 	{
-		free(*input);
-		*input = ft_strdup(value);
+		free(token->text);
+		token->text = ft_strdup(value);
 	}
 	else
 	{
-		free(*input);
-		*input = ft_strdup("");
+		free(token->text);
+		token->text = ft_strdup("");
 	}
 }
 
-void	expand_input(t_mini *mini, char **input)
+void	expand_input(t_token *token, t_mini *mini, char **input)
 {
 	char *key;
 	char *value;
@@ -83,14 +83,14 @@ void	expand_input(t_mini *mini, char **input)
 	value = NULL;
 	key = get_env_key(mini, *input + 1);
 	if(!key)
-		change_token_text(input, value);
+		change_token_text(token, value);
 	else
 	{
 		value = get_env_value(mini, *input + 1);
 		if(!value)
-			change_token_text(input, "");
+			change_token_text(token, "");
 		else
-			change_token_text(input, value);
+			change_token_text(token, value);
 		free(value);
 	}
 	free(key);
@@ -127,7 +127,7 @@ void	expander(t_token **token, t_mini *mini)
 	else if(result == 1)
 	{
 		ft_printf("%s", "Due to subject rules NO unclosed quotes");
-		change_token_text(&(*token)->text, NULL);
+		change_token_text(*token, NULL);
 	}
 	else
 		change_quotes(token, mini);

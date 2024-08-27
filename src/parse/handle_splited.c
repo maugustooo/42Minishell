@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_splited.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/27 14:47:32 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:01:34 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void split_to_tokens(char *line, t_mini *mini)
     if (!mini->splited)
         return ;
     process_tokens(line, mini, &index, &in_quotes);
-	ft_printf("index:%d count:%d\n", index, mini->token_count);
 	if(index == mini->token_count)
     	mini->splited[index] = NULL;
 	else

@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:07:08 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/27 14:56:46 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/27 15:17:34 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,12 @@
 
 void	handle_not_sq(t_token **token,t_mini *mini,  int *i)
 {
-	char	*before;
-	char	*after;
-	char	*join;
-
-	before = ft_strndup((*token)->text, *i);
-	after = ft_strdup((*token)->text + *i);
-	expand_input(mini, &after);
-	join = ft_strjoin(before, after);
-	change_token_text(&(*token)->text, join);
-	free(before);
-	*i += ft_strlen(after) - 1;
-	free(after);
-	free(join);
+	char	*trimmed;
+	
+	trimmed = ft_strtrim((*token)->text, "\"");
+	expand_input(*token, mini, &trimmed);
+	*i += ft_strlen(trimmed) - 1;
+	free(trimmed);
 }
 
 void	change_quotes(t_token **token, t_mini *mini)
@@ -39,11 +32,11 @@ void	change_quotes(t_token **token, t_mini *mini)
 	text = (*token)->text;
 	trimmed = ft_strndup(text + 1, ft_strlen(text) - 2);
 	if(text[0] == '\'' && text[ft_strlen(text) - 1] == '\'')
-		change_token_text(&(*token)->text, trimmed);
+		change_token_text(*token, trimmed);
 	else if (text[0] == '"' && text[ft_strlen(text) - 1] == '"')
 	{
-		change_token_text(&(*token)->text, trimmed);
-		expand_input(mini, &trimmed);
+		change_token_text(*token, trimmed);
+		expand_input(*token, mini, &trimmed);
 	}
 	free(trimmed);
 }
