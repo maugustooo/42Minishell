@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+         #
+#    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 08:48:35 by gude-jes          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2024/08/26 16:21:18 by gude-jes         ###   ########.fr        #
-=======
-#    Updated: 2024/08/26 15:29:48 by maugusto         ###   ########.fr        #
->>>>>>> b7058848e01da1f1fd527a3367203facc85c5445
+#    Updated: 2024/08/27 11:04:26 by maugusto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

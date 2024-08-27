@@ -1,19 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/08/26 15:40:08 by gude-jes         ###   ########.fr       */
-=======
-/*   Updated: 2024/08/27 10:57:38 by gude-jes         ###   ########.fr       */
->>>>>>> b7058848e01da1f1fd527a3367203facc85c5445
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -82,8 +66,11 @@ typedef struct s_mini
 	char	*prev_dir;
 	char	**splited;
 	
+	int		token_count;
+	
 	bool	echo_flag;
 	bool	pipe;
+	bool	final_pipe;
 } t_mini;
 
 //--------------Utils-------------//
@@ -102,7 +89,7 @@ void	dup_envp(t_mini *mini, char **envp);
 void	dup_tenv(t_mini *mini, char **tenv);
 char	*get_env_key(t_mini *mini, char *str);
 char	*get_env_value(t_mini *mini, char *str);
-void	split_to_tokens(char *line, t_mini *mini);
+void	handle_quotes(char c, int *in_quotes, char *quote_char);
 
 //--------------Parser------------//
 
@@ -110,6 +97,8 @@ int		parse(t_mini *mini, t_token	**token, char **envp);
 void	get_tokens(t_token	**token, t_mini *mini);
 void	handle_sigint(int sig);
 void	handle_eof(t_token **token, t_mini *mini);
+void	split_to_tokens(char *line, t_mini *mini);
+int		count_tokens(char *line, t_mini *mini);
 
 //------------Expander-----------//
 

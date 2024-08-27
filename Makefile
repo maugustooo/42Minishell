@@ -6,7 +6,7 @@
 #    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 08:49:04 by gude-jes          #+#    #+#              #
-#    Updated: 2024/08/26 15:00:42 by maugusto         ###   ########.fr        #
+#    Updated: 2024/08/27 14:52:42 by maugusto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ INC			= -I./includes
 RM			= rm -rf
 
 GENERAL		= main
-PARSE		= parse tokens utils freedom env_utils env_utils2 handle_spaces
+PARSE		= parse tokens utils freedom env_utils env_utils2 count_tokens handle_splited
 EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export handle_export2 handle_unset signals
-EXPANDER	= expander
+EXPANDER	= expander expander_utils
 
 #==============================================================================#
 #                                    PATHS                                     #

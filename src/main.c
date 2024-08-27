@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 08:50:13 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/26 15:05:55 by maugusto         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-# include "minishell.h"
+#include "minishell.h"
 /**
  * @brief on a loop, will handle the readlines, parse, do the executor and free everything
  * 
