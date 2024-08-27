@@ -6,7 +6,11 @@
 #    By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 08:48:35 by gude-jes          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2024/08/26 16:21:18 by gude-jes         ###   ########.fr        #
+=======
+#    Updated: 2024/08/26 15:29:48 by maugusto         ###   ########.fr        #
+>>>>>>> b7058848e01da1f1fd527a3367203facc85c5445
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +20,7 @@ CFLAGS			= -Wall -Wextra -Werror -g
 
 NAME			= libft.a
 
-LIB_SRCS			=	ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c ft_str_isalpha.c \
+LIB_SRCS			=	ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c ft_str_isalpha.c ft_isspace.c\
 					ft_strlcat.c ft_strncmp.c ft_strcmp.c ft_substr.c ft_atoi.c ft_isalpha.c ft_strclen.c\
 					ft_itoa.c ft_memcpy.c  ft_putendl_fd.c ft_strchr.c  ft_strlcpy.c ft_strncpy.c ft_find_c.c\
 					ft_strnstr.c ft_tolower.c ft_bzero.c   ft_isascii.c ft_striteri.c \

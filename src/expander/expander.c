@@ -6,7 +6,11 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/08/26 16:43:59 by gude-jes         ###   ########.fr       */
+=======
+/*   Updated: 2024/08/22 09:42:35 by gude-jes         ###   ########.fr       */
+>>>>>>> b7058848e01da1f1fd527a3367203facc85c5445
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +69,7 @@ int	detect_expansion(t_token **token)
 // 	return(NULL);
 // }
 
-void	change_token_text(char **input, char *value, t_mini *mini)
+void	change_token_text(char **input, char *value)
 {
 	if(value)
 	{
@@ -74,16 +78,8 @@ void	change_token_text(char **input, char *value, t_mini *mini)
 	}
 	else
 	{
-		if(ft_strcmp(*input,"$?") == 0)
-		{
-			free(*input);
-			*input = ft_itoa(mini->return_code);
-		}
-		else
-		{
-			free(*input);
-			*input = ft_strdup("");
-		}
+		free(*input);
+		*input = ft_strdup("");
 	}
 }
 
@@ -95,14 +91,14 @@ void	expand_input(t_mini *mini, char **input)
 	value = NULL;
 	key = get_env_key(mini, *input + 1);
 	if(!key)
-		change_token_text(input, value, mini);
+		change_token_text(input, value);
 	else
 	{
 		value = get_env_value(mini, *input + 1);
 		if(!value)
-			change_token_text(input, value, NULL);
+			change_token_text(input, value);
 		else
-			change_token_text(input, value, NULL);
+			change_token_text(input, value);
 		free(value);
 	}
 	free(key);
@@ -142,12 +138,10 @@ void	expander(t_token **token, t_mini *mini)
 	if (result == 0)
 	{
 		handle_expansion(*token, mini);
-		mini->return_code = 0;
 	}
 	else if(result == 1)
 	{
 		ft_printf("%s", "Due to subject rules NO unclosed quotes");
-		change_token_text(&(*token)->text, NULL, mini);
-		mini->return_code = 1;
+		change_token_text(&(*token)->text, NULL);
 	}
 }

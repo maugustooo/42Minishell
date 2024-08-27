@@ -6,7 +6,11 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/08/26 15:40:08 by gude-jes         ###   ########.fr       */
+=======
+/*   Updated: 2024/08/27 10:57:38 by gude-jes         ###   ########.fr       */
+>>>>>>> b7058848e01da1f1fd527a3367203facc85c5445
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +84,6 @@ typedef struct s_mini
 	
 	bool	echo_flag;
 	bool	pipe;
-	int		return_code;
 } t_mini;
 
 //--------------Utils-------------//
@@ -99,13 +102,14 @@ void	dup_envp(t_mini *mini, char **envp);
 void	dup_tenv(t_mini *mini, char **tenv);
 char	*get_env_key(t_mini *mini, char *str);
 char	*get_env_value(t_mini *mini, char *str);
+void	split_to_tokens(char *line, t_mini *mini);
+
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
 void	get_tokens(t_token	**token, t_mini *mini);
 void	handle_sigint(int sig);
 void	handle_eof(t_token **token, t_mini *mini);
-void	split_to_token(char *line, t_mini *mini);
 
 //------------Expander-----------//
 
@@ -117,7 +121,7 @@ void	handle_cd(t_token *arg, t_mini *mini);
 void    handle_exit(t_token **token, t_mini *mini);
 void	handle_echo(t_token *next, t_mini *mini);
 void	handle_env(t_mini *mini, t_token *next);
-void	handle_pwd(t_mini *mini);
+void	handle_pwd();
 void	set_export(t_mini *mini, t_token *token);
 void	handle_export(t_mini *mini, t_token *token);
 void	handle_unset(t_token *token, t_mini *mini);

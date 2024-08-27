@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/20 11:33:10 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/26 10:48:45 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,80 @@ void	check_arg_export(t_token *token)
 		free(key);
 		token = token->next;
 	}
+}	
+
+t_token *ft_tokenpenultimate(t_token *head)
+{
+    t_token *current;
+    
+    if (head == NULL || head->next == NULL)
+        return NULL;
+    current = head;
+    while (current->next && current->next->next)
+        current = current->next;
+    return (current);
 }
-
-// static void handle_pipe(t_token *token)
+// static void handle_pipes(t_token **token, t_mini *mini)
 // {
-// 	if(token->next->type == ARG)
-// 		ft_strlcat(token->text, token->next->text, ft_strlen(token->next->text));
-	
-// }
-// static int have_pipe(t_token *token)
-// {
-// 	int flag;
-
-// 	flag = 0;
-// 	while (token)
+//     char *before_pipe;
+//     char *after_pipe;
+// 	t_token *current_token;
+// 	t_token *last;
+//     t_token *penultimate;
+// 	t_token *next_token;
+	 
+// 	current_token = (*token)->next;
+// 	while (current_token)
 // 	{
-// 		if(token->type == PIPE)
-// 			flag = 1;
-// 		token = token ->next;
+// 		if(ft_find_c('|', current_token->text))
+// 		{
+// 		 	before_pipe = ft_strndup(current_token->text, ft_strclen(current_token->text, '|'));
+//             after_pipe = ft_strdup(current_token->text + ft_strclen(current_token->text, '|') + 1);
+//             free(current_token->text);
+// 			current_token->text = NULL;
+// 			if (before_pipe[0])
+//                 current_token->text = before_pipe;
+//             else
+//             {
+//                 current_token->type = PIPE;
+//                 current_token->text = ft_strdup("|");
+//             }
+//             if (after_pipe[0] != '\0')
+//             {
+//                 ft_tokenadd_back(token, ft_newnode(CMD, after_pipe));
+// 				if (current_token->next && !ft_find_c('|', current_token->next->text))
+//                     ft_tokenadd_back(token, ft_newnode(PIPE, "|"));
+//             }
+// 			else
+//             	free(after_pipe);
+// 			next_token = current_token->next;
+//             current_token = next_token;
+//         }
+//         else
+//             current_token = current_token->next;
 // 	}
-// 	return(flag);
+// 	last = ft_tokenlast(*token);
+//     if (last && last->type == PIPE)
+//         ft_tokendelone(last);
+//     penultimate = ft_tokenpenultimate(*token);
+//     if (penultimate && last->type == PIPE)
+// 		penultimate->next = NULL;
+// 	mini->pipe = true;
 // }
+
+static int have_pipe(t_token *token)
+{
+	int flag;
+
+	flag = 0;
+	while (token)
+	{
+		if(token->type == PIPE || ft_find_c('|', token->text))
+			flag = 1;
+		token = token ->next;
+	}
+	return(flag);
+}
 /**
  * @brief Will parse creating the tokens and checking commands
  * 
@@ -81,7 +134,7 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 			mini->echo_flag = true;
 	if(ft_strcmp((*mini->splited), "export") == 0 && (*token)->next)
 		check_arg_export(*token);
-	// if(have_pipe(*token))
-	// 	handle_pipe(*token);
+	if(have_pipe(*token))
+		mini->pipe = true;
 	return(1);
 }
