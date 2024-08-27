@@ -116,7 +116,7 @@ void	handle_cd(t_token *arg, t_mini *mini);
 void    handle_exit(t_token **token, t_mini *mini);
 void	handle_echo(t_token *next, t_mini *mini);
 void	handle_env(t_mini *mini, t_token *next);
-void	handle_pwd();
+void	handle_pwd(t_mini *mini);
 void	set_export(t_mini *mini, t_token *token);
 void	handle_export(t_mini *mini, t_token *token);
 void	handle_unset(t_token *token, t_mini *mini);

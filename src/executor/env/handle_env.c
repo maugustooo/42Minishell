@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:38:13 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/13 09:53:32 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:10:14 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	handle_env(t_mini *mini, t_token *next)
 		// {
 			while(mini->penv[i])
 				ft_printf("%s\n", mini->penv[i++]);
-		//}	
+		//}
+		mini->return_code = 0;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:36:43 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/20 12:06:27 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:11:34 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ void	handle_unset(t_token *token, t_mini *mini)
 		free_unset(&key);
 		i++;
 	}
+	mini->return_code = 0;
 }
