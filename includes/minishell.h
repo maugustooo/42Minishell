@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/08/26 15:05:03 by gude-jes         ###   ########.fr       */
-=======
-/*   Updated: 2024/08/26 10:42:53 by maugusto         ###   ########.fr       */
->>>>>>> d8f26700cf73c41bdf14bd39e2c359c42ec48ae7
+/*   Updated: 2024/08/26 15:40:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
