@@ -6,11 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 11:29:20 by gude-jes          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/08/26 15:37:59 by gude-jes         ###   ########.fr       */
-=======
-/*   Updated: 2024/08/26 14:22:12 by maugusto         ###   ########.fr       */
->>>>>>> b7058848e01da1f1fd527a3367203facc85c5445
+/*   Updated: 2024/08/27 11:44:57 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +41,8 @@ int	is_built_in(t_token *token)
 
 void	handle_built_ins(t_token **token, t_mini *mini)
 {
-	if (ft_strncmp((*token)->text, "echo", 4) == 0 && (*token)->next)
+	if (ft_strncmp((*token)->text, "echo", 4) == 0)
 		handle_echo((*token)->next, mini);
-	else if (ft_strncmp((*token)->text, "echo", 4) == 0 && !(*token)->next)
-		ft_printf("\n");
 	else if (ft_strncmp((*token)->text, "cd", 2) == 0)
 		handle_cd(*token, mini);
 	else if (ft_strncmp((*token)->text, "env", 3) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:13 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/26 15:05:55 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/27 11:08:54 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,7 @@ static void minishell(t_mini *mini, t_token	**token, char **envp)
             handle_eof(token, mini);
 		mini->line = rl;
 		if (mini->line[0])
-        {
             split_to_tokens(mini->line, mini);
-            int i = 0;
-            while (mini->splited && mini->splited[i])
-            {
-                printf("Token %d: %s\n", i, mini->splited[i]);
-                i++;
-            }
-        }
 		if(!mini->splited)
 			continue;
 		if(!parse(mini, token, envp))	

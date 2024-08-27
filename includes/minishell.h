@@ -1,19 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/08/26 15:40:08 by gude-jes         ###   ########.fr       */
-=======
-/*   Updated: 2024/08/27 10:57:38 by gude-jes         ###   ########.fr       */
->>>>>>> b7058848e01da1f1fd527a3367203facc85c5445
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -84,6 +68,8 @@ typedef struct s_mini
 	
 	bool	echo_flag;
 	bool	pipe;
+
+	int		return_code;
 } t_mini;
 
 //--------------Utils-------------//
@@ -114,6 +100,10 @@ void	handle_eof(t_token **token, t_mini *mini);
 //------------Expander-----------//
 
 void	expander(t_token **token, t_mini *mini);
+void	change_token_text(char **input, char *value);
+void	expand_input(t_mini *mini, char **input);
+void	handle_not_sq(t_token **token,t_mini *mini,  int *i);
+void	change_quotes(t_token **token, t_mini *mini);
 
 //------------Executor-----------//
 

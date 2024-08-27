@@ -6,11 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/08/26 16:43:59 by gude-jes         ###   ########.fr       */
-=======
-/*   Updated: 2024/08/22 09:42:35 by gude-jes         ###   ########.fr       */
->>>>>>> b7058848e01da1f1fd527a3367203facc85c5445
+/*   Updated: 2024/08/27 14:43:29 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +15,10 @@
 int	detect_expansion(t_token **token)
 {
 	int		i;
-	bool	contains_sign;
 	bool	sq;
 	bool	dq;
 
 	i = 0;
-	contains_sign = false;
 	sq = false;
 	dq = false;
 	while((*token)->text[i])
@@ -34,13 +28,11 @@ int	detect_expansion(t_token **token)
 		else if ((*token)->text[i] == '"' && !sq)
 			dq = !dq;
 		else if ((*token)->text[i] == '$' && !sq)
-			contains_sign = true;
+			return (0);
 		i++;
 	}
 	if (sq || dq)
 		return(1);
-	if (contains_sign)
-		return (0);
 	return(2);
 }
 
@@ -96,7 +88,7 @@ void	expand_input(t_mini *mini, char **input)
 	{
 		value = get_env_value(mini, *input + 1);
 		if(!value)
-			change_token_text(input, value);
+			change_token_text(input, "");
 		else
 			change_token_text(input, value);
 		free(value);
@@ -104,7 +96,7 @@ void	expand_input(t_mini *mini, char **input)
 	free(key);
 }
 
-void	handle_expansion(t_token *token, t_mini *mini)
+void	handle_expansion(t_token **token, t_mini *mini)
 {
 	int	i;
 	int sq;
@@ -113,35 +105,30 @@ void	handle_expansion(t_token *token, t_mini *mini)
 	i = 0;
 	sq = 0;
 	dq = 0;
-	while (token->text[i])
+	while ((*token)->text[i])
 	{
-		if (token->text[i] == '"' && !sq)
+		if ((*token)->text[i] == '"' && !sq)
 			dq = !dq;
-		else if (token->text[i] == '\'' && !dq)
+		else if ((*token)->text[i] == '\'' && !dq)
 			sq = !sq;
-		else if (token->text[i] == '$' && !sq)
-		{
-			i++;
-			expand_input(mini, &token->text);
-			i += (ft_strlen(token->text) - 1);
-			continue;
-		}
+		else if ((*token)->text[i] == '$' && !sq)
+			handle_not_sq(token, mini, &i);
 		i++;
 	}
 }
 
 void	expander(t_token **token, t_mini *mini)
 {
-	int	result;
+	int		result;
 
 	result = detect_expansion(token);
 	if (result == 0)
-	{
-		handle_expansion(*token, mini);
-	}
+		handle_expansion(token, mini);
 	else if(result == 1)
 	{
 		ft_printf("%s", "Due to subject rules NO unclosed quotes");
 		change_token_text(&(*token)->text, NULL);
 	}
+	else
+		change_quotes(token, mini);
 }
