@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:23:59 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/26 10:42:53 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/27 10:57:38 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	dup_envp(t_mini *mini, char **envp);
 void	dup_tenv(t_mini *mini, char **tenv);
 char	*get_env_key(t_mini *mini, char *str);
 char	*get_env_value(t_mini *mini, char *str);
+void	split_to_tokens(char *line, t_mini *mini);
+
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
