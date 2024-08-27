@@ -8,3 +8,4 @@ obj/*
 minishell
 readline.supp
 *.txt
+minishell_tester/
