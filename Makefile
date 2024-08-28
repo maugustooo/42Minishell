@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
+#    By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 08:49:04 by gude-jes          #+#    #+#              #
-#    Updated: 2024/08/28 09:34:07 by maugusto         ###   ########.fr        #
+#    Updated: 2024/08/28 15:43:35 by gude-jes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ RM			= rm -rf
 GENERAL		= main
 PARSE		= parse tokens utils freedom env_utils env_utils2 count_tokens handle_splited
 EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export handle_export2 handle_unset signals pipes
-EXPANDER	= expander expander_utils
+EXPANDER	= expander expander_utils expander_utils2
 
 #==============================================================================#
 #                                    PATHS                                     #

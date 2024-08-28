@@ -108,6 +108,7 @@ void	change_token_text(t_token *token, char *value);
 void	expand_input(t_token *token, t_mini *mini, char **input);
 void	handle_not_sq(t_token **token,t_mini *mini,  int *i);
 void	change_quotes(t_token **token, t_mini *mini);
+void	handle_expansion(t_token **token, t_mini *mini);
 
 //------------Executor-----------//
 void	pipes(t_token **token, t_mini *mini, int pid);
