@@ -11,22 +11,25 @@ void handle_quotes(char c, int *in_quotes, char *quote_char)
         *in_quotes = 0;
 }
 
-static void increment_token_count(char **line, int *count)
+static void increment_token_count(char **line, int *count, int in_quotes)
 {
-    if (!ft_isspace(**line) && **line != '|')
+    if (!in_quotes && (!ft_isspace(**line) && **line != '|'))
         return;
     (*count)++;
-    while (**line && (ft_isspace(**line) || **line == '|'))
-    {
-        if (**line == '|')
-        {
-            (*count)++;
-            while (**line && **line == '|')
-                (*line)++;
-        }
-        if (**line)
-            (*line)++;
-    }
+	if(!in_quotes)
+	{
+		while (**line && (ft_isspace(**line) || **line == '|'))
+		{
+			if (!in_quotes && **line == '|')
+			{
+				(*count)++;
+				while (**line && **line == '|')
+					(*line)++;
+			}
+			if (**line)
+				(*line)++;
+		}
+	}
 }
 
 static void check_final_pipe(char *line, t_mini *mini, int *count)
@@ -62,8 +65,7 @@ int count_tokens(char *line, t_mini *mini)
     while (*line)
     {
         handle_quotes(*line, &in_quotes, &quote_char);
-        if (!in_quotes)
-            increment_token_count(&line, &count);
+        increment_token_count(&line, &count, in_quotes);
         if (*line)
             line++;
     }

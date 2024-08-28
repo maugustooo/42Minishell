@@ -22,7 +22,6 @@
 # define DELIMITER 5
 # define APPEND 6
 # define PIPE 7
-
 # define MAX_PATH_LEN 4096
 
 # define HOME "/home/$USER"
@@ -32,6 +31,7 @@ typedef enum e_error
 	ERROR_CMD,
 	ERROR_CD,
 	ERROR_EXPORT,
+	ERROR_PIPE,
 	ERROR_ENV
 }	t_error;
 
@@ -46,7 +46,7 @@ static inline const char *Error_Msg(enum e_error i)
     static const char *strings[] = { "%s: command not found\n",
 	"minishell: cd: %s: No such file or directory",
 	"minishell: export: `%s': not a valid identifier\n",
-	"banana", /* continue for rest of values */ };
+	"syntax error\n", /* continue for rest of values */ };
     return strings[i];
 }
 
@@ -65,13 +65,12 @@ typedef struct s_mini
 	char	**penv;
 	char	*prev_dir;
 	char	**splited;
-	
-	int		token_count;
-	
+
 	bool	echo_flag;
 	bool	pipe;
 	bool	final_pipe;
 
+	int		token_count;
 	int		return_code;
 } t_mini;
 
@@ -111,7 +110,7 @@ void	handle_not_sq(t_token **token,t_mini *mini,  int *i);
 void	change_quotes(t_token **token, t_mini *mini);
 
 //------------Executor-----------//
-
+void	pipes(t_token **token, t_mini *mini, int pid);
 void	handle_cd(t_token *arg, t_mini *mini);
 void    handle_exit(t_token **token, t_mini *mini);
 void	handle_echo(t_token *next, t_mini *mini);

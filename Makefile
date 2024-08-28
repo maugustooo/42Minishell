@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+         #
+#    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 08:49:04 by gude-jes          #+#    #+#              #
-#    Updated: 2024/08/27 14:56:45 by gude-jes         ###   ########.fr        #
+#    Updated: 2024/08/28 09:34:07 by maugusto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ RM			= rm -rf
 
 GENERAL		= main
 PARSE		= parse tokens utils freedom env_utils env_utils2 count_tokens handle_splited
-EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export handle_export2 handle_unset signals
+EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export handle_export2 handle_unset signals pipes
 EXPANDER	= expander expander_utils
 
 #==============================================================================#
@@ -41,6 +41,7 @@ VPATH		= src src/parse\
 				src/executor/echo\
 				src/executor/export\
 				src/executor/unset\
+				src/executor/pipes\
 				
 
 LIBFT_PATH	= libft
