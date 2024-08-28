@@ -88,5 +88,6 @@ void pipes(t_token **token, t_mini *mini, int pid)
 	{
 		mini->return_code = 0;
 		ft_printf(Error_Msg(ERROR_PIPE));
+		mini->final_pipe = 0;
 	}
 }
