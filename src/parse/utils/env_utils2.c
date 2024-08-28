@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 12:19:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/21 15:26:15 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:01:24 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	*get_env_value(t_mini *mini, char *str)
 			{
 				vkey = ft_strdup(key[1]);
 				free_keys(&key);
+				free(str);
 				return(vkey);
 			}
 			free_keys(&key);
