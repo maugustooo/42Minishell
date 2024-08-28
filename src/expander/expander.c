@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/27 16:24:25 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/28 14:41:01 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,16 @@ int	detect_expansion(t_token **token)
 			sq = !sq;
 		else if ((*token)->text[i] == '"' && !sq)
 			dq = !dq;
-		else if ((*token)->text[i] == '$' && !sq)
-			return (0);
 		i++;
 	}
 	if (sq || dq)
 		return(1);
+	i = -1;
+	while((*token)->text[++i])
+	{
+		if ((*token)->text[i] == '$')
+			return(0);
+	}
 	return(2);
 }
 
@@ -96,26 +100,26 @@ void	expand_input(t_token *token, t_mini *mini, char **input)
 	free(key);
 }
 
-void	handle_expansion(t_token **token, t_mini *mini)
-{
-	int	i;
-	int sq;
-	int dq;
+// void	handle_expansion(t_token **token, t_mini *mini)
+// {
+// 	int	i;
+// 	int sq;
+// 	int dq;
 
-	i = 0;
-	sq = 0;
-	dq = 0;
-	while ((*token)->text[i])
-	{
-		if ((*token)->text[i] == '"' && !sq)
-			dq = !dq;
-		else if ((*token)->text[i] == '\'' && !dq)
-			sq = !sq;
-		else if ((*token)->text[i] == '$' && !sq)
-			handle_not_sq(token, mini, &i);
-		i++;
-	}
-}
+// 	i = 0;
+// 	sq = 0;
+// 	dq = 0;
+// 	while ((*token)->text[i])
+// 	{
+// 		if ((*token)->text[i] == '"' && !sq)
+// 			dq = !dq;
+// 		else if ((*token)->text[i] == '\'' && !dq)
+// 			sq = !sq;
+// 		else if ((*token)->text[i] == '$' && !sq)
+// 			handle_not_sq(token, mini, &i);
+// 		i++;
+// 	}
+// }
 
 void	expander(t_token **token, t_mini *mini)
 {
