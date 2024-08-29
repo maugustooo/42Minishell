@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 09:14:01 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/20 11:44:07 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:11:40 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	dup_tenv(t_mini *mini, char **tenv)
 	i = 0;
 	count = env_size(mini, tenv);
 	mini->penv = malloc(sizeof(char *) * (count + 1));
-	//if(!mini->penv)
-		//TODO:HANDLE MALLOC ERROR
+	if(!mini->penv)
+		return ;
 	while (i < count)
 	{
 		mini->penv[i] = ft_strdup(tenv[i]);
@@ -86,8 +86,8 @@ void	dup_envp(t_mini *mini, char **envp)
 	while (envp[count])
 		count++;
 	mini->penv = malloc(sizeof(char *) * (count + 1));
-	//if(!mini->penv)
-		//TODO:HANDLE MALLOC ERROR
+	if(!mini->penv)
+		return ;
 	while (i < count)
 	{
 		mini->penv[i] = ft_strdup(envp[i]);

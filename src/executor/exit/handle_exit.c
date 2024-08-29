@@ -14,7 +14,6 @@
 */
 void    handle_exit(t_token **token, t_mini *mini)
 {
-    //TODO: FREE LIST
 	free_things(mini);
 	freethem(token, mini);
     exit(mini->return_code);

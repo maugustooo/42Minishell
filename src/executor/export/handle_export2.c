@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/20 14:11:05 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/29 14:33:13 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	set_export(t_mini *mini, t_token *token)
 
 	i = env_size(mini, NULL);
 	tenv = ft_calloc((i + 2), sizeof(char *));
-	//TODO: Handle malloc error
+	if(!tenv)
+		return ;
 	j = 0;
 	while (j < i)
 	{

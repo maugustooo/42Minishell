@@ -1,4 +1,27 @@
 #include "minishell.h"
+
+void print_tokens(t_token *tokens, t_mini *mini)
+{
+    t_token *current_token;
+    int i;
+
+    i = 0;
+    while (mini->splited[i] != NULL)
+    {
+        printf("Splited[%d]: %s\n", i, mini->splited[i]);
+        i++;
+    }
+    i = 0;
+    current_token = tokens;
+    while (current_token != NULL)
+    {
+        printf("Token %d: %s\n", i, current_token->text);
+        current_token = current_token->next;
+        i++;
+    }
+	ft_printf("\n");
+}
+
 /**
  * @brief on a loop, will handle the readlines, parse, do the executor and free everything
  * 

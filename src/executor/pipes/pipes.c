@@ -12,19 +12,21 @@ static void handle_parent_process(int pid, int pipefd[2], int *fd_in, int is_pip
 
 static void execute_command(t_token *start, t_token *end, t_mini *mini, t_token **token)
 {
-    char *args[256];
+    char **args;
     int i = 0;
 
+	args = ft_calloc(mini->token_count + 1, sizeof(char *));
     while (start != end)
     {
         args[i++] = start->text;
         start = start->next;
     }
     args[i] = NULL;
-    if(execvp(args[0], args) == -1)
-    {
+	change_token_text(*token, ft_strjoin(CMD_PATH, args[0]));
+    if (execve((*token)->text, args, mini->penv) == -1)
+	{
 		mini->return_code = 0;
-		perror("execvp");
+		perror("execve");
 	}
     handle_exit(token, mini);
 }

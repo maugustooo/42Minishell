@@ -1,13 +1,33 @@
-	/**
- * @defgroup mandatory Mandatory
- * @{
- * @file executor.c
- * @brief Executor of minishell
- * 
-*/
-
 #include "minishell.h"
 
+static int handle_cmd(pid_t pid, t_token **token, t_mini *mini)
+{
+	t_token *temp;
+    char **argv;
+	int i;
+
+	temp = *token;
+	i = -1;
+	argv = ft_calloc(mini->token_count + 1, sizeof(char *));
+	pid = fork();
+	if (pid == 0) 
+	{
+		change_token_text(*token, ft_strjoin(CMD_PATH, (*token)->text));
+		while (temp)
+		{
+			argv[++i] = ft_strdup(temp->text);
+			temp = temp->next;
+		}
+		argv[++i]= NULL;
+		if (execve((*token)->text, argv, mini->penv) == -1)
+		{
+			mini->return_code = 0;
+			perror("execve");
+		}
+		return(1);
+	}
+	return(0);
+}
 /**
  * @brief Checks if token is command
  * 
@@ -55,22 +75,13 @@ void executor(t_token **token, t_mini *mini)
 {
     pid_t pid = 0;
     int status;
-
-    char *argv[] = {(*token)->text, NULL};
+	
 	if (is_built_in(*token) && !mini->pipe)
-        handle_built_ins(token, mini);
-    else if(!mini->pipe)
+	       handle_built_ins(token, mini);
+	else if(!mini->pipe)
     {
-		pid = fork();
-        if (pid == 0) 
-		{
-            if (execvp((*token)->text, argv) == -1)
-			{
-				mini->return_code = 0;
-                perror("execvp");
-			}
-            handle_exit(token, mini);
-        }
+		if(handle_cmd(pid, token, mini))
+			handle_exit(token, mini);
 		else if (pid < 0)
             perror("fork");
         else

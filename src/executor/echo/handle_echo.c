@@ -16,7 +16,7 @@ static void print_echo(t_token **next, t_mini *mini)
 	int first;
 
 	first = 0;
-	//expander(next, mini);
+	expander(next, mini);
 	if(next && first == 2)
 		{
 			ft_printf("%s", (*next)->text);

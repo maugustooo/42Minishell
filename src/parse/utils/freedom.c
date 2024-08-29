@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/29 14:10:36 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:40:16 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	freethem(t_token **token, t_mini *mini)
 	int	i;
 
 	i = 0;
+	mini->pipe = 0;
 	if(token)
 		ft_tokenclear(token);
 	if(mini->splited)

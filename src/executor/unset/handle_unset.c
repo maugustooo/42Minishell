@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:36:43 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/27 16:11:34 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/29 14:46:40 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	dup_env_if(t_mini *mini, char *str)
 	j = 0;
 	k = 0;
 	tenv = ft_calloc((i + 1), sizeof(char *));
-	//TODO:Handle malloc error
+	if(!tenv)
+		return ;
 	while (j < i)
 	{
 		if (ft_strcmp(mini->penv[j], str) == 0)

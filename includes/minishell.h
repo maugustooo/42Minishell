@@ -24,6 +24,7 @@
 # define PIPE 7
 # define MAX_PATH_LEN 4096
 
+# define CMD_PATH "/bin/"
 # define HOME "/home/$USER"
 
 typedef enum e_error
@@ -92,7 +93,7 @@ void	dup_tenv(t_mini *mini, char **tenv);
 char	*get_env_key(t_mini *mini, char *str);
 char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
-
+void	print_tokens(t_token *tokens, t_mini *mini);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
