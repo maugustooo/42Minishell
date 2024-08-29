@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/28 17:04:35 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/29 13:01:26 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start)
 	int		len;
 
 	len = 1;
+	segment = NULL;
 	(*i)++;
 	if((*token)->text[*i] == '?')
 	{
@@ -28,9 +29,7 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start)
 	{
 		while(ft_isalnum_under((*token)->text[*i + len]))
 			len++;
-		segment = ft_strndup((*token)->text + *i, len);
-		*i += len;
-		segment =  get_env_value(mini, segment);
+		segment = handle_sign2(token, mini, i, &len);
 	}
 	else
 	{
@@ -53,7 +52,7 @@ char	*handle_sq(t_token **token, int *i)
 	return(segment);
 }
 
-char	*handle_dq(t_token **token,t_mini *mini, int *i)
+char	*handle_dq(t_token **token, t_mini *mini, int *i)
 {
 	char	*segment;
 	char	*expanded;
@@ -63,19 +62,19 @@ char	*handle_dq(t_token **token,t_mini *mini, int *i)
 	segment = ft_strdup("");
 	start = ++(*i);
 	flag = false;
-	while((*token)->text[*i] && (*token)->text[*i] != '"')
+	while ((*token)->text[*i] && (*token)->text[*i] != '"')
 	{
-		if((*token)->text[*i] == '$' && ft_isalnum_under(
+		if ((*token)->text[*i] == '$' && ft_isalnum_under(
 			(*token)->text[*i + 1]))
 		{
 			expanded = handle_sign(token, mini, i, &start);
 			segment = ft_strjoin_free(segment, expanded, 1);
-			flag = true;
+			flag = handle_dq2(expanded);
 		}
 		else
 			(*i)++;
 	}
-	if(!flag)
+	if (!flag)
 		segment = ft_strjoin_free(segment,
 				ft_strndup((*token)->text + start, *i - start), 3);
 	(*i)++;
