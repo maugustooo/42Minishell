@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   handle_echo.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 15:33:54 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/27 11:44:44 by gude-jes         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 static void handle_input(t_token *token)
@@ -28,7 +16,7 @@ static void print_echo(t_token **next, t_mini *mini)
 	int first;
 
 	first = 0;
-	expander(next, mini);
+	//expander(next, mini);
 	if(next && first == 2)
 		{
 			ft_printf("%s", (*next)->text);

@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   freedom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/20 11:26:28 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/29 14:10:36 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void free_key(char **key)
+{
+	if(key)
+	{
+		free(key[0]);
+		free(key[1]);
+		free(key);
+	}
+}
 
 void	free_things(t_mini *mini)
 {

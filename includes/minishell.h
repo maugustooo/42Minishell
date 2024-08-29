@@ -86,6 +86,7 @@ void	free_things(t_mini *mini);
 int		env_size(t_mini *mini, char **tenv);
 void	free_tenv(char **tenv);
 void	free_penv(t_mini *mini);
+void	free_key(char **key);
 void	dup_envp(t_mini *mini, char **envp);
 void	dup_tenv(t_mini *mini, char **tenv);
 char	*get_env_key(t_mini *mini, char *str);
