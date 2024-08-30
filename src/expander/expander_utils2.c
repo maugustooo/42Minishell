@@ -6,28 +6,55 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:07:08 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/29 13:01:23 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/30 09:52:36 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	change_quotes(t_token **token, t_mini *mini)
+char	*append_part(char *result, char *text, int *i, char quote)
 {
-	char	*text;
-	char	*trimmed;
+	char	*part;
+	int		start;
 
-	text = NULL;
-	trimmed = NULL;
-	text = (*token)->text;
-	trimmed = ft_strndup(text, ft_strlen(text));
-	if(text[0] == '\'' && text[ft_strlen(text) - 1] == '\'')
-		change_token_text(*token, trimmed);
-	else if (text[0] == '"' && text[ft_strlen(text) - 1] == '"')
+	start = *i;
+	part = NULL;
+	if (quote)
 	{
-		change_token_text(*token, trimmed);
-		expand_input(*token, mini, &trimmed);
+		start++;
+		while(text[*i] && text[*i] != quote)
+			(*i)++;
+		part = ft_strndup(text + start, *i - start);
+		(*i)++;
 	}
+	else
+	{
+		while (text[*i] && text[*i] != '"' && text[*i] != '\'')
+			(*i)++;
+		part = ft_strndup(text + start, *i - start);
+	}
+	result = ft_strjoin_free(result, part, 1);
+	free(part);
+	return(result);
+}
+
+void	change_quotes(t_token **token)
+{
+	char	*result;
+	int		i;
+
+	result = ft_strdup("");
+	i = 0;
+	while ((*token)->text[i])
+	{
+		if ((*token)->text[i] == '\'' || (*token)->text[i] == '"')
+			result = append_part(result, (*token)->text, &i, (*token)->text[i]);
+		else
+			result = append_part(result, (*token)->text, &i, 0);
+	}
+
+	change_token_text(*token, result);
+	free(result);
 }
 
 char	*handle_sign2(t_token **token, t_mini *mini, int *i, int *len)

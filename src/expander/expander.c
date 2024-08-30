@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/28 16:31:38 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/30 08:30:48 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,5 @@ void	expander(t_token **token, t_mini *mini)
 		change_token_text(*token, NULL);
 	}
 	else
-		change_quotes(token, mini);
+		change_quotes(token);
 }
