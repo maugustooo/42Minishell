@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/30 10:18:19 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:16:13 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,31 +55,25 @@ char	*handle_sq(t_token **token, int *i)
 char	*handle_dq(t_token **token, t_mini *mini, int *i)
 {
 	char	*segment;
-	char	*expanded;
 	int		start;
-	bool	flag;
 
 	segment = ft_strdup("");
 	start = ++(*i);
-	flag = false;
 	while ((*token)->text[*i] && (*token)->text[*i] != '"')
 	{
-		if ((*token)->text[*i] == '$' && ft_isalnum_under(
-			(*token)->text[*i + 1]))
-		{
-			expanded = handle_sign(token, mini, i, &start);
-			segment = ft_strjoin_free(segment, expanded, 1);
-			flag = handle_dq2(expanded);
-		}
+		if ((*token)->text[*i] == '$' && ft_isalnum_under((*token)->text[*i + 1]))
+			segment = handle_dq2(token, mini, i, &start, segment);
 		else
 			(*i)++;
 	}
-	if (!flag)
-		segment = ft_strjoin_free(segment,
-				ft_strndup((*token)->text + start, *i - start), 3);
+	if (*i > start)
+		segment = ft_strjoin_free(segment, 
+			ft_strndup((*token)->text + start, *i - start), 3);
+
 	(*i)++;
-	return(segment);
+	return (segment);
 }
+
 
 char	*handle_plain(t_token **token, int *i)
 {

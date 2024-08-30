@@ -112,7 +112,8 @@ void	handle_not_sq(t_token **token,t_mini *mini,  int *i);
 void	change_quotes(t_token **token);
 void	handle_expansion(t_token **token, t_mini *mini);
 char	*handle_sign2(t_token **token, t_mini *mini, int *i, int *len);
-bool	handle_dq2(char *expanded);
+char	*handle_dq2(t_token **token, t_mini *mini, int *i, int *start,char *segment);
+char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start);
 
 //------------Executor-----------//
 void	pipes(t_token **token, t_mini *mini, int pid);
