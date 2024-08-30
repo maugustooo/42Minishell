@@ -5,7 +5,10 @@ static void handle_input(t_token *token)
 	int fd;
 	char *file;
 
-	file = token->next->next->text;
+	if(token->next->next->type == ARG)
+		file = token->next->next->text;
+	else
+		ft_printf(Error_Msg(ERROR_ARG_ECHO), token->next->next->text);
 	fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if(fd > 0)
 		ft_printf_fd(fd, token->text);
@@ -44,7 +47,7 @@ void	handle_echo(t_token *next, t_mini *mini)
 	{
 		while (next)
 		{
-			if(next->next)
+			if(next->next->next)
 				if(next->next->type == INPUT)
 				{
 					handle_input(next);

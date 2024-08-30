@@ -10,7 +10,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <dirent.h>
-#include <signal.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
@@ -33,6 +33,7 @@ typedef enum e_error
 	ERROR_CD,
 	ERROR_EXPORT,
 	ERROR_PIPE,
+	ERROR_ARG_ECHO,
 	ERROR_ENV
 }	t_error;
 
@@ -47,7 +48,7 @@ static inline const char *Error_Msg(enum e_error i)
     static const char *strings[] = { "%s: command not found\n",
 	"minishell: cd: %s: No such file or directory",
 	"minishell: export: `%s': not a valid identifier\n",
-	"syntax error\n", /* continue for rest of values */ };
+	"syntax error\n", "parse error near '%s'\n"/* continue for rest of values */ };
     return strings[i];
 }
 
@@ -78,7 +79,7 @@ typedef struct s_mini
 //--------------Utils-------------//
 
 t_token	*ft_tokenlast(t_token *token);
-void	ft_tokenadd_back(t_token **token, t_token *new);
+void	ft_tokenadd_back(t_token **token, t_token *new_token);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
 void	ft_tokendelone(t_token *token);
@@ -98,7 +99,7 @@ void	print_tokens(t_token *tokens, t_mini *mini);
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
 void	get_tokens(t_token	**token, t_mini *mini);
-void	handle_sigint(int sig);
+void	ft_signals(void);
 void	handle_eof(t_token **token, t_mini *mini);
 void	split_to_tokens(char *line, t_mini *mini);
 int		count_tokens(char *line, t_mini *mini);
@@ -117,12 +118,12 @@ bool	handle_dq2(char *expanded);
 //------------Executor-----------//
 void	pipes(t_token **token, t_mini *mini, int pid);
 void	handle_cd(t_token *arg, t_mini *mini);
-void    handle_exit(t_token **token, t_mini *mini);
+void	handle_exit(t_token **token, t_mini *mini);
 void	handle_echo(t_token *next, t_mini *mini);
 void	handle_env(t_mini *mini, t_token *next);
 void	handle_pwd(t_mini *mini);
 void	set_export(t_mini *mini, t_token *token);
 void	handle_export(t_mini *mini, t_token *token);
 void	handle_unset(t_token *token, t_mini *mini);
-void    executor(t_token **token, t_mini *mini);
+void	executor(t_token **token, t_mini *mini);
 #endif

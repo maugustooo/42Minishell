@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/29 14:11:47 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/30 11:28:54 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,6 @@ void	check_arg_export(t_token *token)
 		token = token->next;
 	}
 }	
-
-t_token *ft_tokenpenultimate(t_token *head)
-{
-    t_token *current;
-    
-    if (head == NULL || head->next == NULL)
-        return NULL;
-    current = head;
-    while (current->next && current->next->next)
-        current = current->next;
-    return (current);
-}
 
 static int have_pipe(t_token *token)
 {

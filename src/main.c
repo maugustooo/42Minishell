@@ -15,7 +15,7 @@ void print_tokens(t_token *tokens, t_mini *mini)
     current_token = tokens;
     while (current_token != NULL)
     {
-        printf("Token %d: %s\n", i, current_token->text);
+        printf("Token %d: text:%s type:%d\n", i, current_token->text, current_token->type);
         current_token = current_token->next;
         i++;
     }
@@ -35,6 +35,7 @@ static void minishell(t_mini *mini, t_token	**token, char **envp)
 	rl = NULL;
 	while(1)
 	{
+		ft_signals();
 		rl = readline("miniShell: ");
 		if (!rl)
             handle_eof(token, mini);
@@ -64,7 +65,5 @@ int main(int argc, char **argv, char **envp)
 	
 	token = NULL;
 	ft_memset(&mini, 0, sizeof(t_mini));
-	signal(SIGINT, handle_sigint);
-    signal(SIGQUIT, SIG_IGN);
 	minishell(&mini, &token, envp);
 }

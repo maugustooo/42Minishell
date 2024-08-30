@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:52:10 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/14 11:52:52 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/30 12:18:19 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,9 @@ void handle_eof(t_token **token , t_mini *mini)
 {
     printf("exit\n");
     handle_exit(token, mini);
+}
+void	ft_signals(void)
+{
+	signal(SIGINT, handle_sigint);
+    signal(SIGQUIT, SIG_IGN);
 }

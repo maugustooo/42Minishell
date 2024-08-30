@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:05:35 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/21 13:51:01 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/08/30 11:31:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_token	*ft_newnode(int type, char *text)
  * @param token the list
  * @param new the new node
  */
-void	ft_tokenadd_back(t_token **token, t_token *new)
+void	ft_tokenadd_back(t_token **token, t_token *new_token)
 {
 	t_token	*last;
 
@@ -81,10 +81,10 @@ void	ft_tokenadd_back(t_token **token, t_token *new)
 		if (*token)
 		{
 			last = ft_tokenlast(*token);
-			last->next = new;
+			last->next = new_token;
 		}
 		else
-			*token = new;
+			*token = new_token;
 	}
 }
 /**
