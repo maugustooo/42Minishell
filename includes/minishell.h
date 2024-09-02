@@ -26,7 +26,7 @@
 
 # define CMD_PATH "/bin/"
 # define HOME "/home/$USER"
-
+# define TEMP_FILE "/tmp/minishell_heredoc.txt"
 typedef enum e_error
 {
 	ERROR_CMD,
@@ -123,7 +123,7 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start);
 void	pipes(t_token **token, t_mini *mini, int pid);
 void	handle_cd(t_token *arg, t_mini *mini);
 void	handle_exit(t_token **token, t_mini *mini);
-void	handle_echo(t_token *next, t_mini *mini);
+void	handle_echo(t_token **token, t_mini *mini);
 void	handle_env(t_mini *mini, t_token *next);
 void	handle_pwd(t_mini *mini);
 void	set_export(t_mini *mini, t_token *token);

@@ -9,3 +9,4 @@ minishell
 readline.supp
 *.txt
 minishell_tester/
+echo_tests.txt
