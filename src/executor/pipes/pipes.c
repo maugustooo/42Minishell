@@ -25,7 +25,7 @@ static void execute_command(t_token *start, t_token *end, t_mini *mini, t_token 
 	change_token_text(*token, ft_strjoin(CMD_PATH, args[0]));
     if (execve((*token)->text, args, mini->penv) == -1)
 	{
-		mini->return_code = 0;
+		mini->return_code = 127;
 		perror("execve");
 	}
     handle_exit(token, mini);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/29 14:45:48 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/02 09:31:42 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,15 +119,21 @@ void	export_no_args(t_mini *mini)
 
 void	handle_export(t_mini *mini, t_token *token)
 {
-	if (token)
+	if(!mini->exported)
 	{
-		while(token)
+		if (token)
 		{
-			set_export(mini, token);
-			token = token->next;
+			while(token)
+			{
+				set_export(mini, token);
+				token = token->next;
+			}
+			mini->return_code = 0;
+		}
+		else
+		{
+			export_no_args(mini);
+			mini->return_code = 0;
 		}
 	}
-	else
-		export_no_args(mini);
-	mini->return_code = 0;
 }

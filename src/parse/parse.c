@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/30 11:28:54 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/02 09:31:53 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_arg_export(t_token *token)
+void	check_arg_export(t_token *token, t_mini *mini)
 {
 	char	*value;
 	char	**key;
@@ -32,6 +32,8 @@ void	check_arg_export(t_token *token)
 			if(!ft_str_isalpha(key[0]) && !ft_strchr(key[0], '_'))
 			{
 				ft_printf(Error_Msg(ERROR_EXPORT), token->next->text);
+				mini->return_code = 1;
+				mini->exported = true;
 				free_key(key);
 				return ;
 			}
@@ -72,7 +74,7 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 		if(ft_strncmp((*token)->next->text, "-n", 2) == 0)
 			mini->echo_flag = true;
 	if(ft_strcmp((*mini->splited), "export") == 0 && (*token)->next)
-		check_arg_export(*token);
+		check_arg_export(*token, mini);
 	if(have_pipe(*token) || mini->final_pipe)
 		mini->pipe = true;
 	return(1);

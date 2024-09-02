@@ -47,7 +47,7 @@ void	handle_echo(t_token *next, t_mini *mini)
 	{
 		while (next)
 		{
-			if(next->next->next)
+			if(next->next) //Antes estava next->next->next e dava segfault
 				if(next->next->type == INPUT)
 				{
 					handle_input(next);

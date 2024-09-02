@@ -20,10 +20,7 @@ static int handle_cmd(pid_t pid, t_token **token, t_mini *mini)
 		}
 		argv[++i]= NULL;
 		if (execve((*token)->text, argv, mini->penv) == -1)
-		{
-			mini->return_code = 0;
 			perror("execve");
-		}
 		return(1);
 	}
 	return(0);
@@ -73,15 +70,19 @@ void	handle_built_ins(t_token **token, t_mini *mini)
 */
 void executor(t_token **token, t_mini *mini)
 {
-    pid_t pid = 0;
+    pid_t pid;
     int status;
 	
+	pid = 0;
 	if (is_built_in(*token) && !mini->pipe)
 	       handle_built_ins(token, mini);
-	else if(!mini->pipe)
+	else if (!mini->pipe)
     {
-		if(handle_cmd(pid, token, mini))
+		if (handle_cmd(pid, token, mini))
+		{
+			mini->return_code = 127;
 			handle_exit(token, mini);
+		}
 		else if (pid < 0)
             perror("fork");
         else

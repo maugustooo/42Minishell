@@ -34,7 +34,9 @@ typedef enum e_error
 	ERROR_EXPORT,
 	ERROR_PIPE,
 	ERROR_ARG_ECHO,
-	ERROR_ENV
+	ERROR_ENV,
+	ERROR_TARG, //Too many arguments
+	ERROR_NUMARG //Numeric argument required
 }	t_error;
 
 // const char *Error_Msg[] =
@@ -71,6 +73,7 @@ typedef struct s_mini
 	bool	echo_flag;
 	bool	pipe;
 	bool	final_pipe;
+	bool	exported;
 
 	int		token_count;
 	int		return_code;
