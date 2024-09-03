@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:07:08 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/02 11:46:52 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:40:06 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ char	*append_part(char *result, char *text, int *i, char quote)
 	part = NULL;
 	if (quote)
 	{
-		start++;
+		(*i)++;
 		while(text[*i] && text[*i] != quote)
 			(*i)++;
-		part = ft_strndup(text + start, *i - start);
+		part = ft_strndup(text + start + 1, (*i) - start - 1);
 		(*i)++;
 	}
 	else
@@ -33,8 +33,7 @@ char	*append_part(char *result, char *text, int *i, char quote)
 			(*i)++;
 		part = ft_strndup(text + start, *i - start);
 	}
-	result = ft_strjoin_free(result, part, 1);
-	free(part);
+	result = ft_strjoin_free(result, part, 3);
 	return(result);
 }
 
@@ -81,15 +80,13 @@ char	*handle_dq2(t_token **token, t_mini *mini, int *i, int *start,
 		temp = ft_strndup((*token)->text + *start, *i - *start);
 		if (!temp)
 			return (NULL);
-		segment = ft_strjoin_free(segment, temp, 1);
-		free(temp);
+		segment = ft_strjoin_free(segment, temp, 3);
 	}
 
 	expanded = handle_sign(token, mini, i, start);
 	if (!expanded)
 		return (NULL);
-	segment = ft_strjoin_free(segment, expanded, 1);
-	free(expanded);
+	segment = ft_strjoin_free(segment, expanded, 3);
 	*start = *i;
 	return (segment);
 }

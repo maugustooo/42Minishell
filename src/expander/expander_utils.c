@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/30 16:16:13 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/03 11:10:55 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ char	*handle_dq(t_token **token, t_mini *mini, int *i)
 	start = ++(*i);
 	while ((*token)->text[*i] && (*token)->text[*i] != '"')
 	{
-		if ((*token)->text[*i] == '$' && ft_isalnum_under((*token)->text[*i + 1]))
+		if ((*token)->text[*i] == '$'
+			&& (ft_isalnum_under((*token)->text[*i + 1])
+				|| ((*token)->text[*i + 1] == '?')))
 			segment = handle_dq2(token, mini, i, &start, segment);
 		else
 			(*i)++;
@@ -106,10 +108,8 @@ void	handle_expansion(t_token **token, t_mini *mini)
 			expanded = handle_sign(token, mini, &i, &i);
 		else
 			expanded = handle_plain(token, &i);
-		result = ft_strjoin_free(result, expanded, 1);
-		free(expanded);
+		result = ft_strjoin_free(result, expanded, 2);
 	}
 	change_token_text(*token, result);
 	free(result);
 }
-
