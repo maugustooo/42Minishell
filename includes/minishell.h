@@ -35,8 +35,8 @@ typedef enum e_error
 	ERROR_PIPE,
 	ERROR_ARG_ECHO,
 	ERROR_ENV,
-	ERROR_TARG, //Too many arguments
-	ERROR_NUMARG //Numeric argument required
+	ERROR_TARG,
+	ERROR_NUMARG
 }	t_error;
 
 // const char *Error_Msg[] =
@@ -47,10 +47,15 @@ typedef enum e_error
 
 static inline const char *Error_Msg(enum e_error i)
 {
-    static const char *strings[] = { "%s: command not found\n",
-	"minishell: cd: %s: No such file or directory",
+    static const char *strings[] = { 
+	"%s: command not found\n",
+	"minishell: cd: %s: No such file or directory\n",
 	"minishell: export: `%s': not a valid identifier\n",
-	"syntax error\n", "parse error near '%s'\n"/* continue for rest of values */ };
+	"Syntax error near '%s'\n",
+	"ARG ECHO ERROR\n",
+	"ERROR NO ENV\n",
+	"minishell: %s: too many arguments\n",
+	"minishell: %s: numeric argument required\n"};
     return strings[i];
 }
 

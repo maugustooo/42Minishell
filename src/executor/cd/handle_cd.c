@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/04 10:02:30 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:14:40 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	handle_dir(t_token *next, char **tgt_dir, t_mini *mini, char *curr_dir)
 /**
  * @brief Handles cd command
  * 
- * @param arg Argument
- * @param prev_dir Pointer to handle previous directory
+ * @param token Token Struct
+ * @param mini Minishell Struct
 */
-void	handle_cd(t_token *arg, t_mini *mini)
+void	handle_cd(t_token *token, t_mini *mini)
 {
 	char    *target_dir;
 	char    current_dir[MAX_PATH_LEN];
@@ -60,11 +60,17 @@ void	handle_cd(t_token *arg, t_mini *mini)
 		//TODO: HANDLE ERROR
 		return;
 	}
-	expander(&arg->next, mini);
-	handle_dir(arg, &target_dir, mini, current_dir);
-	if (chdir(target_dir) != 0 && arg->next)
+	if(count_nodes(token) > 2)
 	{
-		ft_printf(Error_Msg(ERROR_CD), arg->next->text);
+		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_TARG), token->text);
+		mini->return_code = 1;
+		return ;
+	}
+	expander(&token->next, mini);
+	handle_dir(token, &target_dir, mini, current_dir);
+	if (chdir(target_dir) != 0 && token->next)
+	{
+		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), token->next->text);
 		mini->return_code = 1;
 		ft_printf("\n");
 	}
