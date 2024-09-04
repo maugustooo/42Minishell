@@ -86,6 +86,7 @@ void	ft_tokenadd_back(t_token **token, t_token *new_token);
 t_token	*ft_newnode(int type, char *text);
 void	ft_tokenclear(t_token **token);
 void	ft_tokendelone(t_token *token);
+int		count_nodes(t_token *token);
 void	freethem(t_token **token, t_mini *mini);
 void	free_things(t_mini *mini);
 int		env_size(t_mini *mini, char **tenv);

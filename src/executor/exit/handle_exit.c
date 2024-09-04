@@ -12,11 +12,11 @@ bool	strnum(t_token **token)
 	int	i;
 
 	i = 0;
-	if((*token)->next->text[i] == '+' || (*token)->next->text[i] == '-')
+	if((*token)->text[i] == '+' || (*token)->text[i] == '-')
 		i++;
-	while ((*token)->next->text[i])
+	while ((*token)->text[i])
 	{
-		if (ft_isdigit((*token)->next->text[i]))
+		if (ft_isdigit((*token)->text[i]))
 			i++;
 		else
 			return(true);
@@ -28,7 +28,7 @@ void	exit_code(t_token **token, t_mini *mini)
 {
 	int	code;
 
-	code = ft_atoi((*token)->next->text);
+	code = ft_atoi((*token)->text);
 	if (code > 256)
 		code %= 256;
 	else if (code == 256)
@@ -50,11 +50,12 @@ void    handle_exit(t_token **token, t_mini *mini)
 	{
 		if((*token)->next)
 		{
-			n_token = count_tokens(mini->line, mini);
+			n_token = count_nodes(*token);
 			if(n_token > 2)
 				ft_printf(Error_Msg(ERROR_TARG), (*token)->text);
 			else
 			{
+				*token = (*token)->next;
 				expander(token, mini);
 				if(strnum(token))
 					ft_printf(Error_Msg(ERROR_NUMARG), (*token)->text);

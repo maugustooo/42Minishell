@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/04 09:55:03 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/04 10:22:50 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int have_pipe(t_token *token)
 	flag = 0;
 	while (token)
 	{
-		if(token->type == PIPE || ft_find_c('|', token->text))
+		if(token->type == PIPE)
 			flag = 1;
 		token = token ->next;
 	}
