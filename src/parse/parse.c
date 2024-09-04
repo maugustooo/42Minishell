@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/02 09:31:53 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/04 09:55:03 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ void	check_arg_export(t_token *token, t_mini *mini)
 	char	*check;
 
 	key = NULL;
-	while(token->next)
+	while (token->next)
 	{
 		check = ft_strchr(token->next->text, '=');
 		key = ft_split(token->next->text, '=');
-		if(check)
+		if (check)
 			check++;
 		if (token->next)
 		{
-			if(check != NULL)
+			if (check != NULL)
 				value = check;
-			if(!ft_str_isalpha(key[0]) && !ft_strchr(key[0], '_'))
+			if (!ft_str_isalpha(key[0]) && !ft_strchr(key[0], '_'))
 			{
-				ft_printf(Error_Msg(ERROR_EXPORT), token->next->text);
+				ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_EXPORT), token->next->text);
 				mini->return_code = 1;
 				mini->exported = true;
 				free_key(key);

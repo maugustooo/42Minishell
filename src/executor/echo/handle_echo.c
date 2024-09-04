@@ -70,11 +70,11 @@ static void print_echo(t_token **next, t_mini *mini, int *first)
 				ft_printf("%s", (*next)->text);
 			*first = 2;
 		}
-		// if(*next) VERIFICAR ISTO - COLOCA ESPACO DEPOIS DAS PALAVRAS QUANDO NAO EXISTE NECESSIDADE
-		// {
-		// 	if(ft_strcmp((*next)->text, "-n") != 0)
-		// 		ft_printf(" ");
-		// }
+		if((*next)->next) //VERIFICAR ISTO - COLOCA ESPACO DEPOIS DAS PALAVRAS QUANDO NAO EXISTE NECESSIDADE
+		{
+			if(ft_strcmp((*next)->text, "-n") != 0)
+				ft_printf(" ");
+		}
 		*next = (*next)->next;
 	}
 }

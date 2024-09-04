@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_unset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:36:43 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/29 14:46:40 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/04 09:46:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,20 @@ void	handle_unset(t_token *token, t_mini *mini)
 	char	**key;
 
 	i = 0;
-	while(mini->penv[i])
+	if(token->next)
 	{
-		key = ft_split(mini->penv[i], '=');
-		if (ft_strcmp(key[0],token->next->text) == 0)
+		while(mini->penv[i])
 		{
-			dup_env_if(mini, mini->penv[i]);
+			key = ft_split(mini->penv[i], '=');
+			if (ft_strcmp(key[0],token->next->text) == 0)
+			{
+				dup_env_if(mini, mini->penv[i]);
+				free_unset(&key);
+				break;
+			}
 			free_unset(&key);
-			break;
+			i++;
 		}
-		free_unset(&key);
-		i++;
 	}
 	mini->return_code = 0;
 }

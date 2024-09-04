@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/27 16:17:35 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/04 10:02:30 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	handle_cd(t_token *arg, t_mini *mini)
 		//TODO: HANDLE ERROR
 		return;
 	}
+	expander(&arg->next, mini);
 	handle_dir(arg, &target_dir, mini, current_dir);
 	if (chdir(target_dir) != 0 && arg->next)
 	{
