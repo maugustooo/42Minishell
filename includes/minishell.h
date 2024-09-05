@@ -121,6 +121,8 @@ char	*handle_dq2(t_token **token, t_mini *mini, int *i, int *start,char *segment
 char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start);
 
 //------------Executor-----------//
+int		is_built_in(t_token *token);
+void	handle_built_ins(t_token **token, t_mini *mini);
 void	pipes(t_token **token, t_mini *mini, int pid);
 void	handle_cd(t_token *arg, t_mini *mini);
 void	handle_exit(t_token **token, t_mini *mini);

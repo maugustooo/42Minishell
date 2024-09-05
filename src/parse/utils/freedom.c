@@ -3,15 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   freedom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/02 09:32:29 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/05 11:31:53 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void free_args(char **args)
+{
+	int i = 0;
+
+	while (args[i])
+	{
+		free(args[i]);
+		i ++;
+	}
+	free(args);
+}
 void free_key(char **key)
 {
 	if(key)
