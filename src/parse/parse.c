@@ -3,45 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/04 10:22:50 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/05 09:33:58 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	check_arg_export(t_token *token, t_mini *mini)
-{
-	char	*value;
-	char	**key;
-	char	*check;
-
-	key = NULL;
-	while (token->next)
-	{
-		check = ft_strchr(token->next->text, '=');
-		key = ft_split(token->next->text, '=');
-		if (check)
-			check++;
-		if (token->next)
-		{
-			if (check != NULL)
-				value = check;
-			if (!ft_str_isalpha(key[0]) && !ft_strchr(key[0], '_'))
-			{
-				ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_EXPORT), token->next->text);
-				mini->return_code = 1;
-				mini->exported = true;
-				free_key(key);
-				return ;
-			}
-		}
-		free_key(key);
-		token = token->next;
-	}
-}	
+#include "minishell.h"	
 
 static int have_pipe(t_token *token)
 {
