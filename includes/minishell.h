@@ -98,6 +98,7 @@ int		env_size(t_mini *mini, char **tenv);
 void	free_tenv(char **tenv);
 void	free_penv(t_mini *mini);
 void	free_key(char **key);
+void	free_keys(char ***key);
 void	dup_envp(t_mini *mini, char **envp);
 void	dup_tenv(t_mini *mini, char **tenv);
 char	*get_env_key(t_mini *mini, char *str);
@@ -136,6 +137,8 @@ void	handle_env(t_mini *mini, t_token *next);
 void	handle_pwd(t_mini *mini);
 void	set_export(t_mini *mini, t_token *token);
 void	handle_export(t_mini *mini, t_token *token);
+int		export_arg(t_token *token, t_mini *mini);
+void	check_arg_export(t_token *token, t_mini *mini);
 void	handle_unset(t_token *token, t_mini *mini);
 void	executor(t_token **token, t_mini *mini);
 #endif
