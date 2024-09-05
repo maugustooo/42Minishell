@@ -51,31 +51,31 @@ static void handle_input(t_token *token, t_mini *mini, t_token *last, int type)
 		}
 }
 
-static void print_echo(t_token **next, t_mini *mini, int *first)
-{
-	while (*next)
+static void print_echo(t_token *next, t_mini *mini, int *first)
+{	
+	while (next && next->type != PIPE)
 	{
-		expander(next, mini);
-		if(next && *first == 2 && ft_strcmp((*next)->text, "-n") != 0)
+		expander(&next, mini);
+		if(next && *first == 2 && ft_strcmp(next->text, "-n") != 0)
 		{
-			ft_printf("%s", (*next)->text);
+			ft_printf("%s", next->text);
 			*first = 2;
 		}
 		if (next && !mini->echo_flag)
-				ft_printf("%s", (*next)->text);
-		else if ((*next)->next && !*first)
+			ft_printf("%s", next->text);
+		else if (next->next && !*first)
 		{
-			(*next) = (*next)->next;
-			if(ft_strcmp((*next)->text, "-n") != 0)
-				ft_printf("%s", (*next)->text);
+			next = next->next;
+			if(ft_strcmp(next->text, "-n") != 0)
+				ft_printf("%s", next->text);
 			*first = 2;
 		}
-		if((*next)->next) //VERIFICAR ISTO - COLOCA ESPACO DEPOIS DAS PALAVRAS QUANDO NAO EXISTE NECESSIDADE
+		if(next->next && next->next->type != PIPE) //VERIFICAR ISTO - PELO QUE VI, SO IMPRIMIA A MAIS COM PIPE NE?
 		{
-			if(ft_strcmp((*next)->text, "-n") != 0)
+			if(ft_strcmp(next->text, "-n") != 0)
 				ft_printf(" ");
 		}
-		*next = (*next)->next;
+		next = next->next;
 	}
 }
 
@@ -104,13 +104,15 @@ static int check_input(t_token *token, t_mini *mini)
 void	handle_echo(t_token **token, t_mini *mini)
 {
 	int first;
+	t_token *temp;
 
+	temp = *token;
 	first = 0;
-	if((*token)->next)
+	if(temp->next)
 	{
-		*token = (*token)->next;
-		if(!check_input(*token, mini))
-			print_echo(token, mini, &first);
+		temp = temp->next;
+		if(!check_input(temp, mini))
+			print_echo(temp, mini, &first);
 		if (mini->echo_flag == false)
 				ft_printf("\n");
 		mini->echo_flag = false;

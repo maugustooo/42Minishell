@@ -33,6 +33,8 @@ static int handle_cmd(pid_t pid, t_token **token, t_mini *mini)
 */
 int	is_built_in(t_token *token)
 {
+	if(!token)
+		return(0);
     return(token->type == CMD
 	&& (ft_strcmp(token->text, "cd") == 0
 	|| ft_strcmp(token->text, "echo") == 0
