@@ -6,7 +6,7 @@
 #    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 08:49:04 by gude-jes          #+#    #+#              #
-#    Updated: 2024/09/04 10:38:04 by maugusto         ###   ########.fr        #
+#    Updated: 2024/09/06 11:48:46 by maugusto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ RM			= rm -rf
 
 GENERAL		= main
 PARSE		= parse tokens utils freedom env_utils env_utils2 count_tokens handle_splited token_utils
-EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export handle_export2 handle_unset signals pipes
+EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export handle_export2 handle_unset signals pipes check_pipe
 EXPANDER	= expander expander_utils expander_utils2
 
 #==============================================================================#

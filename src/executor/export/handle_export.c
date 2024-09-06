@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/06 10:45:21 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/06 11:48:21 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	export_no_args(t_mini *mini)
 			else
 				ft_printf("declare -x %s\n", key[0]);
 		}
-		free_keys(key);
+		free_keys(&key);
 		key = NULL;
 	}
 	free_env(tmp_env, NULL);
