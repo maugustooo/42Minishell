@@ -53,7 +53,7 @@ void	handle_built_ins(t_token **token, t_mini *mini)
 	else if (ft_strncmp((*token)->text, "cd", 2) == 0)
 		handle_cd(*token, mini);
 	else if (ft_strncmp((*token)->text, "env", 3) == 0)
-		handle_env(mini, (*token)->next);
+		handle_env(mini, *token);
 	else if (ft_strncmp((*token)->text, "pwd", 3) == 0)
 		handle_pwd(mini);
 	else if ((ft_strncmp((*token)->text, "export", 6) == 0))
