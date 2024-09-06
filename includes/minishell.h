@@ -129,6 +129,7 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start);
 int		is_built_in(t_token *token);
 void	handle_built_ins(t_token **token, t_mini *mini);
 void	pipes(t_token **token, t_mini *mini, int pid);
+void	check_pipes(int *is_pipe, t_token **temp);
 void	handle_cd(t_token *arg, t_mini *mini);
 void	handle_exit(t_token **token, t_mini *mini);
 void	handle_echo(t_token **token, t_mini *mini);

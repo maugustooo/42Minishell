@@ -79,12 +79,7 @@ static void process_pipe_segment(t_token **temp, int *fd_in,
 		start = *temp;
 		if((*temp)->next)
 		{
-			is_pipe = ((*temp)->next && strcmp((*temp)->next->text, "|") == 0);
-			while ((*temp)->next && !is_pipe)
-			{
-				*temp = (*temp)->next;
-				is_pipe = ((*temp)->next && strcmp((*temp)->next->text, "|") == 0);
-			}
+			check_pipes(&is_pipe, temp);
 		}
 		if (is_pipe == 1)
 			pipe(pipefd);

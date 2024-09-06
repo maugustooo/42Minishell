@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/06 11:12:49 by gude-jes         ###   ########.fr       */
+=======
+/*   Updated: 2024/09/06 11:48:21 by maugusto         ###   ########.fr       */
+>>>>>>> Maugusto
 /*                                                                            */
 /* ************************************************************************** */
 
