@@ -82,6 +82,7 @@ typedef struct s_mini
 
 	int		token_count;
 	int		return_code;
+	int		num_pipes;
 } t_mini;
 
 //--------------Utils-------------//

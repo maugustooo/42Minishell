@@ -6,13 +6,13 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/06 12:26:17 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:20:58 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"	
 
-static int have_pipe(t_token *token)
+static int have_pipe(t_token *token, t_mini *mini)
 {
 	int flag;
 
@@ -20,7 +20,10 @@ static int have_pipe(t_token *token)
 	while (token)
 	{
 		if(token->type == PIPE)
-			flag = 1;
+		{
+			mini->num_pipes++;
+			flag = 1; 
+		}
 		token = token ->next;
 	}
 	return(flag);
@@ -44,7 +47,7 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 			mini->echo_flag = true;
 	if(ft_strcmp((*mini->splited), "export") == 0 && (*token)->next)
 		check_arg_export(*token, mini);
-	if(have_pipe(*token) || mini->final_pipe)
+	if(have_pipe(*token, mini) || mini->final_pipe)
 		mini->pipe = true;
 	return(1);
 }

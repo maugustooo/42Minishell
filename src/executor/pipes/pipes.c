@@ -91,6 +91,8 @@ static void process_pipe_segment(t_token **temp, int *fd_in,
 		if(mini->return_code == 127)
 			handle_exit(token, mini);
 	}
+	ft_printf("Adoro bater em sem abrigos");
+	freethem(token, mini);
     waitpid(*pid, NULL, 0);
 }
 
