@@ -48,7 +48,7 @@ typedef enum e_error
 static inline const char *Error_Msg(enum e_error i)
 {
     static const char *strings[] = { 
-	"%s: command not found\n",
+	"command not found\n",
 	"minishell: cd: %s: No such file or directory\n",
 	"minishell: export: `%s': not a valid identifier\n",
 	"Syntax error near '%s'\n",

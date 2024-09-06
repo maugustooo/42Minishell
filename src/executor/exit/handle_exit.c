@@ -75,9 +75,9 @@ void    handle_exit(t_token **token, t_mini *mini)
 
 	n_token = 0;
 	handle_codes(token, mini, n_token);
-	//ft_printf("HANDLE_EXIT : %d\n", mini->return_code);
 	free_things(mini);
 	freethem(token, mini);
+	//ft_printf("HANDLE_EXIT : %d\n", mini->return_code);
     exit(mini->return_code);
 }
 
