@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/06 08:56:54 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/09 09:15:59 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	handle_cd(t_token *token, t_mini *mini)
 	handle_dir(token, &target_dir, mini, current_dir);
 	if (chdir(target_dir) != 0 && token->next)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), token->next->text);
+		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD));
 		mini->return_code = 1;
 		ft_printf("\n");
 	}

@@ -1,30 +1,5 @@
 #include "minishell.h"
 
-static int handle_cmd(pid_t pid, t_token **token, t_mini *mini)
-{
-	t_token *temp;
-    char **argv;
-	int i;
-
-	temp = *token;
-	i = -1;
-	argv = ft_calloc(mini->token_count + 1, sizeof(char *));
-	pid = fork();
-	if (pid == 0) 
-	{
-		change_token_text(*token, ft_strjoin(CMD_PATH, (*token)->text));
-		while (temp)
-		{
-			argv[++i] = ft_strdup(temp->text);
-			temp = temp->next;
-		}
-		argv[++i]= NULL;
-		if (execve((*token)->text, argv, mini->penv) == -1)
-			ft_printf_fd(STDERR_FILENO,Error_Msg(ERROR_CMD));
-		return(1);
-	}
-	return(0);
-}
 /**
  * @brief Checks if token is command
  * 

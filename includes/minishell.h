@@ -36,7 +36,9 @@ typedef enum e_error
 	ERROR_ARG_ECHO,
 	ERROR_ENV,
 	ERROR_TARG,
-	ERROR_NUMARG
+	ERROR_NUMARG,
+	ERROR_ISDIR,
+	ERROR_PERMS
 }	t_error;
 
 // const char *Error_Msg[] =
@@ -48,14 +50,16 @@ typedef enum e_error
 static inline const char *Error_Msg(enum e_error i)
 {
     static const char *strings[] = { 
-	"command not found\n",
+	"%s: command not found\n",
 	"minishell: cd: %s: No such file or directory\n",
 	"minishell: export: `%s': not a valid identifier\n",
 	"Syntax error near '%s'\n",
 	"ARG ECHO ERROR\n",
 	"ERROR NO ENV\n",
 	"minishell: %s: too many arguments\n",
-	"minishell: %s: numeric argument required\n"};
+	"minishell: %s: numeric argument required\n",
+	"minishell: %s: Is a directory",
+	"minishell: %s: Permission denied"};
     return strings[i];
 }
 
@@ -106,6 +110,7 @@ char	*get_env_key(t_mini *mini, char *str);
 char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
 void	print_tokens(t_token *tokens, t_mini *mini);
+
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
@@ -127,6 +132,7 @@ char	*handle_dq2(t_token **token, t_mini *mini, int *i, int *start,char *segment
 char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start);
 
 //------------Executor-----------//
+
 int		is_built_in(t_token *token);
 void	handle_built_ins(t_token **token, t_mini *mini);
 void	pipes(t_token **token, t_mini *mini, int pid);
@@ -142,4 +148,16 @@ int		export_arg(t_token *token, t_mini *mini);
 void	check_arg_export(t_token *token, t_mini *mini);
 void	handle_unset(t_token *token, t_mini *mini);
 void	executor(t_token **token, t_mini *mini);
+
+//------------Commands-----------//
+
+char	*build_full_path(char *dir, const char *cmd);
+int		check_access(char *full_path);
+int		handle_cmd(pid_t pid, t_token **token, t_mini *mini);
+int		handle_cmd2(t_token **token, t_mini *mini, char **args);
+int		check_command(t_token **token, t_mini *mini, char **args);
+int		check_command2(char *full_path, char **dirs, t_token **token);
+int		check_file(char **argv, t_token **token, t_mini *mini);
+int		check_file2(char **args, t_token **token, t_mini *mini);
+int		check_path(t_mini *mini);
 #endif
