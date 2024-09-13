@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:07:08 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/03 10:40:06 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:31:11 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	change_quotes(t_token **token)
 	}
 
 	change_token_text(*token, result);
-	free(result);
 }
 
 char	*handle_sign2(t_token **token, t_mini *mini, int *i, int *len)

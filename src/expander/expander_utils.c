@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/03 11:10:55 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:31:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	handle_expansion(t_token **token, t_mini *mini)
 	char	*result;
 	char	*expanded;
 	int		i;
+	char	*temp;
 
 	i = 0;
 	result = ft_strdup("");
@@ -108,8 +109,9 @@ void	handle_expansion(t_token **token, t_mini *mini)
 			expanded = handle_sign(token, mini, &i, &i);
 		else
 			expanded = handle_plain(token, &i);
-		result = ft_strjoin_free(result, expanded, 2);
+		temp = ft_strjoin_free(result, expanded, 2);
+		free(result);
+		result = temp;
 	}
 	change_token_text(*token, result);
-	free(result);
 }

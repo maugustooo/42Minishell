@@ -103,6 +103,7 @@ int		env_size(t_mini *mini, char **tenv);
 void	free_tenv(char **tenv);
 void	free_penv(t_mini *mini);
 void	free_key(char **key);
+void	free_args(char **args);
 void	free_keys(char ***key);
 void	dup_envp(t_mini *mini, char **envp);
 void	dup_tenv(t_mini *mini, char **tenv);
@@ -160,4 +161,5 @@ int		check_command2(char *full_path, char **dirs, t_token **token);
 int		check_file(char **argv, t_token **token, t_mini *mini);
 int		check_file2(char **args, t_token **token, t_mini *mini);
 int		check_path(t_mini *mini);
+
 #endif

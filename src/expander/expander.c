@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/09 12:42:14 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:30:51 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	change_token_text(t_token *token, char *value)
 	{
 		free(token->text);
 		token->text = ft_strdup(value);
+		free(value);
 	}
 	else
 	{

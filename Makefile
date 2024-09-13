@@ -6,7 +6,7 @@
 #    By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 08:49:04 by gude-jes          #+#    #+#              #
-#    Updated: 2024/09/12 09:08:31 by gude-jes         ###   ########.fr        #
+#    Updated: 2024/09/13 09:41:53 by gude-jes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ INC			= -I./includes
 RM			= rm -rf
 
 GENERAL		= main
-PARSE		= parse tokens utils freedom env_utils env_utils2 count_tokens handle_splited token_utils
+PARSE		= parse tokens utils freedom env_utils env_utils2 count_tokens handle_splited token_utils cmd_utils
 EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export handle_export2 handle_unset signals pipes check_pipe
 CMD			= handle_cmd handle_cmd2
 EXPANDER	= expander expander_utils expander_utils2

@@ -6,22 +6,13 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/12 11:31:04 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:42:20 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_access(char *full_path)
-{
-	struct stat path_stat;
-
-	if (stat(full_path, &path_stat) == 0 && access(full_path, X_OK) == 0)
-		return (1);
-	return (0);
-}
-
-int	check_file(char **argv, t_token **token, t_mini *mini)
+int	check_file(char **args, t_token **token, t_mini *mini)
 {
 	struct stat	path_stat;
 
@@ -33,7 +24,7 @@ int	check_file(char **argv, t_token **token, t_mini *mini)
 	if (S_ISREG(path_stat.st_mode))
 	{
 		if (access((*token)->text, X_OK) == 0)
-			return (check_file2(argv, token, mini));
+			return (check_file2(args, token, mini));
 		else
 		{
 			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_PERMS), (*token)->text);
@@ -94,6 +85,7 @@ int handle_cmd(pid_t pid, t_token **token, t_mini *mini)
 	int		i;
 	char	**args;
 	t_token	*temp;
+	int		ret;
 
 	i = -1;
 	temp = *token;
@@ -109,8 +101,9 @@ int handle_cmd(pid_t pid, t_token **token, t_mini *mini)
 			temp = temp->next;
 		}
 		args[++i] = NULL;
-		return (handle_cmd2(token, mini, args));
+		ret = handle_cmd2(token, mini, args);
+		free_args(args);
+		return(ret);
 	}
-	//TODO: Free args
 	return (0);
 }

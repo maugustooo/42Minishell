@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/12 11:34:42 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:50:40 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,3 @@ int	check_file2(char **args, t_token **token, t_mini *mini)
 	return (1);
 }
 
-int	check_path(t_mini *mini)
-{
-	char	*checker;
-
-	checker = get_env_key(mini, "PATH");
-	if (checker == NULL)
-		return (0);
-	return (1);
-}
