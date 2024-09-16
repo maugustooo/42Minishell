@@ -59,6 +59,8 @@ static void setup_pipes(int *fd_in, int pipefd[2], int is_pipe, t_token *start, 
 	if(is_built_in(start))
 	{
 		handle_built_ins(&start, mini);
+		freethem(temp, mini);
+		free_things(mini);
 		exit(0);
 	}
 	else

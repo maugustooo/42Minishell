@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/16 10:38:32 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:44:07 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,31 @@ int	check_command2(char *full_path, char **dirs, t_token **token)
 	return (0);
 }
 
+void handle_redirection(char **args)
+{
+	int i;
+
+	i = 0;
+    while (args[i])
+	{
+        if (ft_strcmp(args[i], "<") == 0 && args[i] && ft_strcmp(args[i], "|") != 0)
+		{
+            if(!handle_input(&args, &i))
+				break ;
+		}
+		else if ((ft_strcmp(args[i], ">") == 0 || strcmp(args[i], ">>") == 0)
+			&& args[i] && ft_strcmp(args[i], "|") != 0)
+		{
+			if(!handle_output(&args, &i))
+				break ;
+		}
+		else if (ft_strcmp(args[i], "<<") == 0 && args[i] && ft_strcmp(args[i], "|") != 0)
+			handle_heredoc(&args, &i);
+		else
+			i++;
+    }
+}
+
 int	check_file2(char **args, t_token **token, t_mini *mini)
 {
 	struct stat	path_stat;
@@ -88,6 +113,7 @@ int	check_file2(char **args, t_token **token, t_mini *mini)
 			return (0);
 		}
 	}
+	handle_redirection(args);
 	if (execve((*token)->text, args, mini->penv) == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CMD),

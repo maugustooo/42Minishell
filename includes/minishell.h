@@ -162,5 +162,8 @@ int		check_command2(char *full_path, char **dirs, t_token **token);
 int		check_file(char **argv, t_token **token, t_mini *mini);
 int		check_file2(char **args, t_token **token, t_mini *mini);
 int		check_path(t_mini *mini);
+void	handle_heredoc(char ***args, int *i);
+int		handle_input(char ***args, int	*i);
+int		handle_output(char ***args, int	*i);
 
 #endif

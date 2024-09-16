@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void handle_heredoc(t_token *token, t_token *last)
+static void heredoc(t_token *token, t_token *last)
 {
     char *line;
     int fd;
@@ -24,7 +24,7 @@ static void handle_heredoc(t_token *token, t_token *last)
     close(fd);
 }
 
-static void handle_input(t_token *token, t_mini *mini, t_token *last, int type)
+static void input(t_token *token, t_mini *mini, t_token *last, int type)
 {
 	int fd;
 	char *file;
@@ -91,11 +91,11 @@ static int check_input(t_token *token, t_mini *mini)
 		if (temp->type == INPUT || temp->type == APPEND)
 		{
 			mini->echo_flag = true;
-			handle_input(token, mini, last, temp->type);
+			input(token, mini, last, temp->type);
 			return(1);
 		}
 		if(temp->type == DELIMITER)
-			handle_heredoc(token, last);
+			heredoc(token, last);
 		temp = temp->next;
 	}
 	return(0);
