@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/13 12:50:40 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/16 10:38:32 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	handle_cmd2_5(t_token **token, t_mini *mini, char **args)
 	if (!check_command(token, mini, args))
 	{
 		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CMD), (*token)->text);
-		//TODO: FREE ARGS
+		free_child(token, mini, args);
 		exit(127);
 	}
 	else
@@ -33,6 +33,7 @@ int	handle_cmd2(t_token **token, t_mini *mini, char **args)
 		if (access((*token)->text, F_OK) == -1)
 		{
 			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), (*token)->text);
+			free_child(token, mini, args);
 			exit(127);
 		}
 		if (check_access((*token)->text))
@@ -40,6 +41,7 @@ int	handle_cmd2(t_token **token, t_mini *mini, char **args)
 		else
 		{
 			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_PERMS), (*token)->text);
+			free_child(token, mini, args);
 			exit(126);
 		}
 	}
@@ -60,7 +62,6 @@ int	check_command2(char *full_path, char **dirs, t_token **token)
 		if (check_access(full_path))
 		{
 			change_token_text(*token, full_path);
-			free(full_path);
 			free_keys(&dirs);
 			return (1);
 		}

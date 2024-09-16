@@ -111,6 +111,7 @@ char	*get_env_key(t_mini *mini, char *str);
 char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
 void	print_tokens(t_token *tokens, t_mini *mini);
+void	free_child(t_token **token, t_mini *mini, char **args);
 
 //--------------Parser------------//
 
