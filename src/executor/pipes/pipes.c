@@ -1,6 +1,6 @@
 #include"minishell.h"
 
-static void handle_parent_process(int pid, int pipefd[2], int *fd_in, int is_pipe, t_token **temp)
+static void handle_parent_process(pid_t pid, int pipefd[2], int *fd_in, int is_pipe, t_token **temp)
 {
 	(void)pid;
     if (is_pipe)
@@ -68,7 +68,7 @@ static void setup_pipes(int *fd_in, int pipefd[2], int is_pipe, t_token *start, 
 }
 
 static void process_pipe_segment(t_token **temp, int *fd_in, 
-	int *pid, t_mini *mini, t_token **token)
+	pid_t *pid, t_mini *mini, t_token **token)
 {
     int pipefd[2];
     t_token *start;
@@ -97,7 +97,7 @@ static void process_pipe_segment(t_token **temp, int *fd_in,
     waitpid(*pid, NULL, 0);
 }
 
-void pipes(t_token **token, t_mini *mini, int pid)
+void pipes(t_token **token, t_mini *mini, pid_t pid)
 {
     int fd_in;
     t_token *temp;
