@@ -42,7 +42,7 @@ void handle_heredoc(char ***args, int *i)
 	move_left((*args), *i);
 }
 
-int handle_input(char ***args, int	*i)
+int handle_output(char ***args, int	*i)
 {
 	int fd_in;
 	fd_in = 0;
@@ -56,7 +56,7 @@ int handle_input(char ***args, int	*i)
 	return(1);
 }
 
-int handle_output(char ***args, int	*i)
+int handle_input(char ***args, int	*i)
 {
 	int fd_out;
 	fd_out = 0;

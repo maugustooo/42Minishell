@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/26 10:52:12 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/17 13:42:45 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,47 +46,31 @@ int set_type(char *text)
 static void init_token(t_token **token, char *text)
 {
 	int type;
-
-	type = 0;
+	char cwd[1024];
+	char *file;
+	char *cwd_slash;
+	
+	file = NULL;
+	cwd_slash = NULL;
 	type = set_type(text);
 	ft_tokenadd_back(token, ft_newnode(type, text));
+	if((*token)->next)
+		(*token) = (*token)->next;
+    if ((*token) && (*token)->prev)
+    {
+		getcwd(cwd, sizeof(cwd));
+		cwd_slash = ft_strjoin(cwd, "/");
+		file = ft_strjoin(cwd_slash, (*token)->text);
+		free(cwd_slash);
+		if(((*token)->prev->type == OUTPUT || (*token)->prev->type == INPUT
+			|| (*token)->prev->type == APPEND) && check_file_echo(file))
+			(*token)->type = FILE;
+		else if (((*token)->prev->type == OUTPUT || (*token)->prev->type == INPUT
+			|| (*token)->prev->type == APPEND) && !check_file_echo(file))
+			(*token)->type = NOT_FILE;
+		free(file);
+	}
 }
-
-// /**
-//  * @brief Get the tokens and returns them
-//  * 
-//  * @param mini The struct of the minishell
-//  * @return List of tokens
-//  */
-// void get_tokens(t_token **token, t_mini *mini)
-// {
-// 	int i;
-// 	char **new_splitedd;
-//     int j;
-
-//     i = 0;
-// 	j = 0;
-//     ft_tokenadd_back(token, ft_newnode(CMD, mini->splited[i]));
-//     while (mini->splited[++i]) 
-// 	{
-// 		new_splitedd = ft_split(mini->splited[i], '|');
-//         if (new_splitedd) 
-// 		{
-//             j = 0;
-// 			if(ft_find_c('|', new_splitedd[j]))
-// 				ft_tokenadd_back(token, ft_newnode(PIPE, "|"));
-//             while (new_splitedd[j]) 
-// 			{
-// 				if(j == 0)
-//                 	ft_tokenadd_back(token, ft_newnode(CMD, new_splitedd[j]));
-// 				else
-// 					init_token(token,  new_splitedd[j]);
-//                 j++;
-//             }
-//             free(new_splitedd);
-//         }
-//     }
-// }
 
 void    get_tokens(t_token  **token, t_mini *mini)
 {
@@ -94,5 +78,9 @@ void    get_tokens(t_token  **token, t_mini *mini)
     i = 0;
     ft_tokenadd_back(token, ft_newnode(CMD, mini->splited[i]));
     while (mini->splited[++i])
+	{
         init_token(token,  mini->splited[i]);
+	}
+	while ((*token)->prev)
+		(*token) = (*token)->prev;	
 }

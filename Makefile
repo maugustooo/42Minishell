@@ -6,7 +6,7 @@
 #    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 08:49:04 by gude-jes          #+#    #+#              #
-#    Updated: 2024/09/16 15:22:36 by maugusto         ###   ########.fr        #
+#    Updated: 2024/09/17 11:29:40 by maugusto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ PARSE		= parse tokens count_tokens handle_splited
 EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export handle_export2 handle_unset signals pipes check_pipe
 CMD			= handle_cmd handle_cmd2 redirects
 EXPANDER	= expander expander_utils expander_utils2
-UTILS		= cmd_utils token_utils env_utils env_utils2 utils freedom
+UTILS		= cmd_utils token_utils env_utils env_utils2 utils freedom echo_redirects
 
 #==============================================================================#
 #                                    PATHS                                     #

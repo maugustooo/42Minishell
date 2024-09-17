@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:05:35 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/30 11:31:05 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/17 11:56:57 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,13 @@ void	ft_tokenadd_back(t_token **token, t_token *new_token)
 		{
 			last = ft_tokenlast(*token);
 			last->next = new_token;
+			new_token->prev = last;
 		}
 		else
+		{
+			new_token ->prev = NULL;
 			*token = new_token;
+		}
 	}
 }
 /**
