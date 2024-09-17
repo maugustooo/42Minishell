@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/06 09:45:16 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:36:29 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	export_arg_err(t_token *token, t_mini *mini, char **key)
 	if ((key[0] == NULL) || 
 		(!ft_str_isalpha(key[0]) && !ft_strchr(key[0], '_')))
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_EXPORT), token->next->text);
+		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_EXPORT), token->text);
 		mini->return_code = 1;
 		mini->exported = true;
 		free_key(key);
@@ -53,18 +53,23 @@ void	check_arg_export(t_token *token, t_mini *mini)
 {
 	char	*value;
 	char	**key;
+	int		i;
 
 	key = NULL;
 	value = NULL;
-	while (token->next)
-	{
-		key = ft_split(token->next->text, '=');
-		if (token->next)
-			if(export_arg_err(token, mini, key))
-				return ;
-		free_key(key);
-		token = token->next;
-	}
+	i = -1;
+	key = ft_split(token->text, '=');
+	if(key[0])
+		while(key[0][++i])
+		{
+			if(!ft_isalnum_under(key[0][i]))
+				if(export_arg_err(token, mini, key))
+					return ;
+		}
+	if(!key[1])
+		if(export_arg_err(token, mini, key))
+			return ;
+	free_key(key);
 }
 
 int	export_arg(t_token *token, t_mini *mini)
