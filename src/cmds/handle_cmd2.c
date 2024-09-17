@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/17 10:16:08 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:56:27 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,13 @@ int	handle_cmd2(t_token **token, t_mini *mini, char **args)
 		exit(0);
 	}
 	if(ft_strcmp((*token)->text, "") == 0 && (*token)->next != NULL)
+	{
 		(*token) = (*token)->next;
-	if (ft_strncmp((*token)->text, "/", 1) == 0
+		(*token)->type = 1;
+	}
+	if(is_built_in(*token))
+		return(executor(token, mini), 0);
+	else if (ft_strncmp((*token)->text, "/", 1) == 0
 		|| ft_strncmp((*token)->text, "./", 2) == 0)
 	{
 		if (access((*token)->text, F_OK) == -1)
