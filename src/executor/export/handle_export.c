@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/17 11:55:16 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:40:42 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	export_no_args(t_mini *mini)
 	char	**key;
 	int		i;
 
-
 	tmp_env = handle_arr(mini);
 	i = -1;
 	key = NULL;
@@ -128,18 +127,12 @@ void	handle_export(t_mini *mini, t_token *token)
 	{
 		if (token)
 		{
-			// while(token)
-			// {
-				if(export_arg(token, mini))
-					set_export(mini, token);
-				token = token->next;
-			//}
-			mini->return_code = 0;
+			if(export_arg(token, mini))
+				set_export(mini, token);
+			token = token->next;
 		}
 		else
-		{
 			export_no_args(mini);
-			mini->return_code = 0;
-		}
+		mini->return_code = 0;
 	}
 }

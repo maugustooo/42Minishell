@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/13 12:30:51 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:41:07 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,16 @@ void	expand_input(t_token *token, t_mini *mini, char **input)
 void	expander(t_token **token, t_mini *mini)
 {
 	int		result;
-	// while(token)
-	// {
-		result = detect_expansion(token);
-		if (result == 0)
-			handle_expansion(token, mini);
-		else if(result == 1)
-		{
-			ft_printf("%s", "Due to subject rules NO unclosed quotes");
-			mini->return_code = 2;
-			change_token_text(*token, NULL);
-		}
-		else
-			change_quotes(token);
-	// 	*token = (*token)->next;
-	// }
+
+	result = detect_expansion(token);
+	if (result == 0)
+		handle_expansion(token, mini);
+	else if(result == 1)
+	{
+		ft_printf("%s", "Due to subject rules NO unclosed quotes");
+		mini->return_code = 2;
+		change_token_text(*token, NULL);
+	}
+	else
+		change_quotes(token);
 }

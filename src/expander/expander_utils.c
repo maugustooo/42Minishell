@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/13 12:31:08 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/17 12:44:36 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start)
 			len++;
 		segment = handle_sign2(token, mini, i, &len);
 	}
+	else if (!ft_isalnum_under((*token)->text[*i]) && (*token)->text[*i])
+		segment = ft_strdup("");
 	else
 	{
 		segment = ft_strdup("$");
