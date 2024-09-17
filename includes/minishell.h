@@ -22,6 +22,8 @@
 # define DELIMITER 5
 # define APPEND 6
 # define PIPE 7
+# define FILE 8
+# define NOT_FILE 9
 # define MAX_PATH_LEN 4096
 
 # define CMD_PATH "/bin/"
@@ -68,6 +70,7 @@ typedef struct s_token
 	char			*text;	
 	int				type;
 	struct s_token	*next;
+	struct s_token	*prev;
 } t_token;
 
 
@@ -112,7 +115,7 @@ char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
 void	print_tokens(t_token *tokens, t_mini *mini);
 void	free_child(t_token **token, t_mini *mini, char **args);
-
+int		check_file_echo(char *file);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

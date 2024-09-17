@@ -51,11 +51,38 @@ static void input(t_token *token, t_mini *mini, t_token *last, int type)
 		}
 }
 
+static int check_input(t_token *token, t_mini *mini)
+{
+	t_token *temp;
+	t_token *last;
+
+	temp = token;
+	last = ft_tokenlast(token);
+	while (temp)
+	{
+		if (temp->type == INPUT || temp->type == APPEND)
+		{
+			mini->echo_flag = true;
+			input(token, mini, last, temp->type);
+			return(1);
+		}
+		if(temp->type == DELIMITER)
+			heredoc(token, last);
+		temp = temp->next;
+	}
+	return(0);
+}
+
 static void print_echo(t_token *next, t_mini *mini, int *first)
 {	
 	while (next && next->type != PIPE)
 	{
 		expander(&next, mini);
+		if(next->type == OUTPUT || next->type == FILE || next->type == NOT_FILE)
+		{
+			next = next->next;	
+			continue ;
+		}
 		if(next && *first == 2 && ft_strcmp(next->text, "-n") != 0)
 		{
 			ft_printf("%s", next->text);
@@ -77,28 +104,6 @@ static void print_echo(t_token *next, t_mini *mini, int *first)
 		}
 		next = next->next;
 	}
-}
-
-static int check_input(t_token *token, t_mini *mini)
-{
-	t_token *temp;
-	t_token *last;
-
-	temp = token;
-	last = ft_tokenlast(token);
-	while (temp)
-	{
-		if (temp->type == INPUT || temp->type == APPEND)
-		{
-			mini->echo_flag = true;
-			input(token, mini, last, temp->type);
-			return(1);
-		}
-		if(temp->type == DELIMITER)
-			heredoc(token, last);
-		temp = temp->next;
-	}
-	return(0);
 }
 
 void	handle_echo(t_token **token, t_mini *mini)

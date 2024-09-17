@@ -16,6 +16,8 @@ void print_tokens(t_token *tokens, t_mini *mini)
     while (current_token != NULL)
     {
         printf("Token %d: text:%s type:%d\n", i, current_token->text, current_token->type);
+		if(current_token->prev)
+			ft_printf("prev->text: %s\n\n", current_token->prev->text);
         current_token = current_token->next;
         i++;
     }
@@ -50,6 +52,7 @@ static void minishell(t_mini *mini, t_token	**token, char **envp)
 			freethem(token, mini);
 			continue;
 		}
+		// print_tokens(*token, mini);
 		add_history(mini->line);
 		executor(token, mini);
 		freethem(token, mini);
