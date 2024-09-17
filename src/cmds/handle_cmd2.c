@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/16 15:44:07 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:16:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@ int	handle_cmd2_5(t_token **token, t_mini *mini, char **args)
 
 int	handle_cmd2(t_token **token, t_mini *mini, char **args)
 {
-	expander(token, mini);
+	if(ft_strcmp((*token)->text, "") == 0 && (*token)->next == NULL)
+	{
+		free_child(token, mini, args);
+		exit(0);
+	}
+	if(ft_strcmp((*token)->text, "") == 0 && (*token)->next != NULL)
+		(*token) = (*token)->next;
 	if (ft_strncmp((*token)->text, "/", 1) == 0
 		|| ft_strncmp((*token)->text, "./", 2) == 0)
 	{

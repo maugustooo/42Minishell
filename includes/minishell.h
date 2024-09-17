@@ -58,8 +58,8 @@ static inline const char *Error_Msg(enum e_error i)
 	"ERROR NO ENV\n",
 	"minishell: %s: too many arguments\n",
 	"minishell: %s: numeric argument required\n",
-	"minishell: %s: Is a directory",
-	"minishell: %s: Permission denied"};
+	"minishell: %s: Is a directory\n",
+	"minishell: %s: Permission denied\n"};
     return strings[i];
 }
 
@@ -155,7 +155,7 @@ void	executor(t_token **token, t_mini *mini);
 
 char	*build_full_path(char *dir, const char *cmd);
 int		check_access(char *full_path);
-int		handle_cmd(pid_t pid, t_token **token, t_mini *mini);
+int		handle_cmd(pid_t pid, t_token **token, t_mini *mini, int pipe);
 int		handle_cmd2(t_token **token, t_mini *mini, char **args);
 int		check_command(t_token **token, t_mini *mini, char **args);
 int		check_command2(char *full_path, char **dirs, t_token **token);

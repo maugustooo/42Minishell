@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/16 10:39:16 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:16:12 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	check_command(t_token **token, t_mini *mini, char **args)
 	return (0);
 }
 
-int handle_cmd(pid_t pid, t_token **token, t_mini *mini)
+int handle_cmd(pid_t pid, t_token **token, t_mini *mini, int pipe)
 {
 	int		i;
 	char	**args;
@@ -94,12 +94,29 @@ int handle_cmd(pid_t pid, t_token **token, t_mini *mini)
 	args = ft_calloc(mini->token_count + 1, sizeof(char *));
 	if (!args)
 		return (1); //TODO: Malloc Error
-	pid = fork();
-	if (pid == 0)
+	expander(token, mini);
+	if(!pipe)
 	{
-		while (temp)
+		pid = fork();
+		if (pid == 0)
+		{
+			while (temp)
+			{
+				args[++i] = ft_strdup(temp->text);
+				temp = temp->next;
+			}
+			args[++i] = NULL;
+			ret = handle_cmd2(token, mini, args);
+			free_args(args);
+			return(ret);
+		}
+	}
+	else
+	{
+		while (temp->type != PIPE)
 		{
 			args[++i] = ft_strdup(temp->text);
+			ft_printf("%s\n", args[i]);
 			temp = temp->next;
 		}
 		args[++i] = NULL;

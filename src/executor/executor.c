@@ -56,7 +56,7 @@ void executor(t_token **token, t_mini *mini)
 	       handle_built_ins(token, mini);
 	else if (!mini->pipe)
     {
-		if (handle_cmd(pid, token, mini))
+		if (handle_cmd(pid, token, mini, 0))
 			exit(127);
 		else if (pid < 0)
             perror("fork");
