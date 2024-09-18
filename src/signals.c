@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:52:10 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/30 12:18:19 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:57:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@
 void handle_sigint(int sig)
 {
     (void)sig;
+	ft_printf("\n");
     rl_replace_line("", 0);
-    rl_on_new_line();
-    printf("\n"); 
     rl_redisplay();
 }
 /**

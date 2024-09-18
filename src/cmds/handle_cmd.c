@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/17 10:16:12 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:41:53 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	check_command(t_token **token, t_mini *mini, char **args)
 	return (0);
 }
 
-int handle_cmd(pid_t pid, t_token **token, t_mini *mini, int pipe)
+int handle_cmd(pid_t pid, t_token **token, t_mini *mini)
 {
 	int		i;
 	char	**args;
@@ -95,28 +95,12 @@ int handle_cmd(pid_t pid, t_token **token, t_mini *mini, int pipe)
 	if (!args)
 		return (1); //TODO: Malloc Error
 	expander(token, mini);
-	if(!pipe)
+	pid = fork();
+	if (pid == 0)
 	{
-		pid = fork();
-		if (pid == 0)
-		{
-			while (temp)
-			{
-				args[++i] = ft_strdup(temp->text);
-				temp = temp->next;
-			}
-			args[++i] = NULL;
-			ret = handle_cmd2(token, mini, args);
-			free_args(args);
-			return(ret);
-		}
-	}
-	else
-	{
-		while (temp->type != PIPE)
+		while (temp)
 		{
 			args[++i] = ft_strdup(temp->text);
-			ft_printf("%s\n", args[i]);
 			temp = temp->next;
 		}
 		args[++i] = NULL;
@@ -126,4 +110,28 @@ int handle_cmd(pid_t pid, t_token **token, t_mini *mini, int pipe)
 	}
 	free_args(args);
 	return (0);
+}
+
+int 	handle_cmd_pipe(t_token **token, t_mini *mini)
+{
+	int		i;
+	char	**args;
+	t_token	*temp;
+	int		ret;
+
+	i = -1;
+	temp = *token;
+	args = ft_calloc(mini->token_count + 1, sizeof(char *));
+	if (!args)
+		return (1); //TODO: Malloc Error
+	expander(token, mini);
+	while (temp && temp->type != PIPE)
+	{
+		args[++i] = ft_strdup(temp->text);
+		temp = temp->next;
+	}
+	args[++i] = NULL;
+	ret = handle_cmd2(token, mini, args);
+	free_args(args);
+	return(ret);	
 }
