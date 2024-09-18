@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/17 12:44:36 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/18 08:56:24 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start)
 	int		len;
 
 	len = 1;
-	segment = NULL;
 	(*i)++;
 	if((*token)->text[*i] == '?')
 	{
@@ -35,6 +34,7 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start)
 		segment = ft_strdup("");
 	else
 	{
+		(*i)--;
 		segment = ft_strdup("$");
 		(*start)++;
 	}
