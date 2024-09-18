@@ -33,7 +33,7 @@ static void input(t_token *token, t_mini *mini, t_token *last, int type)
 	if (last->type == ARG)
 		file = last->text;
 	else
-		ft_printf(Error_Msg(ERROR_ARG_ECHO), token->next->next->text);
+		ft_printf(Error_Msg(ERROR_ARG_ECHO));
 	if (type == INPUT)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (type == APPEND)
@@ -60,13 +60,13 @@ static int check_input(t_token *token, t_mini *mini)
 	last = ft_tokenlast(token);
 	while (temp)
 	{
-		if (temp->type == INPUT || temp->type == APPEND)
+		if ((temp->type == INPUT || temp->type == APPEND) && !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
 		{
 			mini->echo_flag = true;
 			input(token, mini, last, temp->type);
 			return (1);
 		}
-		if (temp->type == DELIMITER)
+		if (temp->type == DELIMITER && !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
 			heredoc(token, last);
 		temp = temp->next;
 	}
@@ -74,15 +74,23 @@ static int check_input(t_token *token, t_mini *mini)
 }
 
 static void print_echo(t_token *next, t_mini *mini, int *first)
-{	
+{
+	int len;
+
+	len = 0;
 	while (next && next->type != PIPE)
 	{
-		expander(&next, mini);
-		if (next->type == OUTPUT || next->type == FILE || next->type == NOT_FILE)
+		if (next->type == OUTPUT || next->type == FILE)
 		{
-			next = next->next;	
-			continue ;
+			len = ft_strlen(next->text);
+			if((next->text[1] == '"' && next->text[len -1] == '"') || (next->text[1] == '\'' && next->text[len -1] == '\''))
+			{
+				next = next->next;	
+				continue ;
+			}
 		}
+		expander(&next, mini);
+		//TODO:O expander tem que tirar o < no caso de echo <"file.txt"
 		if (next && *first == 2 && ft_strcmp(next->text, "-n") != 0)
 		{
 			ft_printf("%s", next->text);

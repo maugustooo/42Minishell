@@ -1,11 +1,11 @@
 # include "minishell.h"
 
-void check_pipes(int *is_pipe, t_token **temp)
+void check_pipes(t_mini *mini, t_token **temp)
 {
-	*is_pipe = ((*temp)->next && strcmp((*temp)->next->text, "|") == 0);
-	while ((*temp)->next && !*is_pipe)
+	mini->is_pipe = ((*temp)->next && strcmp((*temp)->next->text, "|") == 0);
+	while ((*temp)->next && !mini->is_pipe)
 	{
 		*temp = (*temp)->next;
-		*is_pipe = ((*temp)->next && strcmp((*temp)->next->text, "|") == 0);
+		mini->is_pipe = ((*temp)->next && strcmp((*temp)->next->text, "|") == 0);
 	}
 }

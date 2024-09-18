@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/17 13:42:45 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:39:24 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int set_type(char *text)
 	int type;
 
 	type = 0;
-	if(ft_strcmp(text, "<") == 0)
+	if(ft_find_c('<', text) == 1)
 		type = OUTPUT;
-	else if(ft_strcmp(text, ">") == 0)
+	else if(ft_find_c('>', text) == 1)
 		type = INPUT;
-	else if(ft_strcmp(text, ">>") == 0)
+	else if(ft_find_c('>', text) == 1 && ft_find_c('>', text + 1) == 1)
 		type = APPEND;
-	else if(ft_strcmp(text, "<<") == 0)
+	else if(ft_strcmp("<<", text) == 0)
 		type = DELIMITER;
 	else if(ft_strcmp(text, "|") == 0)
 		type = PIPE;
@@ -36,7 +36,6 @@ int set_type(char *text)
 		type = ARG;
 	return(type);
 }
-
 /**
  * @brief init the current node of the list
  * 
@@ -63,11 +62,11 @@ static void init_token(t_token **token, char *text)
 		file = ft_strjoin(cwd_slash, (*token)->text);
 		free(cwd_slash);
 		if(((*token)->prev->type == OUTPUT || (*token)->prev->type == INPUT
-			|| (*token)->prev->type == APPEND) && check_file_echo(file))
+			|| (*token)->prev->type == APPEND) && check_file_token(file))
 			(*token)->type = FILE;
 		else if (((*token)->prev->type == OUTPUT || (*token)->prev->type == INPUT
-			|| (*token)->prev->type == APPEND) && !check_file_echo(file))
-			(*token)->type = NOT_FILE;
+			|| (*token)->prev->type == APPEND) && !check_file_token(file))
+			(*token)->type = ARG;
 		free(file);
 	}
 }

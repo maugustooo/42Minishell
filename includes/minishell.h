@@ -89,6 +89,7 @@ typedef struct s_mini
 	bool	final_pipe;
 	bool	exported;
 
+	int		is_pipe;
 	int		token_count;
 	int		return_code;
 	int		num_pipes;
@@ -117,7 +118,7 @@ char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
 void	print_tokens(t_token *tokens, t_mini *mini);
 void	free_child(t_token **token, t_mini *mini, char **args);
-int		check_file_echo(char *file);
+int		check_file_token(char *file);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
@@ -143,7 +144,7 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start);
 int		is_built_in(t_token *token);
 void	handle_built_ins(t_token **token, t_mini *mini);
 void	pipes(t_token **token, t_mini *mini, int pid);
-void	check_pipes(int *is_pipe, t_token **temp);
+void	check_pipes(t_mini *mini, t_token **temp);
 void	handle_cd(t_token *arg, t_mini *mini);
 void	handle_exit(t_token **token, t_mini *mini);
 void	handle_echo(t_token **token, t_mini *mini);
@@ -160,7 +161,8 @@ void	executor(t_token **token, t_mini *mini);
 
 char	*build_full_path(char *dir, const char *cmd);
 int		check_access(char *full_path);
-int		handle_cmd(pid_t pid, t_token **token, t_mini *mini, int pipe);
+int		handle_cmd(pid_t pid, t_token **token, t_mini *mini);
+int		handle_cmd_pipe(t_token **token, t_mini *mini);
 int		handle_cmd2(t_token **token, t_mini *mini, char **args);
 int		check_command(t_token **token, t_mini *mini, char **args);
 int		check_command2(char *full_path, char **dirs, t_token **token);

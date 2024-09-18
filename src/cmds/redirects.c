@@ -16,21 +16,14 @@ void handle_heredoc(char ***args, int *i)
 	char *delimiter;
 	int pipefd[2];
 
-	if (pipe(pipefd) == -1)
-    {
-        perror("pipe");
-        exit(EXIT_FAILURE);
-    }
+	pipe(pipefd);
 	delimiter = (*args)[*i + 1];
 	while (1)
 	{
 		ft_printf("> ");
 		bytes_read = read(STDIN_FILENO, buffer, sizeof(buffer) - 1);
 		if (bytes_read <= 0)
-        {
-            perror("read");
-            exit(EXIT_FAILURE);
-        }
+			break ;
 		buffer[bytes_read] = '\0';
 		if (ft_strncmp(buffer, delimiter, ft_strlen(delimiter)) == 0 && buffer[ft_strlen(delimiter)] == '\n')
 			break;
