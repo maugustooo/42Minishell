@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/17 12:36:29 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/18 09:56:28 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	set_export(t_mini *mini, t_token *token)
 
 	i = env_size(mini, NULL);
 	tenv = ft_calloc((i + 2), sizeof(char *));
-	if(!tenv)
+	if (!tenv)
 		return ;
 	j = 0;
 	while (j < i)
@@ -37,16 +37,16 @@ void	set_export(t_mini *mini, t_token *token)
 
 static int	export_arg_err(t_token *token, t_mini *mini, char **key)
 {
-	if ((key[0] == NULL) || 
-		(!ft_str_isalpha(key[0]) && !ft_strchr(key[0], '_')))
+	if ((key[0] == NULL)
+		|| (!ft_str_isalpha(key[0]) && !ft_strchr(key[0], '_')))
 	{
 		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_EXPORT), token->text);
 		mini->return_code = 1;
 		mini->exported = true;
 		free_key(key);
-		return(1);
+		return (1);
 	}
-	return(0);
+	return (0);
 }
 
 void	check_arg_export(t_token *token, t_mini *mini)
@@ -59,15 +59,17 @@ void	check_arg_export(t_token *token, t_mini *mini)
 	value = NULL;
 	i = -1;
 	key = ft_split(token->text, '=');
-	if(key[0])
-		while(key[0][++i])
+	if (key[0])
+	{
+		while (key[0][++i])
 		{
-			if(!ft_isalnum_under(key[0][i]))
-				if(export_arg_err(token, mini, key))
+			if (!ft_isalnum_under(key[0][i]))
+				if (export_arg_err(token, mini, key))
 					return ;
 		}
-	if(!key[1])
-		if(export_arg_err(token, mini, key))
+	}
+	if (!key[1])
+		if (export_arg_err(token, mini, key))
 			return ;
 	free_key(key);
 }
@@ -83,22 +85,22 @@ int	export_arg(t_token *token, t_mini *mini)
 	key2 = ft_split(token->text, '=');
 	value = get_env_key(mini, key2[0]);
 	free_key(key2);
-	if(value != NULL)
+	if (value != NULL)
 	{
-		while(mini->penv[++i])
+		while (mini->penv[++i])
 		{
 			key = ft_split(mini->penv[i], '=');
-			if(ft_strcmp(key[0], value) == 0)
+			if (ft_strcmp(key[0], value) == 0)
 			{
 				free(mini->penv[i]);
 				mini->penv[i] = ft_strdup(token->text);
 				free(value);
 				free_keys(&key);
-				return(0);
+				return (0);
 			}
 			free_keys(&key);
 		}
 		free(value);
 	}
-	return(1);
+	return (1);
 }

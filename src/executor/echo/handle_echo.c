@@ -41,11 +41,11 @@ static void input(t_token *token, t_mini *mini, t_token *last, int type)
 	if (fd)
 		while (token && token->type == ARG)
 		{
-			if(token->next->type == ARG && ft_strcmp(token->text, "-n") != 0)
+			if (token->next->type == ARG && ft_strcmp(token->text, "-n") != 0)
 				ft_printf_fd(fd, "%s ", token->text);
-			else if(!mini->echo_flag)
+			else if (!mini->echo_flag)
 				ft_printf_fd(fd, "%s\n", token->text);
-			else if(token->type == ARG && ft_strcmp(token->text, "-n") != 0)
+			else if (token->type == ARG && ft_strcmp(token->text, "-n") != 0)
 				ft_printf_fd(fd, token->text);
 			token = token->next;
 		}
@@ -64,13 +64,13 @@ static int check_input(t_token *token, t_mini *mini)
 		{
 			mini->echo_flag = true;
 			input(token, mini, last, temp->type);
-			return(1);
+			return (1);
 		}
-		if(temp->type == DELIMITER)
+		if (temp->type == DELIMITER)
 			heredoc(token, last);
 		temp = temp->next;
 	}
-	return(0);
+	return (0);
 }
 
 static void print_echo(t_token *next, t_mini *mini, int *first)
@@ -78,12 +78,12 @@ static void print_echo(t_token *next, t_mini *mini, int *first)
 	while (next && next->type != PIPE)
 	{
 		expander(&next, mini);
-		if(next->type == OUTPUT || next->type == FILE || next->type == NOT_FILE)
+		if (next->type == OUTPUT || next->type == FILE || next->type == NOT_FILE)
 		{
 			next = next->next;	
 			continue ;
 		}
-		if(next && *first == 2 && ft_strcmp(next->text, "-n") != 0)
+		if (next && *first == 2 && ft_strcmp(next->text, "-n") != 0)
 		{
 			ft_printf("%s", next->text);
 			*first = 2;
@@ -93,13 +93,13 @@ static void print_echo(t_token *next, t_mini *mini, int *first)
 		else if (next->next && !*first)
 		{
 			next = next->next;
-			if(ft_strcmp(next->text, "-n") != 0)
+			if (ft_strcmp(next->text, "-n") != 0)
 				ft_printf("%s", next->text);
 			*first = 2;
 		}
-		if(next->next && next->next->type != PIPE) //VERIFICAR ISTO - PELO QUE VI, SO IMPRIMIA A MAIS COM PIPE NE?
+		if (next->next && next->next->type != PIPE) //VERIFICAR ISTO - PELO QUE VI, SO IMPRIMIA A MAIS COM PIPE NE?
 		{
-			if(ft_strcmp(next->text, "-n") != 0)
+			if (ft_strcmp(next->text, "-n") != 0)
 				ft_printf(" ");
 		}
 		next = next->next;
@@ -113,10 +113,10 @@ void	handle_echo(t_token **token, t_mini *mini)
 
 	temp = *token;
 	first = 0;
-	if(temp->next)
+	if (temp->next)
 	{
 		temp = temp->next;
-		if(!check_input(temp, mini))
+		if (!check_input(temp, mini))
 			print_echo(temp, mini, &first);
 		if (mini->echo_flag == false)
 				ft_printf("\n");

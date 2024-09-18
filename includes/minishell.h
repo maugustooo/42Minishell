@@ -40,7 +40,8 @@ typedef enum e_error
 	ERROR_TARG,
 	ERROR_NUMARG,
 	ERROR_ISDIR,
-	ERROR_PERMS
+	ERROR_PERMS,
+	ERROR_SENV
 }	t_error;
 
 // const char *Error_Msg[] =
@@ -61,7 +62,8 @@ static inline const char *Error_Msg(enum e_error i)
 	"minishell: %s: too many arguments\n",
 	"minishell: %s: numeric argument required\n",
 	"minishell: %s: Is a directory\n",
-	"minishell: %s: Permission denied\n"};
+	"minishell: %s: Permission denied\n",
+	"env: Options/Arguments not allowed by subject\n"};
     return strings[i];
 }
 

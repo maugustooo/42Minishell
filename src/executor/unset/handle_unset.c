@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:36:43 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/04 09:46:08 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/18 09:15:54 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void	dup_env_if(t_mini *mini, char *str)
 	j = 0;
 	k = 0;
 	tenv = ft_calloc((i + 1), sizeof(char *));
-	if(!tenv)
+	if (!tenv)
 		return ;
 	while (j < i)
 	{
 		if (ft_strcmp(mini->penv[j], str) == 0)
 		{
 			j++;
-			continue;
+			continue ;
 		}
 		tenv[k] = ft_strdup(mini->penv[j]);
 		j++;
@@ -66,16 +66,16 @@ void	handle_unset(t_token *token, t_mini *mini)
 	char	**key;
 
 	i = 0;
-	if(token->next)
+	if (token->next)
 	{
-		while(mini->penv[i])
+		while (mini->penv[i])
 		{
 			key = ft_split(mini->penv[i], '=');
-			if (ft_strcmp(key[0],token->next->text) == 0)
+			if (ft_strcmp(key[0], token->next->text) == 0)
 			{
 				dup_env_if(mini, mini->penv[i]);
 				free_unset(&key);
-				break;
+				break ;
 			}
 			free_unset(&key);
 			i++;
