@@ -44,12 +44,6 @@ typedef enum e_error
 	ERROR_SENV
 }	t_error;
 
-// const char *Error_Msg[] =
-// {
-//     [ERROR_CMD] = "%s: command not found",
-//     /* etc. */  
-// };
-
 static inline const char *Error_Msg(enum e_error i)
 {
     static const char *strings[] = { 
@@ -83,6 +77,7 @@ typedef struct s_mini
 	char	**penv;
 	char	*prev_dir;
 	char	**splited;
+	char	curr_dir[MAX_PATH_LEN];
 
 	bool	echo_flag;
 	bool	pipe;

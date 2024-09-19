@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/18 11:40:40 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/19 08:24:29 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ void handle_redirection(char **args)
 
 int	check_file2(char **args, t_token **token, t_mini *mini)
 {
-	char    current_dir[MAX_PATH_LEN];
-
 	args[0] = ft_strdup((*token)->text);
 	handle_redirection(args);
 	if (execve((*token)->text, args, mini->penv) == -1)
