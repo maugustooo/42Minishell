@@ -1,12 +1,32 @@
 #include "minishell.h"
 
-void move_left(char **args, int i)
+char *remove_quotes(char *str)
 {
-    while (args[i])
-	{
-        args[i] = args[i + 2];
+    int len;
+    char *new_str;
+
+    len = strlen(str);
+    if ((str[0] == '"' && str[len - 1] == '"') || (str[0] == '\'' && str[len - 1] == '\''))
+    {
+        new_str = malloc(len - 1);
+        if (!new_str)
+            return NULL;
+        strncpy(new_str, str + 1, len - 2);
+        new_str[len - 2] = '\0';
+        return (new_str);
+    }
+    return (str);
+}
+
+void move_left(char **args, int start_index)
+{
+    int i = start_index;
+    while (args[i + 1])
+    {
+        args[i] = args[i + 1];
         i++;
     }
+    args[i] = NULL;
 }
 
 void handle_heredoc(char ***args, int *i)
@@ -35,18 +55,30 @@ void handle_heredoc(char ***args, int *i)
 	move_left((*args), *i);
 }
 
-int handle_output(char ***args, int	*i)
+int handle_output(char ***args, int *i)
 {
-	int fd_in;
-	fd_in = 0;
+    int fd_in;
+    char *filename;
+	char *original_filename;
 
-	fd_in = open((*args)[*i + 1], O_RDONLY);
-	if(!fd_in)
-		return(0);
-	dup2(fd_in, STDIN_FILENO);
-	close(fd_in);
-	move_left((*args), *i);
-	return(1);
+    fd_in = 0;
+	original_filename = (*args)[*i];
+    filename = remove_quotes((*args)[*i]);
+    if (!filename)
+        return (0);
+    fd_in = open(filename, O_RDONLY);
+    if (fd_in < 0)
+    {
+        free(filename);
+        return (0);
+    }
+    dup2(fd_in, STDIN_FILENO);
+    close(fd_in);
+	(*args)[*i] = filename;
+    if (filename != original_filename)
+        free(original_filename);
+    move_left((*args), *i - 1);
+    return (1);
 }
 
 int handle_input(char ***args, int	*i)

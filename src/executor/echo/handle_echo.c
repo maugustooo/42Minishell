@@ -77,7 +77,7 @@ static void print_echo(t_token *next, t_mini *mini, int *first)
 {
 	while (next && next->type != PIPE)
 	{
-		if(check_redirect(next))
+		if(check_redirect(&next))
 			continue ;
 		expander(&next, mini);
 		if (next && *first == 2 && ft_strcmp(next->text, "-n") != 0)

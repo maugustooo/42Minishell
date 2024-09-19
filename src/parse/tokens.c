@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/19 11:38:47 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:22:49 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void init_token(t_token **token, char *text)
 			|| (*token)->prev->type == APPEND) && !check_file_token(file) &&
 			(*token)->type != OUTPUT && (*token)->type != INPUT
 			&& (*token)->type != APPEND && (*token)->type != PIPE)
-			(*token)->type = ARG;
+			(*token)->type = NOT_FILE;
 		free(file);
 	}
 }

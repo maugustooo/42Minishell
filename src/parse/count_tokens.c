@@ -13,17 +13,21 @@ void handle_quotes(char c, int *in_quotes, char *quote_char)
 
 static void increment_token_count(char **line, int *count, int in_quotes)
 {
-    if (!in_quotes && (!ft_isspace(**line) && **line != '|'))
+    if (!in_quotes && (!ft_isspace(**line) && ((**line == '|' || **line == '<' || **line == '>')
+			|| (**line == '>' && **line + 1 =='>'))))
         return;
     (*count)++;
 	if(!in_quotes)
 	{
-		while (**line && (ft_isspace(**line) || **line == '|'))
+		while (**line && (ft_isspace(**line) || (**line == '|' || **line == '<' || **line == '>')
+				|| (**line == '>' && **line + 1 =='>')))
 		{
-			if (!in_quotes && **line == '|')
+			if ((!in_quotes && ((**line == '|' || **line == '<' || **line == '>')
+				|| (**line == '>' && **line + 1 =='>'))))
 			{
 				(*count)++;
-				while (**line && **line == '|')
+				while ((**line && ((**line == '|' || **line == '<' || **line == '>')
+					|| (**line == '>' && **line + 1 =='>'))))
 					(*line)++;
 			}
 			if (**line)
@@ -69,7 +73,7 @@ int count_tokens(char *line, t_mini *mini)
         if (*line)
             line++;
     }
-    if (*(line - 1) && !ft_isspace(*(line - 1)) && *(line - 1) != '|')
+    if (*(line - 1) && !ft_isspace(*(line - 1)) && *(line - 1) != '|' && *(line - 1) != '<' && *(line - 1) != '>')
         count++;
     check_final_pipe(line, mini, &count);
     return (count);

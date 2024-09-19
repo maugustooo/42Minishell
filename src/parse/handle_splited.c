@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_splited.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/27 15:01:34 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/19 14:07:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@ static void add_token(t_mini *mini, char *start, int len, int index)
     if (mini->splited[index])
     	free(mini->splited[index]);
     mini->splited[index] = ft_strndup(start, len);
+}
+
+static void handle_redirects(char **line, t_mini *mini, int *index, int *len, char **start)
+{
+    if (*len > 0)
+    {
+        add_token(mini, *start, *len, *index);
+        (*index)++;
+        *len = 0;
+    }
+    add_token(mini, *line, 1, *index);
+    (*index)++;
+    (*line)++;
 }
 
 static void handle_pipes(char **line, t_mini *mini, int *index, int *len, char **start)
@@ -62,9 +75,13 @@ static void process_tokens(char *line, t_mini *mini, int *index, int *in_quotes)
             handle_spaces(&line, &len, mini, index);
             continue;
         }
-        if (!*in_quotes && *line == '|')
+        if (!*in_quotes && ((*line == '|' || *line == '<' || *line == '>')
+			|| (*line == '>' && *line + 1 =='>')))
         {
-            handle_pipes(&line, mini, index, &len, &start);
+            if (*line == '|')
+                handle_pipes(&line, mini, index, &len, &start);
+            else
+                handle_redirects(&line, mini, index, &len, &start);
             continue;
         }
         if (len++ == 0)

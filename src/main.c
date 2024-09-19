@@ -18,6 +18,8 @@ void print_tokens(t_token *tokens, t_mini *mini)
         printf("Token %d: text:%s type:%d\n", i, current_token->text, current_token->type);
 		if(current_token->prev)
 			ft_printf("prev->text: %s\n\n", current_token->prev->text);
+		else
+			ft_printf("\n");
         current_token = current_token->next;
         i++;
     }
