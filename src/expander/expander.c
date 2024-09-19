@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/17 12:41:07 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:29:40 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,6 @@ void	change_token_text(t_token *token, char *value)
 		free(token->text);
 		token->text = ft_strdup("");
 	}
-}
-
-void	expand_input(t_token *token, t_mini *mini, char **input)
-{
-	char *key;
-	char *value;
-
-	value = NULL;
-	key = get_env_key(mini, *input + 1);
-	if(!key)
-		change_token_text(token, value);
-	else
-	{
-		value = get_env_value(mini, *input + 1);
-		if(!value)
-			change_token_text(token, "");
-		else
-			change_token_text(token, value);
-		free(value);
-	}
-	free(key);
 }
 
 void	expander(t_token **token, t_mini *mini)
