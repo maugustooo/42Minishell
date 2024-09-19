@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/19 08:24:29 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:41:37 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ void handle_redirection(char **args)
 	{
         if (ft_strcmp(args[i], "<") == 0 && args[i] && ft_strcmp(args[i], "|") != 0)
 		{
-            if(!handle_input(&args, &i))
+            if(!handle_output(&args, &i))
 				break ;
 		}
 		else if ((ft_strcmp(args[i], ">") == 0 || strcmp(args[i], ">>") == 0)
 			&& args[i] && ft_strcmp(args[i], "|") != 0)
 		{
-			if(!handle_output(&args, &i))
+			if(!handle_input(&args, &i))
 				break ;
 		}
 		else if (ft_strcmp(args[i], "<<") == 0 && args[i] && ft_strcmp(args[i], "|") != 0)

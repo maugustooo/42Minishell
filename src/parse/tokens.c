@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/18 14:39:24 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:38:47 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,14 @@ static void init_token(t_token **token, char *text)
 		file = ft_strjoin(cwd_slash, (*token)->text);
 		free(cwd_slash);
 		if(((*token)->prev->type == OUTPUT || (*token)->prev->type == INPUT
-			|| (*token)->prev->type == APPEND) && check_file_token(file))
+			|| (*token)->prev->type == APPEND) && check_file_token(file) &&
+			(*token)->type != OUTPUT && (*token)->type != INPUT
+			&& (*token)->type != APPEND && (*token)->type != PIPE)
 			(*token)->type = FILE;
 		else if (((*token)->prev->type == OUTPUT || (*token)->prev->type == INPUT
-			|| (*token)->prev->type == APPEND) && !check_file_token(file))
+			|| (*token)->prev->type == APPEND) && !check_file_token(file) &&
+			(*token)->type != OUTPUT && (*token)->type != INPUT
+			&& (*token)->type != APPEND && (*token)->type != PIPE)
 			(*token)->type = ARG;
 		free(file);
 	}

@@ -114,6 +114,7 @@ void	handle_quotes(char c, int *in_quotes, char *quote_char);
 void	print_tokens(t_token *tokens, t_mini *mini);
 void	free_child(t_token **token, t_mini *mini, char **args);
 int		check_file_token(char *file);
+int		check_redirect(t_token *next);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
