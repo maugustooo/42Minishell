@@ -75,22 +75,11 @@ static int check_input(t_token *token, t_mini *mini)
 
 static void print_echo(t_token *next, t_mini *mini, int *first)
 {
-	int len;
-
-	len = 0;
 	while (next && next->type != PIPE)
 	{
-		if (next->type == OUTPUT || next->type == FILE)
-		{
-			len = ft_strlen(next->text);
-			if((next->text[1] == '"' && next->text[len -1] == '"') || (next->text[1] == '\'' && next->text[len -1] == '\''))
-			{
-				next = next->next;	
-				continue ;
-			}
-		}
+		if(check_redirect(next))
+			continue ;
 		expander(&next, mini);
-		//TODO:O expander tem que tirar o < no caso de echo <"file.txt"
 		if (next && *first == 2 && ft_strcmp(next->text, "-n") != 0)
 		{
 			ft_printf("%s", next->text);
@@ -105,7 +94,7 @@ static void print_echo(t_token *next, t_mini *mini, int *first)
 				ft_printf("%s", next->text);
 			*first = 2;
 		}
-		if (next->next && next->next->type != PIPE) //VERIFICAR ISTO - PELO QUE VI, SO IMPRIMIA A MAIS COM PIPE NE?
+		if (next->next && next->next->type != PIPE)
 		{
 			if (ft_strcmp(next->text, "-n") != 0)
 				ft_printf(" ");
