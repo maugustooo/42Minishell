@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:38:13 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/18 09:38:31 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:49:36 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ int	check_env_path(t_mini *mini)
 	return (1);
 }
 
+void	print_env(t_mini *mini)
+{
+	int		i;
+	char	**key;
+
+	i = -1;
+	key = NULL;
+	while(mini->penv[++i])
+	{
+		if(ft_find_c('=', mini->penv[i]))
+			ft_printf("%s\n", mini->penv[i]);
+	}
+}
+
 void	handle_env(t_mini *mini, t_token *token)
 {
 	int	i;
@@ -49,8 +63,7 @@ void	handle_env(t_mini *mini, t_token *token)
 	{
 		if (mini->penv && check_env_path(mini))
 		{
-			while (mini->penv[i])
-				ft_printf("%s\n", mini->penv[i++]);
+			print_env(mini);
 			mini->return_code = 0;
 		}
 		else

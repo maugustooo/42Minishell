@@ -6,11 +6,32 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/19 12:20:21 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:44:53 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	check_export_expander(t_token *token, t_mini *mini)
+{
+	char	*tmp;
+	char	**key;
+	char	*expanded_value;
+
+	tmp = ft_strdup(token->text);
+	expander(&token, mini);
+	if(ft_strcmp(token->text, "") == 0)
+	{
+		key = ft_split(tmp, '=');
+		if(key[0])
+		{
+			expanded_value = ft_strjoin(key[0], "=");
+			change_token_text(token, expanded_value);
+		}
+		free_key(key);
+	}
+	free(tmp);
+}
 
 void	set_export(t_mini *mini, t_token *token)
 {
@@ -28,7 +49,7 @@ void	set_export(t_mini *mini, t_token *token)
 		tenv[j] = ft_strdup(mini->penv[j]);
 		j++;
 	}
-	expander(&token, mini);
+	check_export_expander(token, mini);
 	tenv[j] = ft_strdup(token->text);
 	j++;
 	tenv[j] = NULL;

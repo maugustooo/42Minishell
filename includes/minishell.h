@@ -131,7 +131,7 @@ void	change_token_text(t_token *token, char *value);
 void	change_quotes(t_token **token);
 void	handle_expansion(t_token **token, t_mini *mini);
 char	*handle_sign2(t_token **token, t_mini *mini, int *i, int *len);
-char	*handle_dq2(t_token **token, t_mini *mini, int *i, int *start,char *segment);
+char	*handle_dq2(t_token **token, t_mini *mini, int *i, int *start, char *segment);
 char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start);
 
 //------------Executor-----------//

@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 12:19:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/29 11:46:55 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/20 12:20:00 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_env_value(t_mini *mini, char *str)
 	while (mini->penv[i])
 	{
 			key = ft_split(mini->penv[i], '=');
-			if(ft_strcmp(key[0], str) == 0)
+			if(ft_strcmp(key[0], str) == 0 && key[1])
 			{
 				vkey = ft_strdup(key[1]);
 				free_keys(&key);
