@@ -29,13 +29,14 @@ void move_left(char **args, int start_index)
     args[i] = NULL;
 }
 
-void handle_heredoc(char ***args, int *i)
+void handle_heredoc(char ***args, int *i, t_mini *mini)
 {
 	char buffer[1024];
     int bytes_read;
 	char *delimiter;
 	int pipefd[2];
 
+	mini->redirect = 1;
 	pipe(pipefd);
 	delimiter = (*args)[*i + 1];
 	while (1)
@@ -55,12 +56,13 @@ void handle_heredoc(char ***args, int *i)
 	move_left((*args), *i);
 }
 
-int handle_output(char ***args, int *i)
+int handle_output(char ***args, int *i, t_mini *mini)
 {
     int fd_in;
     char *filename;
 	char *original_filename;
 
+	mini->redirect = 1;
     fd_in = 0;
 	original_filename = (*args)[*i];
     filename = remove_quotes((*args)[*i]);
@@ -81,11 +83,12 @@ int handle_output(char ***args, int *i)
     return (1);
 }
 
-int handle_input(char ***args, int	*i)
+int handle_input(char ***args, int	*i, t_mini *mini)
 {
 	int fd_out;
 	fd_out = 0;
 
+	mini->redirect = 1;
 	if(ft_strcmp((*args)[*i], ">") == 0)
 		fd_out = open((*args)[*i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else

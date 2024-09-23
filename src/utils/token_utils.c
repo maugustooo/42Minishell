@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/19 11:28:29 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/23 14:55:32 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,38 @@ int	check_file_token(char *file)
 	else
 		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), file);
 	return (0);
+}
+
+t_token	*ft_tokenlast_redirect(t_token *token)
+{
+	while (token)
+	{
+		if (token->next && (token->type  == INPUT || token->type  == OUTPUT
+			|| token->type  == APPEND))
+		{
+			if(token->next->type == FILE && !token->next->next)
+				return (token);
+		}
+		token = token->next;
+	}
+	return (token);
+}
+
+void count_redirections(t_token *token, t_mini *mini)
+{
+	t_token *temp;
+	int i;
+
+	i = 0;
+	temp = token;
+	while (temp)
+	{
+		if(temp->type == INPUT)
+			mini->input_count++;
+		if(temp->type == OUTPUT)
+			mini->output_count++;
+		if(temp->type == APPEND)
+			mini->append_count++;
+		temp = temp->next;
+	}
 }

@@ -90,13 +90,19 @@ typedef struct s_mini
 	int		token_count;
 	int		return_code;
 	int		num_pipes;
+	int		redirect;
+	int		moved;
+	int		input_count;
+	int		output_count;
+	int		append_count;
 } t_mini;
 
 //--------------Utils-------------//
 
 t_token	*ft_tokenlast(t_token *token);
-void	ft_tokenadd_back(t_token **token, t_token *new_token);
+t_token	*ft_tokenlast_redirect(t_token *token);
 t_token	*ft_newnode(int type, char *text);
+void	ft_tokenadd_back(t_token **token, t_token *new_token);
 void	ft_tokenclear(t_token **token);
 void	ft_tokendelone(t_token *token);
 int		count_nodes(t_token *token);
@@ -110,6 +116,7 @@ void	free_args(char **args);
 void	free_keys(char ***key);
 void	dup_envp(t_mini *mini, char **envp);
 void	dup_tenv(t_mini *mini, char **tenv);
+void	move_left(char **args, int start_index);
 char	*get_env_key(t_mini *mini, char *str);
 char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
@@ -120,6 +127,7 @@ int		check_redirect(t_token **next);
 int		check_dir(char *tgt_dir);
 int		export_arg_err(t_token *token, t_mini *mini, char **key);
 void	check_export_expander(t_token *token, t_mini *mini);
+void	count_redirections(t_token *token, t_mini *mini);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
@@ -169,8 +177,8 @@ int		check_command2(char *full_path, char **dirs, t_token **token);
 int		check_file(char **argv, t_token **token, t_mini *mini);
 int		check_file2(char **args, t_token **token, t_mini *mini);
 int		check_path(t_mini *mini);
-void	handle_heredoc(char ***args, int *i);
-int		handle_input(char ***args, int	*i);
-int		handle_output(char ***args, int	*i);
+void	handle_heredoc(char ***args, int *i, t_mini *mini);
+int		handle_input(char ***args, int	*i, t_mini *mini);
+int		handle_output(char ***args, int	*i, t_mini *mini);
 
 #endif

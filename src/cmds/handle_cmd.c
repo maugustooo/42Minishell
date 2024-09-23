@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/23 09:50:00 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/23 11:41:39 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int handle_cmd(pid_t pid, t_token **token, t_mini *mini)
 		free_args(args);
 		return(ret);
 	}
+	waitpid(pid, NULL, 0);
 	free_args(args);
 	return (0);
 }
