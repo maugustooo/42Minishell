@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/19 11:41:35 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:19:57 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,22 @@ void	handle_cd(t_token *token, t_mini *mini)
 	if(token->next)
 		expander(&token->next, mini);
 	handle_dir(token, &target_dir, mini);
-	if (chdir(target_dir) != 0 && token->next)
+	if(check_dir(target_dir))
 	{
-		ft_printf_fd(STDERR_FILENO, "Could not find HOME\n");
-		mini->return_code = 1;
-	}
-	else
-	{
-		free(mini->prev_dir);
-		mini->prev_dir = ft_strdup(mini->curr_dir);
-		if(target_dir == mini->curr_dir)
+		if (chdir(target_dir) != 0 && token->next)
 		{
-			handle_pwd(mini);
-			mini->return_code = 0;
+			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), token->next->text);
+			mini->return_code = 1;
+		}
+		else
+		{
+			free(mini->prev_dir);
+			mini->prev_dir = ft_strdup(mini->curr_dir);
+			if(target_dir == mini->curr_dir)
+			{
+				handle_pwd(mini);
+				mini->return_code = 0;
+			}
 		}
 	}
 }

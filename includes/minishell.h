@@ -41,7 +41,8 @@ typedef enum e_error
 	ERROR_NUMARG,
 	ERROR_ISDIR,
 	ERROR_PERMS,
-	ERROR_SENV
+	ERROR_SENV,
+	ERROR_NDIR
 }	t_error;
 
 static inline const char *Error_Msg(enum e_error i)
@@ -57,7 +58,8 @@ static inline const char *Error_Msg(enum e_error i)
 	"minishell: %s: numeric argument required\n",
 	"minishell: %s: Is a directory\n",
 	"minishell: %s: Permission denied\n",
-	"env: Options/Arguments not allowed by subject\n"};
+	"env: Options/Arguments not allowed by subject\n",
+	"minishell: cd: %s: Not a directory\n",};
     return strings[i];
 }
 
@@ -115,6 +117,7 @@ void	print_tokens(t_token *tokens, t_mini *mini);
 void	free_child(t_token **token, t_mini *mini, char **args);
 int		check_file_token(char *file);
 int		check_redirect(t_token **next);
+int		check_dir(char *tgt_dir);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
