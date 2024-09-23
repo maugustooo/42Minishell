@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:05:35 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/18 11:13:36 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:19:15 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 /**
  * @brief Delete a node from a list
  * 
@@ -47,6 +45,7 @@ void	ft_tokenclear(t_token **token)
 		*token = tmp;
 	}
 }
+
 /**
  * @brief create a new node to the list
  * 
@@ -66,6 +65,7 @@ t_token	*ft_newnode(int type, char *text)
 	token->next = NULL;
 	return (token);
 }
+
 /**
  * @brief will add a new node 
  * 
@@ -91,6 +91,7 @@ void	ft_tokenadd_back(t_token **token, t_token *new_token)
 		}
 	}
 }
+
 /**
  * @brief return the last node
  * 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/19 15:21:31 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:11:24 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,34 +40,19 @@ int	handle_cmd2(t_token **token, t_mini *mini, char **args)
 		return(executor(token, mini), 0);
 	else if (ft_strncmp((*token)->text, "/", 1) == 0
 		|| ft_strncmp((*token)->text, "./", 2) == 0)
-	{
-		if (access((*token)->text, F_OK) == -1)
-		{
-			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), (*token)->text);
-			free_child(token, mini, args);
-			exit(127);
-		}
-		if (check_access((*token)->text))
-			return (check_file(args, token, mini));
-		else
-		{
-			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_PERMS), (*token)->text);
-			free_child(token, mini, args);
-			exit(126);
-		}
-	}
+		return(handle_cmd3(token, mini, args));
 	else
 		return (handle_cmd2_5(token, mini, args));
 }
 
-int	check_command2(char *full_path, char **dirs, t_token **token)
+int	check_command2(char *full_path, char **dirs, t_token **token, t_mini *mini)
 {
 	int	i;
 
 	i = 0;
 	while (dirs[i] != NULL)
 	{
-		full_path = build_full_path(dirs[i], (*token)->text);
+		full_path = build_full_path(dirs[i], (*token)->text, mini);
 		if (!full_path)
 			return (0);
 		if (check_access(full_path))

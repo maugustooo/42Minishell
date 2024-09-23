@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   freedom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/05 11:31:53 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:20:40 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void free_args(char **args)
+void	free_args(char **args)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (args[i])
 	{
 		free(args[i]);
@@ -23,9 +24,10 @@ void free_args(char **args)
 	}
 	free(args);
 }
-void free_key(char **key)
+
+void	free_key(char **key)
 {
-	if(key)
+	if (key)
 	{
 		free(key[0]);
 		free(key[1]);
@@ -43,7 +45,7 @@ void	free_things(t_mini *mini)
 		free_penv(mini);
 		mini->penv = NULL;
 	}
-	if(mini->prev_dir)
+	if (mini->prev_dir)
 	{
 		free(mini->prev_dir);
 		mini->prev_dir = NULL;
@@ -62,9 +64,9 @@ void	freethem(t_token **token, t_mini *mini)
 
 	i = 0;
 	mini->pipe = 0;
-	if(token)
+	if (token)
 		ft_tokenclear(token);
-	if(mini->splited)
+	if (mini->splited)
 	{
 		while (mini->splited[i])
 			free(mini->splited[i++]);

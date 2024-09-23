@@ -120,6 +120,8 @@ int		check_redirect(t_token **next);
 int		check_dir(char *tgt_dir);
 int		export_arg_err(t_token *token, t_mini *mini, char **key);
 void	check_export_expander(t_token *token, t_mini *mini);
+void	error_malloc(t_mini *mini);
+void	handle_exit_conditions(const char *msg, t_token **token, t_mini *mini, char **args);\
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
@@ -159,13 +161,15 @@ void	executor(t_token **token, t_mini *mini);
 
 //------------Commands-----------//
 
-char	*build_full_path(char *dir, const char *cmd);
+char	*build_full_path(char *dir, const char *cmd, t_mini *mini);
 int		check_access(char *full_path);
 int		handle_cmd(pid_t pid, t_token **token, t_mini *mini);
 int		handle_cmd_pipe(t_token **token, t_mini *mini);
 int		handle_cmd2(t_token **token, t_mini *mini, char **args);
+int		handle_cmd3(t_token **token, t_mini *mini, char **args);
+int		handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args);
 int		check_command(t_token **token, t_mini *mini, char **args);
-int		check_command2(char *full_path, char **dirs, t_token **token);
+int		check_command2(char *full_path, char **dirs, t_token **token, t_mini *mini);
 int		check_file(char **argv, t_token **token, t_mini *mini);
 int		check_file2(char **args, t_token **token, t_mini *mini);
 int		check_path(t_mini *mini);

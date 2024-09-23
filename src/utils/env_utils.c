@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 09:14:01 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/29 15:11:40 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/23 12:17:25 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,32 @@ void	free_penv(t_mini *mini)
 	}
 	free(mini->penv);
 }
+
 int	env_size(t_mini *mini, char **tenv)
 {
 	int	i;
 
 	i = 0;
-	if(tenv)
+	if (tenv)
 	{
-		while(tenv[i])
+		while (tenv[i])
 			i++;
-		return(i);
+		return (i);
 	}
-	while(mini->penv[i])
+	while (mini->penv[i])
 		i++;
-	return(i);
+	return (i);
 }
 
 void	dup_tenv(t_mini *mini, char **tenv)
 {
 	int			count;
 	int			i;
-	
+
 	i = 0;
 	count = env_size(mini, tenv);
 	mini->penv = malloc(sizeof(char *) * (count + 1));
-	if(!mini->penv)
+	if (!mini->penv)
 		return ;
 	while (i < count)
 	{
@@ -80,13 +81,13 @@ void	dup_envp(t_mini *mini, char **envp)
 {
 	int			count;
 	int			i;
-	
+
 	i = 0;
 	count = 0;
 	while (envp[count])
 		count++;
 	mini->penv = malloc(sizeof(char *) * (count + 1));
-	if(!mini->penv)
+	if (!mini->penv)
 		return ;
 	while (i < count)
 	{
