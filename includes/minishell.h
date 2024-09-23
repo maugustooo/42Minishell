@@ -118,6 +118,8 @@ void	free_child(t_token **token, t_mini *mini, char **args);
 int		check_file_token(char *file);
 int		check_redirect(t_token **next);
 int		check_dir(char *tgt_dir);
+int		export_arg_err(t_token *token, t_mini *mini, char **key);
+void	check_export_expander(t_token *token, t_mini *mini);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

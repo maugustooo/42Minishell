@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:07:08 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/20 09:21:36 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:43:14 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*append_part(char *result, char *text, int *i, char quote)
 	if (quote)
 	{
 		(*i)++;
-		while(text[*i] && text[*i] != quote)
+		while (text[*i] && text[*i] != quote)
 			(*i)++;
 		part = ft_strndup(text + start + 1, (*i) - start - 1);
 		(*i)++;
@@ -34,7 +34,7 @@ char	*append_part(char *result, char *text, int *i, char quote)
 		part = ft_strndup(text + start, *i - start);
 	}
 	result = ft_strjoin_free(result, part, 3);
-	return(result);
+	return (result);
 }
 
 void	change_quotes(t_token **token)
@@ -51,7 +51,6 @@ void	change_quotes(t_token **token)
 		else
 			result = append_part(result, (*token)->text, &i, 0);
 	}
-
 	change_token_text(*token, result);
 }
 
@@ -64,16 +63,16 @@ char	*handle_sign2(t_token **token, t_mini *mini, int *i, int *len)
 	tmp = NULL;
 	tmp = ft_strndup((*token)->text + *i, *len);
 	original_var = get_env_value(mini, tmp);
-	if(original_var && ft_strcmp(tmp, original_var) == 0)
+	if (original_var && ft_strcmp(tmp, original_var) == 0)
 	{
 		*i += *len;
 		free(tmp);
-		return(ft_strdup(""));	
+		return (ft_strdup(""));
 	}
 	*i += *len;
 	seg = get_env_value(mini, tmp);
 	free(tmp);
-	return(seg);
+	return (seg);
 }
 
 char	*handle_dq2(t_token **token, t_mini *mini, int *i, int *start,
@@ -89,7 +88,6 @@ char	*handle_dq2(t_token **token, t_mini *mini, int *i, int *start,
 			return (NULL);
 		segment = ft_strjoin_free(segment, temp, 3);
 	}
-
 	expanded = handle_sign(token, mini, i, start);
 	if (!expanded)
 		return (NULL);

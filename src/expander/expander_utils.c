@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/18 08:56:24 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:41:31 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start)
 
 	len = 1;
 	(*i)++;
-	if((*token)->text[*i] == '?')
+	if ((*token)->text[*i] == '?')
 	{
 		segment = ft_itoa(mini->return_code);
 		(*i)++;
 	}
 	else if (ft_isalnum_under((*token)->text[*i]))
 	{
-		while(ft_isalnum_under((*token)->text[*i + len]))
+		while (ft_isalnum_under((*token)->text[*i + len]))
 			len++;
 		segment = handle_sign2(token, mini, i, &len);
 	}
@@ -38,7 +38,7 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start)
 		segment = ft_strdup("$");
 		(*start)++;
 	}
-	return(segment);
+	return (segment);
 }
 
 char	*handle_sq(t_token **token, int *i)
@@ -51,7 +51,7 @@ char	*handle_sq(t_token **token, int *i)
 		(*i)++;
 	segment = ft_strndup(((*token)->text + start), *i - start);
 	(*i)++;
-	return(segment);
+	return (segment);
 }
 
 char	*handle_dq(t_token **token, t_mini *mini, int *i)
@@ -71,13 +71,11 @@ char	*handle_dq(t_token **token, t_mini *mini, int *i)
 			(*i)++;
 	}
 	if (*i > start)
-		segment = ft_strjoin_free(segment, 
-			ft_strndup((*token)->text + start, *i - start), 3);
-
+		segment = ft_strjoin_free(segment,
+				ft_strndup((*token)->text + start, *i - start), 3);
 	(*i)++;
 	return (segment);
 }
-
 
 char	*handle_plain(t_token **token, int *i)
 {
@@ -85,11 +83,11 @@ char	*handle_plain(t_token **token, int *i)
 	int		start;
 
 	start = *i;
-	while((*token)->text[*i] && (*token)->text[*i] != '\'' &&
-		(*token)->text[*i] != '"' && (*token)->text[*i] != '$')
+	while ((*token)->text[*i] && (*token)->text[*i] != '\''
+		&& (*token)->text[*i] != '"' && (*token)->text[*i] != '$')
 		(*i)++;
 	segment = ft_strndup((*token)->text + start, *i - start);
-	return(segment);
+	return (segment);
 }
 
 void	handle_expansion(t_token **token, t_mini *mini)
@@ -101,7 +99,7 @@ void	handle_expansion(t_token **token, t_mini *mini)
 
 	i = 0;
 	result = ft_strdup("");
-	while((*token)->text[i])
+	while ((*token)->text[i])
 	{
 		if ((*token)->text[i] == '\'')
 			expanded = handle_sq(token, &i);

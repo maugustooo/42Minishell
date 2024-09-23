@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/19 11:29:40 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:41:44 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,28 @@ int	detect_expansion(t_token **token)
 	i = 0;
 	sq = false;
 	dq = false;
-	while((*token)->text[i])
+	while ((*token)->text[i])
 	{
-		if((*token)->text[i] == '\'' && !dq)
+		if ((*token)->text[i] == '\'' && !dq)
 			sq = !sq;
 		else if ((*token)->text[i] == '"' && !sq)
 			dq = !dq;
 		i++;
 	}
 	if (sq || dq)
-		return(1);
+		return (1);
 	i = -1;
-	while((*token)->text[++i])
+	while ((*token)->text[++i])
 	{
 		if ((*token)->text[i] == '$')
-			return(0);
+			return (0);
 	}
-	return(2);
+	return (2);
 }
 
 void	change_token_text(t_token *token, char *value)
 {
-	if(value)
+	if (value)
 	{
 		free(token->text);
 		token->text = ft_strdup(value);
@@ -62,7 +62,7 @@ void	expander(t_token **token, t_mini *mini)
 	result = detect_expansion(token);
 	if (result == 0)
 		handle_expansion(token, mini);
-	else if(result == 1)
+	else if (result == 1)
 	{
 		ft_printf("%s", "Due to subject rules NO unclosed quotes");
 		mini->return_code = 2;

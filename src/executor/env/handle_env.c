@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:38:13 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/20 11:49:36 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:29:07 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	print_env(t_mini *mini)
 
 	i = -1;
 	key = NULL;
-	while(mini->penv[++i])
+	while (mini->penv[++i])
 	{
-		if(ft_find_c('=', mini->penv[i]))
+		if (ft_find_c('=', mini->penv[i]))
 			ft_printf("%s\n", mini->penv[i]);
 	}
 }
