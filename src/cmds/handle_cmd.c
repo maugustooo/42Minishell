@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/18 13:41:53 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/23 09:50:00 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	check_command(t_token **token, t_mini *mini, char **args)
 	if (!value)
 		return (free(value), free(key), 0);
 	dirs = ft_split(value, ':');
+	free(value);
+	free(key);
 	if (check_command2(full_path, dirs, token) == 1)
 		return (check_file(args, token, mini));
 	free_keys(&dirs);
