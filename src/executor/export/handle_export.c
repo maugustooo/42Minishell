@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/18 09:53:57 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:50:04 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	handle_export(t_mini *mini, t_token *token)
 
 	if (!mini->exported)
 	{
-		if (token)
+		if (token && token->type != PIPE)
 		{
 			if (export_arg(token, mini))
 				set_export(mini, token);

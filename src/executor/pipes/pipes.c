@@ -70,9 +70,11 @@ static void setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **tem
 static void process_pipe_segment(t_token **temp, int *fd_in, 
 	pid_t *pid, t_mini *mini, t_token **token)
 {
-    int pipefd[2];
+    int 	pipefd[2];
     t_token *start;
+	int		status;
 
+	status = 0;
 	while (temp && *temp)
 	{
 		mini->is_pipe = 2;
@@ -89,7 +91,9 @@ static void process_pipe_segment(t_token **temp, int *fd_in,
 		if(mini->return_code == 127)
 			handle_exit(token, mini);
 	}
-    waitpid(*pid, NULL, 0);
+    waitpid(*pid, &status, 0);
+	if(WIFEXITED(status))
+			mini->return_code = WEXITSTATUS(status);
 }
 
 void pipes(t_token **token, t_mini *mini, pid_t pid)
