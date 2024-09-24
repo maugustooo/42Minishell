@@ -130,6 +130,7 @@ void	check_export_expander(t_token *token, t_mini *mini);
 void	error_malloc(t_mini *mini);
 void	handle_exit_conditions(const char *msg, t_token **token, t_mini *mini, char **args);\
 void	count_redirections(t_token *token, t_mini *mini);
+int		check_file_perms(t_token *token);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/23 15:20:44 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/24 09:55:29 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,12 +219,12 @@ int	check_file2(char **args, t_token **token, t_mini *mini)
 {
 	args[0] = ft_strdup((*token)->text);
 	handle_redirection(args, mini, *token);
-	int i = 0;
-	while (args[i])
-	{
-		ft_printf("args[%d]: %s\n", i, args[i]);
-		i++;
-	}
+	// int i = 0;
+	// while (args[i])
+	// {
+	// 	ft_printf("args[%d]: %s\n", i, args[i]);
+	// 	i++;
+	// }
 	if (execve((*token)->text, args, mini->penv) == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CMD),

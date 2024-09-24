@@ -54,7 +54,7 @@ static void minishell(t_mini *mini, t_token	**token, char **envp)
 			freethem(token, mini);
 			continue;
 		}
-		print_tokens(*token, mini);
+		//print_tokens(*token, mini);
 		add_history(mini->line);
 		executor(token, mini);
 		freethem(token, mini);

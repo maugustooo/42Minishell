@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/23 09:37:57 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/24 09:51:22 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	set_export(t_mini *mini, t_token *token)
 	i = env_size(mini, NULL);
 	tenv = ft_calloc((i + 2), sizeof(char *));
 	if (!tenv)
-		return ;
+		error_malloc(mini);
 	j = 0;
 	while (j < i)
 	{

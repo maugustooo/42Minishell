@@ -30,7 +30,7 @@ static void input(t_token *token, t_mini *mini, t_token *last, int type)
 	char *file;
 
 	fd = 0;
-	if (last->type == ARG)
+	if (last->type == ARG || last->type == FILE)
 		file = last->text;
 	else
 		ft_printf(Error_Msg(ERROR_ARG_ECHO));
@@ -38,6 +38,8 @@ static void input(t_token *token, t_mini *mini, t_token *last, int type)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (type == APPEND)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if(!check_file_perms(last))
+		exit(1);
 	if (fd)
 		while (token && token->type == ARG)
 		{
