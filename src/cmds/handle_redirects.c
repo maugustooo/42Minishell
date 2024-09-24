@@ -1,0 +1,102 @@
+#include "minishell.h"
+
+char *remove_quotes(char *str)
+{
+    int len;
+    char *new_str;
+
+    len = strlen(str);
+    if ((str[0] == '"' && str[len - 1] == '"') || (str[0] == '\'' && str[len - 1] == '\''))
+    {
+        new_str = malloc(len - 1);
+        if (!new_str)
+            return NULL;
+        strncpy(new_str, str + 1, len - 2);
+        new_str[len - 2] = '\0';
+        return (new_str);
+    }
+    return (str);
+}
+
+void move_left(char **args, int start_index)
+{
+    int i = start_index;
+    while (args[i + 1])
+    {
+        args[i] = args[i + 1];
+        i++;
+    }
+    args[i] = NULL;
+}
+
+void handle_heredoc(char ***args, int *i, t_mini *mini)
+{
+	char buffer[1024];
+    int bytes_read;
+	char *delimiter;
+	int pipefd[2];
+
+	mini->redirect = 1;
+	pipe(pipefd);
+	delimiter = (*args)[*i + 1];
+	while (1)
+	{
+		ft_printf("> ");
+		bytes_read = read(STDIN_FILENO, buffer, sizeof(buffer) - 1);
+		if (bytes_read <= 0)
+			break ;
+		buffer[bytes_read] = '\0';
+		if (ft_strncmp(buffer, delimiter, ft_strlen(delimiter)) == 0 && buffer[ft_strlen(delimiter)] == '\n')
+			break;
+		ft_printf_fd(pipefd[1], buffer);
+	}
+	close(pipefd[1]);
+	dup2(pipefd[0], STDIN_FILENO);
+	close(pipefd[0]);
+	move_left((*args), *i);
+}
+
+int handle_output(char ***args, int *i, t_mini *mini)
+{
+    int fd_in;
+    char *filename;
+	char *original_filename;
+
+	mini->redirect = 1;
+    fd_in = 0;
+	original_filename = (*args)[*i];
+    filename = remove_quotes((*args)[*i]);
+    if (!filename)
+        return (0);
+    fd_in = open(filename, O_RDONLY);
+    if (fd_in < 0)
+    {
+        free(filename);
+        return (0);
+    }
+    dup2(fd_in, STDIN_FILENO);
+    close(fd_in);
+	(*args)[*i] = filename;
+    if (filename != original_filename)
+        free(original_filename);
+    move_left((*args), *i - 1);
+    return (1);
+}
+
+int handle_input(char ***args, int	*i, t_mini *mini)
+{
+	int fd_out;
+	fd_out = 0;
+
+	mini->redirect = 1;
+	if(ft_strcmp((*args)[*i], ">") == 0)
+		fd_out = open((*args)[*i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else
+		fd_out = open((*args)[*i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if(!fd_out)
+		return(0);
+	dup2(fd_out, STDOUT_FILENO);
+	close(fd_out);
+	move_left((*args), *i);
+	return(1);
+}

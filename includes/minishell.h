@@ -185,5 +185,5 @@ int		check_path(t_mini *mini);
 void	handle_heredoc(char ***args, int *i, t_mini *mini);
 int		handle_input(char ***args, int	*i, t_mini *mini);
 int		handle_output(char ***args, int	*i, t_mini *mini);
-
+void	handle_redirection(char **args, t_mini *mini,  t_token *token);
 #endif

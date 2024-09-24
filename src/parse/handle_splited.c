@@ -6,93 +6,95 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/19 14:07:05 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:50:25 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"minishell.h"
+#include "minishell.h"
 
-static void add_token(t_mini *mini, char *start, int len, int index)
+static void	add_token(t_mini *mini, char *start, int len, int index)
 {
-    if (mini->splited[index])
-    	free(mini->splited[index]);
-    mini->splited[index] = ft_strndup(start, len);
+	if (mini->splited[index])
+		free(mini->splited[index]);
+	mini->splited[index] = ft_strndup(start, len);
 }
 
-static void handle_redirects(char **line, t_mini *mini, int *index, int *len, char **start)
+static void	handle_redirects(char **line, t_mini *mini, int *index, int *len, char **start)
 {
-    if (*len > 0)
-    {
-        add_token(mini, *start, *len, *index);
-        (*index)++;
-        *len = 0;
-    }
-    add_token(mini, *line, 1, *index);
-    (*index)++;
-    (*line)++;
+	if (*len > 0)
+	{
+		add_token(mini, *start, *len, *index);
+		(*index)++;
+		*len = 0;
+	}
+	add_token(mini, *line, 1, *index);
+	(*index)++;
+	(*line)++;
 }
 
 static void handle_pipes(char **line, t_mini *mini, int *index, int *len, char **start)
 {
-    if (*len > 0)
-    {
-        add_token(mini, *start, *len, *index);
-        (*index)++;
-        *len = 0;
-    }
-	if(((mini->token_count - (*index) != 0) && mini->final_pipe) || !mini->final_pipe)
+	if (*len > 0)
 	{
-    	add_token(mini, *line, 1, *index);
-    	(*index)++;
+		add_token(mini, *start, *len, *index);
+		(*index)++;
+		*len = 0;
+	}
+	if (((mini->token_count - (*index) != 0) && mini->final_pipe)
+		|| !mini->final_pipe)
+	{
+		add_token(mini, *line, 1, *index);
+		(*index)++;
 	}
 	(*line)++;
 }
-static void handle_spaces(char **line, int *len, t_mini *mini, int *index)
+
+static void	handle_spaces(char **line, int *len, t_mini *mini, int *index)
 {
-    if (*len > 0)
-    {
-        add_token(mini, *line - *len, *len, *index);
-        (*index)++;
-    }
-    *len = 0;
-    while (**line && ft_isspace(**line))
-        (*line)++;
+	if (*len > 0)
+	{
+		add_token(mini, *line - *len, *len, *index);
+		(*index)++;
+	}
+	*len = 0;
+	while (**line && ft_isspace(**line))
+		(*line)++;
 }
 
-static void process_tokens(char *line, t_mini *mini, int *index, int *in_quotes)
+static void	process_tokens(char *line, t_mini *mini, int *index, int *in_quotes)
 {
-    char *start;
-    int len;
-    char quote_char;
+	char	*start;
+	int		len;
+	char	quote_char;
 
-    len = 0;
-    quote_char = '\0';
-    while (*line)
-    {
-        handle_quotes(*line, in_quotes, &quote_char);
-        if (!*in_quotes && ft_isspace(*line))
-        {
-            handle_spaces(&line, &len, mini, index);
-            continue;
-        }
-        if (!*in_quotes && ((*line == '|' || *line == '<' || *line == '>')
+	len = 0;
+	quote_char = '\0';
+	while (*line)
+	{
+		handle_quotes(*line, in_quotes, &quote_char);
+		if (!*in_quotes && ft_isspace(*line))
+		{
+			handle_spaces(&line, &len, mini, index);
+			continue ;
+		}
+		if (!*in_quotes && ((*line == '|' || *line == '<' || *line == '>')
 			|| (*line == '>' && *line + 1 =='>')))
-        {
-            if (*line == '|')
-                handle_pipes(&line, mini, index, &len, &start);
-            else
-                handle_redirects(&line, mini, index, &len, &start);
-            continue;
-        }
-        if (len++ == 0)
-            start = line;
-        line++;
-    }
-    if (len > 0)
-        add_token(mini, start, len, *index);
+		{
+			if (*line == '|')
+				handle_pipes(&line, mini, index, &len, &start);
+			else
+				handle_redirects(&line, mini, index, &len, &start);
+			continue ;
+		}
+		if (len++ == 0)
+			start = line;
+		line++;
+	}
+	if (len > 0)
+		add_token(mini, start, len, *index);
 }
 
-void split_to_tokens(char *line, t_mini *mini)
+void	split_to_tokens(char *line, t_mini *mini)
 {
     int index;
 	int in_quotes;

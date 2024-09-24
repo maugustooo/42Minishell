@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:52:10 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/23 12:22:26 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/24 12:16:01 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
  * 
  * @param sig SIGINT
  */
-void	handle_sigint(int sig)
+void handle_sigint(int sig)
 {
-	(void) sig;
-	ft_printf("\n");
-	rl_replace_line("", 0);
-	rl_redisplay();
+    (void)sig;
+	write(STDERR_FILENO, "\n", 1);
+    rl_replace_line("", 0);
+	rl_on_new_line();
+    rl_redisplay();
 }
 
 /**
