@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/19 10:36:42 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:25:57 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,22 @@ static int have_pipe(t_token *token, t_mini *mini)
 	return(flag);
 }
 
+static int check_no_file(t_token *token)
+{
+	t_token *temp;
+
+	temp = token;
+	while (temp)
+	{
+		if(temp->type == NOT_FILE)
+		{
+			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), temp->text);
+			return (0);
+		}
+		temp = temp->next;
+	}
+	return (1);
+}
 /**
  * @brief Will parse creating the tokens and checking commands
  * 
@@ -50,5 +66,10 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 		check_arg_export((*token)->next, mini);
 	if(have_pipe(*token, mini) || mini->final_pipe)
 		mini->pipe = true;
+	if(!check_no_file(*token))
+	{
+		mini->return_code = 1;
+		return(0);
+	}
 	return(1);
 }

@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/24 11:10:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:26:53 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,31 @@ int	count_nodes(t_token *token)
 	return (i);
 }
 
-int	check_file_token(char *file)
+int	check_file_token(t_token **token, char *file, t_mini *mini)
 {
 	struct stat	path_stat;
-
-	if (stat(file, &path_stat) == -1)
+	t_token **temp;
+	
+	(void)file;
+	temp = token;
+	if(ft_find_c('\"', (*temp)->text))
+		expander(temp, mini);
+	if (stat((*temp)->text, &path_stat) == -1)
 		return (0);
 	if (S_ISREG(path_stat.st_mode))
 	{
-		if (access(file, R_OK) == 0)
+		if (access((*temp)->text, R_OK) == 0)
 			return (1);
 		else
 			return (0);
 	}
 	else if (S_ISDIR(path_stat.st_mode))
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_ISDIR), file);
+		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_ISDIR), (*temp)->text);
 		return (0);
 	}
 	else
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), file);
+		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), (*temp)->text);
 	return (0);
 }
 
@@ -80,6 +85,8 @@ void count_redirections(t_token *token, t_mini *mini)
 			mini->output_count++;
 		if(temp->type == APPEND)
 			mini->append_count++;
+		if(temp->type == FILE)
+			mini->file_count++;
 		temp = temp->next;
 	}
 }

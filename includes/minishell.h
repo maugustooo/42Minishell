@@ -44,7 +44,8 @@ typedef enum e_error
 	ERROR_ISDIR,
 	ERROR_PERMS,
 	ERROR_SENV,
-	ERROR_NDIR
+	ERROR_NDIR,
+	ERROR_NFILE
 }	t_error;
 
 static inline const char *Error_Msg(enum e_error i)
@@ -61,7 +62,8 @@ static inline const char *Error_Msg(enum e_error i)
 	"minishell: %s: Is a directory\n",
 	"minishell: %s: Permission denied\n",
 	"env: Options/Arguments not allowed by subject\n",
-	"minishell: cd: %s: Not a directory\n",};
+	"minishell: cd: %s: Not a directory\n",
+	"minishell: %s: No such file or directory\n",};
     return strings[i];
 }
 
@@ -94,9 +96,11 @@ typedef struct s_mini
 	int		num_pipes;
 	int		redirect;
 	int		moved;
+
 	int		input_count;
 	int		output_count;
 	int		append_count;
+	int		file_count;
 } t_mini;
 
 //--------------Utils-------------//
@@ -124,15 +128,16 @@ char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
 void	print_tokens(t_token *tokens, t_mini *mini);
 void	free_child(t_token **token, t_mini *mini, char **args);
-int		check_file_token(char *file);
+int		check_file_token(t_token **token, char *file, t_mini *mini);
 int		check_redirect(t_token **next);
 int		check_dir(char *tgt_dir);
 int		export_arg_err(t_token *token, t_mini *mini, char **key);
 void	check_export_expander(t_token *token, t_mini *mini);
 void	error_malloc(t_mini *mini);
-void	handle_exit_conditions(const char *msg, t_token **token, t_mini *mini, char **args);\
+void	handle_exit_conditions(const char *msg, t_token **token, t_mini *mini, char **args);
 void	count_redirections(t_token *token, t_mini *mini);
 int		check_file_perms(t_token *token);
+int		check_file_red(char *file);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
