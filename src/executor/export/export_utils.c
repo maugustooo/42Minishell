@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:34:10 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/23 09:34:53 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:55:49 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	export_arg_err(t_token *token, t_mini *mini, char **key)
 		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_EXPORT), token->text);
 		mini->return_code = 1;
 		mini->exported = true;
-		free_key(key);
+		free_keys(&key);
 		return (1);
 	}
 	return (0);
