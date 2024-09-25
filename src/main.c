@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+pid_t	g_pid = 0;
+
 void print_tokens(t_token *tokens, t_mini *mini)
 {
     t_token *current_token;

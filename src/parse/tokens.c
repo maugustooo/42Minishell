@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/24 13:44:15 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/25 09:04:03 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ static void	init_token(t_token **token, char *text)
 		cwd_slash = ft_strjoin(cwd, "/");
 		file = ft_strjoin(cwd_slash, (*token)->text);
 		free(cwd_slash);
-		if (condition)
-			(*token)->type = FILE;
-		else if (!condition)
-			(*token)->type = NOT_FILE;
+		// if (condition)
+		// 	(*token)->type = FILE;
+		// else if (!condition)
+		// 	(*token)->type = NOT_FILE; WTF?!?!?!
 		free(file);
 	}
 }

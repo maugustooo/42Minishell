@@ -47,24 +47,22 @@ void	handle_built_ins(t_token **token, t_mini *mini)
 */
 void executor(t_token **token, t_mini *mini)
 {
-    pid_t pid;
     int status;
 	
-	pid = 0;
 	status = 0;
 	if (is_built_in(*token) && !mini->pipe)
 	       handle_built_ins(token, mini);
 	else if (!mini->pipe)
     {
-		if (handle_cmd(pid, token, mini))
+		if (handle_cmd(token, mini))
 			exit(127);
-		else if (pid < 0)
+		else if (g_pid < 0)
             perror("fork");
         else
-            waitpid(pid, &status, 0);
+            waitpid(g_pid, &status, 0);
 		if(WIFEXITED(status))
 				mini->return_code = WEXITSTATUS(status);
     }
 	else
-		pipes(token, mini, pid);
+		pipes(token, mini, g_pid);
 }
