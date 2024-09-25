@@ -71,8 +71,10 @@ int handle_output(char ***args, int *i, t_mini *mini)
     fd_in = open(filename, O_RDONLY);
     if (fd_in < 0)
     {
-        free(filename);
-        return (0);
+		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), filename);
+		move_left((*args), *i - 1);
+		move_left((*args), *i - 1);
+        return (free(filename), 0);
     }
     dup2(fd_in, STDIN_FILENO);
     close(fd_in);

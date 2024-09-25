@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/25 09:04:03 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:24:31 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,23 @@ int	set_type(char *text)
 	return (type);
 }
 
-int	condition(t_token **token, char *file)
+int	condition(t_token **token, char *file, t_mini *mini)
 {
-	return (((*token)->prev->type == OUTPUT
+	if (((*token)->prev->type == OUTPUT
 			|| (*token)->prev->type == INPUT
-			|| (*token)->prev->type == APPEND) && check_file_token(file)
+			|| (*token)->prev->type == APPEND) && check_file_token(token, file, mini)
 		&& (*token)->type != OUTPUT && (*token)->type != INPUT
-		&& (*token)->type != APPEND && (*token)->type != PIPE);
+		&& (*token)->type != APPEND && (*token)->type != PIPE)
+		return (1);
+	else if (((*token)->prev->type == OUTPUT
+			|| (*token)->prev->type == INPUT
+			|| (*token)->prev->type == APPEND) && !check_file_token(token, file, mini)
+		&& (*token)->type != OUTPUT && (*token)->type != INPUT
+		&& (*token)->type != APPEND && (*token)->type != PIPE)
+		return (0);
+	else
+		return(2);
+	
 }
 
 /**
@@ -52,7 +62,7 @@ int	condition(t_token **token, char *file)
  * @param text the word splited
  * @return the node inited
  */
-static void	init_token(t_token **token, char *text)
+static void	init_token(t_token **token, char *text, t_mini *mini)
 {
 	int		type;
 	char	cwd[1024];
@@ -71,10 +81,10 @@ static void	init_token(t_token **token, char *text)
 		cwd_slash = ft_strjoin(cwd, "/");
 		file = ft_strjoin(cwd_slash, (*token)->text);
 		free(cwd_slash);
-		// if (condition)
-		// 	(*token)->type = FILE;
-		// else if (!condition)
-		// 	(*token)->type = NOT_FILE; WTF?!?!?!
+		if (condition(token, file, mini) == 1)
+			(*token)->type = FILE;
+		else if(!condition(token, file, mini))
+			(*token)->type = NOT_FILE;
 		free(file);
 	}
 }
@@ -86,7 +96,7 @@ void	get_tokens(t_token **token, t_mini *mini)
 	i = 0;
 	ft_tokenadd_back(token, ft_newnode(CMD, mini->splited[i]));
 	while (mini->splited[++i])
-		init_token(token, mini->splited[i]);
+		init_token(token, mini->splited[i], mini);
 	while ((*token)->prev)
 		(*token) = (*token)->prev;
 }
