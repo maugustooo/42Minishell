@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/26 14:42:50 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:17:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	free_args(char **args)
 	int	i;
 
 	i = 0;
-	if(!args || !args[0])
-		return ;
 	while (args[i])
 	{
 		free(args[i]);

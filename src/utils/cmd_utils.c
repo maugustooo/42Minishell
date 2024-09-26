@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 12:05:42 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/23 12:16:38 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:22:45 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	check_access(char *full_path)
 
 void	free_child(t_token **token, t_mini *mini, char **args)
 {
-	free_args(args);
+	if(args)
+		free_args(args);
 	freethem(token, mini);
 	free_things(mini);
 }

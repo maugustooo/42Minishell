@@ -35,9 +35,9 @@ static int input(t_token *token, t_mini *mini, t_token *last, int type)
 	else
 		ft_printf(Error_Msg(ERROR_ARG_ECHO));
 	if (type == INPUT)
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC);
 	else if (type == APPEND)
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		fd = open(file, O_WRONLY | O_CREAT | O_APPEND);
 	if(!check_file_perms(last))
 		return (0);
 	if (fd)
@@ -129,9 +129,11 @@ void	handle_echo(t_token **token, t_mini *mini)
 			print_echo(temp, mini, &first);
 		else if (check_input(temp, mini) == 2)
 		{
+			//TODO:ISTO ESTA A PRINTAR NO TERMINAL TAMBEM LOL
 			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_PERMS), (*token)->text);
 			free_child(token, mini, NULL);
-			exit(1);
+			mini->return_code = 1;
+			return ;
 		}
 		if (mini->echo_flag == false)
 				ft_printf("\n");
