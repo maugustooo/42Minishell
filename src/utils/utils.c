@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 10:05:35 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/23 12:19:15 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:54:58 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	ft_tokenclear(t_token **token)
 
 	if (!token || !*token)
 		return ;
+	while ((*token)->prev)
+		(*token) = (*token)->prev;
 	while (*token)
 	{
 		tmp = (*token)->next;

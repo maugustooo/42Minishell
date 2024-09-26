@@ -48,8 +48,11 @@ static void minishell(t_mini *mini, t_token	**token, char **envp)
 		mini->line = rl;
 		if (mini->line[0])
             split_to_tokens(mini->line, mini);
-		if(!mini->splited)
+		if(!mini->splited || !mini->splited[0])
+		{
+			freethem(token, mini);
 			continue;
+		}
 		if(!parse(mini, token, envp))	
 		{
 			free_things(mini);

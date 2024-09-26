@@ -164,7 +164,7 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start);
 
 int		is_built_in(t_token *token);
 void	handle_built_ins(t_token **token, t_mini *mini);
-void	pipes(t_token **token, t_mini *mini, int pid);
+void	pipes(t_token **token, t_mini *mini);
 void	check_pipes(t_mini *mini, t_token **temp);
 void	handle_cd(t_token *arg, t_mini *mini);
 void	handle_exit(t_token **token, t_mini *mini);
@@ -195,5 +195,5 @@ int		check_path(t_mini *mini);
 void	handle_heredoc(char ***args, int *i, t_mini *mini);
 int		handle_input(char ***args, int	*i, t_mini *mini);
 int		handle_output(char ***args, int	*i, t_mini *mini);
-void	handle_redirection(char **args, t_mini *mini,  t_token *token);
+void	handle_redirection(char **args, t_mini *mini,  t_token **token);
 #endif

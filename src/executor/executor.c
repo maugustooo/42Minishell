@@ -64,5 +64,5 @@ void executor(t_token **token, t_mini *mini)
 				mini->return_code = WEXITSTATUS(status);
     }
 	else
-		pipes(token, mini, g_pid);
+		pipes(token, mini);
 }

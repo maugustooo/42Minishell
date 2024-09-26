@@ -1,8 +1,7 @@
 #include"minishell.h"
 
-static void handle_parent_process(pid_t pid, int pipefd[2], int *fd_in, t_mini *mini, t_token **temp)
+static void handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini, t_token **temp)
 {
-	(void)pid;
     if (mini->is_pipe)
     {
         close(pipefd[1]);
@@ -68,7 +67,7 @@ static void setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **tem
 }
 
 static void process_pipe_segment(t_token **temp, int *fd_in, 
-	pid_t *pid, t_mini *mini, t_token **token)
+	t_mini *mini, t_token **token)
 {
     int 	pipefd[2];
     t_token *start;
@@ -83,20 +82,20 @@ static void process_pipe_segment(t_token **temp, int *fd_in,
 			check_pipes(mini, temp);
 		if (mini->is_pipe == 1)
 			pipe(pipefd);
-		*pid = fork();
-		if (*pid == 0)
+		g_pid = fork();
+		if (g_pid== 0)
 			setup_pipes(fd_in, pipefd, start, temp, mini);
 		else
-			handle_parent_process(*pid, pipefd, fd_in, mini, temp);
+			handle_parent_process(pipefd, fd_in, mini, temp);
 		if(mini->return_code == 127)
 			handle_exit(token, mini);
 	}
-    waitpid(*pid, &status, 0);
+    waitpid(g_pid, &status, 0);
 	if(WIFEXITED(status))
 			mini->return_code = WEXITSTATUS(status);
 }
 
-void pipes(t_token **token, t_mini *mini, pid_t pid)
+void pipes(t_token **token, t_mini *mini)
 {
     int fd_in;
     t_token *temp;
@@ -104,7 +103,7 @@ void pipes(t_token **token, t_mini *mini, pid_t pid)
 	temp = *token;
 	fd_in = 0;
 	if (!mini->final_pipe)
-        	process_pipe_segment(&temp, &fd_in, &pid, mini, token);
+        	process_pipe_segment(&temp, &fd_in, mini, token);
 	else
 	{
 		mini->return_code = 0;

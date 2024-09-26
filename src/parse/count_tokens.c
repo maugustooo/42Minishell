@@ -43,7 +43,7 @@ static void check_final_pipe(char *line, t_mini *mini, int *count)
 
     i = 1;
     last_flag = 0;
-    while (!last_flag)
+    while (!last_flag && *line)
     {
         if (*(line - i) == '|')
         {

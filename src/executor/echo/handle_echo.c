@@ -24,13 +24,13 @@ static void heredoc(t_token *token, t_token *last)
     close(fd);
 }
 
-static void input(t_token *token, t_mini *mini, t_token *last, int type)
+static int input(t_token *token, t_mini *mini, t_token *last, int type)
 {
 	int fd;
 	char *file;
 
 	fd = 0;
-	if (last->type == ARG || last->type == FILE)
+	if (last->type == ARG || last->type == FILE || last->type == NOT_FILE)
 		file = last->text;
 	else
 		ft_printf(Error_Msg(ERROR_ARG_ECHO));
@@ -39,7 +39,7 @@ static void input(t_token *token, t_mini *mini, t_token *last, int type)
 	else if (type == APPEND)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if(!check_file_perms(last))
-		exit(1);
+		return (0);
 	if (fd)
 		while (token && token->type == ARG)
 		{
@@ -53,6 +53,7 @@ static void input(t_token *token, t_mini *mini, t_token *last, int type)
 		}
 	else
 		check_access(token->text);
+	return (1);
 }
 
 static int check_input(t_token *token, t_mini *mini)
@@ -62,12 +63,13 @@ static int check_input(t_token *token, t_mini *mini)
 
 	temp = token;
 	last = ft_tokenlast(token);
-	while (temp)
+	while (temp && temp->type != PIPE)
 	{
 		if ((temp->type == INPUT || temp->type == APPEND) && !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
 		{
 			mini->echo_flag = true;
-			input(token, mini, last, temp->type);
+			if(!input(token, mini, last, temp->type))
+				return(2);
 			return (1);
 		}
 		if (temp->type == DELIMITER && !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
@@ -123,8 +125,14 @@ void	handle_echo(t_token **token, t_mini *mini)
 	if (temp->next)
 	{
 		temp = temp->next;
-		if (!check_input(temp, mini))
+		if (check_input(temp, mini) == 0)
 			print_echo(temp, mini, &first);
+		else if (check_input(temp, mini) == 2)
+		{
+			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_PERMS), (*token)->text);
+			free_child(token, mini, NULL);
+			exit(1);
+		}
 		if (mini->echo_flag == false)
 				ft_printf("\n");
 		mini->echo_flag = false;

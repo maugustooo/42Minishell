@@ -17,7 +17,7 @@ static void move_left_args(char **args, int *i, char *last_text)
 	}
 	*i -= 2;
 }
-static void handle_single_redirection(char **args, t_mini *mini, t_token *last_red)
+static int handle_single_redirection(char **args, t_mini *mini, t_token *last_red)
 {
 	int i;
 
@@ -27,9 +27,8 @@ static void handle_single_redirection(char **args, t_mini *mini, t_token *last_r
         if (!ft_strcmp(args[i], "<") && args[i] && ft_strcmp(args[i], "|") != 0)
 		{
 			i++;
-			// if(!ft_strcmp(args[i], last_red->next->text) && !mini->redirect)
 				if(!handle_output(&args, &i, mini))
-					exit(1) ;
+					return (0);
 		}
 		else if (((ft_strcmp(args[i], ">") == 0 || strcmp(args[i], ">>") == 0))
 				&& args[i] && ft_strcmp(args[i], "|") != 0)
@@ -44,6 +43,7 @@ static void handle_single_redirection(char **args, t_mini *mini, t_token *last_r
 		else
 			i++;
     }
+	return(1);
 }
 
 static void remove_redirection_symbol(char **args)
@@ -65,7 +65,7 @@ static void remove_redirection_symbol(char **args)
     args[j] = NULL;
 }
 
-static void handle_mult_redirections(char **args, t_mini *mini, t_token *last_red)
+static int handle_mult_redirections(char **args, t_mini *mini, t_token *last_red)
 {
 	int i;
 	i = 0;
@@ -81,7 +81,7 @@ static void handle_mult_redirections(char **args, t_mini *mini, t_token *last_re
 	while (i > 0)
     {
 		if((ft_strcmp(args[i - 1], "<") == 0 || ft_find_c('<', args[i])) && !check_file_red(args[i]))
-			exit(2);
+			return(0);
       	if (!ft_strcmp(args[i - 1], "<") && args[i] && mini)
 			move_left_args(args, &i, last_red->next->text);
         else if ((!ft_strcmp(args[i], ">") || !ft_strcmp(args[i], ">>")) && args[i + 1])
@@ -89,28 +89,31 @@ static void handle_mult_redirections(char **args, t_mini *mini, t_token *last_re
         else
             i--;
     }
+	return (1);
 }
 
-void handle_redirection(char **args, t_mini *mini,  t_token *token)
+void handle_redirection(char **args, t_mini *mini,  t_token **token)
 {
 	t_token *last_redirect;
 	
-	count_redirections(token, mini);
-	last_redirect = ft_tokenlast_redirect(token);
+	count_redirections(*token, mini);
+	last_redirect = ft_tokenlast_redirect(*token);
 	if(mini->input_count > 1 || mini->output_count > 1 || mini->append_count > 1)
 	{
-		handle_mult_redirections(args, mini, last_redirect);
-		// int o = 0;
-		// while (args[o])
-		// {
-		// 	ft_printf("args[%d]:%s\n", o, args[o]);
-		// 	o++;
-		// }
+		if(!handle_mult_redirections(args, mini, last_redirect))
+		{
+			free_child(token, mini, args);
+			exit(2) ;
+		}
 		remove_redirection_symbol(args);
 	}
 	else
 	{
-		handle_single_redirection(args, mini, last_redirect);
+		if(!handle_single_redirection(args, mini, last_redirect))
+		{
+			free_child(token, mini, args);
+			exit(1) ;
+		}
 		remove_redirection_symbol(args);
 	}
 }
