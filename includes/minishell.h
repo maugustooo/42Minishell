@@ -45,7 +45,8 @@ typedef enum e_error
 	ERROR_PERMS,
 	ERROR_SENV,
 	ERROR_NDIR,
-	ERROR_NFILE
+	ERROR_NFILE,
+	ERROR_ENUM
 }	t_error;
 
 static inline const char *Error_Msg(enum e_error i)
@@ -63,7 +64,8 @@ static inline const char *Error_Msg(enum e_error i)
 	"minishell: %s: Permission denied\n",
 	"env: Options/Arguments not allowed by subject\n",
 	"minishell: cd: %s: Not a directory\n",
-	"minishell: %s: No such file or directory\n",};
+	"minishell: %s: No such file or directory\n",
+	"minishell: exit: %s: numeric argument required",};
     return strings[i];
 }
 
@@ -138,6 +140,7 @@ void	handle_exit_conditions(const char *msg, t_token **token, t_mini *mini, char
 void	count_redirections(t_token *token, t_mini *mini);
 int		check_file_perms(t_token *token);
 int		check_file_red(char *file);
+char	**change_args_exec(char **args, t_token *token, t_mini *mini);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

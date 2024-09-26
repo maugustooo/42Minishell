@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:45:18 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/18 09:47:47 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:03:27 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,24 @@ bool	strnum(t_token **token)
 
 void	exit_code(t_token **token, t_mini *mini)
 {
-	int	code;
+	long long	code;
 
-	code = ft_atoi((*token)->text);
-	if (code > 256)
-		code %= 256;
-	else if (code == 256)
-		code = 0;
-	else if (code < 0)
-		code = 256 - (code * -1);
+	code = ft_atoll((*token)->text);
+	if(code > 9223372036854775807
+		|| code < -9223372036854775807)
+	{
+		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_ENUM), (*token)->text);
+		code = 2;
+	}
+	else
+	{
+		if (code > 256)
+			code %= 256;
+		else if (code == 256)
+			code = 0;
+		else if (code < 0)
+			code = 256 - (code * -1);
+	}
 	mini->return_code = code;
 }
 

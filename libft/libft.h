@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:49:51 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/28 14:28:21 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:40:10 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t	ft_strlcat(char *dst, const char *src, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t n);
 size_t	ft_strlen(char const *str);
+size_t	ft_arrlen(char **arr);
 int		ft_strncmp(char const *s1, char const *s2, size_t n);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_tolower(int c);
@@ -87,6 +88,8 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 int		ft_lstsize(t_list *lst);
+
+long long	ft_atoll(const char *str);
 
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);

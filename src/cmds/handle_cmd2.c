@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/25 13:42:30 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:11:18 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	handle_cmd2_5(t_token **token, t_mini *mini, char **args)
 
 int	handle_cmd2(t_token **token, t_mini *mini, char **args)
 {
+	args = change_args_exec(args, *token, mini);
 	if(ft_strcmp((*token)->text, "") == 0 && (*token)->next == NULL)
 	{
 		free_child(token, mini, args);
@@ -69,7 +70,8 @@ int	check_command2(char *full_path, char **dirs, t_token **token, t_mini *mini)
 
 int	check_file2(char **args, t_token **token, t_mini *mini)
 {
-	args[0] = ft_strdup((*token)->text);
+
+	//args[0] = ft_strdup((*token)->text);
 	// print_tokens(*token, mini);
 	handle_redirection(args, mini, *token);
 	// int o = 0;

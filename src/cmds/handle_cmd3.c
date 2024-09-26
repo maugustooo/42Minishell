@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/25 12:08:44 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/26 12:16:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,29 @@ int	handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args)
 	ret = handle_cmd2(token, mini, args);
 	free_args(args);
 	return(ret);
+}
+
+char	**change_args_exec(char **args, t_token *token, t_mini *mini)
+{
+	char	**key;
+	char	**nargs;
+	int 	i;
+	int		j;
+
+	i = -1;
+	key = ft_split(token->text, ' ');
+	j = ft_arrlen(args) + ft_arrlen(key);
+	nargs = ft_calloc(j, sizeof(char **));
+	if(!nargs)
+		error_malloc(mini);
+	while(key[++i])
+		nargs[i] = ft_strdup(key[i]);
+	j = 0;
+	i--;
+	while(nargs[j++ + i] && args[j])
+		nargs[i + j] = ft_strdup(args[j]);
+	nargs[i + j] = NULL;
+	free_keys(&key);
+	free_args(args);
+	return (nargs);
 }
