@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/25 15:25:57 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/26 09:43:25 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int have_pipe(t_token *token, t_mini *mini)
 	return(flag);
 }
 
-static int check_no_file(t_token *token)
+static int check_no_file(t_token *token, t_mini *mini)
 {
 	t_token *temp;
 
@@ -38,7 +38,8 @@ static int check_no_file(t_token *token)
 	{
 		if(temp->type == NOT_FILE)
 		{
-			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), temp->text);
+			if(!mini->pipe)
+				ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), temp->text);
 			return (0);
 		}
 		temp = temp->next;
@@ -66,7 +67,7 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 		check_arg_export((*token)->next, mini);
 	if(have_pipe(*token, mini) || mini->final_pipe)
 		mini->pipe = true;
-	if(!check_no_file(*token))
+	if(!check_no_file(*token, mini) && !mini->pipe)
 	{
 		mini->return_code = 1;
 		return(0);

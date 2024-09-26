@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/25 15:24:31 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/26 11:02:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ static void	init_token(t_token **token, char *text, t_mini *mini)
 			(*token)->type = FILE;
 		else if(!condition(token, file, mini))
 			(*token)->type = NOT_FILE;
+		if((*token)->prev->type == PIPE)
+			(*token)->type = CMD;
 		free(file);
 	}
 }

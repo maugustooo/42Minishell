@@ -9,6 +9,8 @@ int check_redirect(t_token **next)
 		{
 			if((*next)->type == FILE || (*next)->type == NOT_FILE)
 			{
+				if((*next)->type == NOT_FILE)
+					return(2);
 				(*next) = (*next)->next;
 				return (1);
 			}

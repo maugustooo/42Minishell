@@ -51,6 +51,8 @@ static void input(t_token *token, t_mini *mini, t_token *last, int type)
 				ft_printf_fd(fd, token->text);
 			token = token->next;
 		}
+	else
+		check_access(token->text);
 }
 
 static int check_input(t_token *token, t_mini *mini)
@@ -79,8 +81,14 @@ static void print_echo(t_token *next, t_mini *mini, int *first)
 {
 	while (next && next->type != PIPE)
 	{
-		if(check_redirect(&next))
+		if(check_redirect(&next) == 1)
 			continue ;
+		else if(check_redirect(&next) == 2)
+		{
+			mini->return_code = 1;
+			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), next->text);
+			break;
+		}
 		expander(&next, mini);
 		if (next && *first == 2 && ft_strcmp(next->text, "-n") != 0)
 		{

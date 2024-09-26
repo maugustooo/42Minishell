@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/25 15:29:09 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:55:09 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ int handle_cmd(t_token **token, t_mini *mini)
 	char	**args;
 	t_token	*temp;
 
-	temp = *token;
 	args = ft_calloc(mini->token_count + 1, sizeof(char *));
 	if (!args)
 		error_malloc(mini);
 	expander(token, mini);
+	temp = *token;
 	g_pid = fork();
 	if (g_pid == 0)
 		handle_cmd3_5(temp, token, mini, args);
@@ -101,13 +101,14 @@ int 	handle_cmd_pipe(t_token **token, t_mini *mini)
 	int		ret;
 
 	i = -1;
-	temp = *token;
 	args = ft_calloc(mini->token_count + 1, sizeof(char *));
 	if (!args)
 		error_malloc(mini);
 	expander(token, mini);
+	temp = *token;
 	while (temp && temp->type != PIPE)
 	{
+		expander(&temp, mini);
 		args[++i] = ft_strdup(temp->text);
 		temp = temp->next;
 	}
