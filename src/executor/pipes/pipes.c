@@ -72,6 +72,7 @@ static void process_pipe_segment(t_token **temp, int *fd_in,
     int 	pipefd[2];
     t_token *start;
 	int		status;
+	int		pid;
 
 	status = 0;
 	while (temp && *temp)
@@ -82,15 +83,15 @@ static void process_pipe_segment(t_token **temp, int *fd_in,
 			check_pipes(mini, temp);
 		if (mini->is_pipe == 1)
 			pipe(pipefd);
-		g_pid = fork();
-		if (g_pid== 0)
+		pid = fork();
+		if (pid== 0)
 			setup_pipes(fd_in, pipefd, start, temp, mini);
 		else
 			handle_parent_process(pipefd, fd_in, mini, temp);
 		if(mini->return_code == 127)
 			handle_exit(token, mini);
 	}
-    waitpid(g_pid, &status, 0);
+    waitpid(pid, &status, 0);
 	if(WIFEXITED(status))
 			mini->return_code = WEXITSTATUS(status);
 }

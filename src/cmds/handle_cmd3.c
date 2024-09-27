@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/26 12:16:08 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/27 10:03:13 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,35 @@ int	handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args)
 	return(ret);
 }
 
+void	change_token_args(t_token *token, char **key, t_mini *mini)
+{
+	t_token *curr;
+	t_token	*new_token;
+	int 	i;
+
+	i = 0;
+	curr = token;
+	while (key[i])
+	{
+		if (i == 0)
+		{
+			free(curr->text);
+			curr->text = ft_strdup(key[i]);
+		}
+		else
+		{
+			new_token = (t_token *)malloc(sizeof(t_token));
+			if(!new_token)
+				error_malloc(mini);
+			new_token->text = ft_strdup(key[i]);
+			new_token->next = curr->next;
+			curr->next = new_token;
+			curr = new_token;
+		}
+		i++;
+	}
+}
+
 char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 {
 	char	**key;
@@ -67,6 +96,7 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 
 	i = -1;
 	key = ft_split(token->text, ' ');
+	change_token_args(token, key, mini);
 	j = ft_arrlen(args) + ft_arrlen(key);
 	nargs = ft_calloc(j, sizeof(char **));
 	if(!nargs)

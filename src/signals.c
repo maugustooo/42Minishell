@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:52:10 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/25 09:06:18 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/27 11:29:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,10 @@
 void handle_sigint(int sig)
 {
     (void)sig;
-	if (g_pid > 0)
-	{
-		kill(g_pid, SIGINT);
-		waitpid(g_pid, NULL, 0);
-		write(STDERR_FILENO, "\n", 1);
-	}
-	else
-	{
-		write(STDERR_FILENO, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+	write(STDERR_FILENO, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
 /**
