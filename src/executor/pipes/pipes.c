@@ -60,7 +60,7 @@ static void setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **tem
 		handle_built_ins(&start, mini);
 		freethem(temp, mini);
 		free_things(mini);
-		exit(0);
+		exit(mini->return_code);
 	}
 	else
 		mini->return_code = handle_cmd_pipe(&start, mini);

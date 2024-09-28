@@ -21,21 +21,21 @@ static int handle_single_redirection(char **args, t_mini *mini, t_token *last_re
 {
 	int i;
 
+	(void)last_red;
 	i = 0;
     while (args[i])
 	{
         if (!ft_strcmp(args[i], "<") && args[i] && ft_strcmp(args[i], "|") != 0)
 		{
 			i++;
-				if(!handle_output(&args, &i, mini))
+				if(!handle_input(&args, &i, mini))
 					return (0);
 		}
 		else if (((ft_strcmp(args[i], ">") == 0 || strcmp(args[i], ">>") == 0))
 				&& args[i] && ft_strcmp(args[i], "|") != 0)
 		{
-			i++;
-			if(!ft_strcmp(args[i], last_red->next->text) && !mini->redirect)
-				if(!handle_input(&args, &i, mini))
+			// if(!ft_strcmp(args[i], last_red->next->text) && !mini->redirect)
+				if(!handle_output(&args, &i, mini))
 					break ;
 		}
 		else if (ft_strcmp(args[i], "<<") == 0 && args[i] && ft_strcmp(args[i], "|") != 0)

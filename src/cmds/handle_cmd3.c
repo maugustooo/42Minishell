@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/26 12:16:08 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:12:37 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args)
 	while (temp)
 	{
 		expander(&temp, mini);
-		if(temp->type == OUTPUT)
+		if(temp->type == INPUT)
 		{
 			if(temp->next && temp->next->type == FILE)
 			{
@@ -47,7 +47,12 @@ int	handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args)
 				temp = temp->next;
 			}
 			while (temp->type == FILE && temp->next	)
-				temp = temp->next;
+			{
+				if(temp->next->type == FILE)
+					temp = temp->next;
+				else
+					break ;
+			}
 		}
 		args[++i] = ft_strdup(temp->text);
 		temp = temp->next;

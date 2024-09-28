@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/26 11:02:05 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:32:48 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	set_type(char *text)
 
 	type = 0;
 	if (ft_find_c('<', text) == 1)
-		type = OUTPUT;
-	else if (ft_find_c('>', text) == 1)
 		type = INPUT;
+	else if (ft_find_c('>', text) == 1)
+		type = OUTPUT;
 	else if (ft_find_c('>', text) == 1 && ft_find_c('>', text + 1) == 1)
 		type = APPEND;
 	else if (ft_strcmp("<<", text) == 0)

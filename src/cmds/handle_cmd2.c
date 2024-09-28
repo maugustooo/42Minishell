@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/26 14:26:00 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:15:32 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ int	check_command2(char *full_path, char **dirs, t_token **token, t_mini *mini)
 
 int	check_file2(char **args, t_token **token, t_mini *mini)
 {
-
-	//args[0] = ft_strdup((*token)->text);
+	args[0] = ft_strdup((*token)->text);
 	// print_tokens(*token, mini);
 	handle_redirection(args, mini, token);
 	// int o = 0;

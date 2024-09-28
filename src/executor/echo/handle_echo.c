@@ -24,7 +24,7 @@ static void heredoc(t_token *token, t_token *last)
     close(fd);
 }
 
-static int input(t_token *token, t_mini *mini, t_token *last, int type)
+static int output(t_token *token, t_mini *mini, t_token *last, int type)
 {
 	int fd;
 	char *file;
@@ -34,7 +34,7 @@ static int input(t_token *token, t_mini *mini, t_token *last, int type)
 		file = last->text;
 	else
 		ft_printf(Error_Msg(ERROR_ARG_ECHO));
-	if (type == INPUT)
+	if (type == OUTPUT)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC);
 	else if (type == APPEND)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND);
@@ -65,10 +65,10 @@ static int check_input(t_token *token, t_mini *mini)
 	last = ft_tokenlast(token);
 	while (temp && temp->type != PIPE)
 	{
-		if ((temp->type == INPUT || temp->type == APPEND) && !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
+		if ((temp->type == OUTPUT || temp->type == APPEND) && !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
 		{
 			mini->echo_flag = true;
-			if(!input(token, mini, last, temp->type))
+			if(!output(token, mini, last, temp->type))
 				return(2);
 			return (1);
 		}
@@ -131,7 +131,6 @@ void	handle_echo(t_token **token, t_mini *mini)
 		{
 			//TODO:ISTO ESTA A PRINTAR NO TERMINAL TAMBEM LOL
 			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_PERMS), (*token)->text);
-			free_child(token, mini, NULL);
 			mini->return_code = 1;
 			return ;
 		}

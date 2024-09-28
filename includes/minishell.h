@@ -99,6 +99,7 @@ typedef struct s_mini
 	int		redirect;
 	int		moved;
 
+	int		input;
 	int		input_count;
 	int		output_count;
 	int		append_count;
