@@ -56,10 +56,6 @@ void executor(t_token **token, t_mini *mini)
     {
 		if (handle_cmd(token, mini))
 			exit(127);
-		else if (g_pid < 0)
-            perror("fork");
-        else
-            waitpid(g_pid, &status, 0);
 		if(WIFEXITED(status))
 				mini->return_code = WEXITSTATUS(status);
     }

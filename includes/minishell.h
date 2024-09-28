@@ -30,7 +30,6 @@
 # define HOME "/home/$USER"
 # define TEMP_FILE "/tmp/minishell_heredoc.txt"
 
-extern int g_pid;
 typedef enum e_error
 {
 	ERROR_CMD,
