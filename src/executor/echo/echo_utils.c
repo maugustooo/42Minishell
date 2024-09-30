@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/30 11:00:28 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:43:41 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,21 @@ static void heredoc(t_token *token, t_token *last)
 int	check_input(t_token *token, t_mini *mini)
 {
 	t_token *temp;
-	t_token *last;
+	t_token *file;
 
 	temp = token;
-	last = ft_tokenlast(token);
+	file = ft_finde_file(token);
 	while (temp && temp->type != PIPE)
 	{
 		if ((temp->type == OUTPUT || temp->type == APPEND) && !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
 		{
 			mini->echo_flag = true;
-			if(!output(token, mini, last, temp->type))
+			if(!output(token, mini, file, temp->type))
 				return(2);
 			return (1);
 		}
 		if (temp->type == DELIMITER && !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
-			heredoc(token, last);
+			heredoc(token, file);
 		temp = temp->next;
 	}
 	return (0);

@@ -17,26 +17,28 @@ static void move_left_args(char **args, int *i, char *last_text)
 	}
 	*i -= 2;
 }
-static int handle_single_redirection(char **args, t_mini *mini, t_token *last_red)
+static int handle_single_redirection(char **args, t_mini *mini)
 {
 	int i;
+	int file;
 
-	(void)last_red;
+	file = 0;
 	i = 0;
     while (args[i])
 	{
         if (!ft_strcmp(args[i], "<") && args[i] && ft_strcmp(args[i], "|") != 0)
 		{
 			i++;
-				if(!handle_input(&args, &i, mini))
-					return (0);
+			if(!handle_input(&args, &i, mini))
+				return (0);
+			file = 1;
 		}
 		else if (((ft_strcmp(args[i], ">") == 0 || strcmp(args[i], ">>") == 0))
 				&& args[i] && ft_strcmp(args[i], "|") != 0)
 		{
-			// if(!ft_strcmp(args[i], last_red->next->text) && !mini->redirect)
-				if(!handle_output(&args, &i, mini))
-					break ;
+			if(!handle_output(&args, &i, mini, file))
+				return (0);
+			file = 1;
 		}
 		else if (ft_strcmp(args[i], "<<") == 0 && args[i] && ft_strcmp(args[i], "|") != 0)
 			handle_heredoc(&args, &i, mini);
@@ -44,7 +46,7 @@ static int handle_single_redirection(char **args, t_mini *mini, t_token *last_re
 			i++;
     }
 	return(1);
-}
+}	
 
 static void remove_redirection_symbol(char **args)
 {
@@ -109,7 +111,7 @@ void handle_redirection(char **args, t_mini *mini,  t_token **token)
 	}
 	else
 	{
-		if(!handle_single_redirection(args, mini, last_redirect))
+		if(!handle_single_redirection(args, mini))
 		{
 			free_child(token, mini, args);
 			exit(1) ;

@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/25 15:26:53 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:31:34 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,18 @@ void count_redirections(t_token *token, t_mini *mini)
 			mini->file_count++;
 		temp = temp->next;
 	}
+}
+
+t_token *ft_finde_file(t_token *token)
+{
+	t_token *temp;
+
+	temp = token;
+	while (temp)
+	{
+		if (temp->type == FILE || temp->type == NOT_FILE)
+			return (temp);
+		temp = temp->next;
+	}
+	return (temp);
 }

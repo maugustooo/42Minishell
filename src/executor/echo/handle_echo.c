@@ -1,25 +1,32 @@
 #include "minishell.h"
 
-int output(t_token *token, t_mini *mini, t_token *last, int type)
+int output(t_token *token, t_mini *mini, t_token *file_node, int type)
 {
 	int fd;
 	char *file;
 
 	fd = 0;
-	if (last->type == ARG || last->type == FILE || last->type == NOT_FILE)
-		file = last->text;
+	if (file_node->type == ARG || file_node->type == FILE || file_node->type == NOT_FILE)
+		file = file_node->text;
 	else
 		ft_printf(Error_Msg(ERROR_ARG_ECHO));
 	if (type == OUTPUT)
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (type == APPEND)
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND);
-	if(!check_file_perms(last))
-		return (0);
+		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if(file_node->prev->type == INPUT)
+		if(!check_file_perms(file_node))
+			return (0);
 	if (fd)
-		while (token && token->type == ARG)
-		{
-			if (token->next->type == ARG && ft_strcmp(token->text, "-n") != 0)
+		while (token)
+		{	
+			if(token->type != ARG)
+			{
+				token = token->next;	
+				continue;
+			}
+			if ((token->type == ARG || token->type == FILE)
+				&& ft_strcmp(token->text, "-n") != 0)
 				ft_printf_fd(fd, "%s ", token->text);
 			else if (!mini->echo_flag)
 				ft_printf_fd(fd, "%s\n", token->text);
@@ -27,8 +34,8 @@ int output(t_token *token, t_mini *mini, t_token *last, int type)
 				ft_printf_fd(fd, token->text);
 			token = token->next;
 		}
-	else
-		check_access(token->text);
+	// else
+	// 	check_access(token->text);
 	return (1);
 }
 
