@@ -6,11 +6,28 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/27 17:32:48 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:14:37 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void remove_node(t_token **token)
+{
+    t_token *current;
+
+	current = *token;
+    if (!token || !(*token))
+        return;
+    if (current->prev)
+        current->prev->next = current->next;
+    if (current->next)
+        current->next->prev = current->prev;
+    *token = current->next;
+	free(current->text);
+    free(current);
+}
+
 
 /**
  * @brief Set the values type of the node
@@ -99,6 +116,27 @@ void	get_tokens(t_token **token, t_mini *mini)
 	ft_tokenadd_back(token, ft_newnode(CMD, mini->splited[i]));
 	while (mini->splited[++i])
 		init_token(token, mini->splited[i], mini);
+	while ((*token)->prev)
+		(*token) = (*token)->prev;
+	while ((*token)->next)
+	{
+		if((*token)->type == INPUT && (*token)->next)
+		{
+			(*token) = (*token)->next;
+			while (((*token)->type == FILE || (*token)->type == NOT_FILE)
+					&& (*token)->next)
+				{
+					if((*token)->next->type == FILE	
+						|| (*token)->next->type == NOT_FILE
+						|| (*token)->next->type == ARG)
+						remove_node(token);
+					else
+						break ;
+				}
+		}
+		if((*token)->next)
+			(*token) = (*token)->next;
+	}
 	while ((*token)->prev)
 		(*token) = (*token)->prev;
 }

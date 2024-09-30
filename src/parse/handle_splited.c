@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/25 12:41:08 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:34:36 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,18 @@ static void	handle_redirects(char **line, t_mini *mini, int *index, int *len, ch
 		(*index)++;
 		*len = 0;
 	}
-	add_token(mini, *line, 1, *index);
-	(*index)++;
-	(*line)++;
+	if((*(*line) == '>' && *(*line + 1) == '>'))
+	{
+		add_token(mini, *line, 2, *index);
+		(*line) = (*line) + 2;
+		(*index)++;
+	}
+	else
+	{
+		add_token(mini, *line, 1, *index);
+		(*line)++;
+		(*index)++;
+	}
 }
 
 static void handle_pipes(char **line, t_mini *mini, int *index, int *len, char **start)
