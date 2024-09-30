@@ -83,9 +83,6 @@ void	handle_echo(t_token **token, t_mini *mini)
 			mini->return_code = 1;
 			return ;
 		}
-		if (mini->echo_flag == false)
-				ft_printf("\n");
-		mini->echo_flag = false;
 	}
 	else
 		ft_printf("\n");
