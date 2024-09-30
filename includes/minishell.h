@@ -143,6 +143,7 @@ int		check_file_red(char *file);
 char	**change_args_exec(char **args, t_token *token, t_mini *mini);
 int		check_input(t_token *token, t_mini *mini);
 int 	output(t_token *token, t_mini *mini, t_token *last, int type);
+int		check_valid_n_flag(char *str);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

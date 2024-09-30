@@ -32,8 +32,17 @@ int output(t_token *token, t_mini *mini, t_token *last, int type)
 	return (1);
 }
 
-static void print_echo(t_token *next, t_mini *mini, int *first)
+void	print_echo(t_token *next, t_mini *mini, int *first)
 {
+	int n_flag;
+
+	n_flag = 0;
+	while (next && (ft_strncmp(next->text, "-n", 2) == 0)
+		&& check_valid_n_flag(next->text))
+	{
+		n_flag++;
+    	next = next->next;
+	}
 	while (next && next->type != PIPE)
 	{
 		if(check_redirect(&next) == 1)
@@ -45,27 +54,14 @@ static void print_echo(t_token *next, t_mini *mini, int *first)
 			break;
 		}
 		expander(&next, mini);
-		if (next && *first == 2 && ft_strcmp(next->text, "-n") != 0)
-		{
-			ft_printf("%s", next->text);
-			*first = 2;
-		}
-		if (next && !mini->echo_flag)
-			ft_printf("%s", next->text);
-		else if (next->next && !*first)
-		{
-			next = next->next;
-			if (ft_strcmp(next->text, "-n") != 0)
-				ft_printf("%s", next->text);
-			*first = 2;
-		}
-		if (next->next && next->next->type != PIPE)
-		{
-			if (ft_strcmp(next->text, "-n") != 0)
-				ft_printf(" ");
-		}
+        if (*first)
+            ft_printf(" ");
+        ft_printf("%s", next->text);
+        *first = 1;
 		next = next->next;
 	}
+	if (n_flag == 0)
+        ft_printf("\n");
 }
 
 void	handle_echo(t_token **token, t_mini *mini)

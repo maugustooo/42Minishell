@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/30 10:13:41 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:00:28 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,17 @@ int	check_input(t_token *token, t_mini *mini)
 		temp = temp->next;
 	}
 	return (0);
+}
+
+int check_valid_n_flag(char *str)
+{
+    int i = 1;
+
+    if (str[0] == '-')
+    {
+        while (str[i] && str[i] == 'n')
+            i++;
+        return (str[i] == '\0');
+    }
+    return 0;
 }
