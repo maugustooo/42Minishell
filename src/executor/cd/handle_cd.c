@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/25 13:53:05 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/30 09:07:40 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	handle_dir(t_token *token, char **tgt_dir, t_mini *mini)
 	{
 		*tgt_dir = get_env_value(mini, "HOME");
 		if (!*tgt_dir)
+		{
+			free(tgt_dir);
 			*tgt_dir = HOME;
+		}
 	}
 	else if (ft_strncmp(token->next->text, "-",
 			ft_strlen(token->next->text)) == 0)
@@ -30,12 +33,10 @@ void	handle_dir(t_token *token, char **tgt_dir, t_mini *mini)
 		else
 			*tgt_dir = mini->prev_dir;
 	}
-	else if (ft_strncmp(token->next->text, "..", 2) == 0)
-		*tgt_dir = "..";
-	else if (ft_strncmp(token->next->text, ".", 1) == 0)
+	else if (ft_strcmp(token->next->text, ".") == 0)
 		*tgt_dir = mini->curr_dir;
 	else
-		*tgt_dir = token->next->text;
+		*tgt_dir = ft_strdup(token->next->text);
 }
 
 void	handle_cd2(t_mini *mini, char *target_dir)
@@ -47,6 +48,8 @@ void	handle_cd2(t_mini *mini, char *target_dir)
 		handle_pwd(mini);
 		mini->return_code = 0;
 	}
+	else if (target_dir != mini->curr_dir && ft_strcmp(target_dir, HOME) != 0)
+		free(target_dir);
 }
 
 void	handle_cd(t_token *token, t_mini *mini)
