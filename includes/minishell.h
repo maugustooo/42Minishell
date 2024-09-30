@@ -110,6 +110,7 @@ typedef struct s_mini
 t_token	*ft_tokenlast(t_token *token);
 t_token	*ft_tokenlast_redirect(t_token *token);
 t_token	*ft_newnode(int type, char *text);
+t_token *ft_finde_file(t_token *token);
 void	ft_tokenadd_back(t_token **token, t_token *new_token);
 void	ft_tokenclear(t_token **token);
 void	ft_tokendelone(t_token *token);
@@ -197,6 +198,6 @@ int		check_file2(char **args, t_token **token, t_mini *mini);
 int		check_path(t_mini *mini);
 void	handle_heredoc(char ***args, int *i, t_mini *mini);
 int		handle_input(char ***args, int	*i, t_mini *mini);
-int		handle_output(char ***args, int	*i, t_mini *mini);
+int		handle_output(char ***args, int	*i, t_mini *mini, int file);
 void	handle_redirection(char **args, t_mini *mini,  t_token **token);
 #endif

@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/26 09:43:25 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:27:34 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,17 @@ static int have_pipe(t_token *token, t_mini *mini)
 static int check_no_file(t_token *token, t_mini *mini)
 {
 	t_token *temp;
+	int input;
 
+	input = 0;
 	temp = token;
 	while (temp)
 	{
-		if(temp->type == NOT_FILE)
+		if(temp->type == INPUT)
+			input = 1;
+		if(temp->type == APPEND || temp->type == OUTPUT)
+			input = 0;
+		if(temp->type == NOT_FILE && input)
 		{
 			if(!mini->pipe)
 				ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), temp->text);

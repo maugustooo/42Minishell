@@ -67,8 +67,8 @@ int handle_input(char ***args, int *i, t_mini *mini)
 	original_filename = (*args)[*i];
     filename = remove_quotes((*args)[*i]);
     if (!filename)
-        return (0);
-    fd_in = open(filename, O_RDONLY);
+		return (0);
+	fd_in = open(filename, O_RDONLY);
     if (fd_in < 0)
     {
 		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), filename);
@@ -85,7 +85,7 @@ int handle_input(char ***args, int *i, t_mini *mini)
     return (1);
 }
 
-int handle_output(char ***args, int	*i, t_mini *mini)
+int handle_output(char ***args, int	*i, t_mini *mini, int file)
 {
 	int fd_out;
 	fd_out = 0;
@@ -101,5 +101,7 @@ int handle_output(char ***args, int	*i, t_mini *mini)
 	if(fd_out)
 		close(fd_out);
 	move_left((*args), *i);
+	if(file)
+		move_left((*args), *i);
 	return(1);
 }
