@@ -49,13 +49,11 @@ void executor(t_token **token, t_mini *mini)
 {
     int status;
 	
-	status = 0;
 	if (is_built_in(*token) && !mini->pipe)
 	       handle_built_ins(token, mini);
 	else if (!mini->pipe)
     {
-		if (handle_cmd(token, mini))
-			exit(127);
+		status = handle_cmd(token, mini);
 		if(WIFEXITED(status))
 				mini->return_code = WEXITSTATUS(status);
     }

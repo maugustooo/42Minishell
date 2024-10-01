@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/27 11:28:52 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:21:15 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_file(char **args, t_token **token, t_mini *mini)
 	if (stat((*token)->text, &path_stat) == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CMD), (*token)->text);
-		return (0);
+		exit(127);
 	}
 	if (S_ISREG(path_stat.st_mode))
 	{
@@ -95,7 +95,7 @@ int handle_cmd(t_token **token, t_mini *mini)
 	else
 		waitpid(pid, &status, 0);
 	free_args(args);
-	return (0);
+	return (status);
 }
 
 int 	handle_cmd_pipe(t_token **token, t_mini *mini)
