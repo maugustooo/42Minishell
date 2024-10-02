@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/30 09:07:40 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:09:52 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ void	handle_cd(t_token *token, t_mini *mini)
 	}
 	else
 		mini->return_code = 1;
+	free(target_dir);
 }
