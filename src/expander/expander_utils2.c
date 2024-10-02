@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:07:08 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/23 09:43:14 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:40:27 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,14 @@ char	*handle_sign2(t_token **token, t_mini *mini, int *i, int *len)
 	tmp = NULL;
 	tmp = ft_strndup((*token)->text + *i, *len);
 	original_var = get_env_value(mini, tmp);
+	*i += *len;
 	if (original_var && ft_strcmp(tmp, original_var) == 0)
 	{
-		*i += *len;
 		free(tmp);
+		free(original_var);
 		return (ft_strdup(""));
 	}
-	*i += *len;
+	free(original_var);
 	seg = get_env_value(mini, tmp);
 	free(tmp);
 	return (seg);
