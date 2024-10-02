@@ -48,7 +48,8 @@ typedef enum e_error
 	ERROR_SENV,
 	ERROR_NDIR,
 	ERROR_NFILE,
-	ERROR_ENUM
+	ERROR_ENUM,
+	ERROR_ECHO_RED,
 }	t_error;
 
 static inline const char *Error_Msg(enum e_error i)
@@ -67,7 +68,8 @@ static inline const char *Error_Msg(enum e_error i)
 	"env: Options/Arguments not allowed by subject\n",
 	"minishell: cd: %s: Not a directory\n",
 	"minishell: %s: No such file or directory\n",
-	"minishell: exit: %s: numeric argument required",};
+	"minishell: exit: %s: numeric argument required\n",
+	"syntax error near unexpected token `newline'\n",};
     return strings[i];
 }
 
@@ -134,7 +136,7 @@ char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
 void	print_tokens(t_token *tokens, t_mini *mini);
 void	free_child(t_token **token, t_mini *mini, char **args);
-int		check_file_token(t_token **token, char *file, t_mini *mini);
+int		check_file_token(t_token *token, char *file, t_mini *mini);
 int		check_redirect(t_token **next);
 int		check_dir(char *tgt_dir);
 int		export_arg_err(t_token *token, t_mini *mini, char **key);

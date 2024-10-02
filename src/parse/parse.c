@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/30 11:27:34 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:25:32 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ static int check_no_file(t_token *token, t_mini *mini)
  */
 int parse(t_mini *mini, t_token	**token, char **envp)
 {
-	get_tokens(token, mini);
 	if(!mini->penv)
 		dup_envp(mini, envp);
+	get_tokens(token, mini);
 	if(ft_strncmp((*mini->splited), "echo", 4) == 0 && (*token)->next)
 		if(ft_strncmp((*token)->next->text, "-n", 2) == 0)
 			mini->echo_flag = true;
