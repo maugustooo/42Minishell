@@ -6,6 +6,8 @@ int output(t_token *token, t_mini *mini, t_token *file_node, int type)
 	char *file;
 
 	fd = 0;
+	if(!file_node)
+		return (2);
 	if (file_node->type == ARG || file_node->type == FILE || file_node->type == NOT_FILE)
 		file = file_node->text;
 	else
@@ -74,15 +76,18 @@ void	handle_echo(t_token **token, t_mini *mini)
 {
 	int first;
 	t_token *temp;
+	int check_input_return;
 
+	check_input_return = 0;
 	temp = *token;
 	first = 0;
 	if (temp->next)
 	{
 		temp = temp->next;
-		if (check_input(temp, mini) == 0)
+		check_input_return = check_input(temp, mini);
+		if (check_input_return == 0)
 			print_echo(temp, mini, &first);
-		else if (check_input(temp, mini) == 2)
+		else if (check_input_return == 2)
 			return ;
 	}
 	else

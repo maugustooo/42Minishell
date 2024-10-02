@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/01 12:31:56 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:11:15 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ int	check_input(t_token *token, t_mini *mini)
 {
 	t_token *temp;
 	t_token *file;
+	int output_return;
 
+	output_return = 0;
 	temp = token;
 	file = ft_finde_file(token);
 	while (temp && temp->type != PIPE)
@@ -48,11 +50,18 @@ int	check_input(t_token *token, t_mini *mini)
 		if ((temp->type == OUTPUT || temp->type == APPEND) && !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
 		{
 			mini->echo_flag = true;
-			if(!output(token, mini, file, temp->type))
+			output_return = output(token, mini, file, temp->type);
+			if(output_return == 0)
 			{
 				ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_PERMS), temp->next->text);
 				mini->return_code = 1;
-				exit(1);
+				return(1);
+			}
+			else if (output_return == 2)
+			{
+				ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_ECHO_RED));
+				mini->return_code = 2;
+				return(1);
 			}
 			return (1);
 		}

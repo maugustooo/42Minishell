@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/30 15:14:37 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:52:37 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,18 @@ int	condition(t_token **token, char *file, t_mini *mini)
 {
 	if (((*token)->prev->type == OUTPUT
 			|| (*token)->prev->type == INPUT
-			|| (*token)->prev->type == APPEND) && check_file_token(token, file, mini)
+			|| (*token)->prev->type == APPEND
+			|| (*token)->prev->type == FILE) && check_file_token(*token, file, mini)
 		&& (*token)->type != OUTPUT && (*token)->type != INPUT
 		&& (*token)->type != APPEND && (*token)->type != PIPE)
 		return (1);
 	else if (((*token)->prev->type == OUTPUT
 			|| (*token)->prev->type == INPUT
-			|| (*token)->prev->type == APPEND) && !check_file_token(token, file, mini)
+			|| (*token)->prev->type == APPEND) && !check_file_token(*token, file, mini)
 		&& (*token)->type != OUTPUT && (*token)->type != INPUT
 		&& (*token)->type != APPEND && (*token)->type != PIPE)
 		return (0);
-	else
-		return(2);
-	
+	return(2);
 }
 
 /**
@@ -123,12 +122,12 @@ void	get_tokens(t_token **token, t_mini *mini)
 		if((*token)->type == INPUT && (*token)->next)
 		{
 			(*token) = (*token)->next;
-			while (((*token)->type == FILE || (*token)->type == NOT_FILE)
+			while (((*token)->type == FILE || (*token)->type == NOT_FILE || (*token)->next->type == INPUT)
 					&& (*token)->next)
 				{
 					if((*token)->next->type == FILE	
 						|| (*token)->next->type == NOT_FILE
-						|| (*token)->next->type == ARG)
+						|| (*token)->next->type == INPUT)
 						remove_node(token);
 					else
 						break ;

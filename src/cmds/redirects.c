@@ -84,8 +84,11 @@ static int handle_mult_redirections(char **args, t_mini *mini, t_token *last_red
 				if(!check_file_red(args[i]))
 					return(0);
 				else
+				{
 					if(!handle_input(&args, &i, mini))
 						return (0);
+					i --;
+				}
 			}
 		}
       	if (!ft_strcmp(args[i - 1], "<") && args[i] && mini)
