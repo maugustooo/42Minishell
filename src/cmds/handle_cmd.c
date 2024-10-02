@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/01 10:13:05 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/02 09:10:14 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ int	check_command(t_token **token, t_mini *mini, char **args)
 
 int handle_cmd(t_token **token, t_mini *mini)
 {	
-	char	**args;
-	t_token	*temp;
-	int		status;
-	int		pid;
+	char		**args;
+	t_token		*temp;
+	int			status;
+	pid_t		pid;
 
 	status = 0;
 	args = ft_calloc(mini->token_count + 1, sizeof(char *));
@@ -94,11 +94,17 @@ int handle_cmd(t_token **token, t_mini *mini)
 	temp = *token;
 	pid = fork();
 	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
 		handle_cmd3_5(temp, token, mini, args);
+	}
 	else
+	{
+		g_pid = pid;
 		waitpid(pid, &status, 0);
-	free_args(args);
-	return (status);
+		g_pid = 0;
+	}
+	return (free_args(args), status);
 }
 
 int 	handle_cmd_pipe(t_token **token, t_mini *mini)
