@@ -14,6 +14,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
+# include <errno.h>
 
 # define CMD 1
 # define ARG 2

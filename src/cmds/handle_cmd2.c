@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/27 17:15:32 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:24:18 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,12 @@ int	check_file2(char **args, t_token **token, t_mini *mini)
 	{
 		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CMD),
 			(*token)->text);
-		return (0);
+		if (errno == EACCES)
+            exit(126);
+        else if (errno == ENOENT)
+            exit(127);
+        else
+            exit(1);
 	}
 	return (1);
 }

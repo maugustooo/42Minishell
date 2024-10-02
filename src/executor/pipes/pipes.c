@@ -63,7 +63,10 @@ static void setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **tem
 		exit(mini->return_code);
 	}
 	else
+	{
 		mini->return_code = handle_cmd_pipe(&start, mini);
+		exit(mini->return_code);
+	}
 }
 
 static void process_pipe_segment(t_token **temp, int *fd_in, 

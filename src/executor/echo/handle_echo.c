@@ -10,13 +10,12 @@ int output(t_token *token, t_mini *mini, t_token *file_node, int type)
 		file = file_node->text;
 	else
 		ft_printf(Error_Msg(ERROR_ARG_ECHO));
+	if(!check_file_perms(file_node))
+			return (0);
 	if (type == OUTPUT)
 		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (type == APPEND)
 		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if(file_node->prev->type == INPUT)
-		if(!check_file_perms(file_node))
-			return (0);
 	if (fd)
 		while (token)
 		{	
@@ -34,8 +33,8 @@ int output(t_token *token, t_mini *mini, t_token *file_node, int type)
 				ft_printf_fd(fd, token->text);
 			token = token->next;
 		}
-	// else
-	// 	check_access(token->text);
+	else
+		check_access(token->text);
 	return (1);
 }
 
@@ -84,12 +83,7 @@ void	handle_echo(t_token **token, t_mini *mini)
 		if (check_input(temp, mini) == 0)
 			print_echo(temp, mini, &first);
 		else if (check_input(temp, mini) == 2)
-		{
-			//TODO:ISTO ESTA A PRINTAR NO TERMINAL TAMBEM LOL
-			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_PERMS), (*token)->text);
-			mini->return_code = 1;
 			return ;
-		}
 	}
 	else
 		ft_printf("\n");

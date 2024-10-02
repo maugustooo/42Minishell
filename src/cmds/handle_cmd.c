@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/01 09:21:15 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:13:05 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	check_file(char **args, t_token **token, t_mini *mini)
 	else if (S_ISDIR(path_stat.st_mode))
 		handle_exit_conditions(Error_Msg(ERROR_ISDIR), token, mini, args);
 	else
+	{
 		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), (*token)->text);
+		exit(127);
+	}
 	return (0);
 }
 
