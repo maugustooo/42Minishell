@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/02 11:06:26 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/02 16:01:16 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,9 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 		error_malloc(mini);
 	while(key[++i])
 		nargs[i] = ft_strdup(key[i]);
-	j = -1;
-	while(nargs[++j + i] && args[j])
+	j = 0;
+	i--;
+	while(nargs[j++ + i] && args[j])
 		nargs[i + j] = ft_strdup(args[j]);
 	nargs[i + j] = NULL;
 	free_keys(&key);

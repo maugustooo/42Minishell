@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/02 11:25:32 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:33:52 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,29 @@ static int check_no_file(t_token *token, t_mini *mini)
 	}
 	return (1);
 }
+int syntax_errors(t_token *token)
+{
+	t_token *temp;
+
+	temp = token;
+	while (temp)
+	{
+		if((temp->type == OUTPUT || temp->type == INPUT || temp->type == APPEND
+			|| temp->type == DELIMITER) && temp->next)
+		{
+			if(temp->next->type == OUTPUT || temp->next->type == INPUT
+			|| temp->next->type == APPEND || temp->next->type == DELIMITER)
+				return  (ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_SYNTAX_RED), temp->next->text), 0);
+		}
+		if(temp->type == PIPE && temp->next)
+			if(temp->next->type == PIPE)
+				return  (ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_SYNTAX_RED), temp->next->text), 0);
+		if (temp->type == CMD && ft_strcmp(temp->text, "|") == 0)
+			return (ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_SYNTAX_RED), temp->text), 0);
+		temp = temp->next;
+	}
+	return (1);
+}
 /**
  * @brief Will parse creating the tokens and checking commands
  * 
@@ -65,6 +88,9 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 	if(!mini->penv)
 		dup_envp(mini, envp);
 	get_tokens(token, mini);
+	// print_tokens(*token, mini);
+	if(!syntax_errors(*token))
+		return(0);
 	if(ft_strncmp((*mini->splited), "echo", 4) == 0 && (*token)->next)
 		if(ft_strncmp((*token)->next->text, "-n", 2) == 0)
 			mini->echo_flag = true;

@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/02 11:52:37 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/02 17:09:47 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void	init_token(t_token **token, char *text, t_mini *mini)
 			(*token)->type = FILE;
 		else if(!condition(token, file, mini))
 			(*token)->type = NOT_FILE;
-		if((*token)->prev->type == PIPE)
+		if((*token)->prev->type == PIPE && ft_strcmp((*token)->text, "|") != 0)
 			(*token)->type = CMD;
 		free(file);
 	}
@@ -122,8 +122,8 @@ void	get_tokens(t_token **token, t_mini *mini)
 		if((*token)->type == INPUT && (*token)->next)
 		{
 			(*token) = (*token)->next;
-			while (((*token)->type == FILE || (*token)->type == NOT_FILE || (*token)->next->type == INPUT)
-					&& (*token)->next)
+			while ((*token)->next && ((*token)->type == FILE
+				|| (*token)->type == NOT_FILE || (*token)->next->type == INPUT))
 				{
 					if((*token)->next->type == FILE	
 						|| (*token)->next->type == NOT_FILE

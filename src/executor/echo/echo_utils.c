@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/02 12:11:15 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/02 16:45:57 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	check_input(t_token *token, t_mini *mini)
 			if(output_return == 0)
 			{
 				ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_PERMS), temp->next->text);
-				mini->return_code = 1;
+				mini->return_code = 0;
 				return(1);
 			}
 			else if (output_return == 2)

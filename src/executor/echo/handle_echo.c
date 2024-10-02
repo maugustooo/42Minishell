@@ -4,7 +4,9 @@ int output(t_token *token, t_mini *mini, t_token *file_node, int type)
 {
 	int fd;
 	char *file;
+	int after_file;
 
+	after_file = 0;
 	fd = 0;
 	if(!file_node)
 		return (2);
@@ -15,12 +17,14 @@ int output(t_token *token, t_mini *mini, t_token *file_node, int type)
 	if(!check_file_perms(file_node))
 			return (0);
 	if (type == OUTPUT)
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	else if (type == APPEND)
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (fd)
 		while (token)
-		{	
+		{
+			if (token->type == FILE)
+				after_file = 1;
 			if(token->type != ARG)
 			{
 				token = token->next;	
@@ -29,7 +33,7 @@ int output(t_token *token, t_mini *mini, t_token *file_node, int type)
 			if ((token->type == ARG || token->type == FILE)
 				&& ft_strcmp(token->text, "-n") != 0)
 				ft_printf_fd(fd, "%s ", token->text);
-			else if (!mini->echo_flag)
+			else if (!mini->echo_flag || after_file)
 				ft_printf_fd(fd, "%s\n", token->text);
 			else if (token->type == ARG && ft_strcmp(token->text, "-n") != 0)
 				ft_printf_fd(fd, token->text);
@@ -37,6 +41,8 @@ int output(t_token *token, t_mini *mini, t_token *file_node, int type)
 		}
 	else
 		check_access(token->text);
+	if(after_file)
+		ft_printf_fd(fd, "\n");
 	return (1);
 }
 

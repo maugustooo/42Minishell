@@ -50,6 +50,7 @@ typedef enum e_error
 	ERROR_NFILE,
 	ERROR_ENUM,
 	ERROR_ECHO_RED,
+	ERROR_SYNTAX_RED,
 }	t_error;
 
 static inline const char *Error_Msg(enum e_error i)
@@ -69,7 +70,8 @@ static inline const char *Error_Msg(enum e_error i)
 	"minishell: cd: %s: Not a directory\n",
 	"minishell: %s: No such file or directory\n",
 	"minishell: exit: %s: numeric argument required\n",
-	"syntax error near unexpected token `newline'\n",};
+	"syntax error near unexpected token `newline'\n",
+	"syntax error near unexpected token `%s'\n",};
     return strings[i];
 }
 
@@ -95,7 +97,7 @@ typedef struct s_mini
 	bool	pipe;
 	bool	final_pipe;
 	bool	exported;
-
+	bool	redirecte_handled;
 	int		is_pipe;
 	int		token_count;
 	int		return_code;
