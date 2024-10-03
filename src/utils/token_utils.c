@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/03 12:15:07 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:46:07 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ t_token	*ft_tokenlast_redirect(t_token *token)
 {
 	while (token)
 	{
-		if (token->next && (token->type  == INPUT || token->type  == OUTPUT
-			|| token->type  == APPEND))
+		if (token->next && (token->type == INPUT || token->type == OUTPUT
+				|| token->type == APPEND))
 		{
-			if(token->next->type == FILE && !token->next->next)
+			if (token->next->type == FILE && !token->next->next)
 				return (token);
 		}
 		token = token->next;
@@ -62,28 +62,28 @@ t_token	*ft_tokenlast_redirect(t_token *token)
 	return (token);
 }
 
-void count_redirections(t_token *token, t_mini *mini)
+void	count_redirections(t_token *token, t_mini *mini)
 {
-	t_token *temp;
-	int i;
+	t_token	*temp;
+	int		i;
 
 	i = 0;
 	temp = token;
 	while (temp)
 	{
-		if(temp->type == INPUT)
+		if (temp->type == INPUT)
 			mini->input_count++;
-		if(temp->type == OUTPUT)
+		if (temp->type == OUTPUT)
 			mini->output_count++;
-		if(temp->type == APPEND)
+		if (temp->type == APPEND)
 			mini->append_count++;
-		if(temp->type == FILE)
+		if (temp->type == FILE)
 			mini->file_count++;
 		temp = temp->next;
 	}
 }
 
-t_token *ft_finde_file(t_token *token)
+t_token	*ft_finde_file(t_token *token)
 {
 	t_token *temp;
 	t_token *file;

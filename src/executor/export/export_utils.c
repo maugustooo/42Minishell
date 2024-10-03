@@ -6,33 +6,33 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:34:10 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 10:44:24 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:38:30 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *strip_quotes2(char *str)
+char	*strip_quotes2(char *str)
 {
-    char *new_str;
-    int len;
+	char	*new_str;
+	int		len;
 
-    if (!str)
-        return (NULL);
-    len = ft_strlen(str);
-    if (str[0] == '\'' || str[0] == '\"')
-    {
-        if (len > 1 && str[len - 1] == str[0])
-            new_str = ft_substr(str, 1, len - 2);
-        else
-            new_str = ft_substr(str, 1, len - 1);
-    }
-    else if (str[len - 1] == '\'' || str[len - 1] == '\"')
-        new_str = ft_substr(str, 0, len - 1);
-    else
-        new_str = ft_strdup(str);
-    free(str);
-    return (new_str);
+	if (!str)
+		return (NULL);
+	len = ft_strlen(str);
+	if (str[0] == '\'' || str[0] == '\"')
+	{
+		if (len > 1 && str[len - 1] == str[0])
+			new_str = ft_substr(str, 1, len - 2);
+		else
+			new_str = ft_substr(str, 1, len - 1);
+	}
+	else if (str[len - 1] == '\'' || str[len - 1] == '\"')
+		new_str = ft_substr(str, 0, len - 1);
+	else
+		new_str = ft_strdup(str);
+	free(str);
+	return (new_str);
 }
 
 char	*strip_quotes(char *str)
@@ -58,9 +58,9 @@ char	*strip_quotes(char *str)
 
 int	export_arg_err(t_token *token, t_mini *mini, char **key)
 {
-	if(key[0] != NULL)
+	if (key[0] != NULL)
 	{
-		if(key[0][0] != key[0][ft_strlen(key[0]) - 1])
+		if (key[0][0] != key[0][ft_strlen(key[0]) - 1])
 			key[0] = strip_quotes2(key[0]);
 		else
 			key[0] = strip_quotes(key[0]);
@@ -77,6 +77,7 @@ int	export_arg_err(t_token *token, t_mini *mini, char **key)
 	}
 	return (0);
 }
+
 void	check_export_expander(t_token *token, t_mini *mini)
 {
 	char	*tmp;
