@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 09:08:43 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:34:38 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	handle_cmd3(t_token **token, t_mini *mini, char **args)
 {
 	if (access((*token)->text, F_OK) == -1)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), (*token)->text);
+		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), (*token)->text);
 		free_child(token, mini, args);
 		exit(127);
 	}

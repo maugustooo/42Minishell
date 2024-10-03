@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 09:42:03 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:52:35 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,22 @@ int syntax_errors(t_token *token)
 	}
 	return (1);
 }
+
+void check_red_cmd(t_token **token)
+{
+	int fd;
+
+	fd = 0;
+	if((*token)->type == CMD && (ft_strcmp((*token)->text, ">") == 0 || ft_strcmp((*token)->text, ">>") == 0) && (*token)->next)
+	{
+		if((*token)->next->type == FILE && ft_strcmp((*token)->text, ">") == 0)
+			fd = open((*token)->next->text, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if((*token)->next->type == FILE && ft_strcmp((*token)->text, ">>") == 0)
+			fd = open((*token)->next->text, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		remove_node(token);
+		remove_node(token);
+	}
+}
 /**
  * @brief Will parse creating the tokens and checking commands
  * 
@@ -102,5 +118,7 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 		mini->return_code = 1;
 		return(0);
 	}
+	remove_dup_files(token);
+	check_red_cmd(token);
 	return(1);
 }

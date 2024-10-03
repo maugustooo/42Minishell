@@ -138,7 +138,7 @@ char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
 void	print_tokens(t_token *tokens, t_mini *mini);
 void	free_child(t_token **token, t_mini *mini, char **args);
-int		check_file_token(t_token *token, char *file, t_mini *mini);
+int		check_file_token(t_token *token, int start, t_mini *mini);
 int		check_redirect(t_token **next);
 int		check_dir(char *tgt_dir);
 int		export_arg_err(t_token *token, t_mini *mini, char **key);
@@ -152,6 +152,8 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini);
 int		check_input(t_token *token, t_mini *mini);
 int 	output(t_token *token, t_mini *mini, t_token *last, int type);
 int		check_valid_n_flag(char *str);
+void	remove_dup_files(t_token **token);
+void	remove_node(t_token **token);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

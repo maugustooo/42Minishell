@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/02 17:14:35 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:30:42 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	check_file2(char **args, t_token **token, t_mini *mini)
 {
 	args[0] = ft_strdup((*token)->text);
 	// print_tokens(*token, mini);
-	// handle_redirection(args, mini, token);
+	handle_redirection(args, mini, token);
 	// int o = 0;
 	// while (args[o])
 	// {

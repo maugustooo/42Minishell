@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/02 11:47:02 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:15:07 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,19 @@ int	count_nodes(t_token *token)
 	return (i);
 }
 
-int	check_file_token(t_token *token, char *file, t_mini *mini)
+int	check_file_token(t_token *token, int start, t_mini *mini)
 {
 	struct stat	path_stat;
 	t_token *temp;
 	
-	(void)file;
 	temp = token;
-	if(ft_find_c('\"', temp->text))
+	if(ft_find_c('\"', temp->text + start))
 		expander(&temp, mini);
-	if (stat(temp->text, &path_stat) == -1)
+	if (stat(temp->text + start, &path_stat) == -1)
 		return (0);
 	if (S_ISREG(path_stat.st_mode))
 	{
-		if (access(temp->text, R_OK) == 0)
+		if (access(temp->text + start, R_OK) == 0)
 			return (1);
 		else
 			return (0);
@@ -87,13 +86,16 @@ void count_redirections(t_token *token, t_mini *mini)
 t_token *ft_finde_file(t_token *token)
 {
 	t_token *temp;
-
+	t_token *file;
+	
+	file = NULL;
 	temp = token;
 	while (temp)
 	{
-		if (temp->type == FILE || temp->type == NOT_FILE)
-			return (temp);
+		if ((temp->type == FILE || temp->type == NOT_FILE)
+			&& (temp->prev->type == OUTPUT || temp->prev->type == APPEND))
+			file = temp;
 		temp = temp->next;
 	}
-	return (temp);
+	return (file);
 }
