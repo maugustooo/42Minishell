@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/02 16:01:16 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:08:43 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,23 +96,38 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 {
 	char	**key;
 	char	**nargs;
-	int 	i;
-	int		j;
+	size_t 	i;
+	size_t	j;
+	int		total_len;
 
-	i = -1;
 	key = ft_split(token->text, ' ');
 	change_token_args(token, key, mini);
-	j = ft_arrlen(args) + ft_arrlen(key);
-	nargs = ft_calloc(j, sizeof(char **));
+	total_len = ft_arrlen(args) + ft_arrlen(key);
+	nargs = ft_calloc(total_len + 1, sizeof(char **));
 	if(!nargs)
 		error_malloc(mini);
-	while(key[++i])
+	i = -1;
+	while (++i < ft_arrlen(key))
+	{
 		nargs[i] = ft_strdup(key[i]);
-	j = 0;
-	i--;
-	while(nargs[j++ + i] && args[j])
-		nargs[i + j] = ft_strdup(args[j]);
-	nargs[i + j] = NULL;
+		if(!nargs[i])
+			error_malloc(mini);
+	}
+	j = 1;
+	while(j < ft_arrlen(args))
+	{
+		nargs[i++] = ft_strdup(args[j++]);
+		if(!nargs[i - 1])
+			error_malloc(mini);
+	}
+	nargs[i] = NULL;
+	// while(key[++i])
+	// 	nargs[i] = ft_strdup(key[i]);
+	// j = 0;
+	// i--;
+	// while(nargs[j++ + i] && args[j])
+	// 	nargs[i + j] = ft_strdup(args[j]);
+	// nargs[i + j] = NULL;
 	free_keys(&key);
 	free_args(args);
 	return (nargs);

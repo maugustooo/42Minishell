@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:20:06 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/25 10:24:15 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/03 10:39:51 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	handle_export(t_mini *mini, t_token *token)
 			tmp_env = handle_arr(mini);
 			export_no_args(tmp_env);
 			free_env(tmp_env, NULL);
+			mini->return_code = 0;
 		}
-		mini->return_code = 0;
 	}
 }

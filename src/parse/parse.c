@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/02 17:33:52 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:42:03 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 		if(ft_strncmp((*token)->next->text, "-n", 2) == 0)
 			mini->echo_flag = true;
 	getcwd(mini->curr_dir, sizeof(mini->curr_dir));
-	if(ft_strcmp((*mini->splited), "export") == 0 && (*token)->next)
-		check_arg_export((*token)->next, mini);
 	if(have_pipe(*token, mini) || mini->final_pipe)
 		mini->pipe = true;
 	if(!check_no_file(*token, mini) && !mini->pipe)

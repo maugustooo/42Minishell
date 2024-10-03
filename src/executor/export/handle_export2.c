@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/25 09:53:18 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/03 10:42:43 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,15 @@ void	set_export(t_mini *mini, t_token *token)
 
 void	check_arg_export(t_token *token, t_mini *mini)
 {
-	char	*value;
 	char	**key;
 	int		i;
 
 	key = NULL;
-	value = NULL;
 	i = -1;
 	if(token->type == PIPE)
 		return ;
 	key = ft_split(token->text, '=');
-	if (key[0])
+	if (key && key[0] && ft_strlen(key[0]) > 0)
 	{
 		while (key[0][++i])
 		{
