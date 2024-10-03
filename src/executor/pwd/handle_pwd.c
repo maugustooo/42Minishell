@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:34:17 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/30 12:17:42 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:39:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handle_pwd(t_mini *mini)
 	}
 	else
 	{
-		if(ft_strcmp(mini->curr_dir, "") == 0)
+		if (ft_strcmp(mini->curr_dir, "") == 0)
 		{
 			ft_printf_fd(STDERR_FILENO, "Computer Error");
 			mini->return_code = 1;

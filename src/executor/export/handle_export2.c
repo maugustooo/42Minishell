@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 12:19:52 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:37:17 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	check_arg_export(t_token *token, t_mini *mini)
 
 	key = NULL;
 	i = -1;
-	if(token->type == PIPE)
+	if (token->type == PIPE)
 		return ;
 	key = ft_split(token->text, '=');
 	if (key && key[0] && ft_strlen(key[0]) > 0)
@@ -85,7 +85,7 @@ int	export_arg(t_token *token, t_mini *mini)
 
 	i = -1;
 	key2 = ft_split(token->text, '=');
-	if(export_arg_err(token, mini, key2))
+	if (export_arg_err(token, mini, key2))
 		return (0);
 	value = get_env_key(mini, key2[0]);
 	free_key(key2);
@@ -94,7 +94,7 @@ int	export_arg(t_token *token, t_mini *mini)
 		while (mini->penv[++i])
 		{
 			key = ft_split(mini->penv[i], '=');
-			if(!export_arg2(token, mini, key, &i, value))
+			if (!export_arg2(token, mini, key, &i, value))
 				return (0);
 		}
 		free(value);

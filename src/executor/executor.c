@@ -8,17 +8,16 @@
 */
 int	is_built_in(t_token *token)
 {
-	if(!token)
-		return(0);
-    return(token->type == CMD
-	&& (ft_strcmp(token->text, "cd") == 0
-	|| ft_strcmp(token->text, "echo") == 0
-	|| ft_strcmp(token->text, "env") == 0
-	|| ft_strcmp(token->text, "pwd") == 0
-	|| ft_strcmp(token->text, "export") == 0
-	|| ft_strcmp(token->text, "unset") == 0
-	|| ft_strcmp(token->text, "exit") == 0));
-	
+	if (!token)
+		return (0);
+	return (token->type == CMD
+		&& (ft_strcmp(token->text, "cd") == 0
+			|| ft_strcmp(token->text, "echo") == 0
+			|| ft_strcmp(token->text, "env") == 0
+			|| ft_strcmp(token->text, "pwd") == 0
+			|| ft_strcmp(token->text, "export") == 0
+			|| ft_strcmp(token->text, "unset") == 0
+			|| ft_strcmp(token->text, "exit") == 0));
 }
 
 void	handle_built_ins(t_token **token, t_mini *mini)
@@ -34,7 +33,7 @@ void	handle_built_ins(t_token **token, t_mini *mini)
 	else if ((ft_strncmp((*token)->text, "export", 6) == 0))
 		handle_export(mini, (*token)->next);
 	else if (ft_strncmp((*token)->text, "unset", 5) == 0)
-	 	handle_unset(*token, mini);
+		handle_unset(*token, mini);
 	else if (ft_strncmp((*token)->text, "exit", 4) == 0)
 		handle_exit(token, mini);
 }
@@ -45,18 +44,18 @@ void	handle_built_ins(t_token **token, t_mini *mini)
  * @param token Command
  * @param next Arguments
 */
-void executor(t_token **token, t_mini *mini)
+void	executor(t_token **token, t_mini *mini)
 {
-    int status;
-	
+	int	status;
+
 	if (is_built_in(*token) && !mini->pipe)
-	       handle_built_ins(token, mini);
+		handle_built_ins(token, mini);
 	else if (!mini->pipe)
-    {
+	{
 		status = handle_cmd(token, mini);
-		if(WIFEXITED(status))
-				mini->return_code = WEXITSTATUS(status);
-    }
+		if (WIFEXITED(status))
+			mini->return_code = WEXITSTATUS(status);
+	}
 	else
 		pipes(token, mini);
 }

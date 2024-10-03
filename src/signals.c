@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:52:10 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/02 09:06:48 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/03 12:27:58 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
  * @brief will handle the ctrl+C to display a new line
  * 
  * @param sig SIGINT
- */
-void handle_sigint(int sig)
+*/
+void	handle_sigint(int sig)
 {
-    (void)sig;
+	(void)sig;
 	if (g_pid != 0)
 	{
 		kill(g_pid, SIGINT);
