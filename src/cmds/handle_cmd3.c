@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 12:34:38 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:09:20 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ int	handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args)
 	while (temp)
 	{
 		expander(&temp, mini);
-		if(temp->type == INPUT)
+		if (temp->type == INPUT)
 		{
-			if(temp->next && temp->next->type == FILE)
+			if (temp->next && temp->next->type == FILE)
 			{
 				args[++i] = ft_strdup(temp->text);
 				temp = temp->next;
 			}
-			while (temp->type == FILE && temp->next	)
+			while (temp->type == FILE && temp->next)
 			{
-				if(temp->next->type == FILE)
+				if (temp->next->type == FILE)
 					temp = temp->next;
 				else
 					break ;
@@ -60,14 +60,14 @@ int	handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args)
 	args[++i] = NULL;
 	ret = handle_cmd2(token, mini, args);
 	free_args(args);
-	return(ret);
+	return (ret);
 }
 
 void	change_token_args(t_token *token, char **key, t_mini *mini)
 {
-	t_token *curr;
+	t_token	*curr;
 	t_token	*new_token;
-	int 	i;
+	int		i;
 
 	i = 0;
 	curr = token;
@@ -81,7 +81,7 @@ void	change_token_args(t_token *token, char **key, t_mini *mini)
 		else
 		{
 			new_token = (t_token *)malloc(sizeof(t_token));
-			if(!new_token)
+			if (!new_token)
 				error_malloc(mini);
 			new_token->text = ft_strdup(key[i]);
 			new_token->next = curr->next;
@@ -96,7 +96,7 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 {
 	char	**key;
 	char	**nargs;
-	size_t 	i;
+	size_t	i;
 	size_t	j;
 	int		total_len;
 
@@ -104,20 +104,20 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 	change_token_args(token, key, mini);
 	total_len = ft_arrlen(args) + ft_arrlen(key);
 	nargs = ft_calloc(total_len + 1, sizeof(char **));
-	if(!nargs)
+	if (!nargs)
 		error_malloc(mini);
 	i = -1;
 	while (++i < ft_arrlen(key))
 	{
 		nargs[i] = ft_strdup(key[i]);
-		if(!nargs[i])
+		if (!nargs[i])
 			error_malloc(mini);
 	}
 	j = 1;
-	while(j < ft_arrlen(args))
+	while (j < ft_arrlen(args))
 	{
 		nargs[i++] = ft_strdup(args[j++]);
-		if(!nargs[i - 1])
+		if (!nargs[i - 1])
 			error_malloc(mini);
 	}
 	nargs[i] = NULL;

@@ -51,6 +51,7 @@ typedef enum e_error
 	ERROR_ENUM,
 	ERROR_ECHO_RED,
 	ERROR_SYNTAX_RED,
+	ERROR_UNCLOSED_PIPE,
 }	t_error;
 
 static inline const char *Error_Msg(enum e_error i)
@@ -71,7 +72,8 @@ static inline const char *Error_Msg(enum e_error i)
 	"minishell: %s: No such file or directory\n",
 	"minishell: exit: %s: numeric argument required\n",
 	"syntax error near unexpected token `newline'\n",
-	"syntax error near unexpected token `%s'\n",};
+	"syntax error near unexpected token `%s'\n",
+	"NO unclosed pipes are allowed\n",};
     return strings[i];
 }
 
@@ -98,6 +100,7 @@ typedef struct s_mini
 	bool	final_pipe;
 	bool	exported;
 	bool	redirecte_handled;
+	bool	after_pipe;
 	int		is_pipe;
 	int		token_count;
 	int		return_code;
@@ -207,6 +210,6 @@ int		check_file2(char **args, t_token **token, t_mini *mini);
 int		check_path(t_mini *mini);
 void	handle_heredoc(char ***args, int *i, t_mini *mini);
 int		handle_input(char ***args, int	*i, t_mini *mini);
-int		handle_output(char ***args, int	*i, t_mini *mini, int file);
+int		handle_output(char ***args, int	*i, t_mini *mini);
 void	handle_redirection(char **args, t_mini *mini,  t_token **token);
 #endif

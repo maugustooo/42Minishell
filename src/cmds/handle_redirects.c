@@ -54,6 +54,7 @@ void handle_heredoc(char ***args, int *i, t_mini *mini)
 	dup2(pipefd[0], STDIN_FILENO);
 	close(pipefd[0]);
 	move_left((*args), *i);
+	move_left((*args), *i);
 }
 
 int handle_input(char ***args, int *i, t_mini *mini)
@@ -85,23 +86,22 @@ int handle_input(char ***args, int *i, t_mini *mini)
     return (1);
 }
 
-int handle_output(char ***args, int	*i, t_mini *mini, int file)
+int handle_output(char ***args, int	*i, t_mini *mini)
 {
 	int fd_out;
 	fd_out = 0;
-	
+
 	mini->redirect = 1;
 	if(ft_strcmp((*args)[*i], ">") == 0)
 		fd_out = open((*args)[*i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if(ft_strcmp((*args)[*i], ">>") == 0)
 		fd_out = open((*args)[*i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if(!fd_out)
+	if(fd_out == -1)
 		return(0);
 	dup2(fd_out, STDOUT_FILENO);
 	if(fd_out)
 		close(fd_out);
+	move_left((*args), *i);	
 	move_left((*args), *i);
-	if(file)
-		move_left((*args), *i);
 	return(1);
 }

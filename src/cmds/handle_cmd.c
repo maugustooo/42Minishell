@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/02 09:10:14 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:28:55 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int	check_command(t_token **token, t_mini *mini, char **args)
 	return (0);
 }
 
-int handle_cmd(t_token **token, t_mini *mini)
-{	
+int	handle_cmd(t_token **token, t_mini *mini)
+{
 	char		**args;
 	t_token		*temp;
 	int			status;
@@ -107,7 +107,7 @@ int handle_cmd(t_token **token, t_mini *mini)
 	return (free_args(args), status);
 }
 
-int 	handle_cmd_pipe(t_token **token, t_mini *mini)
+int	handle_cmd_pipe(t_token **token, t_mini *mini)
 {
 	int		i;
 	char	**args;
@@ -129,5 +129,5 @@ int 	handle_cmd_pipe(t_token **token, t_mini *mini)
 	args[++i] = NULL;
 	ret = handle_cmd2(token, mini, args);
 	free_args(args);
-	return(ret);	
+	return (ret);
 }

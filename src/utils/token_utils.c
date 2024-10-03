@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/03 13:46:07 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:06:37 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	count_nodes(t_token *token)
 int	check_file_token(t_token *token, int start, t_mini *mini)
 {
 	struct stat	path_stat;
-	t_token *temp;
-	
+	t_token		*temp;
+
 	temp = token;
-	if(ft_find_c('\"', temp->text + start))
+	if (ft_find_c('\"', temp->text + start))
 		expander(&temp, mini);
 	if (stat(temp->text + start, &path_stat) == -1)
 		return (0);
@@ -85,9 +85,9 @@ void	count_redirections(t_token *token, t_mini *mini)
 
 t_token	*ft_finde_file(t_token *token)
 {
-	t_token *temp;
-	t_token *file;
-	
+	t_token	*temp;
+	t_token	*file;
+
 	file = NULL;
 	temp = token;
 	while (temp)

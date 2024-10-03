@@ -62,11 +62,9 @@ static void process_pipe_segment(t_token **temp, int *fd_in,
 		if (pid== 0)
 			setup_pipes(fd_in, pipefd, start, temp, mini);
 		else
-		{
 			handle_parent_process(pipefd, fd_in, mini, temp);
-    		waitpid(pid, &status, 0);
-		}
 	}
+	waitpid(pid, &status, 0);
 	if(WIFEXITED(status))
 			mini->return_code = WEXITSTATUS(status);
 }

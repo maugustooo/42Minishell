@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 12:52:35 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:02:54 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ static int have_pipe(t_token *token, t_mini *mini)
 {
 	int flag;
 
+	mini->after_pipe = true;
 	flag = 0;
 	while (token)
 	{
 		if(token->type == PIPE)
 		{
+			if(!token->next)
+				mini->after_pipe = false;
 			mini->num_pipes++;
 			flag = 1; 
 		}
@@ -83,10 +86,12 @@ void check_red_cmd(t_token **token)
 	fd = 0;
 	if((*token)->type == CMD && (ft_strcmp((*token)->text, ">") == 0 || ft_strcmp((*token)->text, ">>") == 0) && (*token)->next)
 	{
-		if((*token)->next->type == FILE && ft_strcmp((*token)->text, ">") == 0)
+		if(ft_strcmp((*token)->text, ">") == 0)
 			fd = open((*token)->next->text, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if((*token)->next->type == FILE && ft_strcmp((*token)->text, ">>") == 0)
+		else if(ft_strcmp((*token)->text, ">>") == 0)
 			fd = open((*token)->next->text, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if(fd < 0)
+			return ;
 		remove_node(token);
 		remove_node(token);
 	}
@@ -104,7 +109,6 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 	if(!mini->penv)
 		dup_envp(mini, envp);
 	get_tokens(token, mini);
-	// print_tokens(*token, mini);
 	if(!syntax_errors(*token))
 		return(0);
 	if(ft_strncmp((*mini->splited), "echo", 4) == 0 && (*token)->next)
@@ -120,5 +124,9 @@ int parse(t_mini *mini, t_token	**token, char **envp)
 	}
 	remove_dup_files(token);
 	check_red_cmd(token);
+	if(!token || !*token)
+		return(0);
+	if(mini->after_pipe == false)
+		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_UNCLOSED_PIPE));
 	return(1);
 }

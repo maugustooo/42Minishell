@@ -41,8 +41,7 @@ int output(t_token *token, t_mini *mini, t_token *file_node, int type)
 		}
 	else
 		check_access(token->text);
-	if(after_file)
-		ft_printf_fd(fd, "\n");
+	ft_printf_fd(fd, "\n");
 	return (1);
 }
 
