@@ -70,7 +70,7 @@ static void setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **tem
 }
 
 static void process_pipe_segment(t_token **temp, int *fd_in, 
-	t_mini *mini, t_token **token)
+	t_mini *mini)
 {
     int 	pipefd[2];
     t_token *start;
@@ -107,7 +107,7 @@ void pipes(t_token **token, t_mini *mini)
 	temp = *token;
 	fd_in = 0;
 	if (!mini->final_pipe)
-        	process_pipe_segment(&temp, &fd_in, mini, token);
+        	process_pipe_segment(&temp, &fd_in, mini);
 	else
 	{
 		mini->return_code = 0;
