@@ -1,6 +1,6 @@
 #include"minishell.h"
 
-static void handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini, t_token **temp)
+void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini, t_token **temp)
 {
     if (mini->is_pipe)
     {
@@ -13,7 +13,7 @@ static void handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini, t_tok
 		*temp = (*temp)->next->next;
 }
 
-static void setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **temp, t_mini *mini)
+void	setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **temp, t_mini *mini)
 {
 	if (*fd_in != 0)
 	{
@@ -41,32 +41,22 @@ static void setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **tem
 	}
 }
 
-static void process_pipe_segment(t_token **temp, int *fd_in, 
-	t_mini *mini)
+void process_pipe_segment(t_token **temp, int *fd_in, t_mini *mini)
 {
-    int 	pipefd[2];
-    t_token *start;
-	int		status;
-	int		pid;
+    pid_t child_pids[1024];
+    int pid_count;
+    int status;
+    t_pipe_info pipe_info;
 
+	pid_count = 0;
 	status = 0;
-	while (temp && *temp)
-	{
-		mini->is_pipe = 2;
-		start = *temp;
-		if((*temp)->next)
-			check_pipes(mini, temp);
-		if (mini->is_pipe == 1)
-			pipe(pipefd);
-		pid = fork();
-		if (pid== 0)
-			setup_pipes(fd_in, pipefd, start, temp, mini);
-		else
-			handle_parent_process(pipefd, fd_in, mini, temp);
-	}
-	waitpid(pid, &status, 0);
-	if(WIFEXITED(status))
-			mini->return_code = WEXITSTATUS(status);
+    pipe_info.fd_in = fd_in;
+    pipe_info.pid_count = &pid_count;
+    pipe_info.child_pids = child_pids;
+
+    while (temp && *temp)
+        process_segment_iteration(temp, mini, &pipe_info);
+    wait_for_children(child_pids, pid_count, mini);
 }
 
 void pipes(t_token **token, t_mini *mini)

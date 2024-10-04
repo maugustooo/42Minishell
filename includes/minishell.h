@@ -85,7 +85,12 @@ typedef struct s_token
 	struct s_token	*prev;
 } t_token;
 
-
+typedef struct s_pipe_info
+{
+	int		*pid_count;
+	pid_t	*child_pids;
+	int		*fd_in;
+} t_pipe_info;
 
 typedef struct s_mini
 {
@@ -157,6 +162,11 @@ int 	output(t_token *token, t_mini *mini, t_token *last, int type);
 int		check_valid_n_flag(char *str);
 void	remove_dup_files(t_token **token);
 void	remove_node(t_token **token);
+void	wait_for_children(pid_t *child_pids, int pid_count, t_mini *mini);
+void	process_segment_iteration(t_token **temp, t_mini *mini, t_pipe_info *pipe_info);
+void	setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **temp, t_mini *mini);
+void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini, t_token **temp);
+
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
