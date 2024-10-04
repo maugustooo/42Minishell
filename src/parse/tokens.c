@@ -6,28 +6,27 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/03 11:55:13 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:54:15 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void remove_node(t_token **token)
+void	remove_node(t_token **token)
 {
-    t_token *current;
+	t_token	*current;
 
 	current = *token;
-    if (!token || !(*token))
-        return;
-    if (current->prev)
-        current->prev->next = current->next;
-    if (current->next)
-        current->next->prev = current->prev;
-    *token = current->next;
+	if (!token || !(*token))
+		return ;
+	if (current->prev)
+		current->prev->next = current->next;
+	if (current->next)
+		current->next->prev = current->prev;
+	*token = current->next;
 	free(current->text);
-    free(current);
+	free(current);
 }
-
 
 /**
  * @brief Set the values type of the node
@@ -58,27 +57,29 @@ int	condition(t_token **token, t_mini *mini)
 {
 	if (((*token)->text[0] == '<' && (*token)->text[1])
 		|| ((*token)->text[0] == '\"' && (*token)->text[1] == '<'
-		&& (*token)->text[2]))
+			&& (*token)->text[2]))
 	{
-		if(check_file_token(*token, 1, mini))
+		if (check_file_token(*token, 1, mini))
 			return (1);
-		else if(!check_file_token(*token, 1, mini))
+		else if (!check_file_token(*token, 1, mini))
 			return (0);
 	}
 	if (((*token)->prev->type == OUTPUT
 			|| (*token)->prev->type == INPUT
 			|| (*token)->prev->type == APPEND
-			|| (*token)->prev->type == FILE) && check_file_token(*token, 0, mini)
+			|| (*token)->prev->type == FILE)
+		&& check_file_token(*token, 0, mini)
 		&& (*token)->type != OUTPUT && (*token)->type != INPUT
 		&& (*token)->type != APPEND && (*token)->type != PIPE)
 		return (1);
 	else if (((*token)->prev->type == OUTPUT
 			|| (*token)->prev->type == INPUT
-			|| (*token)->prev->type == APPEND) && !check_file_token(*token, 0, mini)
+			|| (*token)->prev->type == APPEND)
+		&& !check_file_token(*token, 0, mini)
 		&& (*token)->type != OUTPUT && (*token)->type != INPUT
 		&& (*token)->type != APPEND && (*token)->type != PIPE)
 		return (0);
-	return(2);
+	return (2);
 }
 
 /**
@@ -108,9 +109,9 @@ static void	init_token(t_token **token, char *text, t_mini *mini)
 		free(cwd_slash);
 		if (condition(token, mini) == 1)
 			(*token)->type = FILE;
-		else if(!condition(token, mini))
+		else if (!condition(token, mini))
 			(*token)->type = NOT_FILE;
-		if((*token)->prev->type == PIPE && ft_strcmp((*token)->text, "|") != 0)
+		if ((*token)->prev->type == PIPE && ft_strcmp((*token)->text, "|") != 0)
 			(*token)->type = CMD;
 		free(file);
 	}
@@ -128,26 +129,28 @@ void	get_tokens(t_token **token, t_mini *mini)
 		(*token) = (*token)->prev;
 }
 
-void remove_dup_files(t_token **token)
+void	remove_dup_files(t_token **token)
 {
 	while ((*token)->next)
 	{
-		if((*token)->type == INPUT && (*token)->next)
+		if ((*token)->type == INPUT && (*token)->next)
 		{
 			(*token) = (*token)->next;
 			while ((*token)->next && ((*token)->type == FILE
-				|| (*token)->type == NOT_FILE || (*token)->next->type == INPUT || (*token)->type == INPUT))
-				{
-					if((*token)->next->type == FILE	
-						|| (*token)->next->type == NOT_FILE
-						|| (*token)->next->type == INPUT
-						|| (*token)->type == INPUT)
-						remove_node(token);
-					else
-						break ;
-				}
+					|| (*token)->type == NOT_FILE
+					|| (*token)->next->type == INPUT
+					|| (*token)->type == INPUT))
+			{
+				if ((*token)->next->type == FILE
+					|| (*token)->next->type == NOT_FILE
+					|| (*token)->next->type == INPUT
+					|| (*token)->type == INPUT)
+					remove_node(token);
+				else
+					break ;
+			}
 		}
-		if((*token)->next)
+		if ((*token)->next)
 			(*token) = (*token)->next;
 	}
 	while ((*token)->prev)

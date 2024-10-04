@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/03 14:57:50 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:45:29 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@ static void	add_token(t_mini *mini, char *start, int len, int index)
 {
 	if (mini->splited[index])
 		free(mini->splited[index]);
-	// if(ft_find_c('<', mini->splited[index]))
-	// {
-	// 	ft_strtrim(e)
-	// }
 	mini->splited[index] = ft_strndup(start, len);
 }
 
-static void	handle_redirects(char **line, t_mini *mini, int *index, int *len, char **start)
+static void	handle_redirects(char **line, t_mini *mini, int *index, int *len,char **start)
 {
 	if (*len > 0)
 	{
@@ -31,7 +27,7 @@ static void	handle_redirects(char **line, t_mini *mini, int *index, int *len, ch
 		(*index)++;
 		*len = 0;
 	}
-	if((*(*line) == '>' && *(*line + 1) == '>')
+	if ((*(*line) == '>' && *(*line + 1) == '>')
 		|| (*(*line) == '<' && *(*line + 1) == '<'))
 	{
 		add_token(mini, *line, 2, *index);
@@ -92,7 +88,7 @@ static void	process_tokens(char *line, t_mini *mini, int *index, int *in_quotes)
 			continue ;
 		}
 		if (!*in_quotes && ((*line == '|' || *line == '<' || *line == '>')
-			|| (*line == '>' && *line + 1 =='>')))
+				|| (*line == '>' && *line + 1 == '>')))
 		{
 			if (*line == '|')
 				handle_pipes(&line, mini, index, &len, &start);
@@ -110,20 +106,20 @@ static void	process_tokens(char *line, t_mini *mini, int *index, int *in_quotes)
 
 void	split_to_tokens(char *line, t_mini *mini)
 {
-    int index;
-	int in_quotes;
-	
+	int	index;
+	int	in_quotes;
+
 	in_quotes = 0;
 	index = 0;
-    if (!line || !line[0])
-        return;
-    mini->token_count = count_tokens(line, mini);
+	if (!line || !line[0])
+		return ;
+	mini->token_count = count_tokens(line, mini);
 	mini->splited = ft_calloc((mini->token_count + 1), sizeof(char *));
-    if (!mini->splited)
-        return ;
-    process_tokens(line, mini, &index, &in_quotes);
-	if(index == mini->token_count)
-    	mini->splited[index] = NULL;
+	if (!mini->splited)
+		return ;
+	process_tokens(line, mini, &index, &in_quotes);
+	if (index == mini->token_count)
+		mini->splited[index] = NULL;
 	else
 		mini->splited[index + 1] = NULL;
 }

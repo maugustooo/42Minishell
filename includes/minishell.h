@@ -50,7 +50,7 @@ typedef enum e_error
 	ERROR_NFILE,
 	ERROR_ENUM,
 	ERROR_ECHO_RED,
-	ERROR_SYNTAX_RED,
+	ERROR_SNTAX_RED,
 	ERROR_UNCLOSED_PIPE,
 }	t_error;
 
