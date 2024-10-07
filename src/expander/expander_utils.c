@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/02 10:39:14 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 08:56:50 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,23 @@ char	*handle_sq(t_token **token, int *i)
 char	*handle_dq(t_token **token, t_mini *mini, int *i)
 {
 	char	*segment;
-	int		start;
+	t_index	idx;
 
 	segment = ft_strdup("");
-	start = ++(*i);
+	idx.i = i;
+	idx.start = ++(*i);
 	while ((*token)->text[*i] && (*token)->text[*i] != '"')
 	{
 		if ((*token)->text[*i] == '$'
 			&& (ft_isalnum_under((*token)->text[*i + 1])
 				|| ((*token)->text[*i + 1] == '?')))
-			segment = handle_dq2(token, mini, i, &start, segment);
+			segment = handle_dq2(token, mini, &idx, segment);
 		else
 			(*i)++;
 	}
-	if (*i > start)
+	if (*i > idx.start)
 		segment = ft_strjoin_free(segment,
-				ft_strndup((*token)->text + start, *i - start), 3);
+				ft_strndup((*token)->text + idx.start, *i - idx.start), 3);
 	(*i)++;
 	return (segment);
 }

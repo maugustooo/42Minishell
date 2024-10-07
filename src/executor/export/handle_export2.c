@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 12:37:17 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 10:52:04 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	set_export(t_mini *mini, t_token *token)
 		tenv[j] = ft_strdup(mini->penv[j]);
 		j++;
 	}
-	check_export_expander(token, mini);
 	tenv[j] = ft_strdup(token->text);
 	j++;
 	tenv[j] = NULL;
@@ -61,19 +60,20 @@ void	check_arg_export(t_token *token, t_mini *mini)
 	free_key(key);
 }
 
-int	export_arg2(t_token *token, t_mini *mini, char **key, int *i, char *value)
+int	export_arg2(char **key, char *value)
 {
 	if (ft_strcmp(key[0], value) == 0)
-	{
-		free(mini->penv[*i]);
-		expander(&token, mini);
-		mini->penv[*i] = ft_strdup(token->text);
-		free(value);
-		free_keys(&key);
 		return (0);
-	}
 	free_keys(&key);
 	return (1);
+}
+
+void	export_arg2_5(t_token *token, t_mini *mini, int *i, char *value)
+{
+	free(mini->penv[*i]);
+	expander(&token, mini);
+	mini->penv[*i] = ft_strdup(token->text);
+	free(value);
 }
 
 int	export_arg(t_token *token, t_mini *mini)
@@ -94,8 +94,11 @@ int	export_arg(t_token *token, t_mini *mini)
 		while (mini->penv[++i])
 		{
 			key = ft_split(mini->penv[i], '=');
-			if (!export_arg2(token, mini, key, &i, value))
-				return (0);
+			if (!export_arg2(key, value))
+			{
+				export_arg2_5(token, mini, &i, value);
+				return (free_keys(&key), 0);
+			}
 		}
 		free(value);
 	}

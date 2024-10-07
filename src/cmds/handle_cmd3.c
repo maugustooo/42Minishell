@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/04 10:32:17 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 11:20:18 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	change_token_args(t_token *token, char **key, t_mini *mini)
 	t_token	*new_token;
 	int		i;
 
-	i = 0;
+	i = -1;
 	curr = token;
-	while (key[i])
+	while (key[i++])
 	{
 		if (i == 0)
 		{
@@ -89,40 +89,15 @@ void	change_token_args(t_token *token, char **key, t_mini *mini)
 			curr->next = new_token;
 			curr = new_token;
 		}
-		i++;
 	}
 }
 
 char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 {
-	char	**key;
 	char	**nargs;
-	size_t	i;
-	size_t	j;
-	int		total_len;
 
-	key = ft_split(token->text, ' ');
-	change_token_args(token, key, mini);
-	total_len = ft_arrlen(args) + ft_arrlen(key);
-	nargs = ft_calloc(total_len + 1, sizeof(char **));
-	if (!nargs)
-		error_malloc(mini);
-	i = -1;
-	while (++i < ft_arrlen(key))
-	{
-		nargs[i] = ft_strdup(key[i]);
-		if (!nargs[i])
-			error_malloc(mini);
-	}
-	j = 1;
-	while (j < ft_arrlen(args))
-	{
-		nargs[i++] = ft_strdup(args[j++]);
-		if (!nargs[i - 1])
-			error_malloc(mini);
-	}
-	nargs[i] = NULL;
-	free_keys(&key);
+	nargs = create_nargs(token, args, mini);
+	copy_args(nargs, args, mini, ft_arrlen(nargs));
 	free_args(args);
 	return (nargs);
 }
