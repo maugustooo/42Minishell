@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/04 14:15:51 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	handle_input(char ***args, int *i, t_mini *mini)
 	fd_in = open(filename, O_RDONLY);
 	if (fd_in < 0)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), filename);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NFILE), filename);
 		move_left((*args), *i - 1);
 		move_left((*args), *i - 1);
 		return (free(filename), 0);

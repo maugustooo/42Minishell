@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 10:13:27 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 12:10:53 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_file_perms(t_token *token)
 	}
 	else if (S_ISDIR(path_stat.st_mode))
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_ISDIR), token->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_ISDIR), token->text);
 		return (1);
 	}
 	return (1);
@@ -37,7 +37,7 @@ int	check_file_red(char *file)
 
 	if (stat(file, &path_stat) == -1)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), file);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NFILE), file);
 		return (0);
 	}
 	if (S_ISREG(path_stat.st_mode))
@@ -79,7 +79,7 @@ void	copy_args(char **nargs, char **args, t_mini *mini, size_t start)
 	i = 1;
 	while (args[i])
 	{
-		if(args[i])
+		if (args[i])
 			nargs[start++] = ft_strdup(args[i]);
 		if (!nargs[start - 1])
 			error_malloc(mini);

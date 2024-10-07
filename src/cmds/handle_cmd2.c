@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 15:27:24 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:54:58 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 int	handle_cmd2_5(t_token **token, t_mini *mini, char **args)
 {
-	handle_redirection(args, mini, token);
 	if (!check_command(token, mini, args))
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CMD), (*token)->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_CMD), (*token)->text);
 		free_child(token, mini, args);
 		exit(127);
 	}
@@ -75,7 +74,7 @@ int	check_file2(char **args, t_token **token, t_mini *mini)
 	handle_redirection(args, mini, token);
 	if (execve((*token)->text, args, mini->penv) == -1)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CMD),
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_CMD),
 			(*token)->text);
 		if (errno == EACCES)
 			exit(126);

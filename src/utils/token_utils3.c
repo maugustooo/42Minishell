@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:24:45 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 12:48:00 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:41:23 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	remove_node(t_token **token)
 	free(current->text);
 	free(current);
 }
-
 
 void	add_token(t_mini *mini, char *start, int len, t_splited_data *data)
 {

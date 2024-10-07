@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 12:03:35 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:13:52 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	handle_cmd3(t_token **token, t_mini *mini, char **args)
 {
 	if (access((*token)->text, F_OK) == -1)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), (*token)->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NFILE), (*token)->text);
 		free_child(token, mini, args);
 		exit(127);
 	}
@@ -24,10 +24,22 @@ int	handle_cmd3(t_token **token, t_mini *mini, char **args)
 		return (check_file(args, token, mini));
 	else
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_PERMS), (*token)->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_PERMS), (*token)->text);
 		free_child(token, mini, args);
 		exit(126);
 	}
+}
+
+int	advance_token(t_token *temp)
+{
+	while (temp->type == FILE && temp->next)
+	{
+		if (temp->next->type == FILE)
+			temp = temp->next;
+		else
+			return (0);
+	}
+	return (1);
 }
 
 int	handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args)
@@ -46,13 +58,8 @@ int	handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args)
 				args[++i] = ft_strdup(temp->text);
 				temp = temp->next;
 			}
-			while (temp->type == FILE && temp->next)
-			{
-				if (temp->next->type == FILE)
-					temp = temp->next;
-				else
-					break ;
-			}
+			if (!advance_token(temp))
+				break ;
 		}
 		args[++i] = ft_strdup(temp->text);
 		temp = temp->next;
@@ -78,7 +85,7 @@ void	change_token_args(t_token *token, char **key, t_mini *mini)
 			free(curr->text);
 			curr->text = ft_strdup(key[i]);
 		}
-		else if(key[i])
+		else if (key[i])
 		{
 			new_token = (t_token *)malloc(sizeof(t_token));
 			if (!new_token)

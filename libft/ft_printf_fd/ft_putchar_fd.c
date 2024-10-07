@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 12:40:13 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/02 12:40:48 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:51:33 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,5 @@
 int	ft_printchar_fd(char c, int fd)
 {
 	write (fd, &c, 1);
-	return(1);
+	return (1);
 }

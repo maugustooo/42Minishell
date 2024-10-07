@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:38:13 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/23 09:29:07 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	handle_env(t_mini *mini, t_token *token)
 	i = 0;
 	if (token->next && (ft_strcmp(token->next->text, "|") != 0))
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_SENV));
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SENV));
 		mini->return_code = 1;
 	}
 	else
@@ -68,7 +68,7 @@ void	handle_env(t_mini *mini, t_token *token)
 		}
 		else
 		{
-			ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CMD), token->text);
+			ft_printf_fd(STDERR_FILENO, error_msg(ERROR_CMD), token->text);
 			mini->return_code = 1;
 		}
 	}

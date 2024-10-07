@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_isalpha.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 12:16:23 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/14 10:39:42 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:45:00 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
  */
 int	ft_str_isalpha(char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = -1;
 	while (str[++i])
 		if (!ft_isalpha(str[i]))

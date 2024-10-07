@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 09:01:42 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/26 11:42:19 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:45:27 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,12 +157,12 @@ char	**ft_splitt(char const *s, char c)
 
 /**@}*/
 
-int main()
-{
-	char **s = ft_splitt("echo l | wc | ls", '|');
-	while (*s)
-	{
-		printf("%s\n", *s);
-		s++;
-	}
-}
+// int main()
+// {
+// 	char **s = ft_splitt("echo l | wc | ls", '|');
+// 	while (*s)
+// 	{
+// 		printf("%s\n", *s);
+// 		s++;
+// 	}
+// }

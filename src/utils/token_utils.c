@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/03 15:06:37 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:58:46 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	count_redirections(t_token *token, t_mini *mini)
 		if (temp->type == OUTPUT)
 			mini->output_count++;
 		if (temp->type == APPEND)
-			mini->append_count++;
+			mini->app_count++;
 		if (temp->type == FILE)
 			mini->file_count++;
 		temp = temp->next;

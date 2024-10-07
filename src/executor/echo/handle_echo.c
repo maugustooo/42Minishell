@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_echo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:04:24 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 09:46:11 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	output(t_token *token, t_mini *mini, t_token *file_node, int type)
 		|| file_node->type == NOT_FILE)
 		file = file_node->text;
 	else
-		ft_printf(Error_Msg(ERROR_ARG_ECHO));
+		ft_printf(error_msg(ERROR_ARG_ECHO));
 	if (!check_file_perms(file_node))
 		return (0);
 	if (type == OUTPUT)
@@ -73,7 +73,7 @@ int	print_echo2(t_token **next, t_mini *mini)
 	else if (redirect_status == 2)
 	{
 		mini->return_code = 1;
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), (*next)->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NFILE), (*next)->text);
 		return (2);
 	}
 	return (0);

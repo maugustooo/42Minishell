@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 09:46:01 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int	check_input2(t_token *token, t_mini *mini, t_token *file, t_token *temp)
 	output_return = output(token, mini, file, temp->type);
 	if (output_return == 0)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_PERMS), temp->next->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_PERMS), temp->next->text);
 		mini->return_code = 0;
 		return (1);
 	}
 	else if (output_return == 2)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_ECHO_RED));
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_ECHO_RED));
 		mini->return_code = 2;
 		return (1);
 	}

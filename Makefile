@@ -6,7 +6,7 @@
 #    By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 08:49:04 by gude-jes          #+#    #+#              #
-#    Updated: 2024/10/07 12:49:23 by maugusto         ###   ########.fr        #
+#    Updated: 2024/10/07 14:19:22 by maugusto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,11 @@ RM			= rm -rf
 GENERAL		= main
 PARSE		= parse tokens count_tokens handle_splited
 EXECUTOR	= executor handle_cd handle_echo handle_exit handle_pwd handle_env handle_export handle_export2 handle_unset signals echo_utils 
-CMD			= handle_cmd handle_cmd2 redirects handle_cmd3 handle_redirects
+CMD			= handle_cmd handle_cmd2 handle_cmd3
 EXPANDER	= expander expander_utils expander_utils2
 UTILS		= cmd_utils token_utils env_utils env_utils2 token_utils2 token_utils3 freedom echo_redirects cd_utils export_utils cmd_utils2
 PIPES		= pipes pipes2 check_pipe
+REDIRECTS  = redirects redirects_utils handle_redirects
 
 #==============================================================================#
 #                                    PATHS                                     #
@@ -46,7 +47,8 @@ VPATH		= src src/parse\
 				src/executor/pipes\
 				src/cmds\
 				src/utils\
-				src/pipes
+				src/pipes\
+				src/redirects
 				
 
 LIBFT_PATH	= libft
@@ -59,7 +61,7 @@ SRC			= $(addsuffix .c, $(GENERAL))\
 				$(addsuffix .c, $(CMD))\
 				$(addsuffix .c, $(UTILS))\
 				$(addsuffix .c, $(PIPES))\
-
+				$(addsuffix .c, $(REDIRECTS))\
 
 
 OBJ_DIR		= obj

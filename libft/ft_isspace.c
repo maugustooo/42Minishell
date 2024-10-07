@@ -6,13 +6,13 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:17:11 by maugusto          #+#    #+#             */
-/*   Updated: 2024/08/26 15:53:17 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:46:09 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
-int ft_isspace(char c)
+int	ft_isspace(char c)
 {
-	return(c == ' ');
+	return (c == ' ');
 }

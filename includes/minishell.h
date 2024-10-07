@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
+/*   Updated: 2024/10/07 15:40:33 by maugusto         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -54,28 +66,35 @@ typedef enum e_error
 	ERROR_UNCLOSED_PIPE,
 }	t_error;
 
-static inline const char *Error_Msg(enum e_error i)
+static inline const char	*error_msg(enum e_error i)
 {
-    static const char *strings[] = { 
-	"%s: command not found\n",
-	"minishell: cd: %s: No such file or directory\n",
-	"minishell: export: `%s': not a valid identifier\n",
-	"Syntax error near '%s'\n",
-	"ARG ECHO ERROR\n",
-	"ERROR NO ENV\n",
-	"minishell: %s: too many arguments\n",
-	"minishell: %s: numeric argument required\n",
-	"minishell: %s: Is a directory\n",
-	"minishell: %s: Permission denied\n",
-	"env: Options/Arguments not allowed by subject\n",
-	"minishell: cd: %s: Not a directory\n",
-	"minishell: %s: No such file or directory\n",
-	"minishell: exit: %s: numeric argument required\n",
-	"syntax error near unexpected token `newline'\n",
-	"syntax error near unexpected token `%s'\n",
-	"NO unclosed pipes are allowed\n",};
-    return strings[i];
+	static const char	*strings[17];
+
+	strings[0] = "%s: command not found\n";
+	strings[1] = "minishell: cd: %s: No such file or directory\n";
+	strings[2] = "minishell: export: `%s': not a valid identifier\n";
+	strings[3] = "Syntax error near '%s'\n";
+	strings[4] = "ARG ECHO ERROR\n";
+	strings[5] = "ERROR NO ENV\n";
+	strings[6] = "minishell: %s: too many arguments\n";
+	strings[7] = "minishell: %s: numeric argument required\n";
+	strings[8] = "minishell: %s: Is a directory\n";
+	strings[9] = "minishell: %s: Permission denied\n";
+	strings[10] = "env: Options/Arguments not allowed by subject\n";
+	strings[11] = "minishell: cd: %s: Not a directory\n";
+	strings[12] = "minishell: %s: No such file or directory\n";
+	strings[13] = "minishell: exit: %s: numeric argument required\n";
+	strings[14] = "syntax error near unexpected token `newline'\n";
+	strings[15] = "syntax error near unexpected token `%s'\n";
+	strings[16] = "NO unclosed pipes are allowed\n";
+	return (strings[i]);
 }
+
+typedef struct s_redirection
+{
+	int	file;
+	int	i;
+}	t_redirection_data;
 
 typedef struct s_token
 {
@@ -83,7 +102,7 @@ typedef struct s_token
 	int				type;
 	struct s_token	*next;
 	struct s_token	*prev;
-}		t_token;
+}	t_token;
 
 typedef struct s_pipe_info
 {
@@ -100,15 +119,16 @@ typedef struct s_index
 
 typedef struct s_splited_data
 {
-	int  len;
-	int  index;
-	int  in_quotes;
-	char quote_char;
+	int		len;
+	int		index;
+	int		in_quotes;
+	char	quote_char;
 }	t_splited_data;
 
 typedef struct s_mini
 {
 	char	*line;
+	char	*rl;
 	char	**penv;
 	char	*prev_dir;
 	char	**splited;
@@ -120,6 +140,8 @@ typedef struct s_mini
 	bool	exported;
 	bool	redirecte_handled;
 	bool	after_pipe;
+	
+	int		check_file_return;
 	int		is_pipe;
 	int		token_count;
 	int		return_code;
@@ -130,7 +152,7 @@ typedef struct s_mini
 	int		input;
 	int		input_count;
 	int		output_count;
-	int		append_count;
+	int		app_count;
 	int		file_count;
 }	t_mini;
 
@@ -167,7 +189,7 @@ int		export_arg_err(t_token *token, t_mini *mini, char **key);
 void	check_export_expander(t_token *token, t_mini *mini);
 void	error_malloc(t_mini *mini);
 void	handle_exit_conditions(const char *msg, t_token **token, t_mini *mini,
-							char **args);
+								char **args);
 void	count_redirections(t_token *token, t_mini *mini);
 int		check_file_perms(t_token *token);
 int		check_file_red(char *file);
@@ -179,10 +201,10 @@ void	remove_dup_files(t_token **token);
 void	remove_node(t_token **token);
 void	wait_for_children(pid_t *child_pids, int pid_count, t_mini *mini);
 void	process_segment_iteration(t_token **temp, t_mini *mini,
-							t_pipe_info *pipe_info);
+								t_pipe_info *pipe_info);
 int		setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_mini *mini);
 void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini,
-							t_token **temp);
+								t_token **temp);
 int		handle_n_flag(t_token **next);
 char	**create_nargs(t_token *token, char **args, t_mini *mini);
 void	copy_args(char **nargs, char **args, t_mini *mini, size_t start);
@@ -190,6 +212,10 @@ void	change_token_args(t_token *token, char **key, t_mini *mini);
 void	remove_node(t_token **token);
 void	handle_quotes_data(char c, t_splited_data *data);
 void	add_token(t_mini *mini, char *start, int len, t_splited_data *data);
+int		input_and_heredoc(char *str);
+int		output_or_append(char *str);
+void	move_left_args(char **args, int *i, char *last_text);
+int		args_len(char **args);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
@@ -237,10 +263,10 @@ int		handle_cmd_pipe(t_token **token, t_mini *mini);
 int		handle_cmd2(t_token **token, t_mini *mini, char **args);
 int		handle_cmd3(t_token **token, t_mini *mini, char **args);
 int		handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini,
-							char **args);
+								char **args);
 int		check_command(t_token **token, t_mini *mini, char **args);
 int		check_command2(char *full_path, char **dirs, t_token **token,
-							t_mini *mini);
+								t_mini *mini);
 int		check_file(char **argv, t_token **token, t_mini *mini);
 int		check_file2(char **args, t_token **token, t_mini *mini);
 int		check_path(t_mini *mini);

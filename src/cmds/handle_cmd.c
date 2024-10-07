@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 15:28:55 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_file(char **args, t_token **token, t_mini *mini)
 
 	if (stat((*token)->text, &path_stat) == -1)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CMD), (*token)->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_CMD), (*token)->text);
 		exit(127);
 	}
 	if (S_ISREG(path_stat.st_mode))
@@ -26,13 +26,13 @@ int	check_file(char **args, t_token **token, t_mini *mini)
 		if (access((*token)->text, X_OK) == 0)
 			return (check_file2(args, token, mini));
 		else
-			handle_exit_conditions(Error_Msg(ERROR_PERMS), token, mini, args);
+			handle_exit_conditions(error_msg(ERROR_PERMS), token, mini, args);
 	}
 	else if (S_ISDIR(path_stat.st_mode))
-		handle_exit_conditions(Error_Msg(ERROR_ISDIR), token, mini, args);
+		handle_exit_conditions(error_msg(ERROR_ISDIR), token, mini, args);
 	else
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), (*token)->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_CD), (*token)->text);
 		exit(127);
 	}
 	return (0);

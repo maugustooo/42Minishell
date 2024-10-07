@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:19:07 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 12:22:43 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	pipes(t_token **token, t_mini *mini)
 	else
 	{
 		mini->return_code = 0;
-		ft_printf(Error_Msg(ERROR_PIPE));
+		ft_printf(error_msg(ERROR_PIPE));
 		mini->final_pipe = 0;
 	}
 }

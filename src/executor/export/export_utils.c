@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:34:10 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 12:38:30 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	export_arg_err(t_token *token, t_mini *mini, char **key)
 		|| (!ft_str_isalpha(key[0]) && !ft_strchr(key[0], '_'))
 		|| ft_strcmp(key[0], "") == 0)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_EXPORT), token->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_EXPORT), token->text);
 		mini->return_code = 1;
 		mini->exported = true;
 		free_keys(&key);

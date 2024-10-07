@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/04 14:34:15 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:52:50 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	check_no_file(t_token *token, t_mini *mini)
 		if (temp->type == NOT_FILE && input)
 		{
 			if (!mini->pipe)
-				ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NFILE), temp->text);
+				ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NFILE), temp->text);
 			return (0);
 		}
 		temp = temp->next;
@@ -68,15 +68,15 @@ int	syntax_errors(t_token *token)
 		{
 			if (temp->next->type == OUTPUT || temp->next->type == INPUT
 				|| temp->next->type == APPEND || temp->next->type == DELIMITER)
-				return (ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_SNTAX_RED),
+				return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
 						temp->next->text), 0);
 		}
 		if (temp->type == PIPE && temp->next)
 			if (temp->next->type == PIPE)
-				return (ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_SNTAX_RED),
+				return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
 						temp->next->text), 0);
 		if (temp->type == CMD && ft_strcmp(temp->text, "|") == 0)
-			return (ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_SNTAX_RED),
+			return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
 					temp->text), 0);
 		temp = temp->next;
 	}
@@ -134,6 +134,6 @@ int	parse(t_mini *mini, t_token	**token, char **envp)
 	if (!token || !*token)
 		return (0);
 	if (mini->after_pipe == false)
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_UNCLOSED_PIPE));
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_UNCLOSED_PIPE));
 	return (1);
 }

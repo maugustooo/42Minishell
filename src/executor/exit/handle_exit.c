@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:45:18 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 12:36:27 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	exit_code(t_token **token, t_mini *mini)
 	if (code > 9223372036854775807
 		|| code < -9223372036854775807)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_ENUM), (*token)->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_ENUM), (*token)->text);
 		code = 2;
 	}
 	else
@@ -65,7 +65,7 @@ void	handle_codes2(t_token **token, t_mini *mini)
 	expander(token, mini);
 	if (strnum(token))
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_NUMARG), (*token)->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NUMARG), (*token)->text);
 		mini->return_code = 2;
 	}
 	else
@@ -81,7 +81,7 @@ void	handle_codes(t_token **token, t_mini *mini, int n_token)
 			n_token = count_nodes(*token);
 			if (n_token > 2 && !mini->pipe)
 			{
-				ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_TARG),
+				ft_printf_fd(STDERR_FILENO, error_msg(ERROR_TARG),
 					(*token)->text);
 				mini->return_code = 1;
 			}

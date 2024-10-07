@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 09:50:15 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	change_dir(t_token *token, t_mini *mini, char *tgt_dir)
 	if (chdir(tgt_dir) != 0 && token->next)
 	{
 		free(tgt_dir);
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_CD), token->next->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_CD), token->next->text);
 		mini->return_code = 1;
 	}
 	else
@@ -70,7 +70,7 @@ void	handle_cd(t_token *token, t_mini *mini)
 
 	if (count_nodes(token) > 2)
 	{
-		ft_printf_fd(STDERR_FILENO, Error_Msg(ERROR_TARG), token->text);
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_TARG), token->text);
 		mini->return_code = 1;
 		return ;
 	}

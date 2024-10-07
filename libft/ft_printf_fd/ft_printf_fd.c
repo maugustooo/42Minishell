@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 10:23:10 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/08/02 12:40:54 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:51:17 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static int	ft_check(int fd, const char *str, int i, va_list ap)
 	else if (str[i] == 's')
 		return (ft_printstr_fd(va_arg(ap, char *), fd));
 	else if (str[i] == 'p')
-		return (ft_putptr_fd( va_arg(ap, void *), fd));
+		return (ft_putptr_fd(va_arg(ap, void *), fd));
 	else if (str[i] == 'd' || str[i] == 'i')
-		return (ft_printnbr_fd( va_arg(ap, int), fd));
+		return (ft_printnbr_fd(va_arg(ap, int), fd));
 	else if (str[i] == 'u')
-		return (ft_uitoa_fd( va_arg(ap, unsigned int), fd));
+		return (ft_uitoa_fd(va_arg(ap, unsigned int), fd));
 	else if (str[i] == 'x' || str[i] == 'X')
-		return (ft_putnbrhex_fd( va_arg(ap, int), str[i], fd));
+		return (ft_putnbrhex_fd(va_arg(ap, int), str[i], fd));
 	else if (str[i] == '%')
 		return (ft_printpercent_fd(fd));
 	return (0);
