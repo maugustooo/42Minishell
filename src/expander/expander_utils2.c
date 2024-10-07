@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:07:08 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 11:53:57 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 11:56:28 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,12 @@ char	*handle_special_signs(t_token **token, t_mini *mini, int *i)
 	else if ((*token)->text[*i] == '$')
 	{
 		pid = fork();
-		if(pid != 0)
+		if (pid != 0)
 			segment = ft_itoa(pid);
 		else
 			exit(0);
 		(*i)++;
-		return(segment);
+		return (segment);
 	}
 	else
 		segment = NULL;

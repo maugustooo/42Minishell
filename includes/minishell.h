@@ -31,7 +31,7 @@
 # define HOME "/home/$USER"
 # define TEMP_FILE "/tmp/minishell_heredoc.txt"
 
-extern int g_pid;
+extern int	g_pid;
 
 typedef enum e_error
 {
@@ -83,26 +83,26 @@ typedef struct s_token
 	int				type;
 	struct s_token	*next;
 	struct s_token	*prev;
-} t_token;
+}		t_token;
 
 typedef struct s_pipe_info
 {
 	int		*pid_count;
 	pid_t	*child_pids;
 	int		*fd_in;
-} t_pipe_info;
+}	t_pipe_info;
 
 typedef struct s_index
 {
 	int	*i;
 	int	start;
-} t_index;
+}	t_index;
 
 typedef struct s_splited_data
 {
-	int  len;
-	int  index;
-	int  in_quotes;
+	int	len;
+	int	index;
+	int	in_quotes;
 }	t_splited_data;
 
 typedef struct s_mini
@@ -131,14 +131,14 @@ typedef struct s_mini
 	int		output_count;
 	int		append_count;
 	int		file_count;
-} t_mini;
+}	t_mini;
 
 //--------------Utils-------------//
 
 t_token	*ft_tokenlast(t_token *token);
 t_token	*ft_tokenlast_redirect(t_token *token);
 t_token	*ft_newnode(int type, char *text);
-t_token *ft_finde_file(t_token *token);
+t_token	*ft_finde_file(t_token *token);
 void	ft_tokenadd_back(t_token **token, t_token *new_token);
 void	ft_tokenclear(t_token **token);
 void	ft_tokendelone(t_token *token);
@@ -165,20 +165,23 @@ int		check_dir(char *tgt_dir);
 int		export_arg_err(t_token *token, t_mini *mini, char **key);
 void	check_export_expander(t_token *token, t_mini *mini);
 void	error_malloc(t_mini *mini);
-void	handle_exit_conditions(const char *msg, t_token **token, t_mini *mini, char **args);
+void	handle_exit_conditions(const char *msg, t_token **token, t_mini *mini,
+							char **args);
 void	count_redirections(t_token *token, t_mini *mini);
 int		check_file_perms(t_token *token);
 int		check_file_red(char *file);
 char	**change_args_exec(char **args, t_token *token, t_mini *mini);
 int		check_input(t_token *token, t_mini *mini);
-int 	output(t_token *token, t_mini *mini, t_token *last, int type);
+int		output(t_token *token, t_mini *mini, t_token *last, int type);
 int		check_valid_n_flag(char *str);
 void	remove_dup_files(t_token **token);
 void	remove_node(t_token **token);
 void	wait_for_children(pid_t *child_pids, int pid_count, t_mini *mini);
-void	process_segment_iteration(t_token **temp, t_mini *mini, t_pipe_info *pipe_info);
+void	process_segment_iteration(t_token **temp, t_mini *mini,
+							t_pipe_info *pipe_info);
 void	setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **temp, t_mini *mini);
-void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini, t_token **temp);
+void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini,
+							t_token **temp);
 int		handle_n_flag(t_token **next);
 char	**create_nargs(t_token *token, char **args, t_mini *mini);
 void	copy_args(char **nargs, char **args, t_mini *mini, size_t start);
@@ -229,14 +232,16 @@ int		handle_cmd(t_token **token, t_mini *mini);
 int		handle_cmd_pipe(t_token **token, t_mini *mini);
 int		handle_cmd2(t_token **token, t_mini *mini, char **args);
 int		handle_cmd3(t_token **token, t_mini *mini, char **args);
-int		handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args);
+int		handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini,
+							char **args);
 int		check_command(t_token **token, t_mini *mini, char **args);
-int		check_command2(char *full_path, char **dirs, t_token **token, t_mini *mini);
+int		check_command2(char *full_path, char **dirs, t_token **token,
+							t_mini *mini);
 int		check_file(char **argv, t_token **token, t_mini *mini);
 int		check_file2(char **args, t_token **token, t_mini *mini);
 int		check_path(t_mini *mini);
 void	handle_heredoc(char ***args, int *i, t_mini *mini);
 int		handle_input(char ***args, int	*i, t_mini *mini);
 int		handle_output(char ***args, int	*i, t_mini *mini);
-void	handle_redirection(char **args, t_mini *mini,  t_token **token);
+void	handle_redirection(char **args, t_mini *mini, t_token **token);
 #endif
