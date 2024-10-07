@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 11:04:33 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 11:41:49 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,16 @@ static void	handle_spaces(char **line, t_mini *mini, t_splited_data *data)
 		(*line)++;
 }
 
+void	handle_quotess(char c, t_splited_data *data, char *quote_char)
+{
+	if ((c == '"' || c == '\'') && !data->in_quotes)
+	{
+		data->in_quotes = 1;
+		*quote_char = c;
+	}
+	else if (c == *quote_char && data->in_quotes)
+		data->in_quotes = 0;
+}
 static void	process_tokens(char *line, t_mini *mini, t_splited_data *data)
 {
 	char	*start;
@@ -79,7 +89,7 @@ static void	process_tokens(char *line, t_mini *mini, t_splited_data *data)
 	quote_char = '\0';
 	while (*line)
 	{
-		handle_quotes(*line, data, &quote_char);
+		handle_quotess(*line, data, &quote_char);
 		if (!data->in_quotes && ft_isspace(*line))
 		{
 			handle_spaces(&line, mini, data);
@@ -109,7 +119,7 @@ void	split_to_tokens(char *line, t_mini *mini)
 	ft_memset(&data, 0, sizeof(t_splited_data));
 	if (!line || !line[0])
 		return ;
-	mini->token_count = count_tokens(line, mini, &data);
+	mini->token_count = count_tokens(line, mini);
 	mini->splited = ft_calloc((mini->token_count + 1), sizeof(char *));
 	if (!mini->splited)
 		return ;

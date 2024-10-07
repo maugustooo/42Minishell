@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 11:20:18 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 11:49:02 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	change_token_args(t_token *token, char **key, t_mini *mini)
 			free(curr->text);
 			curr->text = ft_strdup(key[i]);
 		}
-		else
+		else if(key[i])
 		{
 			new_token = (t_token *)malloc(sizeof(t_token));
 			if (!new_token)
