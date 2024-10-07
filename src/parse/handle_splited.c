@@ -6,20 +6,14 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 11:41:49 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:47:53 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	add_token(t_mini *mini, char *start, int len, t_splited_data *data)
-{
-	if (mini->splited[data->index])
-		free(mini->splited[data->index]);
-	mini->splited[data->index] = ft_strndup(start, len);
-}
-
-static void	handle_redirects(char **line, t_mini *mini, t_splited_data *data, char **start)
+static void	handle_redirects(char **line, t_mini *mini, t_splited_data *data,
+		char **start)
 {
 	if (data->len > 0)
 	{
@@ -42,7 +36,8 @@ static void	handle_redirects(char **line, t_mini *mini, t_splited_data *data, ch
 	}
 }
 
-static void handle_pipes(char **line, t_mini *mini, t_splited_data *data, char **start)
+static void	handle_pipes(char **line, t_mini *mini, t_splited_data *data,
+		char **start)
 {
 	if (data->len > 0)
 	{
@@ -71,25 +66,13 @@ static void	handle_spaces(char **line, t_mini *mini, t_splited_data *data)
 		(*line)++;
 }
 
-void	handle_quotess(char c, t_splited_data *data, char *quote_char)
-{
-	if ((c == '"' || c == '\'') && !data->in_quotes)
-	{
-		data->in_quotes = 1;
-		*quote_char = c;
-	}
-	else if (c == *quote_char && data->in_quotes)
-		data->in_quotes = 0;
-}
 static void	process_tokens(char *line, t_mini *mini, t_splited_data *data)
 {
 	char	*start;
-	char	quote_char;
 
-	quote_char = '\0';
 	while (*line)
 	{
-		handle_quotess(*line, data, &quote_char);
+		handle_quotes_data(*line, data);
 		if (!data->in_quotes && ft_isspace(*line))
 		{
 			handle_spaces(&line, mini, data);

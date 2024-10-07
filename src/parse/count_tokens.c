@@ -6,11 +6,22 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:49:49 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 11:38:27 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:46:27 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	handle_quotes_data(char c, t_splited_data *data)
+{
+	if ((c == '"' || c == '\'') && !data->in_quotes)
+	{
+		data->in_quotes = 1;
+		data->quote_char = c;
+	}
+	else if (c == data->quote_char && data->in_quotes)
+		data->in_quotes = 0;
+}
 
 void	handle_quotes(char c, int *in_quotes, char *quote_char)
 {
