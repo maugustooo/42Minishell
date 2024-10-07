@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 15:09:20 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/04 10:32:17 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	change_token_args(t_token *token, char **key, t_mini *mini)
 			if (!new_token)
 				error_malloc(mini);
 			new_token->text = ft_strdup(key[i]);
+			new_token->type = 2;
 			new_token->next = curr->next;
 			curr->next = new_token;
 			curr = new_token;
@@ -121,13 +122,6 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 			error_malloc(mini);
 	}
 	nargs[i] = NULL;
-	// while(key[++i])
-	// 	nargs[i] = ft_strdup(key[i]);
-	// j = 0;
-	// i--;
-	// while(nargs[j++ + i] && args[j])
-	// 	nargs[i + j] = ft_strdup(args[j]);
-	// nargs[i + j] = NULL;
 	free_keys(&key);
 	free_args(args);
 	return (nargs);
