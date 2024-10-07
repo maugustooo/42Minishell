@@ -156,7 +156,7 @@ void	dup_tenv(t_mini *mini, char **tenv);
 void	move_left(char **args, int start_index);
 char	*get_env_key(t_mini *mini, char *str);
 char	*get_env_value(t_mini *mini, char *str);
-void	handle_quotes(char c, t_splited_data *data, char *quote_char);
+void	handle_quotes(char c, int *in_quotes, char *quote_char);
 void	print_tokens(t_token *tokens, t_mini *mini);
 void	free_child(t_token **token, t_mini *mini, char **args);
 int		check_file_token(t_token *token, int start, t_mini *mini);
@@ -190,7 +190,7 @@ void	get_tokens(t_token	**token, t_mini *mini);
 void	ft_signals(void);
 void	handle_eof(t_token **token, t_mini *mini);
 void	split_to_tokens(char *line, t_mini *mini);
-int		count_tokens(char *line, t_mini *mini, t_splited_data *data);
+int		count_tokens(char *line, t_mini *mini);
 
 //------------Expander-----------//
 
