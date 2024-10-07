@@ -92,6 +92,12 @@ typedef struct s_pipe_info
 	int		*fd_in;
 } t_pipe_info;
 
+typedef struct s_index
+{
+	int	*i;
+	int	start;
+} t_index;
+
 typedef struct s_mini
 {
 	char	*line;
@@ -166,7 +172,7 @@ void	wait_for_children(pid_t *child_pids, int pid_count, t_mini *mini);
 void	process_segment_iteration(t_token **temp, t_mini *mini, t_pipe_info *pipe_info);
 void	setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **temp, t_mini *mini);
 void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini, t_token **temp);
-
+int		handle_n_flag(t_token **next);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
@@ -183,7 +189,7 @@ void	change_token_text(t_token *token, char *value);
 void	change_quotes(t_token **token);
 void	handle_expansion(t_token **token, t_mini *mini);
 char	*handle_sign2(t_token **token, t_mini *mini, int *i, int *len);
-char	*handle_dq2(t_token **token, t_mini *mini, int *i, int *start, char *segment);
+char	*handle_dq2(t_token **token, t_mini *mini, t_index *idx, char *segment);
 char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start);
 
 //------------Executor-----------//
