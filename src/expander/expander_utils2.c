@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:07:08 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 11:34:27 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 11:53:57 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,9 @@ char	*handle_dq2(t_token **token, t_mini *mini, t_index *idx, char *segment)
 char	*handle_special_signs(t_token **token, t_mini *mini, int *i)
 {
 	char	*segment;
+	pid_t	pid;
 
+	segment = NULL;
 	if ((*token)->text[*i] == '?')
 	{
 		segment = ft_itoa(mini->return_code);
@@ -107,8 +109,13 @@ char	*handle_special_signs(t_token **token, t_mini *mini, int *i)
 	}
 	else if ((*token)->text[*i] == '$')
 	{
-		segment = ft_itoa(getpid());
+		pid = fork();
+		if(pid != 0)
+			segment = ft_itoa(pid);
+		else
+			exit(0);
 		(*i)++;
+		return(segment);
 	}
 	else
 		segment = NULL;
