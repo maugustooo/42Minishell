@@ -6,21 +6,21 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:49:49 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/04 14:57:40 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 10:58:18 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_quotes(char c, int *in_quotes, char *quote_char)
+void	handle_quotes(char c, t_splited_data *data, char *quote_char)
 {
-	if ((c == '"' || c == '\'') && !(*in_quotes))
+	if ((c == '"' || c == '\'') && !data->in_quotes)
 	{
-		*in_quotes = 1;
+		data->in_quotes = 1;
 		*quote_char = c;
 	}
-	else if (c == *quote_char && *in_quotes)
-		*in_quotes = 0;
+	else if (c == *quote_char && data->in_quotes)
+		data->in_quotes = 0;
 }
 
 static void	increment_token_count(char **line, int *count, int in_quotes)
@@ -74,7 +74,7 @@ static void	check_final_pipe(char *line, t_mini *mini, int *count)
 	}
 }
 
-int	count_tokens(char *line, t_mini *mini)
+int	count_tokens(char *line, t_mini *mini, t_splited_data *data)
 {
 	int		count;
 	int		in_quotes;
@@ -85,7 +85,7 @@ int	count_tokens(char *line, t_mini *mini)
 	quote_char = '\0';
 	while (*line)
 	{
-		handle_quotes(*line, &in_quotes, &quote_char);
+		handle_quotes(*line, data, &quote_char);
 		increment_token_count(&line, &count, in_quotes);
 		if (*line)
 			line++;

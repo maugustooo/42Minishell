@@ -7,6 +7,8 @@ void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini, t_token **te
         close(pipefd[1]);
         *fd_in = pipefd[0];
     }
+	if(!mini->is_pipe)
+		close(pipefd[0]);
 	if (mini->is_pipe == 2 || !mini->is_pipe)
 		*temp = (*temp)->next;
 	else
@@ -25,7 +27,8 @@ void	setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **temp, t_mi
 		dup2(pipefd[1], STDOUT_FILENO);
         close(pipefd[1]);
 	}
-	close(pipefd[0]);
+	if(mini->is_pipe == 1)
+		close(pipefd[0]);
 	if (is_built_in(start))
 	{
 		handle_built_ins(&start, mini);
