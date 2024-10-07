@@ -6,27 +6,11 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/04 15:54:15 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:24:15 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	remove_node(t_token **token)
-{
-	t_token	*current;
-
-	current = *token;
-	if (!token || !(*token))
-		return ;
-	if (current->prev)
-		current->prev->next = current->next;
-	if (current->next)
-		current->next->prev = current->prev;
-	*token = current->next;
-	free(current->text);
-	free(current);
-}
 
 /**
  * @brief Set the values type of the node

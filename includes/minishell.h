@@ -100,9 +100,10 @@ typedef struct s_index
 
 typedef struct s_splited_data
 {
-	int	len;
-	int	index;
-	int	in_quotes;
+	int  len;
+	int  index;
+	int  in_quotes;
+	char quote_char;
 }	t_splited_data;
 
 typedef struct s_mini
@@ -179,13 +180,16 @@ void	remove_node(t_token **token);
 void	wait_for_children(pid_t *child_pids, int pid_count, t_mini *mini);
 void	process_segment_iteration(t_token **temp, t_mini *mini,
 							t_pipe_info *pipe_info);
-void	setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **temp, t_mini *mini);
+int		setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_mini *mini);
 void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini,
 							t_token **temp);
 int		handle_n_flag(t_token **next);
 char	**create_nargs(t_token *token, char **args, t_mini *mini);
 void	copy_args(char **nargs, char **args, t_mini *mini, size_t start);
 void	change_token_args(t_token *token, char **key, t_mini *mini);
+void	remove_node(t_token **token);
+void	handle_quotes_data(char c, t_splited_data *data);
+void	add_token(t_mini *mini, char *start, int len, t_splited_data *data);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
