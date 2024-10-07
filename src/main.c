@@ -60,7 +60,6 @@ static void minishell(t_mini *mini, t_token	**token, char **envp)
 			freethem(token, mini);
 			continue;
 		}
-		// print_tokens(*token, mini);
 		executor(token, mini);
 		freethem(token, mini);
 	}

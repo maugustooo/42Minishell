@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 10:13:27 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 11:53:23 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:10:53 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,13 @@ void	copy_args(char **nargs, char **args, t_mini *mini, size_t start)
 	size_t	i;
 
 	i = 1;
-	while (args[i++])
+	while (args[i])
 	{
 		if(args[i])
 			nargs[start++] = ft_strdup(args[i]);
 		if (!nargs[start - 1])
 			error_malloc(mini);
+		i++;
 	}
 	nargs[start] = NULL;
 }
