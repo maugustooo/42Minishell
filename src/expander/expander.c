@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-/*   Updated: 2024/09/23 09:41:44 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 10:48:34 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	expander(t_token **token, t_mini *mini)
 		handle_expansion(token, mini);
 	else if (result == 1)
 	{
-		ft_printf("%s", "Due to subject rules NO unclosed quotes");
+		ft_printf("%s", "Due to subject rules NO unclosed quotes\n");
 		mini->return_code = 2;
 		change_token_text(*token, NULL);
 	}
