@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 08:56:50 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/07 11:38:19 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@ char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start)
 
 	len = 1;
 	(*i)++;
-	if ((*token)->text[*i] == '?')
-	{
-		segment = ft_itoa(mini->return_code);
-		(*i)++;
-	}
-	else if (ft_isalnum_under((*token)->text[*i]))
+	segment = handle_special_signs(token, mini, i);
+	if (segment)
+		return (segment);
+	if (ft_isalnum_under((*token)->text[*i]))
 	{
 		while (ft_isalnum_under((*token)->text[*i + len]))
 			len++;
@@ -66,7 +64,8 @@ char	*handle_dq(t_token **token, t_mini *mini, int *i)
 	{
 		if ((*token)->text[*i] == '$'
 			&& (ft_isalnum_under((*token)->text[*i + 1])
-				|| ((*token)->text[*i + 1] == '?')))
+				|| ((*token)->text[*i + 1] == '?')
+				|| ((*token)->text[*i + 1] == '$')))
 			segment = handle_dq2(token, mini, &idx, segment);
 		else
 			(*i)++;

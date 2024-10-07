@@ -194,6 +194,7 @@ void	handle_expansion(t_token **token, t_mini *mini);
 char	*handle_sign2(t_token **token, t_mini *mini, int *i, int *len);
 char	*handle_dq2(t_token **token, t_mini *mini, t_index *idx, char *segment);
 char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start);
+char	*handle_special_signs(t_token **token, t_mini *mini, int *i);
 
 //------------Executor-----------//
 
