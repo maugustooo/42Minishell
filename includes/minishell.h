@@ -173,6 +173,9 @@ void	process_segment_iteration(t_token **temp, t_mini *mini, t_pipe_info *pipe_i
 void	setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_token **temp, t_mini *mini);
 void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini, t_token **temp);
 int		handle_n_flag(t_token **next);
+char	**create_nargs(t_token *token, char **args, t_mini *mini);
+void	copy_args(char **nargs, char **args, t_mini *mini, size_t start);
+void	change_token_args(t_token *token, char **key, t_mini *mini);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
