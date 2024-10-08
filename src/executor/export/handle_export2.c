@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/08 11:28:22 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:05:02 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	export_arg2(char **key, char *value)
 
 void	export_arg2_5(t_token *token, t_mini *mini, int *i, char *value)
 {
-	char *new_value;
+	char	*new_value;
 
 	if (mini->app_mode)
 	{
@@ -87,25 +87,18 @@ void	export_arg2_5(t_token *token, t_mini *mini, int *i, char *value)
 	}
 }
 
-
-int	export_arg(t_token *token, t_mini *mini)
+int	export_arg(t_token *token, t_mini *mini, int i)
 {
 	char	*value;
 	char	**key;
 	char	**key2;
-	int		i;
 
-	i = -1;
 	key2 = ft_split(token->text, '=');
 	if (export_arg_err(token, mini, key2))
 		return (0);
 	value = get_env_key(mini, key2[0]);
 	if (!key2[1] && value != NULL)
-	{
-		free_key(key2);
-		free(value);
-		return (0);
-	}
+		return (free_key(key2), free(value), 0);
 	if (value != NULL)
 	{
 		while (mini->penv[++i])
@@ -119,7 +112,5 @@ int	export_arg(t_token *token, t_mini *mini)
 		}
 		free(value);
 	}
-	free_key(key2);
-	return (1);
+	return (free_key(key2), 1);
 }
-

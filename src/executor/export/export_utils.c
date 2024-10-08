@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:34:10 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/08 11:34:27 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:02:07 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	export_arg_err(t_token *token, t_mini *mini, char **key)
 {
 	if (key[0] != NULL)
 	{
-		if(ft_strchr(key[0], '+') && key[0][ft_strlen(key[0]) - 1] == '+')
+		if (ft_strchr(key[0], '+') && key[0][ft_strlen(key[0]) - 1] == '+')
 		{
 			key[0] = ft_substr_free(key[0], 0, ft_strlen(key[0]) - 1);
 			mini->app_mode = true;

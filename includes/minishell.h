@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/08 11:34:45 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:05:10 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ typedef struct s_mini
 	bool	redirecte_handled;
 	bool	after_pipe;
 	bool	app_mode;
-	
+
 	int		check_file_return;
 	int		is_pipe;
 	int		token_count;
@@ -251,7 +251,7 @@ void	handle_env(t_mini *mini, t_token *toke);
 void	handle_pwd(t_mini *mini);
 void	set_export(t_mini *mini, t_token *token);
 void	handle_export(t_mini *mini, t_token *token);
-int		export_arg(t_token *token, t_mini *mini);
+int		export_arg(t_token *token, t_mini *mini, int i);
 void	check_arg_export(t_token *token, t_mini *mini);
 void	handle_unset(t_token *token, t_mini *mini);
 void	executor(t_token **token, t_mini *mini);
