@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:49:49 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 12:46:27 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/08 13:44:25 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,27 @@ void	handle_quotes(char c, int *in_quotes, char *quote_char)
 		*in_quotes = 0;
 }
 
+int pipes_and_red(char line)
+{
+	return((line == '|'
+					|| line == '<' || line == '>')
+				|| (line == '>' && line + 1 == '>')
+				|| (line == '<' && line + 1 == '<'));
+}
+
 static void	increment_token_count(char **line, int *count, int in_quotes)
 {
-	if (!in_quotes && (!ft_isspace(**line) && ((**line == '|'
-					|| **line == '<' || **line == '>')
-				|| (**line == '>' && **line + 1 == '>'))))
+	if (!in_quotes && (!ft_isspace(**line) && !pipes_and_red(**line)))
 		return ;
 	(*count)++;
 	if (!in_quotes)
 	{
-		while (**line && (ft_isspace(**line) || (**line == '|'
-					|| **line == '<' || **line == '>')
-				|| (**line == '>' && **line + 1 == '>')))
+		while (**line && (ft_isspace(**line) || pipes_and_red(**line)))
 		{
-			if ((!in_quotes && ((**line == '|' || **line == '<'
-							|| **line == '>') || (**line == '>'
-							&& **line + 1 == '>'))))
+			if ((!in_quotes && (pipes_and_red(**line))))
 			{
 				(*count)++;
-				while ((**line && ((**line == '|' || **line == '<'
-								|| **line == '>') || (**line == '>'
-								&& **line + 1 == '>'))))
+				while ((**line && (pipes_and_red(**line))))
 					(*line)++;
 			}
 			if (**line)
