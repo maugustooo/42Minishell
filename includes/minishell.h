@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 15:40:33 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/08 11:34:45 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ typedef struct s_mini
 	bool	exported;
 	bool	redirecte_handled;
 	bool	after_pipe;
+	bool	app_mode;
 	
 	int		check_file_return;
 	int		is_pipe;
@@ -216,6 +217,7 @@ int		input_and_heredoc(char *str);
 int		output_or_append(char *str);
 void	move_left_args(char **args, int *i, char *last_text);
 int		args_len(char **args);
+char	*ft_substr_free(const char *s, unsigned int start, size_t len);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

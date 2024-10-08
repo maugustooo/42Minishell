@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:49:51 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 14:50:32 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/08 09:24:11 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_str1dup(char *s, int len);
+char		*ft_strstr(char *str, char *to_find);
 char		*ft_strjoin_free(char *s1, char *s2, int to_free);
 
 void		ft_lstadd_front(t_list **lst, t_list *new);
