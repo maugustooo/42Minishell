@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 15:52:50 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/08 11:39:41 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	have_pipe(t_token *token, t_mini *mini)
 	return (flag);
 }
 
-static int	check_no_file(t_token *token, t_mini *mini)
+static int		check_no_file(t_token *token, t_mini *mini)
 {
 	t_token	*temp;
 	int		input;
@@ -45,10 +45,12 @@ static int	check_no_file(t_token *token, t_mini *mini)
 			input = 1;
 		if (temp->type == APPEND || temp->type == OUTPUT)
 			input = 0;
-		if (temp->type == NOT_FILE && input)
+		if (temp->type == NOT_FILE && (input || ft_strcmp(temp->text, "<") != 0))
 		{
 			if (!mini->pipe)
 				ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NFILE), temp->text);
+			if(ft_find_c('<', temp->text) && temp->next && temp->next->type != FILE)
+				mini->return_code = 2;
 			return (0);
 		}
 		temp = temp->next;
@@ -126,7 +128,8 @@ int	parse(t_mini *mini, t_token	**token, char **envp)
 		mini->pipe = true;
 	if (!check_no_file(*token, mini) && !mini->pipe)
 	{
-		mini->return_code = 1;
+		if(mini->return_code != 2)
+			mini->return_code = 1;
 		return (0);
 	}
 	remove_dup_files(token);
