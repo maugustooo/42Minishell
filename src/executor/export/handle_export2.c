@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/08 12:05:02 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/09 10:29:28 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	export_arg2_5(t_token *token, t_mini *mini, int *i, char *value)
 		free(mini->penv[*i]);
 		expander(&token, mini);
 		mini->penv[*i] = ft_strdup(token->text);
-		free(value);
 	}
 }
 
@@ -107,7 +106,7 @@ int	export_arg(t_token *token, t_mini *mini, int i)
 			if (!export_arg2(key, value))
 			{
 				export_arg2_5(token, mini, &i, key2[1]);
-				return (free_keys(&key), free_key(key2), free(value), 0);
+				return (free_keys(&key), free(value), free_key(key2), 0);
 			}
 		}
 		free(value);

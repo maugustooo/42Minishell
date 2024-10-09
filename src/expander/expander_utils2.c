@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:07:08 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 11:56:28 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/09 09:50:14 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*handle_dq2(t_token **token, t_mini *mini, t_index *idx, char *segment)
 	expanded = handle_sign(token, mini, idx->i, &(idx->start));
 	if (!expanded)
 		return (NULL);
-	segment = ft_strjoin_free(segment, expanded, 3);
+	segment = ft_strjoin_free(segment, expanded, 2);
 	idx->start = *(idx->i);
 	return (segment);
 }

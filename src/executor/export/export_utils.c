@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:34:10 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/08 12:02:07 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:37:59 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@ char	*strip_quotes2(char *str)
 	if (str[0] == '\'' || str[0] == '\"')
 	{
 		if (len > 1 && str[len - 1] == str[0])
-			new_str = ft_substr(str, 1, len - 2);
+			new_str = ft_substr_free(str, 1, len - 2);
 		else
-			new_str = ft_substr(str, 1, len - 1);
+			new_str = ft_substr_free(str, 1, len - 1);
 	}
 	else if (str[len - 1] == '\'' || str[len - 1] == '\"')
-		new_str = ft_substr(str, 0, len - 1);
+		new_str = ft_substr_free(str, 0, len - 1);
 	else
+	{
 		new_str = ft_strdup(str);
-	free(str);
+		free(str);
+	}
 	return (new_str);
 }
 
@@ -77,7 +79,7 @@ int	export_arg_err(t_token *token, t_mini *mini, char **key)
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_EXPORT), token->text);
 		mini->return_code = 1;
 		mini->exported = true;
-		free_keys(&key);
+		free_key(key);
 		return (1);
 	}
 	return (0);
