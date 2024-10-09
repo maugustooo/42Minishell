@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 11:36:43 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/09/18 09:15:54 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/09 10:46:02 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,17 @@ void	handle_unset(t_token *token, t_mini *mini)
 {
 	int		i;
 	char	**key;
+	t_token	*current;
 
-	i = 0;
-	if (token->next)
+	mini->return_code = 0;
+	current = token->next;
+	while (current)
 	{
+		i = 0;
 		while (mini->penv[i])
 		{
 			key = ft_split(mini->penv[i], '=');
-			if (ft_strcmp(key[0], token->next->text) == 0)
+			if (ft_strcmp(key[0], current->text) == 0)
 			{
 				dup_env_if(mini, mini->penv[i]);
 				free_unset(&key);
@@ -80,6 +83,7 @@ void	handle_unset(t_token *token, t_mini *mini)
 			free_unset(&key);
 			i++;
 		}
+		current = current->next;
 	}
 	mini->return_code = 0;
 }
