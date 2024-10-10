@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:29:22 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 14:32:53 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:09:52 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	handle_mult_redirections(char **args, t_mini *mini,
 		if (!ft_strcmp(args[data.i - 1], "<") && args[data.i] && mini)
 			move_left_args(args, &data.i, last_red->next->text);
 		else if (args[data.i + 1] && output_or_append(args[data.i + 1]))
-			move_left_args(args, &data.i, last_red->next->text);
+			handle_output(&args, &data.i, mini);
 		else
 			data.i--;
 	}
@@ -101,7 +101,7 @@ void	handle_redirection(char **args, t_mini *mini, t_token **token)
 	ft_memset(&data, 0, sizeof(t_redirection_data));
 	count_redirections(*token, mini);
 	last_redirect = ft_tokenlast_redirect(*token);
-	if (mini->input_count > 1 || mini->output_count > 1 || mini->app_count > 1)
+	if (mini->input_count > 1)
 	{
 		if (!handle_mult_redirections(args, mini, last_redirect, data))
 		{

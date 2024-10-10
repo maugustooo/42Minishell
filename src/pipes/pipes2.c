@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 08:58:30 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 12:23:44 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:56:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	process_segment_iteration(t_token **temp, t_mini *mini,
 	if ((*temp)->next)
 		check_pipes(mini, temp);
 	if (mini->is_pipe == 1)
-		pipe(pipefd);
+		if (pipe(pipefd) == -1)
+			handle_exit(temp, mini);
 	pid = fork();
 	if (pid == 0)
 	{
 		if (setup_pipes(pipe_info->fd_in, pipefd, start, mini))
 		{
-			freethem(temp, mini);
-			free_things(mini);
+			free_child(temp, mini, NULL);
 			exit(mini->return_code);
 		}
 	}

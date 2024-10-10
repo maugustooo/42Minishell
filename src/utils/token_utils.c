@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 13:58:46 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:06:12 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,15 @@ int	check_file_token(t_token *token, int start, t_mini *mini)
 	return (0);
 }
 
-t_token	*ft_tokenlast_redirect(t_token *token)
+t_token	*	ft_tokenlast_redirect(t_token *token)
 {
 	while (token)
 	{
 		if (token->next && (token->type == INPUT || token->type == OUTPUT
 				|| token->type == APPEND))
 		{
-			if (token->next->type == FILE && !token->next->next)
+			if ((token->next->type == FILE || token->next->type == NOT_FILE)
+				&& !token->next->next)
 				return (token);
 		}
 		token = token->next;
