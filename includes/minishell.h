@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/08 13:51:25 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/10 08:47:20 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,7 @@ void	handle_cd(t_token *arg, t_mini *mini);
 void	handle_exit(t_token **token, t_mini *mini);
 void	handle_echo(t_token **token, t_mini *mini);
 void	handle_env(t_mini *mini, t_token *toke);
-void	handle_pwd(t_mini *mini);
+void	handle_pwd(t_mini *mini, t_token *token);
 void	set_export(t_mini *mini, t_token *token);
 void	handle_export(t_mini *mini, t_token *token);
 int		export_arg(t_token *token, t_mini *mini, int i);
