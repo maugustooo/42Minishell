@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:38:40 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/08 11:45:36 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:20:31 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_pid;
+int	g_sig;
 
 char	*error_msg(enum e_error i)
 {
