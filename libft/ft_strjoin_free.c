@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:20:30 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 14:47:46 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:23:45 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
  * 
  * @param s1 String 1
  * @param s2 String 2
- * @param to_free NUm to free
+ * @param to_free Num to free
  * @return char* Returns the joined string
 */
 char	*ft_strjoin_free(char *s1, char *s2, int to_free)

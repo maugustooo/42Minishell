@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/09 09:47:38 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/09 12:13:23 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*handle_dq(t_token **token, t_mini *mini, int *i)
 	char	*segment;
 	t_index	idx;
 
-	segment = "";
+	segment = ft_strdup("");
 	idx.i = i;
 	idx.start = ++(*i);
 	while ((*token)->text[*i] && (*token)->text[*i] != '"')
