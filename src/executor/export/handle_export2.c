@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/09 10:29:28 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/10 09:23:07 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,7 @@ int	export_arg(t_token *token, t_mini *mini, int i)
 	char	**key;
 	char	**key2;
 
-	key2 = ft_split(token->text, '=');
-	if (export_arg_err(token, mini, key2))
+	if (!validate_and_split_export(token, mini, &key2))
 		return (0);
 	value = get_env_key(mini, key2[0]);
 	if (!key2[1] && value != NULL)

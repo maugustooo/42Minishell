@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/10 08:47:20 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/10 09:23:26 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ int		output_or_append(char *str);
 void	move_left_args(char **args, int *i, char *last_text);
 int		args_len(char **args);
 char	*ft_substr_free(const char *s, unsigned int start, size_t len);
+int		validate_and_split_export(t_token *token, t_mini *mini, char ***key2);
 char	*error_msg(enum e_error i);
 //--------------Parser------------//
 
