@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:34:17 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/10 08:54:51 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:33:07 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_pwd(t_mini *mini, t_token *token)
 {
-	if (token->next && (token->next->type != PIPE || token->next->text[0] == '-'))
+	if (token->next && token->next->type != PIPE && token->next->text[0] == '-')
 	{
 		ft_printf_fd(STDERR_FILENO, "pwd: options not allowed\n");
 		mini->return_code = 1;
