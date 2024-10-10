@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/10 09:23:26 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:46:37 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define HOME "/home/$USER"
 # define TEMP_FILE "/tmp/minishell_heredoc.txt"
 
-extern int	g_pid;
+extern int	g_sig;
 
 typedef enum e_error
 {
@@ -196,6 +196,8 @@ void	move_left_args(char **args, int *i, char *last_text);
 int		args_len(char **args);
 char	*ft_substr_free(const char *s, unsigned int start, size_t len);
 int		validate_and_split_export(t_token *token, t_mini *mini, char ***key2);
+void	handle_sigint(int sig);
+void	handle_sigint2(int sig);
 char	*error_msg(enum e_error i);
 //--------------Parser------------//
 

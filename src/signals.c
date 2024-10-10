@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:52:10 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/03 12:27:58 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:57:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,21 @@
 */
 void	handle_sigint(int sig)
 {
-	(void)sig;
-	if (g_pid != 0)
+	if(sig == SIGINT)
 	{
-		kill(g_pid, SIGINT);
 		write(STDOUT_FILENO, "\n", 1);
+		ft_putstr("miniShell: ");
+		signal(SIGINT, handle_sigint);
 	}
-	else
+}
+
+void	handle_sigint2(int sig)
+{
+	if(sig == SIGINT)
 	{
 		write(STDOUT_FILENO, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		g_sig = 130;
+		signal(SIGINT, handle_sigint2);
 	}
 }
 
