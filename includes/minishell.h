@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/10 13:35:25 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:06:09 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_pipe_info
 	int		*pid_count;
 	pid_t	*child_pids;
 	int		*fd_in;
+	int		pid;
 }	t_pipe_info;
 
 typedef struct s_index

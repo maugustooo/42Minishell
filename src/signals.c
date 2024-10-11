@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:52:10 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/11 10:40:11 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:07:36 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	handle_sigint2(int sig)
 	{
 		g_sig = 130;
 		write(STDOUT_FILENO, "\n", 1);
-		signal(SIGINT, handle_sigint2);
 	}
 }
 

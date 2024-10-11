@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 08:58:30 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/10 12:56:05 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:07:02 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	process_segment_iteration(t_token **temp, t_mini *mini,
 {
 	t_token	*start;
 	int		pipefd[2];
-	int		pid;
 
 	mini->is_pipe = 2;
 	start = *temp;
@@ -26,8 +25,9 @@ void	process_segment_iteration(t_token **temp, t_mini *mini,
 	if (mini->is_pipe == 1)
 		if (pipe(pipefd) == -1)
 			handle_exit(temp, mini);
-	pid = fork();
-	if (pid == 0)
+	pipe_info->pid = fork();
+	signal(SIGINT, handle_sigint2);
+	if (pipe_info->pid == 0)
 	{
 		if (setup_pipes(pipe_info->fd_in, pipefd, start, mini))
 		{
@@ -37,7 +37,7 @@ void	process_segment_iteration(t_token **temp, t_mini *mini,
 	}
 	else
 	{
-		pipe_info->child_pids[(*pipe_info->pid_count)++] = pid;
+		pipe_info->child_pids[(*pipe_info->pid_count)++] = pipe_info->pid;
 		handle_parent_process(pipefd, pipe_info->fd_in, mini, temp);
 	}
 }

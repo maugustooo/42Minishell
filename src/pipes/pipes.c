@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:19:07 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/11 11:06:24 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,15 @@ void	process_pipe_segment(t_token **temp, int *fd_in, t_mini *mini)
 	pid_t		child_pids[1024];
 	int			pid_count;
 	t_pipe_info	pipe_info;
+	int			pid;
 
 	ft_bzero(child_pids, sizeof(pid_t) * 1024);
 	pid_count = 0;
+	pid = 0;
 	pipe_info.fd_in = fd_in;
 	pipe_info.pid_count = &pid_count;
 	pipe_info.child_pids = child_pids;
+	pipe_info.pid = pid;
 	while (temp && *temp)
 		process_segment_iteration(temp, mini, &pipe_info);
 	wait_for_children(child_pids, pid_count, mini);
