@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 15:13:52 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/09 12:41:45 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ int	handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args)
 			if (!advance_token(temp))
 				break ;
 		}
-		args[++i] = ft_strdup(temp->text);
+		if(ft_strcmp(temp->text, "") != 0)
+			args[++i] = ft_strdup(temp->text);
 		temp = temp->next;
 	}
 	args[++i] = NULL;
 	ret = handle_cmd2(token, mini, args);
-	free_args(args);
 	return (ret);
 }
 

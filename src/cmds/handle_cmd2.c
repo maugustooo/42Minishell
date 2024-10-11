@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 15:54:58 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/09 12:52:04 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	handle_cmd2(t_token **token, t_mini *mini, char **args)
 		(*token)->type = 1;
 	}
 	if (is_built_in(*token))
-		return (executor(token, mini), 0);
+		return (executor(token, mini),free_args(args), 0);
 	else if (ft_strncmp((*token)->text, "/", 1) == 0
 		|| ft_strncmp((*token)->text, "./", 2) == 0)
 		return (handle_cmd3(token, mini, args));
