@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:07:08 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/10 12:29:10 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/11 09:46:15 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,11 @@ char	*handle_special_signs(t_token **token, t_mini *mini, int *i)
 	segment = NULL;
 	if ((*token)->text[*i] == '?')
 	{
+		if(g_sig == 130)
+		{
+			mini->return_code = 130;
+			g_sig = 0;
+		}
 		segment = ft_itoa(mini->return_code);
 		(*i)++;
 	}
@@ -117,7 +122,5 @@ char	*handle_special_signs(t_token **token, t_mini *mini, int *i)
 		(*i)++;
 		return (segment);
 	}
-	else
-		segment = NULL;
 	return (segment);
 }
