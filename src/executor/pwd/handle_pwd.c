@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_pwd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 16:34:17 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/10 12:33:07 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:52:26 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	handle_pwd(t_mini *mini, t_token *token)
 {
 	char	cwd[MAX_PATH_LEN];
 
-	if(check_pwd(mini, token))
-		return;
+	if (check_pwd(mini, token))
+		return ;
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		ft_printf("%s\n", cwd);

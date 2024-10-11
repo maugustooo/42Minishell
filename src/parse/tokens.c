@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/08 12:05:03 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:51:27 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	set_type(char *text)
 int	condition(t_token **token, t_mini *mini)
 {
 	if (((*token)->text[0] == '<' && ((*token)->text[1])
-		&& (*token)->text[1] != '<') || ((*token)->text[0] == '\"'
-		&& (*token)->text[1] == '<' && (*token)->text[2]))
+			&& (*token)->text[1] != '<') || ((*token)->text[0] == '\"'
+			&& (*token)->text[1] == '<' && (*token)->text[2]))
 	{
 		if (check_file_token(*token, 1, mini))
 			return (1);

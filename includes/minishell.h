@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/11 15:14:58 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:49:02 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef enum e_error
 	ERROR_SNTAX_RED,
 	ERROR_UNCLOSED_PIPE,
 }	t_error;
-
 
 typedef struct s_redirection
 {
@@ -170,7 +169,7 @@ int		export_arg_err(t_token *token, t_mini *mini, char **key);
 void	check_export_expander(t_token *token, t_mini *mini);
 void	error_malloc(t_mini *mini);
 void	handle_exit_conditions(const char *msg, t_token **token, t_mini *mini,
-								char **args);
+			char **args);
 void	count_redirections(t_token *token, t_mini *mini);
 int		check_file_perms(t_token *token);
 int		check_file_red(char *file);
@@ -182,10 +181,10 @@ void	remove_dup_files(t_token **token);
 void	remove_node(t_token **token);
 void	wait_for_children(pid_t *child_pids, int pid_count, t_mini *mini);
 void	process_segment_iteration(t_token **temp, t_mini *mini,
-								t_pipe_info *pipe_info);
+			t_pipe_info *pipe_info);
 int		setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_mini *mini);
 void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini,
-								t_token **temp);
+			t_token **temp);
 int		handle_n_flag(t_token **next);
 char	**create_nargs(t_token *token, char **args, t_mini *mini);
 void	copy_args(char **nargs, char **args, t_mini *mini, size_t start);
@@ -249,10 +248,10 @@ int		handle_cmd_pipe(t_token **token, t_mini *mini);
 int		handle_cmd2(t_token **token, t_mini *mini, char **args);
 int		handle_cmd3(t_token **token, t_mini *mini, char **args);
 int		handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini,
-								char **args);
+			char **args);
 int		check_command(t_token **token, t_mini *mini, char **args);
 int		check_command2(char *full_path, char **dirs, t_token **token,
-								t_mini *mini);
+			t_mini *mini);
 int		check_file(char **argv, t_token **token, t_mini *mini);
 int		check_file2(char **args, t_token **token, t_mini *mini);
 int		check_path(t_mini *mini);

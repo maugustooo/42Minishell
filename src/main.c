@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:38:40 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/10 12:20:31 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:49:19 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*error_msg(enum e_error i)
 	strings[16] = "NO unclosed pipes are allowed\n";
 	return (strings[i]);
 }
+
 /**
  * @brief on a loop, will handle the readlines, parse, do the executor and
  * free everything

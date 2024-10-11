@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/08 13:50:17 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:47:38 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	have_pipe(t_token *token, t_mini *mini)
 	return (flag);
 }
 
-static int		check_no_file(t_token *token, t_mini *mini)
+static int	check_no_file(t_token *token, t_mini *mini)
 {
 	t_token	*temp;
 	int		input;
@@ -49,7 +49,7 @@ static int		check_no_file(t_token *token, t_mini *mini)
 		{
 			if (!mini->pipe)
 				ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NFILE), temp->text);
-			if(ft_find_c('<', temp->text) && temp->next && temp->next->type != FILE)
+			if (ft_find_c('<', temp->text) && temp->next && temp->next->type != FILE)
 				mini->return_code = 2;
 			return (0);
 		}
@@ -67,20 +67,20 @@ int	syntax_errors(t_token *token)
 	{
 		if ((temp->type == OUTPUT || temp->type == INPUT || temp->type == APPEND
 				|| temp->type == DELIMITER))
-		{	
+		{
 			if (temp->next && (temp->next->type == OUTPUT
-				|| temp->next->type == INPUT || temp->next->type == APPEND
-				|| temp->next->type == DELIMITER))
+					|| temp->next->type == INPUT || temp->next->type == APPEND
+					|| temp->next->type == DELIMITER))
 				return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
 						temp->next->text), 0);
-			else if(!temp->next && (temp->text[0] == '<' || temp->text[0] == '>'
+			else if (!temp->next && (temp->text[0] == '<' || temp->text[0] == '>'
 					|| (temp->text[0] == '>' &&  temp->text[1] == '>')))
 				return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_ECHO_RED),
 						temp->text), 0);
 		}
 		if (temp->type == PIPE && temp->next && temp->next->type == PIPE)
 			return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
-						temp->next->text), 0);
+					temp->next->text), 0);
 		if (temp->type == CMD && ft_strcmp(temp->text, "|") == 0)
 			return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
 					temp->text), 0);
@@ -132,7 +132,7 @@ int	parse(t_mini *mini, t_token	**token, char **envp)
 		mini->pipe = true;
 	if (!check_no_file(*token, mini) && !mini->pipe)
 	{
-		if(mini->return_code != 2)
+		if (mini->return_code != 2)
 			mini->return_code = 1;
 		return (0);
 	}

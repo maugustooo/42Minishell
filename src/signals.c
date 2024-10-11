@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:52:10 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/11 11:07:36 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:49:28 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 */
 void	handle_sigint(int sig)
 {
-	if(sig == SIGINT)
+	if (sig == SIGINT)
 	{
 		g_sig = 130;
 		rl_replace_line("", 0);
@@ -32,7 +32,7 @@ void	handle_sigint(int sig)
 
 void	handle_sigint2(int sig)
 {
-	if(sig == SIGINT)
+	if (sig == SIGINT)
 	{
 		g_sig = 130;
 		write(STDOUT_FILENO, "\n", 1);

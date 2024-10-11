@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/11 14:58:53 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:46:25 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	handle_cmd2_5(t_token **token, t_mini *mini, char **args)
 {
 	handle_redirection(args, mini, token);
-	if(mini->redir_handled)
+	if (mini->redir_handled)
 		while (*token && ft_strcmp((*token)->text, args[0]) != 0)
 			*token = (*token)->next;
 	if (!check_command(token, mini, args))
@@ -56,7 +56,7 @@ int	check_command2(char *full_path, char **dirs, t_token **token, t_mini *mini)
 	int	i;
 
 	i = 0;
-	if(ft_strcmp(((*token)->text), "<") == 0)
+	if (ft_strcmp(((*token)->text), "<") == 0)
 		return (1);
 	while (dirs[i] != NULL)
 	{
@@ -78,13 +78,6 @@ int	check_command2(char *full_path, char **dirs, t_token **token, t_mini *mini)
 int	check_file2(char **args, t_token **token, t_mini *mini)
 {
 	args[0] = ft_strdup((*token)->text);
-	// handle_redirection(args, mini, token);
-	// int o = 0;
-	// while (args[o])
-	// {
-	// 	ft_printf("args[%d]: %s\n", o, args[o]);
-	// 	o++;
-	// }
 	if (execve((*token)->text, args, mini->penv) == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_CMD),
