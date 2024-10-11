@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:19:07 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:12:22 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini,
 		t_token **temp)
 {
-	if (mini->is_pipe)
+	if (mini->is_pipe == 1)
 	{
 		close(pipefd[1]);
 		*fd_in = pipefd[0];
 	}
-	if (!mini->is_pipe)
+	if (mini->is_pipe == 0 && mini->pipe_created)
 		close(pipefd[0]);
 	if (mini->is_pipe == 2 || !mini->is_pipe)
 		*temp = (*temp)->next;

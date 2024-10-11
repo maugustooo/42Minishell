@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/10 13:35:25 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:11:44 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,14 @@ typedef struct s_mini
 	int		output_count;
 	int		app_count;
 	int		file_count;
+	int		redir_handled;
+	int		pipe_created;
 }	t_mini;
 
 //--------------Utils-------------//
 
 t_token	*ft_tokenlast(t_token *token);
-t_token	*ft_tokenlast_redirect(t_token *token);
+t_token	*ft_last_redir(t_token *token);
 t_token	*ft_newnode(int type, char *text);
 t_token	*ft_finde_file(t_token *token);
 void	ft_tokenadd_back(t_token **token, t_token *new_token);
