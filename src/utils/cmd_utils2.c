@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 10:13:27 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/10 08:32:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	**create_nargs(t_token *token, char **args, t_mini *mini)
 	size_t	i;
 	int		total_len;
 
+	if(ft_strcmp(token->text, "") == 0)
+		token = token->next;
 	key = ft_split(token->text, ' ');
 	change_token_args(token, key, mini);
 	total_len = ft_arrlen(args) + ft_arrlen(key);

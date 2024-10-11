@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/11 08:23:23 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/11 09:19:16 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	handle_cmd3(t_token **token, t_mini *mini, char **args)
 int	advance_token(t_token *temp)
 {
 	while ((temp->type == FILE || (temp->next->type == FILE
-		|| temp->next->type == NOT_FILE)) && (temp->next))
+				|| temp->next->type == NOT_FILE)) && (temp->next))
 	{
 		if (temp->next->type == FILE)
 			temp = temp->next;
-		else if(temp->type == FILE && temp->next->type != FILE)
+		else if (temp->type == FILE && temp->next->type != FILE)
 			return (1);
 		else
 			return (0);
@@ -53,7 +53,6 @@ int	handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args)
 	i = -1;
 	while (temp)
 	{
-		expander(&temp, mini);
 		if (temp->type == INPUT)
 		{
 			if (temp->next && temp->next->type == FILE)
@@ -64,7 +63,7 @@ int	handle_cmd3_5(t_token *temp, t_token **token, t_mini *mini, char **args)
 			if (!advance_token(temp))
 				break ;
 		}
-		if(ft_strcmp(temp->text, "") != 0)
+		if (ft_strcmp(temp->text, "") != 0)
 			args[++i] = ft_strdup(temp->text);
 		temp = temp->next;
 	}
@@ -106,6 +105,10 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 {
 	char	**nargs;
 
+	if ((token->text[0] == '"'
+			&& token->text[ft_strlen(token->text) - 1] == '"')
+		|| (token->text[0] == '\'' && token->text[ft_strlen(token->text) - 1]))
+		return (args);
 	nargs = create_nargs(token, args, mini);
 	copy_args(nargs, args, mini, ft_arrlen(nargs));
 	free_args(args);

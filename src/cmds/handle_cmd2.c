@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/11 08:23:24 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/11 09:16:03 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	handle_cmd2_5(t_token **token, t_mini *mini, char **args)
 	handle_redirection(args, mini, token);
 	if (!check_command(token, mini, args))
 	{
+		expander(token, mini);
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_CMD), (*token)->text);
 		free_child(token, mini, args);
 		exit(127);
@@ -39,7 +40,7 @@ int	handle_cmd2(t_token **token, t_mini *mini, char **args)
 		(*token)->type = 1;
 	}
 	if (is_built_in(*token))
-		return (executor(token, mini),free_args(args), 0);
+		return (executor(token, mini), free_args(args), 0);
 	else if (ft_strncmp((*token)->text, "/", 1) == 0
 		|| ft_strncmp((*token)->text, "./", 2) == 0)
 		return (handle_cmd3(token, mini, args));

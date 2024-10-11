@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/11 09:13:50 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,21 +90,17 @@ int	handle_cmd(t_token **token, t_mini *mini)
 	args = ft_calloc(mini->token_count + 1, sizeof(char *));
 	if (!args)
 		error_malloc(mini);
-	expander(token, mini);
 	temp = *token;
 	pid = fork();
+	signal(SIGINT, handle_sigint2);
 	if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
 		handle_cmd3_5(temp, token, mini, args);
-	}
 	else
 	{
-		g_pid = pid;
 		waitpid(pid, &status, 0);
-		g_pid = 0;
+		free_args(args);
 	}
-	return (free_args(args), status);
+	return (status);
 }
 
 int	handle_cmd_pipe(t_token **token, t_mini *mini)
