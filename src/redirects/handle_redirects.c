@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:37:02 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,30 +75,30 @@ void	handle_heredoc(char ***args, int *i, t_mini *mini)
 
 int	handle_input(char ***args, int *i, t_mini *mini)
 {
-	int		fd_in;
 	char	*filename;
 	char	*original_filename;
 
 	mini->redirect = 1;
-	fd_in = 0;
 	original_filename = (*args)[*i];
 	filename = remove_quotes((*args)[*i]);
 	if (!filename)
 		return (0);
-	fd_in = open(filename, O_RDONLY);
-	if (fd_in < 0)
+	mini->fd_in = open(filename, O_RDONLY);
+	if (mini->fd_in < 0)
 	{
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NFILE), filename);
 		move_left((*args), *i - 1);
 		move_left((*args), *i - 1);
 		return (free(filename), 0);
 	}
-	dup2(fd_in, STDIN_FILENO);
-	close(fd_in);
+	dup2(mini->fd_in, STDIN_FILENO);
+	close(mini->fd_in);
 	(*args)[*i] = filename;
 	if (filename != original_filename)
 		free(original_filename);
 	move_left((*args), *i - 1);
+	move_left((*args), *i -1);
+	(*i)--;
 	return (1);
 }
 

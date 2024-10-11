@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/09 12:41:45 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/11 08:23:23 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,13 @@ int	handle_cmd3(t_token **token, t_mini *mini, char **args)
 
 int	advance_token(t_token *temp)
 {
-	while (temp->type == FILE && temp->next)
+	while ((temp->type == FILE || (temp->next->type == FILE
+		|| temp->next->type == NOT_FILE)) && (temp->next))
 	{
 		if (temp->next->type == FILE)
 			temp = temp->next;
+		else if(temp->type == FILE && temp->next->type != FILE)
+			return (1);
 		else
 			return (0);
 	}
