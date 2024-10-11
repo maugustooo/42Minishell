@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/11 09:16:03 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/11 14:58:53 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 int	handle_cmd2_5(t_token **token, t_mini *mini, char **args)
 {
 	handle_redirection(args, mini, token);
+	if(mini->redir_handled)
+		while (*token && ft_strcmp((*token)->text, args[0]) != 0)
+			*token = (*token)->next;
 	if (!check_command(token, mini, args))
 	{
 		expander(token, mini);
@@ -53,6 +56,8 @@ int	check_command2(char *full_path, char **dirs, t_token **token, t_mini *mini)
 	int	i;
 
 	i = 0;
+	if(ft_strcmp(((*token)->text), "<") == 0)
+		return (1);
 	while (dirs[i] != NULL)
 	{
 		full_path = build_full_path(dirs[i], (*token)->text, mini);

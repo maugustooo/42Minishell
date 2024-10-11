@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:29:22 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/10 12:09:52 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/11 14:57:33 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,20 +95,19 @@ static int	handle_mult_redirections(char **args, t_mini *mini,
 
 void	handle_redirection(char **args, t_mini *mini, t_token **token)
 {
-	t_token				*last_redirect;
 	t_redirection_data	data;
 
 	ft_memset(&data, 0, sizeof(t_redirection_data));
 	count_redirections(*token, mini);
-	last_redirect = ft_tokenlast_redirect(*token);
 	if (mini->input_count > 1)
 	{
-		if (!handle_mult_redirections(args, mini, last_redirect, data))
+		if (!handle_mult_redirections(args, mini, ft_last_redir(*token), data))
 		{
 			free_child(token, mini, args);
 			mini->return_code = 2;
 			exit (2);
 		}
+		mini->redir_handled = 1;
 		remove_redirection_symbol(args);
 	}
 	else
@@ -118,6 +117,7 @@ void	handle_redirection(char **args, t_mini *mini, t_token **token)
 			free_child(token, mini, args);
 			exit (1);
 		}
+		mini->redir_handled = 1;
 		remove_redirection_symbol(args);
 	}
 }
