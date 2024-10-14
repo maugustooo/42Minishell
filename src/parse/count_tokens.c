@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:49:49 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/11 15:50:26 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:29:40 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,6 @@ void	handle_quotes(char c, int *in_quotes, char *quote_char)
 	}
 	else if (c == *quote_char && in_quotes)
 		*in_quotes = 0;
-}
-
-int	pipes_and_red(char line)
-{
-	return ((line == '|'
-			|| line == '<' || line == '>')
-		|| (line == '>' && line + 1 == '>')
-		|| (line == '<' && line + 1 == '<'));
 }
 
 static void	increment_token_count(char **line, int *count, int in_quotes)

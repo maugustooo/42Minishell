@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 10:44:07 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:31:17 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,19 @@ int	condition(t_token **token, t_mini *mini)
 		if (check_file_token(*token, 1, mini) == 1)
 			return (1);
 		else if (check_file_token(*token, 1, mini) == 2)
-			return(3);
-		else 
+		{
+			(*token)->type = NO_PERM;
+			return (3);
+		}
+		else
 			return (0);
 	}
-	if (((*token)->prev->type == OUTPUT
-			|| (*token)->prev->type == INPUT
-			|| (*token)->prev->type == APPEND
-			|| (*token)->prev->type == FILE)
+	if ((return_redirect(*token) || (*token)->prev->type == FILE)
 		&& check_file_token(*token, 0, mini)
 		&& (*token)->type != OUTPUT && (*token)->type != INPUT
 		&& (*token)->type != APPEND && (*token)->type != PIPE)
 		return (1);
-	else if (((*token)->prev->type == OUTPUT
-			|| (*token)->prev->type == INPUT
-			|| (*token)->prev->type == APPEND)
-		&& !check_file_token(*token, 0, mini)
+	else if (return_redirect(*token) && !check_file_token(*token, 0, mini)
 		&& (*token)->type != OUTPUT && (*token)->type != INPUT
 		&& (*token)->type != APPEND && (*token)->type != PIPE)
 		return (0);
@@ -95,8 +92,6 @@ static void	init_token(t_token **token, char *text, t_mini *mini)
 		free(cwd_slash);
 		if (condition(token, mini) == 1)
 			(*token)->type = FILE;
-		else if (condition(token, mini) == 3)
-			(*token)->type = NO_PERM;
 		else if (!condition(token, mini))
 			(*token)->type = NOT_FILE;
 		if ((*token)->prev->type == PIPE && ft_strcmp((*token)->text, "|") != 0)

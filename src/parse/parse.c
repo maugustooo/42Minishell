@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/14 10:35:29 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:30:49 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,13 @@ static int	check_no_file(t_token *token, t_mini *mini)
 		{
 			if (!mini->pipe)
 				ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NFILE), temp->text);
-			if (ft_find_c('<', temp->text) && temp->next && temp->next->type != FILE)
+			if (ft_find_c('<', temp->text) && temp->next
+				&& temp->next->type != FILE)
 				mini->return_code = 2;
 			return (0);
 		}
-		if (temp->type == NO_PERM && (input || (ft_find_c('<', temp->text)
-				|| ft_find_c('>', temp->text)
-				|| (ft_find_c('<', temp->text)
-					&& ft_find_c('<', temp->text + 1)))))
-		{
-			ft_printf_fd(STDERR_FILENO, error_msg(ERROR_PERMS), temp->next->text);
-			return(0);
-		}
+		if (!check_perms)
+			return (0);
 		temp = temp->next;
 	}
 	return (1);
@@ -68,31 +63,29 @@ static int	check_no_file(t_token *token, t_mini *mini)
 
 int	syntax_errors(t_token *token)
 {
-	t_token	*temp;
+	t_token	*tmp;
 
-	temp = token;
-	while (temp)
+	tmp = token;
+	while (tmp)
 	{
-		if ((temp->type == OUTPUT || temp->type == INPUT || temp->type == APPEND
-				|| temp->type == DELIMITER))
+		if ((tmp->type == OUTPUT || tmp->type == INPUT || tmp->type == APPEND
+				|| tmp->type == DELIMITER))
 		{
-			if (temp->next && (temp->next->type == OUTPUT
-					|| temp->next->type == INPUT || temp->next->type == APPEND
-					|| temp->next->type == DELIMITER))
+			if (tmp->next && return_redirect(tmp))
 				return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
-						temp->next->text), 0);
-			else if (!temp->next && (temp->text[0] == '<' || temp->text[0] == '>'
-					|| (temp->text[0] == '>' &&  temp->text[1] == '>')))
+						tmp->next->text), 0);
+			else if (!tmp->next && (tmp->text[0] == '<' || tmp->text[0] == '>'
+					|| (tmp->text[0] == '>' && tmp->text[1] == '>')))
 				return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_ECHO_RED),
-						temp->text), 0);
+						tmp->text), 0);
 		}
-		if (temp->type == PIPE && temp->next && temp->next->type == PIPE)
+		if (tmp->type == PIPE && tmp->next && tmp->next->type == PIPE)
 			return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
-					temp->next->text), 0);
-		if (temp->type == CMD && ft_strcmp(temp->text, "|") == 0)
+					tmp->next->text), 0);
+		if (tmp->type == CMD && ft_strcmp(tmp->text, "|") == 0)
 			return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
-					temp->text), 0);
-		temp = temp->next;
+					tmp->text), 0);
+		tmp = tmp->next;
 	}
 	return (1);
 }

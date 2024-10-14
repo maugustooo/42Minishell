@@ -6,11 +6,35 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:29:22 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/11 14:57:33 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:33:15 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	move_left_heredoc(char **args, int start_index)
+{
+	int	i;
+
+	i = start_index;
+	while (args[i + 1])
+	{
+		if (args[i])
+			free(args[i]);
+		args[i] = args[i + 1];
+		i++;
+	}
+	if (args[i])
+		free(args[i]);
+	args[i] = NULL;
+	i = start_index;
+	while (args[i + 1])
+	{
+		args[i] = args[i + 1];
+		i++;
+	}
+	args[i] = NULL;
+}
 
 static int	handle_single_redirection(char **args, t_mini *mini,
 		t_redirection_data data)

@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 12:18:37 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:29:54 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,10 @@ void	handle_sigint2(int sig);
 char	*error_msg(enum e_error i);
 void	handle_sigint_heredoc(int sig);
 int		condition_hereoc(char *buffer, char *delimiter);
+void	move_left_heredoc(char **args, int start_index);
+int		check_perms(t_token *temp, int input);
+int		return_redirect(t_token *token);
+int		pipes_and_red(char line);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
