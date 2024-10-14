@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/10 12:37:02 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 11:44:29 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	move_left(char **args, int start_index)
 	i = start_index;
 	while (args[i + 1])
 	{
+		free(args[i]);
 		args[i] = args[i + 1];
 		i++;
 	}
@@ -69,7 +70,6 @@ void	handle_heredoc(char ***args, int *i, t_mini *mini)
 	close(pipefd[1]);
 	dup2(pipefd[0], STDIN_FILENO);
 	close(pipefd[0]);
-	move_left((*args), *i);
 	move_left((*args), *i);
 }
 
