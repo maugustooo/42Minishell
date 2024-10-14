@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 10:31:33 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:18:37 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,8 @@ int		validate_and_split_export(t_token *token, t_mini *mini, char ***key2);
 void	handle_sigint(int sig);
 void	handle_sigint2(int sig);
 char	*error_msg(enum e_error i);
+void	handle_sigint_heredoc(int sig);
+int		condition_hereoc(char *buffer, char *delimiter);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:16:07 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 14:33:47 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:17:59 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,10 @@ int	args_len(char **args)
 		i++;
 	i --;
 	return (i);
+}
+
+int condition_hereoc(char *buffer, char *delimiter)
+{
+	return (ft_strncmp(buffer, delimiter, ft_strlen(delimiter)) == 0
+			&& buffer[ft_strlen(delimiter)] == '\n');
 }

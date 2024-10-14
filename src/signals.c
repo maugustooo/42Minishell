@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:52:10 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/11 15:49:28 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:15:52 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ void	handle_sigint2(int sig)
 	}
 }
 
+void	handle_sigint_heredoc(int sig)
+{
+	if (sig == SIGINT)
+	{
+		close(STDIN_FILENO);
+		write(STDERR_FILENO, "\n", 1);
+	}
+}
 /**
  * @brief Will handle the ctrl+D to exit
  * 

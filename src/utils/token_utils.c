@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 10:29:44 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/14 10:41:58 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int	check_file_token(t_token *token, int start, t_mini *mini)
 		return (0);
 	if (S_ISREG(path_stat.st_mode))
 	{
-		if (access(temp->text + start, R_OK) == 0)
+		if (access(temp->text + start, R_OK) == 0
+			&& access(temp->text + start, X_OK) == 0
+			&& access(temp->text + start, W_OK) == 0)
 			return (1);
 		else
 			return (2);

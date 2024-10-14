@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 10:31:14 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/14 10:44:07 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	init_token(t_token **token, char *text, t_mini *mini)
 		free(cwd_slash);
 		if (condition(token, mini) == 1)
 			(*token)->type = FILE;
-		else if (condition(token, mini) == 2)
+		else if (condition(token, mini) == 3)
 			(*token)->type = NO_PERM;
 		else if (!condition(token, mini))
 			(*token)->type = NOT_FILE;
