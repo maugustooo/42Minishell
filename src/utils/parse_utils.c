@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:56:12 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 15:33:01 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:42:23 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	check_perms(t_token *temp, int input)
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_PERMS), temp->next->text);
 		return (0);
 	}
-	else
-		return (1);
+	return (1);
 }
 
 int	return_redirect(t_token *token)

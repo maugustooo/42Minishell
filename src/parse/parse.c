@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/14 15:30:49 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:46:28 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	check_no_file(t_token *token, t_mini *mini)
 				mini->return_code = 2;
 			return (0);
 		}
-		if (!check_perms)
+		if (!check_perms(temp, input))
 			return (0);
 		temp = temp->next;
 	}
@@ -71,7 +71,7 @@ int	syntax_errors(t_token *token)
 		if ((tmp->type == OUTPUT || tmp->type == INPUT || tmp->type == APPEND
 				|| tmp->type == DELIMITER))
 		{
-			if (tmp->next && return_redirect(tmp))
+			if (tmp->next && return_redirect(tmp->next))
 				return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
 						tmp->next->text), 0);
 			else if (!tmp->next && (tmp->text[0] == '<' || tmp->text[0] == '>'

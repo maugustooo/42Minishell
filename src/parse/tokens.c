@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 15:31:17 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:47:55 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ int	condition(t_token **token, t_mini *mini)
 		else
 			return (0);
 	}
-	if ((return_redirect(*token) || (*token)->prev->type == FILE)
+	if ((return_redirect((*token)->prev) || (*token)->prev->type == FILE)
 		&& check_file_token(*token, 0, mini)
 		&& (*token)->type != OUTPUT && (*token)->type != INPUT
 		&& (*token)->type != APPEND && (*token)->type != PIPE)
 		return (1);
-	else if (return_redirect(*token) && !check_file_token(*token, 0, mini)
+	else if (return_redirect((*token)->prev) && !check_file_token(*token, 0, mini)
 		&& (*token)->type != OUTPUT && (*token)->type != INPUT
 		&& (*token)->type != APPEND && (*token)->type != PIPE)
 		return (0);
