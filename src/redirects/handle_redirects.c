@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/10 12:37:02 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:33:26 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	move_left(char **args, int start_index)
 	i = start_index;
 	while (args[i + 1])
 	{
+		if(args[i])
+			free(args[i]);
 		args[i] = args[i + 1];
 		i++;
 	}
@@ -54,6 +56,7 @@ void	handle_heredoc(char ***args, int *i, t_mini *mini)
 	mini->redirect = 1;
 	pipe(pipefd);
 	delimiter = (*args)[*i + 1];
+	signal(SIGINT, handle_sigint_heredoc);
 	while (1)
 	{
 		ft_printf("> ");
@@ -61,8 +64,7 @@ void	handle_heredoc(char ***args, int *i, t_mini *mini)
 		if (bytes_read <= 0)
 			break ;
 		buffer[bytes_read] = '\0';
-		if (ft_strncmp(buffer, delimiter, ft_strlen(delimiter)) == 0
-			&& buffer[ft_strlen(delimiter)] == '\n')
+		if (condition_hereoc(buffer, delimiter))
 			break ;
 		ft_printf_fd(pipefd[1], buffer);
 	}
