@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/11 15:47:38 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 10:35:29 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ static int	check_no_file(t_token *token, t_mini *mini)
 			if (ft_find_c('<', temp->text) && temp->next && temp->next->type != FILE)
 				mini->return_code = 2;
 			return (0);
+		}
+		if (temp->type == NO_PERM && (input || (ft_find_c('<', temp->text)
+				|| ft_find_c('>', temp->text)
+				|| (ft_find_c('<', temp->text)
+					&& ft_find_c('<', temp->text + 1)))))
+		{
+			ft_printf_fd(STDERR_FILENO, error_msg(ERROR_PERMS), temp->next->text);
+			return(0);
 		}
 		temp = temp->next;
 	}

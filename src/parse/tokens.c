@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/11 15:51:27 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/14 10:31:14 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@ int	condition(t_token **token, t_mini *mini)
 			&& (*token)->text[1] != '<') || ((*token)->text[0] == '\"'
 			&& (*token)->text[1] == '<' && (*token)->text[2]))
 	{
-		if (check_file_token(*token, 1, mini))
+		if (check_file_token(*token, 1, mini) == 1)
 			return (1);
-		else if (!check_file_token(*token, 1, mini))
+		else if (check_file_token(*token, 1, mini) == 2)
+			return(3);
+		else 
 			return (0);
 	}
 	if (((*token)->prev->type == OUTPUT
@@ -93,6 +95,8 @@ static void	init_token(t_token **token, char *text, t_mini *mini)
 		free(cwd_slash);
 		if (condition(token, mini) == 1)
 			(*token)->type = FILE;
+		else if (condition(token, mini) == 2)
+			(*token)->type = NO_PERM;
 		else if (!condition(token, mini))
 			(*token)->type = NOT_FILE;
 		if ((*token)->prev->type == PIPE && ft_strcmp((*token)->text, "|") != 0)
