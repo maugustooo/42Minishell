@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 11:05:13 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:05:49 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,30 @@ int	set_type(char *text)
 
 int	condition(t_token **tok, t_mini *mini)
 {
-	if (((*tok)->text[0] == '<' && ((*tok)->text[1] && (*tok)->text[1] != ' ')
+	if (((*tok)->text[0] == '<' && ((*tok)->text[1])
 			&& (*tok)->text[1] != '<') || ((*tok)->text[0] == '\"'
 			&& (*tok)->text[1] == '<' && (*tok)->text[2]))
 	{
 		if (check_file_token(*tok, 1, mini) == 1)
 			return (1);
-		else if (check_file_token(*tok, 1, mini) == 2)
-		{
-			(*tok)->type = NO_PERM;
-			return (3);
-		}
 		else
 			return (0);
 	}
 	if ((get_redirects((*tok)->prev) || (*tok)->prev->type == FILE)
-		&& check_file_token(*tok, 0, mini)
-		&& (*tok)->type != OUTPUT && (*tok)->type != INPUT
-		&& (*tok)->type != APPEND && (*tok)->type != PIPE)
+		&& check_file_token(*tok, 0, mini) == 1 && !get_redirects(*tok)
+		&& (*tok)->type != PIPE)
 		return (1);
 	else if (get_redirects((*tok)->prev) && !check_file_token(*tok, 0, mini)
 		&& (*tok)->type != OUTPUT && (*tok)->type != INPUT
 		&& (*tok)->type != APPEND && (*tok)->type != PIPE)
 		return (0);
+	else if (get_redirects((*tok)->prev) && check_file_token(*tok, 0, mini) == 2
+		&& (*tok)->type != OUTPUT && (*tok)->type != INPUT
+		&& (*tok)->type != APPEND && (*tok)->type != PIPE)
+	{
+		(*tok)->type = NO_PERM;
+		return (3);
+	}
 	return (2);
 }
 

@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 11:26:11 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:04:57 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ void	split_to_tokens(char *line, t_mini *mini)
 	if (!line || !line[0])
 		return ;
 	mini->token_count = count_tokens(line, mini);
-	// ft_printf("Token count: %d\n", mini->token_count);
 	mini->splited = ft_calloc((mini->token_count + 1), sizeof(char *));
 	if (!mini->splited)
 		return ;
