@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:49:49 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 15:29:40 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:10:12 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	handle_quotes(char c, int *in_quotes, char *quote_char)
 		*in_quotes = 0;
 }
 
-static void	increment_token_count(char **line, int *count, int in_quotes)
+static void	increment_token_count(char **line, int *count, int in_quotes, t_mini *mini)
 {
 	if (!in_quotes && (!ft_isspace(**line) && !pipes_and_red(**line)))
 		return ;
@@ -46,7 +46,8 @@ static void	increment_token_count(char **line, int *count, int in_quotes)
 			if ((!in_quotes && (pipes_and_red(**line))))
 			{
 				(*count)++;
-				while ((**line && (pipes_and_red(**line))))
+				mini->num_redir = 0;
+				while ((**line && (pipes_and_red(**line)) && ++mini->num_redir < 2))
 					(*line)++;
 			}
 			if (**line)
@@ -89,7 +90,7 @@ int	count_tokens(char *line, t_mini *mini)
 	while (*line)
 	{
 		handle_quotes(*line, &in_quotes, &quote_char);
-		increment_token_count(&line, &count, in_quotes);
+		increment_token_count(&line, &count, in_quotes, mini);
 		if (*line)
 			line++;
 	}

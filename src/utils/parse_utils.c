@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:56:12 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 15:42:23 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:12:25 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,23 @@ int	return_redirect(t_token *token)
 		|| token->type == APPEND || token->type == DELIMITER);
 }
 
+int	get_redirects(t_token *token)
+{
+	return (token->type == INPUT || token->type == OUTPUT
+		|| token->type == APPEND);
+}
+
 int	pipes_and_red(char line)
 {
 	return ((line == '|'
 			|| line == '<' || line == '>')
 		|| (line == '>' && line + 1 == '>')
 		|| (line == '<' && line + 1 == '<'));
+}
+
+int	check_redirects(char line)
+{
+	return((line == '|' || line == '<' || line == '>')
+				|| (line == '>' && line + 1 == '>')
+				|| (line == '<' && line + 1 == '<'));
 }

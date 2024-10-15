@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:24:45 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 13:41:23 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:25:41 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	add_token(t_mini *mini, char *start, int len, t_splited_data *data)
 	if (mini->splited[data->index])
 		free(mini->splited[data->index]);
 	mini->splited[data->index] = ft_strndup(start, len);
+	mini->len = len;
 }

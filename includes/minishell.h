@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 15:29:54 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:25:56 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ typedef struct s_mini
 	int		file_count;
 	int		redir_handled;
 	int		pipe_created;
+	int		num_redir;
+	int		len;
 }	t_mini;
 
 //--------------Utils-------------//
@@ -161,7 +163,7 @@ void	move_left(char **args, int start_index);
 char	*get_env_key(t_mini *mini, char *str);
 char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
-void	print_tokens(t_token *tokens, t_mini *mini);
+void	print_tokens(t_token *tokens, char**splited);
 void	free_child(t_token **token, t_mini *mini, char **args);
 int		check_file_token(t_token *token, int start, t_mini *mini);
 int		check_redirect(t_token **next);
@@ -208,6 +210,8 @@ void	move_left_heredoc(char **args, int start_index);
 int		check_perms(t_token *temp, int input);
 int		return_redirect(t_token *token);
 int		pipes_and_red(char line);
+int		check_redirects(char line);
+int		get_redirects(t_token *token);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

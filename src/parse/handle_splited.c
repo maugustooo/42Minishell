@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 14:03:47 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:26:11 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@ static void	handle_redirects(char **line, t_mini *mini, t_splited_data *data,
 		data->index++;
 		data->len = 0;
 	}
-	if ((*(*line) == '>' && *(*line + 1) == '>')
-		|| (*(*line) == '<' && *(*line + 1) == '<'))
+	if (check_redirects(**line))
 	{
-		add_token(mini, *line, 2, data);
-		(*line) = (*line) + 2;
-		data->index++;
+		while ((*line) && check_redirects(**line))
+		{
+			if (*(*line + 1) && (*(*line + 1) == '<' || *(*line + 1) == '<'))
+				add_token(mini, *line, 2, data);
+			else
+				add_token(mini, *line, 1, data);
+			(*line) = (*line) + mini->len;
+			data->index++;
+		}
 	}
 	else
 	{
@@ -103,6 +108,7 @@ void	split_to_tokens(char *line, t_mini *mini)
 	if (!line || !line[0])
 		return ;
 	mini->token_count = count_tokens(line, mini);
+	// ft_printf("Token count: %d\n", mini->token_count);
 	mini->splited = ft_calloc((mini->token_count + 1), sizeof(char *));
 	if (!mini->splited)
 		return ;

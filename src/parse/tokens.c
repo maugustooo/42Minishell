@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 09:10:18 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:05:13 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	set_type(char *text)
 	int	type;
 
 	type = 0;
-	if (ft_strcmp("<", text) == 0)
+	if (ft_strcmp("<<", text) == 0)
+		type = DELIMITER;
+	else if (ft_find_c('<', text) == 1)
 		type = INPUT;
-	else if (ft_find_c('>', text) == 1)
-		type = OUTPUT;
 	else if (ft_find_c('>', text) == 1 && ft_find_c('>', text + 1) == 1)
 		type = APPEND;
-	else if (ft_strcmp("<<", text) == 0)
-		type = DELIMITER;
+	else if (ft_find_c('>', text) == 1)
+		type = OUTPUT;
 	else if (ft_strcmp(text, "|") == 0)
 		type = PIPE;
 	else
@@ -39,7 +39,7 @@ int	set_type(char *text)
 
 int	condition(t_token **tok, t_mini *mini)
 {
-	if (((*tok)->text[0] == '<' && ((*tok)->text[1])
+	if (((*tok)->text[0] == '<' && ((*tok)->text[1] && (*tok)->text[1] != ' ')
 			&& (*tok)->text[1] != '<') || ((*tok)->text[0] == '\"'
 			&& (*tok)->text[1] == '<' && (*tok)->text[2]))
 	{
@@ -53,12 +53,12 @@ int	condition(t_token **tok, t_mini *mini)
 		else
 			return (0);
 	}
-	if ((return_redirect((*tok)->prev) || (*tok)->prev->type == FILE)
+	if ((get_redirects((*tok)->prev) || (*tok)->prev->type == FILE)
 		&& check_file_token(*tok, 0, mini)
 		&& (*tok)->type != OUTPUT && (*tok)->type != INPUT
 		&& (*tok)->type != APPEND && (*tok)->type != PIPE)
 		return (1);
-	else if (return_redirect((*tok)->prev) && !check_file_token(*tok, 0, mini)
+	else if (get_redirects((*tok)->prev) && !check_file_token(*tok, 0, mini)
 		&& (*tok)->type != OUTPUT && (*tok)->type != INPUT
 		&& (*tok)->type != APPEND && (*tok)->type != PIPE)
 		return (0);
