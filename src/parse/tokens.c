@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 12:05:49 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:32:01 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	set_type(char *text)
 
 	type = 0;
 	if (ft_strcmp("<<", text) == 0)
-		type = DELIMITER;
+		type = HERE;
 	else if (ft_find_c('<', text) == 1)
 		type = INPUT;
 	else if (ft_find_c('>', text) == 1 && ft_find_c('>', text + 1) == 1)
@@ -94,7 +94,7 @@ static void	init_token(t_token **token, char *text, t_mini *mini)
 		if (condition(token, mini) == 1)
 			(*token)->type = FILE;
 		else if (!condition(token, mini))
-			(*token)->type = NOT_FILE;
+			(*token)->type = NFILE;
 		if ((*token)->prev->type == PIPE && ft_strcmp((*token)->text, "|") != 0)
 			(*token)->type = CMD;
 		free(file);
@@ -117,18 +117,17 @@ void	remove_dup_files(t_token **token)
 {
 	while ((*token)->next)
 	{
-		if ((*token)->type == INPUT && (*token)->next)
+		if (((*token)->type == INPUT || (*token)->type == HERE)
+			&& (*token)->next)
 		{
 			(*token) = (*token)->next;
 			while ((*token)->next && ((*token)->type == FILE
-					|| (*token)->type == NOT_FILE
-					|| (*token)->next->type == INPUT
-					|| (*token)->type == INPUT))
+					|| (*token)->type == NFILE || (*token)->next->type == INPUT
+					|| (*token)->type == INPUT || (*token)->type == HERE
+					|| (*token)->prev->type == HERE) && ((*token)->next
+					&& (*token)->next->type != PIPE))
 			{
-				if ((*token)->next->type == FILE
-					|| (*token)->next->type == NOT_FILE
-					|| (*token)->next->type == INPUT
-					|| (*token)->type == INPUT)
+				if (return_dup_files(token))
 					remove_node(token);
 				else
 					break ;

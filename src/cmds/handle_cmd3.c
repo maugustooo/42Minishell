@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/15 09:48:49 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:17:07 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	handle_cmd3(t_token **token, t_mini *mini, char **args)
 int	advance_token(t_token *temp)
 {
 	while ((temp->type == FILE || (temp->next->type == FILE
-				|| temp->next->type == NOT_FILE)) && (temp->next))
+				|| temp->next->type == NFILE)) && (temp->next))
 	{
 		if (temp->next->type == FILE)
 			temp = temp->next;

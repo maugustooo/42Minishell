@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 13:39:58 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	check_input(t_token *token, t_mini *mini)
 		if ((temp->type == OUTPUT || temp->type == APPEND)
 			&& !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
 			return (check_input2(token, mini, file, temp));
-		if (temp->type == DELIMITER && !ft_find_c('"', temp->text)
+		if (temp->type == HERE && !ft_find_c('"', temp->text)
 			&& !ft_find_c('\'', temp->text))
 			heredoc(token, file);
 		temp = temp->next;

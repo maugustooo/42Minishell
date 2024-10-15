@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:29:22 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 15:33:15 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:32:00 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void	handle_redirection(char **args, t_mini *mini, t_token **token)
 	}
 	else
 	{
+		
 		if (!handle_single_redirection(args, mini, data))
 		{
 			free_child(token, mini, args);

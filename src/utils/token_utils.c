@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 12:21:53 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:17:07 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_token	*ft_last_redir(t_token *token)
 		if (token->next && (token->type == INPUT || token->type == OUTPUT
 				|| token->type == APPEND))
 		{
-			if ((token->next->type == FILE || token->next->type == NOT_FILE)
+			if ((token->next->type == FILE || token->next->type == NFILE)
 				&& !token->next->next)
 				return (token);
 		}
@@ -94,7 +94,7 @@ t_token	*ft_finde_file(t_token *token)
 	temp = token;
 	while (temp)
 	{
-		if ((temp->type == FILE || temp->type == NOT_FILE)
+		if ((temp->type == FILE || temp->type == NFILE)
 			&& (temp->prev->type == OUTPUT || temp->prev->type == APPEND))
 			file = temp;
 		temp = temp->next;

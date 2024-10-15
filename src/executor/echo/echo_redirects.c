@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_redirects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:07:50 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 09:23:31 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:17:07 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ int	check_redirect(t_token **next)
 
 	len = 0;
 	if ((*next)->type == INPUT || (*next)->type == FILE
-		|| (*next)->type == NOT_FILE)
+		|| (*next)->type == NFILE)
 	{
-		if ((*next)->type == FILE || (*next)->type == NOT_FILE)
+		if ((*next)->type == FILE || (*next)->type == NFILE)
 		{
-			if ((*next)->type == NOT_FILE)
+			if ((*next)->type == NFILE)
 				return (2);
 			(*next) = (*next)->next;
 			return (1);

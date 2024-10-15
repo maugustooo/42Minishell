@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 11:25:56 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:19:28 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@
 # define ARG 2
 # define INPUT 3
 # define OUTPUT 4
-# define DELIMITER 5
+# define HERE 5
 # define APPEND 6
 # define PIPE 7
 # define FILE 8
-# define NOT_FILE 9
+# define NFILE 9
 # define NO_PERM 10
 # define MAX_PATH_LEN 4096
 
@@ -137,6 +137,7 @@ typedef struct s_mini
 	int		pipe_created;
 	int		num_redir;
 	int		len;
+	int		saved_stdout;
 }	t_mini;
 
 //--------------Utils-------------//
@@ -212,6 +213,8 @@ int		return_redirect(t_token *token);
 int		pipes_and_red(char line);
 int		check_redirects(char line);
 int		get_redirects(t_token *token);
+int		return_dup_files(t_token **token);
+int		return_next(t_token *tmp);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

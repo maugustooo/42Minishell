@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 13:52:38 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:39:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,33 @@ void	move_left(char **args, int start_index)
 	args[i] = NULL;
 }
 
+char *set_delimiter(char **args, int *i, t_mini *mini)
+{
+	char	**tmp;
+	int		j;
+	char	*delimiter;
+
+	delimiter = NULL;
+	j = 0;
+	tmp = args;
+	if(mini->pipe)
+	{
+		while (tmp[j])
+		{
+			if (ft_strcmp(tmp[j], "<<") == 0)
+			{
+				if(tmp[j + 1])
+					delimiter = tmp[j + 1];
+				break;
+			}
+			j++;
+		}
+	}
+	else
+		delimiter = args[*i + 1];
+	return (delimiter);
+}
+
 void	handle_heredoc(char ***args, int *i, t_mini *mini)
 {
 	char	buffer[1024];
@@ -53,11 +80,11 @@ void	handle_heredoc(char ***args, int *i, t_mini *mini)
 
 	mini->redirect = 1;
 	pipe(pipefd);
-	delimiter = (*args)[*i + 1];
+	delimiter = set_delimiter(*args, i, mini);
 	signal(SIGINT, handle_sigint_heredoc);
 	while (1)
 	{
-		ft_printf("> ");
+		ft_printf_fd(mini->saved_stdout, "> ");
 		bytes_read = read(STDIN_FILENO, buffer, sizeof(buffer) - 1);
 		if (bytes_read <= 0)
 			break ;

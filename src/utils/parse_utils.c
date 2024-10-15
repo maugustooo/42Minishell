@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:56:12 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 12:06:11 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 13:39:58 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_perms(t_token *temp, int input)
 int	return_redirect(t_token *token)
 {
 	return (token->type == INPUT || token->type == OUTPUT
-		|| token->type == APPEND || token->type == DELIMITER);
+		|| token->type == APPEND || token->type == HERE);
 }
 
 int	get_redirects(t_token *token)

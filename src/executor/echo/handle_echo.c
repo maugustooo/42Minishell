@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:04:24 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:17:07 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	output(t_token *token, t_mini *mini, t_token *file_node, int type)
 	if (!file_node)
 		return (2);
 	if (file_node->type == ARG || file_node->type == FILE
-		|| file_node->type == NOT_FILE)
+		|| file_node->type == NFILE)
 		file = file_node->text;
 	else
 		ft_printf(error_msg(ERROR_ARG_ECHO));

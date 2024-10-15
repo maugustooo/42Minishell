@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:24:45 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 11:25:41 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:52:27 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	remove_node(t_token **token)
 		current->prev->next = current->next;
 	if (current->next)
 		current->next->prev = current->prev;
-	*token = current->next;
+	if(current->next)
+		*token = current->next;
+	else
+		*token = current->prev;
 	free(current->text);
 	free(current);
 }

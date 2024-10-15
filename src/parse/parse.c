@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/15 12:43:39 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:52:16 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	check_no_file(t_token *token, t_mini *mini)
 			input = 1;
 		if (temp->type == APPEND || temp->type == OUTPUT)
 			input = 0;
-		if (temp->type == NOT_FILE && (input || ft_find_c('<', temp->text)))
+		if (temp->type == NFILE && (input || ft_find_c('<', temp->text)))
 		{
 			if (!mini->pipe)
 				ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NFILE), temp->text);
@@ -69,7 +69,7 @@ int	syntax_errors(t_token *token)
 	while (tmp)
 	{
 		if ((tmp->type == OUTPUT || tmp->type == INPUT || tmp->type == APPEND
-				|| tmp->type == DELIMITER))
+				|| tmp->type == HERE))
 		{
 			if (tmp->next && return_redirect(tmp->next))
 				return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
@@ -82,7 +82,7 @@ int	syntax_errors(t_token *token)
 		if (tmp->type == PIPE && tmp->next && tmp->next->type == PIPE)
 			return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
 					tmp->next->text), 0);
-		if (tmp->type == CMD && ft_strcmp(tmp->text, "|") == 0)
+		if (tmp->type == CMD && (ft_strcmp(tmp->text, "|") == 0 || return_next(tmp)))
 			return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
 					tmp->text), 0);
 		tmp = tmp->next;
@@ -95,25 +95,27 @@ void	check_red_cmd(t_token **token)
 	int	fd;
 
 	fd = 0;
-	while (*token && (*token)->next)
+	while (*token)
 	{
 		if ((*token)->type == CMD && (ft_strcmp((*token)->text, ">") == 0
 				|| ft_strcmp((*token)->text, ">>") == 0) && (*token)->next)
 		{
 			if (ft_strcmp((*token)->text, ">") == 0)
-				fd = open((*token)->next->text, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+				fd = open((*token)->next->text, 577, 0644);
 			else if (ft_strcmp((*token)->text, ">>") == 0)
-				fd = open((*token)->next->text, O_WRONLY | O_CREAT | O_APPEND,
-						0644);
+				fd = open((*token)->next->text, 577, 0644);
 			if (fd < 0)
 				return ;
 			remove_node(token);
 			remove_node(token);
+			continue;
 		}
 		if(*token && (*token)->next)
 			(*token) = (*token)->next;
+		else
+			break ;
 	}
-	while ((*token)->prev)
+	while (*token && (*token)->prev)
 		(*token) = (*token)->prev;
 }
 
