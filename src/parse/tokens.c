@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 15:47:55 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 09:10:18 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,30 @@ int	set_type(char *text)
 	return (type);
 }
 
-int	condition(t_token **token, t_mini *mini)
+int	condition(t_token **tok, t_mini *mini)
 {
-	if (((*token)->text[0] == '<' && ((*token)->text[1])
-			&& (*token)->text[1] != '<') || ((*token)->text[0] == '\"'
-			&& (*token)->text[1] == '<' && (*token)->text[2]))
+	if (((*tok)->text[0] == '<' && ((*tok)->text[1])
+			&& (*tok)->text[1] != '<') || ((*tok)->text[0] == '\"'
+			&& (*tok)->text[1] == '<' && (*tok)->text[2]))
 	{
-		if (check_file_token(*token, 1, mini) == 1)
+		if (check_file_token(*tok, 1, mini) == 1)
 			return (1);
-		else if (check_file_token(*token, 1, mini) == 2)
+		else if (check_file_token(*tok, 1, mini) == 2)
 		{
-			(*token)->type = NO_PERM;
+			(*tok)->type = NO_PERM;
 			return (3);
 		}
 		else
 			return (0);
 	}
-	if ((return_redirect((*token)->prev) || (*token)->prev->type == FILE)
-		&& check_file_token(*token, 0, mini)
-		&& (*token)->type != OUTPUT && (*token)->type != INPUT
-		&& (*token)->type != APPEND && (*token)->type != PIPE)
+	if ((return_redirect((*tok)->prev) || (*tok)->prev->type == FILE)
+		&& check_file_token(*tok, 0, mini)
+		&& (*tok)->type != OUTPUT && (*tok)->type != INPUT
+		&& (*tok)->type != APPEND && (*tok)->type != PIPE)
 		return (1);
-	else if (return_redirect((*token)->prev) && !check_file_token(*token, 0, mini)
-		&& (*token)->type != OUTPUT && (*token)->type != INPUT
-		&& (*token)->type != APPEND && (*token)->type != PIPE)
+	else if (return_redirect((*tok)->prev) && !check_file_token(*tok, 0, mini)
+		&& (*tok)->type != OUTPUT && (*tok)->type != INPUT
+		&& (*tok)->type != APPEND && (*tok)->type != PIPE)
 		return (0);
 	return (2);
 }
