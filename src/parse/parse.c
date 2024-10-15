@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/15 12:27:07 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:43:39 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	check_red_cmd(t_token **token)
 	int	fd;
 
 	fd = 0;
-	while (*token)
+	while (*token && (*token)->next)
 	{
 		if ((*token)->type == CMD && (ft_strcmp((*token)->text, ">") == 0
 				|| ft_strcmp((*token)->text, ">>") == 0) && (*token)->next)
@@ -110,8 +110,11 @@ void	check_red_cmd(t_token **token)
 			remove_node(token);
 			remove_node(token);
 		}
-		(*token) = (*token)->next;
+		if(*token && (*token)->next)
+			(*token) = (*token)->next;
 	}
+	while ((*token)->prev)
+		(*token) = (*token)->prev;
 }
 
 /**

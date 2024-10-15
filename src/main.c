@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:38:40 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 12:16:24 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:44:58 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	minishell(t_mini *mini, t_token	**token, char **envp)
 			freethem(token, mini);
 			continue ;
 		}
-		print_tokens(*token, mini->splited);
+		// print_tokens(*token, mini->splited);
 		executor(token, mini);
 		freethem(token, mini);
 	}
