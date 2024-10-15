@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/14 15:46:28 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:27:07 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,22 @@ void	check_red_cmd(t_token **token)
 	int	fd;
 
 	fd = 0;
-	if ((*token)->type == CMD && (ft_strcmp((*token)->text, ">") == 0
-			|| ft_strcmp((*token)->text, ">>") == 0) && (*token)->next)
+	while (*token)
 	{
-		if (ft_strcmp((*token)->text, ">") == 0)
-			fd = open((*token)->next->text, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (ft_strcmp((*token)->text, ">>") == 0)
-			fd = open((*token)->next->text, O_WRONLY | O_CREAT | O_APPEND,
-					0644);
-		if (fd < 0)
-			return ;
-		remove_node(token);
-		remove_node(token);
+		if ((*token)->type == CMD && (ft_strcmp((*token)->text, ">") == 0
+				|| ft_strcmp((*token)->text, ">>") == 0) && (*token)->next)
+		{
+			if (ft_strcmp((*token)->text, ">") == 0)
+				fd = open((*token)->next->text, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			else if (ft_strcmp((*token)->text, ">>") == 0)
+				fd = open((*token)->next->text, O_WRONLY | O_CREAT | O_APPEND,
+						0644);
+			if (fd < 0)
+				return ;
+			remove_node(token);
+			remove_node(token);
+		}
+		(*token) = (*token)->next;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 12:04:57 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:13:07 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void	handle_redirects(char **line, t_mini *mini, t_splited_data *data,
 	{
 		while ((*line) && check_redirects(**line))
 		{
-			if (*(*line + 1) && (*(*line + 1) == '<' || *(*line + 1) == '<'))
+			if (*(*line + 1) && ((*(*line + 1) == '<' || *(*line + 1) == '<')
+				|| (*(*line + 1) == '>' || *(*line + 1) == '>')))
 				add_token(mini, *line, 2, data);
 			else
 				add_token(mini, *line, 1, data);

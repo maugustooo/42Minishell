@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:38:40 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/11 15:49:19 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:16:24 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,20 @@
 
 int	g_sig;
 
+void print_tokens(t_token *tokens, char**splited)
+{
+	t_token *tmp;
+
+	tmp = tokens;
+	while (tmp)
+	{
+		printf("Token && type: %s %d\n", tmp->text, tmp->type);
+		tmp = tmp->next;
+	}
+	int i = -1;
+	while (splited[++i])
+		printf("Splited[%d]: %s\n", i, splited[i]);
+}
 char	*error_msg(enum e_error i)
 {
 	char	*strings[17];
@@ -68,6 +82,7 @@ void	minishell(t_mini *mini, t_token	**token, char **envp)
 			freethem(token, mini);
 			continue ;
 		}
+		print_tokens(*token, mini->splited);
 		executor(token, mini);
 		freethem(token, mini);
 	}

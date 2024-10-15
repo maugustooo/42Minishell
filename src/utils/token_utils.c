@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/14 10:41:58 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:21:53 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	check_file_token(t_token *token, int start, t_mini *mini)
 	if (S_ISREG(path_stat.st_mode))
 	{
 		if (access(temp->text + start, R_OK) == 0
-			&& access(temp->text + start, X_OK) == 0
 			&& access(temp->text + start, W_OK) == 0)
 			return (1);
 		else
