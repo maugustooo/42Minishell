@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 12:07:08 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/16 11:18:30 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:51:41 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	*handle_special_signs(t_token **token, t_mini *mini, int *i)
 		segment = ft_itoa(mini->return_code);
 		(*i)++;
 	}
-	else if((*token)->text[*i - 1] == '~' || (*token)->text[*i] == '$')
+	else if ((*token)->text[*i - 1] == '~' || (*token)->text[*i] == '$')
 		segment = handle_special_signs2(token, mini, i);
 	return (segment);
 }

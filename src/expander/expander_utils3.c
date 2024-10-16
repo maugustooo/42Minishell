@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 09:12:45 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/16 11:45:55 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:51:55 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*handle_ss_dolla(t_token **token, t_mini *mini, char *segment, int *i)
 		exit(0);
 	}
 	(*i)++;
-	return(segment);
+	return (segment);
 }
 
 char	*handle_special_signs2(t_token **token, t_mini *mini, int *i)
@@ -41,10 +41,10 @@ char	*handle_special_signs2(t_token **token, t_mini *mini, int *i)
 	segment = NULL;
 	if ((*token)->text[*i] == '$')
 		segment = handle_ss_dolla(token, mini, segment, i);
-	else if((*token)->text[*i - 1] == '~')
+	else if ((*token)->text[*i - 1] == '~')
 	{
 		value = get_env_value(mini, "HOME");
-		if(value)
+		if (value)
 			segment = value;
 	}
 	return (segment);
