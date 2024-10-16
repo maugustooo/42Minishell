@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/11 15:46:25 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:11:10 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	handle_cmd2_5(t_token **token, t_mini *mini, char **args)
 {
 	handle_redirection(args, mini, token);
-	if (mini->redir_handled)
+	if (mini->redir_handled && args[0])
 		while (*token && ft_strcmp((*token)->text, args[0]) != 0)
 			*token = (*token)->next;
 	if (!check_command(token, mini, args))

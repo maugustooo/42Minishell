@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:38:40 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 10:48:37 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:01:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ char	*error_msg(enum e_error i)
 	char	*strings[17];
 
 	strings[0] = "%s: command not found\n";
-	strings[1] = "minishell: cd: %s: No such file or directory\n";
-	strings[2] = "minishell: export: `%s': not a valid identifier\n";
+	strings[1] = "miniShell: cd: %s: No such file or directory\n";
+	strings[2] = "miniShell: export: `%s': not a valid identifier\n";
 	strings[3] = "Syntax error near '%s'\n";
 	strings[4] = "ARG ECHO ERROR\n";
 	strings[5] = "ERROR NO ENV\n";
-	strings[6] = "minishell: %s: too many arguments\n";
-	strings[7] = "minishell: %s: numeric argument required\n";
-	strings[8] = "minishell: %s: Is a directory\n";
-	strings[9] = "minishell: %s: Permission denied\n";
+	strings[6] = "miniShell: %s: too many arguments\n";
+	strings[7] = "miniShell: %s: numeric argument required\n";
+	strings[8] = "miniShell: %s: Is a directory\n";
+	strings[9] = "miniShell: %s: Permission denied\n";
 	strings[10] = "env: Options/Arguments not allowed by subject\n";
-	strings[11] = "minishell: cd: %s: Not a directory\n";
-	strings[12] = "minishell: %s: No such file or directory\n";
-	strings[13] = "minishell: exit: %s: numeric argument required\n";
+	strings[11] = "miniShell: cd: %s: Not a directory\n";
+	strings[12] = "miniShell: %s: No such file or directory\n";
+	strings[13] = "miniShell: exit: %s: numeric argument required\n";
 	strings[14] = "syntax error near unexpected token `newline'\n";
 	strings[15] = "syntax error near unexpected token `%s'\n";
 	strings[16] = "NO unclosed pipes are allowed\n";
