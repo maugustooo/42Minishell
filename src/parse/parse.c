@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/15 15:52:16 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:59:29 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	check_no_file(t_token *token, t_mini *mini)
 	temp = token;
 	while (temp)
 	{
-		if (temp->type == INPUT)
+		if (temp->type == INPUT || ft_find_c('<', temp->text))
 			input = 1;
 		if (temp->type == APPEND || temp->type == OUTPUT)
 			input = 0;
@@ -82,7 +82,7 @@ int	syntax_errors(t_token *token)
 		if (tmp->type == PIPE && tmp->next && tmp->next->type == PIPE)
 			return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
 					tmp->next->text), 0);
-		if (tmp->type == CMD && (ft_strcmp(tmp->text, "|") == 0 || return_next(tmp)))
+		if (tmp->type == CMD && (ft_strcmp(tmp->text, "|") == 0 || next(tmp)))
 			return (ft_printf_fd(STDERR_FILENO, error_msg(ERROR_SNTAX_RED),
 					tmp->text), 0);
 		tmp = tmp->next;
@@ -108,9 +108,9 @@ void	check_red_cmd(t_token **token)
 				return ;
 			remove_node(token);
 			remove_node(token);
-			continue;
+			continue ;
 		}
-		if(*token && (*token)->next)
+		if (*token && (*token)->next)
 			(*token) = (*token)->next;
 		else
 			break ;

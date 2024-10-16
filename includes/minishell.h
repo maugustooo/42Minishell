@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 11:33:44 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:50:54 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ void	move_left(char **args, int start_index);
 char	*get_env_key(t_mini *mini, char *str);
 char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
-void	print_tokens(t_token *tokens, char**splited);
 void	free_child(t_token **token, t_mini *mini, char **args);
 int		check_file_token(t_token *token, int start, t_mini *mini);
 int		check_redirect(t_token **next);
@@ -215,7 +214,8 @@ int		pipes_and_red(char line);
 int		check_redirects(char line);
 int		get_redirects(t_token *token);
 int		return_dup_files(t_token **token);
-int		return_next(t_token *tmp);
+int		next(t_token *tmp);
+char	*set_delimiter(char **args, int *i, t_mini *mini);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

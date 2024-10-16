@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 14:39:05 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:01:43 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,33 +42,6 @@ void	move_left(char **args, int start_index)
 		i++;
 	}
 	args[i] = NULL;
-}
-
-char *set_delimiter(char **args, int *i, t_mini *mini)
-{
-	char	**tmp;
-	int		j;
-	char	*delimiter;
-
-	delimiter = NULL;
-	j = 0;
-	tmp = args;
-	if(mini->pipe)
-	{
-		while (tmp[j])
-		{
-			if (ft_strcmp(tmp[j], "<<") == 0)
-			{
-				if(tmp[j + 1])
-					delimiter = tmp[j + 1];
-				break;
-			}
-			j++;
-		}
-	}
-	else
-		delimiter = args[*i + 1];
-	return (delimiter);
 }
 
 void	handle_heredoc(char ***args, int *i, t_mini *mini)
