@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 09:17:23 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:48:44 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,6 @@ void	move_left(char **args, int start_index);
 char	*get_env_key(t_mini *mini, char *str);
 char	*get_env_value(t_mini *mini, char *str);
 void	handle_quotes(char c, int *in_quotes, char *quote_char);
-void	print_tokens(t_token *tokens, char**splited);
 void	free_child(t_token **token, t_mini *mini, char **args);
 int		check_file_token(t_token *token, int start, t_mini *mini);
 int		check_redirect(t_token **next);
