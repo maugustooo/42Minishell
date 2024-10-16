@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/15 14:17:07 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/16 09:29:35 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,10 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 			&& token->text[ft_strlen(token->text) - 1] == '"')
 		|| (token->text[0] == '\''
 			&& token->text[ft_strlen(token->text) - 1] == '\''))
-		return (args);
+	{
+		if(ft_find_c(' ', token->text))
+			return (args);
+	}
 	expander(&token, mini);
 	nargs = create_nargs(token, args, mini);
 	copy_args(nargs, args, mini, ft_arrlen(nargs));
