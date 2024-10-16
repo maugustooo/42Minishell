@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/09 12:13:23 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/16 09:12:18 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	handle_expansion(t_token **token, t_mini *mini)
 			expanded = handle_sq(token, &i);
 		else if ((*token)->text[i] == '"')
 			expanded = handle_dq(token, mini, &i);
-		else if ((*token)->text[i] == '$')
+		else if ((*token)->text[i] == '$' || (*token)->text[i] == '~')
 			expanded = handle_sign(token, mini, &i, &i);
 		else
 			expanded = handle_plain(token, &i);

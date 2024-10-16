@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:05:58 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/07 10:48:34 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/16 09:12:04 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	detect_expansion(t_token **token)
 	i = -1;
 	while ((*token)->text[++i])
 	{
-		if ((*token)->text[i] == '$')
+		if ((*token)->text[i] == '$' || (*token)->text[i] == '~')
 			return (0);
 	}
 	return (2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 15:19:28 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/16 09:17:23 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,7 @@ char	*handle_sign2(t_token **token, t_mini *mini, int *i, int *len);
 char	*handle_dq2(t_token **token, t_mini *mini, t_index *idx, char *segment);
 char	*handle_sign(t_token **token, t_mini *mini, int *i, int *start);
 char	*handle_special_signs(t_token **token, t_mini *mini, int *i);
+char	*handle_special_signs2(t_token **token, t_mini *mini, int *i);
 
 //------------Executor-----------//
 
