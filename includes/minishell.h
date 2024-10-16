@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 10:48:44 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:01:59 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,8 @@ int		pipes_and_red(char line);
 int		check_redirects(char line);
 int		get_redirects(t_token *token);
 int		return_dup_files(t_token **token);
-int		return_next(t_token *tmp);
+int		next(t_token *tmp);
+char	*set_delimiter(char **args, int *i, t_mini *mini);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

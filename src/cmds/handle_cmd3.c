@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/16 09:29:35 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:04:46 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 		|| (token->text[0] == '\''
 			&& token->text[ft_strlen(token->text) - 1] == '\''))
 	{
-		if(ft_find_c(' ', token->text))
+		if (ft_find_c(' ', token->text))
 			return (args);
 	}
 	expander(&token, mini);
