@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 09:17:23 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:33:44 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_mini
 	char	*prev_dir;
 	char	**splited;
 	char	curr_dir[MAX_PATH_LEN];
+	char	*result;
 
 	bool	echo_flag;
 	bool	pipe;

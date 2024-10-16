@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 11:10:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/16 09:12:18 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:38:44 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,11 @@ char	*handle_plain(t_token **token, int *i)
 
 void	handle_expansion(t_token **token, t_mini *mini)
 {
-	char	*result;
 	char	*expanded;
 	int		i;
-	char	*temp;
 
 	i = 0;
-	result = ft_strdup("");
+	mini->result = ft_strdup("");
 	while ((*token)->text[i])
 	{
 		if ((*token)->text[i] == '\'')
@@ -109,9 +107,7 @@ void	handle_expansion(t_token **token, t_mini *mini)
 			expanded = handle_sign(token, mini, &i, &i);
 		else
 			expanded = handle_plain(token, &i);
-		temp = ft_strjoin_free(result, expanded, 2);
-		free(result);
-		result = temp;
+		mini->result = ft_strjoin_free(mini->result, expanded, 3);
 	}
-	change_token_text(*token, result);
+	change_token_text(*token, mini->result);
 }
