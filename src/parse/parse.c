@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 08:50:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/15 15:52:16 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:40:27 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	check_no_file(t_token *token, t_mini *mini)
 	temp = token;
 	while (temp)
 	{
-		if (temp->type == INPUT)
+		if (temp->type == INPUT || ft_find_c('<', temp->text))
 			input = 1;
 		if (temp->type == APPEND || temp->type == OUTPUT)
 			input = 0;
