@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 11:50:54 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:38:10 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,12 +133,15 @@ typedef struct s_mini
 	int		input_count;
 	int		output_count;
 	int		app_count;
+	int		here_count;
 	int		file_count;
 	int		redir_handled;
 	int		pipe_created;
 	int		num_redir;
 	int		len;
 	int		saved_stdout;
+	int		i;
+	int		j;
 }	t_mini;
 
 //--------------Utils-------------//
@@ -207,7 +210,8 @@ void	handle_sigint2(int sig);
 char	*error_msg(enum e_error i);
 void	handle_sigint_heredoc(int sig);
 int		condition_hereoc(char *buffer, char *delimiter);
-void	move_left_heredoc(char **args, int start_index);
+void	move_left_heredoc(char **args, int start_index, int here_count,
+			t_mini *mini);
 int		check_perms(t_token *temp, int input);
 int		return_redirect(t_token *token);
 int		pipes_and_red(char line);

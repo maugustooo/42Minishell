@@ -6,34 +6,40 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:29:22 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 11:02:15 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:42:11 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	move_left_heredoc(char **args, int start_index)
+void	move_left_heredoc(char **args, int start_index, int here_count,
+t_mini *mini)
 {
-	int	i;
-
-	i = start_index;
-	while (args[i + 1])
+	mini->i = start_index;
+	while (here_count-- > 0)
 	{
-		if (args[i])
-			free(args[i]);
-		args[i] = args[i + 1];
-		i++;
+		while (args[mini->i] && strcmp(args[mini->i], "<<") != 0)
+			mini->i++;
+		if (args[mini->i] && strcmp(args[mini->i], "<<") == 0)
+		{
+			free(args[mini->i]);
+			args[mini->i] = NULL;
+			if (args[mini->i + 1])
+			{
+				free(args[mini->i + 1]);
+				args[mini->i + 1] = NULL;
+			}
+			mini->j = mini->i + 2;
+			while (args[mini->j])
+			{
+				args[mini->i] = args[mini->j];
+				args[mini->j] = NULL;
+				mini->i++;
+				mini->j++;
+			}
+			args[mini->i] = NULL;
+		}
 	}
-	if (args[i])
-		free(args[i]);
-	args[i] = NULL;
-	i = start_index;
-	while (args[i + 1])
-	{
-		args[i] = args[i + 1];
-		i++;
-	}
-	args[i] = NULL;
 }
 
 static int	handle_single_redirection(char **args, t_mini *mini,

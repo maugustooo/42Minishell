@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 08:27:56 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/16 12:11:10 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:38:32 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,23 @@ int	handle_cmd2_5(t_token **token, t_mini *mini, char **args)
 	if (mini->redir_handled && args[0])
 		while (*token && ft_strcmp((*token)->text, args[0]) != 0)
 			*token = (*token)->next;
-	if (!check_command(token, mini, args))
+	if (args[0])
 	{
-		expander(token, mini);
-		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_CMD), (*token)->text);
+		if (!check_command(token, mini, args))
+		{
+			expander(token, mini);
+			ft_printf_fd(STDERR_FILENO, error_msg(ERROR_CMD), (*token)->text);
+			free_child(token, mini, args);
+			exit(127);
+		}
+		else
+			return (check_file(args, token, mini));
+	}
+	else
+	{
 		free_child(token, mini, args);
 		exit(127);
 	}
-	else
-		return (check_file(args, token, mini));
 }
 
 int	handle_cmd2(t_token **token, t_mini *mini, char **args)

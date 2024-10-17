@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:20:31 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 11:05:23 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:41:06 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 int	return_dup_files(t_token **token)
 {
 	return (((*token)->next->type == FILE
-			|| (*token)->next->type == NFILE || (*token)->next->type == INPUT
-			|| (*token)->type == INPUT || (*token)->type == HERE
+			|| (*token)->next->type == NFILE
+			|| ((*token)->next->type == INPUT)
+			|| ((*token)->type == INPUT)
+			|| ((*token)->type == HERE)
 			|| (*token)->prev->type == HERE) && ((*token)->next
-			&& (*token)->next->type != PIPE));
+			&& ((*token)->next->type != PIPE)));
 }
 
 int	next(t_token *tmp)

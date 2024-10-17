@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 11:01:43 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:34:22 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	handle_heredoc(char ***args, int *i, t_mini *mini)
 	close(pipefd[1]);
 	dup2(pipefd[0], STDIN_FILENO);
 	close(pipefd[0]);
-	move_left_heredoc((*args), *i);
+	move_left_heredoc((*args), *i, mini->here_count, mini);
 }
 
 int	handle_input(char ***args, int *i, t_mini *mini)
