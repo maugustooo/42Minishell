@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:45:18 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 10:01:25 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	handle_codes2(t_token **token, t_mini *mini)
 {
 	*token = (*token)->next;
 	expander(token, mini);
-	if (strnum(token))
+	if (strnum(token) && !mini->pipe)
 	{
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NUMARG), (*token)->text);
 		mini->return_code = 2;
