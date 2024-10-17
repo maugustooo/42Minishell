@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 11:01:43 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 11:27:13 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*remove_quotes(char *str)
 	int		len;
 	char	*new_str;
 
-	len = strlen(str);
+	len = ft_strlen(str);
 	if ((str[0] == '"' && str[len - 1] == '"') || (str[0] == '\''
 			&& str[len - 1] == '\''))
 	{

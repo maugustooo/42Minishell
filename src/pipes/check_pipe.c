@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:41:20 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/03 12:41:55 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/17 11:26:56 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	check_pipes(t_mini *mini, t_token **temp)
 {
-	mini->is_pipe = ((*temp)->next && strcmp((*temp)->next->text, "|") == 0);
+	mini->is_pipe = ((*temp)->next && ft_strcmp((*temp)->next->text, "|") == 0);
 	while ((*temp)->next && !mini->is_pipe)
 	{
 		*temp = (*temp)->next;
 		mini->is_pipe = ((*temp)->next
-				&& strcmp((*temp)->next->text, "|") == 0);
+				&& ft_strcmp((*temp)->next->text, "|") == 0);
 	}
 }
