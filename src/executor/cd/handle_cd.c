@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/16 09:20:13 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/17 08:58:28 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	handle_dir(t_token *token, char **tgt_dir, t_mini *mini)
 			ft_strlen(token->next->text)) == 0)
 	{
 		if (mini->prev_dir == NULL)
-			*tgt_dir = mini->curr_dir;
+			*tgt_dir = ft_strdup(mini->curr_dir);
 		else
-			*tgt_dir = mini->prev_dir;
+			*tgt_dir = ft_strdup(mini->prev_dir);
 	}
 	else if (ft_strcmp(token->next->text, ".") == 0)
-		*tgt_dir = mini->curr_dir;
+		*tgt_dir = ft_strdup(mini->curr_dir);
 	else
 		*tgt_dir = ft_strdup(token->next->text);
 }
