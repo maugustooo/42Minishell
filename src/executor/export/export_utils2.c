@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_isalpha.c                                   :+:      :+:    :+:   */
+/*   export_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 12:16:23 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/17 10:37:19 by gude-jes         ###   ########.fr       */
+/*   Created: 2024/10/17 10:43:28 by gude-jes          #+#    #+#             */
+/*   Updated: 2024/10/17 11:49:27 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * @defgroup mandatory Mandatory
- * @{
- * @file ft_str_isalpha.c
- * @brief Check if str is alphanumeric
-*/
+#include "minishell.h"
 
-#include "libft.h"
+int	ft_isalpha_or_underscore(char c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_')
+		return (1);
+	return (0);
+}
 
-/**
- * @brief Verifies if str is alphanumeric
- * 
- * @param str string
- * @return int 1 if alphanumeric | 0 if not
- */
-int	ft_str_isalpha(char *str)
+int	ft_str_isalnum_or_underscore(char *str)
 {
 	int	i;
 
-	i = -1;
-	while (str[++i])
-		if (!ft_isalnum(str[i]))
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
 			return (0);
+		i++;
+	}
 	return (1);
 }
-
-/**@}*/

@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:29:22 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/17 17:42:11 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:43:34 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	handle_single_redirection(char **args, t_mini *mini,
 			data.file = 1;
 		}
 		else if (((ft_strcmp(args[data.i], ">") == 0
-					|| strcmp(args[data.i], ">>") == 0))
+					|| ft_strcmp(args[data.i], ">>") == 0))
 			&& args[data.i] && ft_strcmp(args[data.i], "|") != 0)
 		{
 			if (!handle_output(&args, &data.i, mini))

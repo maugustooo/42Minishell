@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/17 17:38:10 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:43:24 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 # define MAX_PATH_LEN 4096
 
 # define CMD_PATH "/bin/"
-# define HOME "/home/$USER"
 # define TEMP_FILE "/tmp/minishell_heredoc.txt"
 
 extern int	g_sig;
@@ -65,6 +64,7 @@ typedef enum e_error
 	ERROR_ECHO_RED,
 	ERROR_SNTAX_RED,
 	ERROR_UNCLOSED_PIPE,
+	ERROR_HOME,
 }	t_error;
 
 typedef struct s_redirection
@@ -220,6 +220,8 @@ int		get_redirects(t_token *token);
 int		return_dup_files(t_token **token);
 int		next(t_token *tmp);
 char	*set_delimiter(char **args, int *i, t_mini *mini);
+int		ft_str_isalnum_or_underscore(char *str);
+int		ft_isalpha_or_underscore(char c);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

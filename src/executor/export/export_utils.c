@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:34:10 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/17 08:48:49 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/17 10:44:54 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,8 @@ int	export_arg_err(t_token *token, t_mini *mini, char **key)
 		else
 			key[0] = strip_quotes(key[0]);
 	}
-	if ((key[0] == NULL)
-		|| (!ft_str_isalpha(key[0]) && !ft_strchr(key[0], '_'))
-		|| ft_strcmp(key[0], "") == 0)
+	if (key[0] == NULL || !ft_isalpha_or_underscore(key[0][0])
+		|| !ft_str_isalnum_or_underscore(key[0]) || ft_strcmp(key[0], "") == 0)
 	{
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_EXPORT), token->text);
 		mini->return_code = 1;

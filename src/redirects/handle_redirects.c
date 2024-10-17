@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/17 17:34:22 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 17:43:30 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*remove_quotes(char *str)
 	int		len;
 	char	*new_str;
 
-	len = strlen(str);
+	len = ft_strlen(str);
 	if ((str[0] == '"' && str[len - 1] == '"') || (str[0] == '\''
 			&& str[len - 1] == '\''))
 	{

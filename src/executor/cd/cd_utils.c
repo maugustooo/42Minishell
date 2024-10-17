@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:11:42 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/07 13:45:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 11:49:08 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ int	check_dir(char *tgt_dir)
 {
 	struct stat	path_stat;
 
+	if (!tgt_dir)
+	{
+		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_HOME), tgt_dir);
+		return (0);
+	}
 	if (stat(tgt_dir, &path_stat) == -1)
 	{
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_CD), tgt_dir);
