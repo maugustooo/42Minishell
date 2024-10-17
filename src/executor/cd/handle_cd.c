@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/17 08:58:28 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/17 11:46:56 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	handle_dir(t_token *token, char **tgt_dir, t_mini *mini)
 			ft_strlen(token->next->text)) == 0)
 	{
 		*tgt_dir = get_env_value(mini, "HOME");
-		if (!*tgt_dir)
+		if (!tgt_dir)
 		{
 			free(tgt_dir);
-			*tgt_dir = HOME;
+			*tgt_dir = NULL;
 		}
 	}
 	else if (ft_strncmp(token->next->text, "-",
@@ -43,7 +43,7 @@ void	handle_cd2(t_mini *mini, char *target_dir)
 {
 	free(mini->prev_dir);
 	mini->prev_dir = ft_strdup(mini->curr_dir);
-	if (target_dir != mini->curr_dir && ft_strcmp(target_dir, HOME) != 0)
+	if (target_dir != mini->curr_dir && ft_strcmp(target_dir, "") != 0)
 		free(target_dir);
 }
 

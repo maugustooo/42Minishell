@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/17 10:45:39 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/17 11:44:25 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 # define MAX_PATH_LEN 4096
 
 # define CMD_PATH "/bin/"
-# define HOME "/home/$USER"
 # define TEMP_FILE "/tmp/minishell_heredoc.txt"
 
 extern int	g_sig;
@@ -65,6 +64,7 @@ typedef enum e_error
 	ERROR_ECHO_RED,
 	ERROR_SNTAX_RED,
 	ERROR_UNCLOSED_PIPE,
+	ERROR_HOME,
 }	t_error;
 
 typedef struct s_redirection

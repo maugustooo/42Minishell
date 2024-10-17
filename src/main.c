@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:38:40 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 12:01:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 11:45:31 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	g_sig;
 
 char	*error_msg(enum e_error i)
 {
-	char	*strings[17];
+	char	*strings[18];
 
 	strings[0] = "%s: command not found\n";
 	strings[1] = "miniShell: cd: %s: No such file or directory\n";
@@ -35,6 +35,7 @@ char	*error_msg(enum e_error i)
 	strings[14] = "syntax error near unexpected token `newline'\n";
 	strings[15] = "syntax error near unexpected token `%s'\n";
 	strings[16] = "NO unclosed pipes are allowed\n";
+	strings[17] = "minishell: cd: HOME not set\n";
 	return (strings[i]);
 }
 
