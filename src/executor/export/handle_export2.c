@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 13:58:22 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/10 09:23:07 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/17 08:41:50 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ int	export_arg(t_token *token, t_mini *mini, int i)
 	if (!validate_and_split_export(token, mini, &key2))
 		return (0);
 	value = get_env_key(mini, key2[0]);
-	if (!key2[1] && value != NULL)
-		return (free_key(key2), free(value), 0);
 	if (value != NULL)
 	{
 		while (mini->penv[++i])
