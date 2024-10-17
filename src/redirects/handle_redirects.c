@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/17 17:43:30 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/17 18:11:51 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ void	move_left(char **args, int start_index)
 {
 	int	i;
 
+	if (!args || start_index < 0)
+		return ;
 	i = start_index;
+	if (args[i])
+		free(args[i]);
 	while (args[i + 1])
 	{
 		args[i] = args[i + 1];
