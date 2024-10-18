@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:25:31 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/10 09:22:43 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/18 09:32:31 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,20 @@ char	*ft_substr_free(const char *s, unsigned int start, size_t len)
 
 int	validate_and_split_export(t_token *token, t_mini *mini, char ***key2)
 {
+	char *key;
+
 	if (token->text[0] == '=')
 	{
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_EXPORT), token->text);
 		mini->return_code = 1;
 		return (0);
+	}
+	if(!ft_find_c('=', token->text))
+	{
+		key = get_env_key(mini, token->text);
+		if(key)
+			return(free(key), 0);
+		free(key);
 	}
 	*key2 = ft_split(token->text, '=');
 	if (export_arg_err(token, mini, *key2))
