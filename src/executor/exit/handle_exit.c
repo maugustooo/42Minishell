@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:45:18 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/18 15:03:13 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/18 15:10:29 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	handle_codes(t_token **token, t_mini *mini, int n_token)
 				return (handle_codes2(token, mini), 1);
 		}
 	}
-	return (0);
+	return (1);
 }
 
 /**
@@ -102,7 +102,6 @@ void	handle_exit(t_token **token, t_mini *mini)
 	int	flag;
 
 	n_token = 0;
-	flag = 0;
 	flag = handle_codes(token, mini, n_token);
 	free_things(mini);
 	freethem(token, mini);
