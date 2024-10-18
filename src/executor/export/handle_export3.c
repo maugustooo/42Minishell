@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_export3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 09:25:31 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/18 09:32:31 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/18 09:45:11 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_substr_free(const char *s, unsigned int start, size_t len)
 
 int	validate_and_split_export(t_token *token, t_mini *mini, char ***key2)
 {
-	char *key;
+	char	*key;
 
 	if (token->text[0] == '=')
 	{
@@ -45,11 +45,11 @@ int	validate_and_split_export(t_token *token, t_mini *mini, char ***key2)
 		mini->return_code = 1;
 		return (0);
 	}
-	if(!ft_find_c('=', token->text))
+	if (!ft_find_c('=', token->text))
 	{
 		key = get_env_key(mini, token->text);
-		if(key)
-			return(free(key), 0);
+		if (key)
+			return (free(key), 0);
 		free(key);
 	}
 	*key2 = ft_split(token->text, '=');
