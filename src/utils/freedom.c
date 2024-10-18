@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freedom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 11:41:34 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/18 10:12:55 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ void	free_things(t_mini *mini)
 		free(mini->prev_dir);
 		mini->prev_dir = NULL;
 	}
+}
+
+void free_in_main(t_token **token, t_mini *mini)
+{
+	free_things(mini);
+	freethem(token, mini);
 }
 
 /**

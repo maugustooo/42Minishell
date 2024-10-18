@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:38:40 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/17 11:45:31 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/18 10:34:07 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,21 @@ void	minishell(t_mini *mini, t_token	**token, char **envp)
 		ft_signals();
 		mini->rl = readline("miniShell: ");
 		if (!mini->rl)
+		{
 			handle_eof(token, mini);
-		mini->line = mini->rl;
-		if (mini->line[0])
-			split_to_tokens(mini->line, mini);
+			break;
+		}
+		if (mini->rl[0])
+			split_to_tokens(mini->rl, mini);
 		if (!mini->splited || !mini->splited[0])
 		{
 			freethem(token, mini);
 			continue ;
 		}
-		add_history(mini->line);
+		add_history(mini->rl);
 		if (!parse(mini, token, envp))
 		{
-			free_things(mini);
-			freethem(token, mini);
+			free_in_main(token, mini);
 			continue ;
 		}
 		executor(token, mini);
