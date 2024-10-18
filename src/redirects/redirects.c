@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:29:22 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/17 17:43:34 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/18 09:42:36 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_mini *mini)
 	mini->i = start_index;
 	while (here_count-- > 0)
 	{
-		while (args[mini->i] && strcmp(args[mini->i], "<<") != 0)
+		while (args[mini->i] && ft_strcmp(args[mini->i], "<<") != 0)
 			mini->i++;
-		if (args[mini->i] && strcmp(args[mini->i], "<<") == 0)
+		if (args[mini->i] && ft_strcmp(args[mini->i], "<<") == 0)
 		{
 			free(args[mini->i]);
 			args[mini->i] = NULL;

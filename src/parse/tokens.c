@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 14:32:01 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/18 09:41:53 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,9 @@ static void	init_token(t_token **token, char *text, t_mini *mini)
 		(*token) = (*token)->next;
 	if ((*token) && (*token)->prev)
 	{
-		getcwd(cwd, sizeof(cwd));
-		cwd_slash = ft_strjoin(cwd, "/");
-		file = ft_strjoin(cwd_slash, (*token)->text);
-		free(cwd_slash);
+		if (getcwd(cwd, sizeof(cwd)))
+			cwd_slash = ft_strjoin(cwd, "/");
+		file = ft_strjoin_free(cwd_slash, (*token)->text, 1);
 		if (condition(token, mini) == 1)
 			(*token)->type = FILE;
 		else if (!condition(token, mini))
