@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_exit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:45:18 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/18 10:03:48 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:32:09 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	handle_codes(t_token **token, t_mini *mini, int n_token)
 				return (handle_codes2(token, mini), 1);
 		}
 	}
-	return (0);
+	return (1);
 }
 
 /**
