@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:38:40 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/18 10:34:07 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:47:31 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	minishell(t_mini *mini, t_token	**token, char **envp)
 		if (!mini->rl)
 		{
 			handle_eof(token, mini);
-			break;
+			break ;
 		}
 		if (mini->rl[0])
 			split_to_tokens(mini->rl, mini);

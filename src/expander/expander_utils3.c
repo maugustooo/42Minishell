@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 09:12:45 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/18 12:18:57 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:48:54 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,25 @@ char	*handle_special_signs2(t_token **token, t_mini *mini, int *i)
 
 void	badjeras(t_token **token, t_mini *mini)
 {
-	if(((*token)->text[0] == '"') || ((*token)->text[0]) == '\'')
+	if (((*token)->text[0] == '"') || ((*token)->text[0]) == '\'')
 	{
-		if(ft_count_char((*token)->text, '\'',
-				ft_strlen((*token)->text) -1) % 2 == 0
-					|| ft_count_char((*token)->text, '"',
-				ft_strlen((*token)->text) -1) % 2 == 0)
+		if (ft_count_char((*token)->text, '\'',
+				ft_strlen((*token)->text) - 1) % 2 == 0
+			|| ft_count_char((*token)->text, '"',
+				ft_strlen((*token)->text) - 1) % 2 == 0)
 		{
 			expander(token, mini);
-			while((*token)->next && (ft_find_c('"', (*token)->text) == 0
-				|| ft_find_c('\'', (*token)->text) == 0))
+			while ((*token)->next && (ft_find_c('"', (*token)->text) == 0
+					|| ft_find_c('\'', (*token)->text) == 0))
 			{
 				if (ft_find_c('"', (*token)->text)
 					|| ft_find_c('\'', (*token)->text))
 					expander(&(*token)->next, mini);
 				*token = (*token)->next;
 			}
-			if (ft_find_c('"', (*token)->text) || ft_find_c('\'', (*token)->text))
-					expander(token, mini);
+			if (ft_find_c('"', (*token)->text)
+				|| ft_find_c('\'', (*token)->text))
+				expander(token, mini);
 		}
 		while ((*token)->prev)
 			*token = (*token)->prev;

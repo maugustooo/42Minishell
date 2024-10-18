@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/18 10:12:55 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:49:20 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	free_things(t_mini *mini)
 	}
 }
 
-void free_in_main(t_token **token, t_mini *mini)
+void	free_in_main(t_token **token, t_mini *mini)
 {
 	free_things(mini);
 	freethem(token, mini);

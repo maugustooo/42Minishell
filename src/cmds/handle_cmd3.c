@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cmd3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/18 12:15:19 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:49:13 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	advance_token(t_token *temp)
 {
 	while (temp->next && (temp->type == FILE
 			|| (temp->next->type == FILE
-			|| temp->next->type == NFILE)))
+				|| temp->next->type == NFILE)))
 	{
 		if (temp->next->type == FILE)
 			temp = temp->next;
@@ -107,7 +107,7 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 	char	**nargs;
 
 	if (token && ft_find_c(' ', token->text))
-		return(args);
+		return (args);
 	expander(&token, mini);
 	nargs = create_nargs(token, args, mini);
 	copy_args(nargs, args, mini, ft_arrlen(nargs));
