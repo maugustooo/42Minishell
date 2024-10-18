@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 09:45:18 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/17 10:01:25 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/18 10:02:18 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	handle_codes2(t_token **token, t_mini *mini)
 		exit_code(token, mini);
 }
 
-void	handle_codes(t_token **token, t_mini *mini, int n_token)
+int	handle_codes(t_token **token, t_mini *mini, int n_token)
 {
 	if (token != NULL && *token != NULL)
 	{
@@ -84,11 +84,13 @@ void	handle_codes(t_token **token, t_mini *mini, int n_token)
 				ft_printf_fd(STDERR_FILENO, error_msg(ERROR_TARG),
 					(*token)->text);
 				mini->return_code = 1;
+				return(0);
 			}
 			else
-				handle_codes2(token, mini);
+				return(handle_codes2(token, mini), 1);
 		}
 	}
+	return(0);
 }
 
 /**
@@ -97,12 +99,14 @@ void	handle_codes(t_token **token, t_mini *mini, int n_token)
 void	handle_exit(t_token **token, t_mini *mini)
 {
 	int	n_token;
+	int	flag;
 
 	n_token = 0;
-	handle_codes(token, mini, n_token);
+	flag = handle_codes(token, mini, n_token);
 	free_things(mini);
 	freethem(token, mini);
-	exit (mini->return_code);
+	if(flag)
+		exit (mini->return_code);
 }
 
 /**@}*/
