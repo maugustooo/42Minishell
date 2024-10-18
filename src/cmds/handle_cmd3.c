@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/16 11:04:46 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/18 09:26:39 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	handle_cmd3(t_token **token, t_mini *mini, char **args)
 
 int	advance_token(t_token *temp)
 {
-	while ((temp->type == FILE || (temp->next->type == FILE
-				|| temp->next->type == NFILE)) && (temp->next))
+	while (temp->type == FILE || ((temp->next) && (temp->next->type == FILE
+				|| temp->next->type == NFILE)))
 	{
 		if (temp->next->type == FILE)
 			temp = temp->next;
