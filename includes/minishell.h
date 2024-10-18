@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/18 10:13:10 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:14:50 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ char	*set_delimiter(char **args, int *i, t_mini *mini);
 int		ft_str_isalnum_or_underscore(char *str);
 int		ft_isalpha_or_underscore(char c);
 void	free_in_main(t_token **token, t_mini *mini);
+void	badjeras(t_token **token, t_mini *mini);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

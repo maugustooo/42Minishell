@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:07:11 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/18 10:27:22 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:15:19 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,22 +106,8 @@ char	**change_args_exec(char **args, t_token *token, t_mini *mini)
 {
 	char	**nargs;
 
-	if ((token->text[0] == '"'
-			&& token->text[ft_strlen(token->text) - 1] == '"')
-		|| (token->text[0] == '\''
-			&& token->text[ft_strlen(token->text) - 1] == '\''))
-	{
-		if(token->text[0] == '"')
-		{
-			if(ft_count_char(token->text, '"') % 2 == 0 && ft_find_c(' ', token->text))
-				return(args);
-		}
-		else if (token->text[0] == '\'')
-		{
-			if(ft_count_char(token->text, '"') % 2 == 0 && ft_find_c(' ', token->text))
-				return(args);
-		}
-	}
+	if (token && ft_find_c(' ', token->text))
+		return(args);
 	expander(&token, mini);
 	nargs = create_nargs(token, args, mini);
 	copy_args(nargs, args, mini, ft_arrlen(nargs));
