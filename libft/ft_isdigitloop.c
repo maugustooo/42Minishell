@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:28:36 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/22 10:45:47 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/22 10:57:12 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	ft_isdigitloop(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
 			return (0);
 		i++;
 	}
-	return(1);
+	return (1);
 }
