@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 09:18:55 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/18 12:14:44 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/22 10:39:38 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int	handle_cmd(t_token **token, t_mini *mini)
 	if (!args)
 		error_malloc(mini);
 	badjeras(token, mini);
+	badjeras2(token, mini);
 	temp = *token;
 	pid = fork();
 	signal(SIGINT, handle_sigint2);

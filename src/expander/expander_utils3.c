@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 09:12:45 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/18 12:48:54 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/22 10:41:24 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,15 @@ void	badjeras(t_token **token, t_mini *mini)
 		while ((*token)->prev)
 			*token = (*token)->prev;
 	}
+}
+void	badjeras2(t_token **token, t_mini *mini)
+{
+	while((*token)->next)
+	{
+		expander(token, mini);
+		(*token) = (*token)->next;
+	}
+	expander(token, mini);
+	while((*token)->prev)
+		(*token) = (*token)->prev;
 }

@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 10:13:27 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/14 09:59:25 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/22 10:34:10 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ char	**create_nargs(t_token *token, char **args, t_mini *mini)
 	i = -1;
 	while (key[++i])
 	{
-		nargs[i] = ft_strdup(key[i]);
+		if(ft_isdigitloop(key[i]))
+			nargs[i] = ft_itoa(ft_atoi(key[i]));
+		else
+			nargs[i] = ft_strdup(key[i]);
 		if (!nargs[i])
 			error_malloc(mini);
 	}
