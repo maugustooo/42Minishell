@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:49:49 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 12:06:33 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/24 12:20:30 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ static void	increment_token_count(char **line, int *count, int in_quotes,
 			{
 				(*count)++;
 				mini->num_redir = 0;
-				while ((**line && (pipes_and_red(**line))
-						&& ++mini->num_redir < 2))
-					(*line)++;
 			}
 			if (**line)
 				(*line)++;

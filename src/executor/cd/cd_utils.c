@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 09:11:42 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/24 09:14:50 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/24 12:21:10 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	cd_env_pwd(t_mini *mini)
 	char	cwd[MAX_PATH_LEN];
 
 	pwd = get_env_key(mini, "PWD");
-	if(!pwd)
+	if (!pwd)
 	{
 		free(pwd);
 		return ;
@@ -55,9 +55,9 @@ void	cd_env_pwd(t_mini *mini)
 	new_pwd = ft_strjoin("PWD=", getcwd(cwd, sizeof(cwd)));
 	getcwd(mini->curr_dir, sizeof(mini->curr_dir));
 	i = 0;
-	while(mini->penv[i])
+	while (mini->penv[i])
 	{
-		if(ft_strncmp(mini->penv[i], "PWD=", 4) == 0)
+		if (ft_strncmp(mini->penv[i], "PWD=", 4) == 0)
 		{
 			free(mini->penv[i]);
 			mini->penv[i] = new_pwd;
@@ -75,20 +75,20 @@ void	cd_env(t_mini *mini)
 
 	i = 0;
 	nold_pwd = get_env_key(mini, "OLDPWD");
-	if(!nold_pwd)
+	if (!nold_pwd)
 	{
 		free(nold_pwd);
 		return ;
 	}
-	while(mini->penv[i++])
+	while (mini->penv[i++])
 	{
-		if(ft_strncmp(mini->penv[i], "OLDPWD=", 7) == 0)
+		if (ft_strncmp(mini->penv[i], "OLDPWD=", 7) == 0)
 		{
 			free(mini->penv[i]);
 			temp = ft_strjoin("OLDPWD=", mini->prev_dir);
 			mini->penv[i] = ft_strdup(temp);
 			free(temp);
-			break;
+			break ;
 		}
 	}
 	cd_env_pwd(mini);
