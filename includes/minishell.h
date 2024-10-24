@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/22 10:40:45 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:31:49 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,7 @@ int		ft_isalpha_or_underscore(char c);
 void	free_in_main(t_token **token, t_mini *mini);
 void	badjeras(t_token **token, t_mini *mini);
 void	badjeras2(t_token **token, t_mini *mini);
+void	cd_env(t_mini *mini);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

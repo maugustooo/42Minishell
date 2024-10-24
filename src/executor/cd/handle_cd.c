@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/17 11:46:56 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/23 12:40:23 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	handle_cd2(t_mini *mini, char *target_dir)
 {
 	free(mini->prev_dir);
 	mini->prev_dir = ft_strdup(mini->curr_dir);
+	cd_env(mini);
 	if (target_dir != mini->curr_dir && ft_strcmp(target_dir, "") != 0)
 		free(target_dir);
 }
