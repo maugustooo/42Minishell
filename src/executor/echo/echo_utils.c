@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/29 10:56:26 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/29 11:58:18 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,12 @@ int	check_input2(t_token *token, t_mini *mini, t_token *file, t_token *temp)
 	if (output_return == 0)
 	{
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_PERMS), temp->next->text);
-		mini->return_code = 0;
-		return (1);
+		mini->return_code = 1;
 	}
 	else if (output_return == 2)
 	{
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_ECHO_RED));
 		mini->return_code = 2;
-		return (1);
 	}
 	return (1);
 }

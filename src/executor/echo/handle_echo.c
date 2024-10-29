@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_echo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:04:24 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/15 14:17:07 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/29 11:45:50 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int	output(t_token *token, t_mini *mini, t_token *file_node, int type)
 	if (file_node->type == ARG || file_node->type == FILE
 		|| file_node->type == NFILE)
 		file = file_node->text;
-	else
-		ft_printf(error_msg(ERROR_ARG_ECHO));
 	if (!check_file_perms(file_node))
 		return (0);
 	if (type == OUTPUT)
