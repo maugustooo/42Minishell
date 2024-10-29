@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/29 10:56:57 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/29 11:44:14 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,12 @@ t_token	*ft_finde_file(t_token *token)
 	temp = token;
 	while (temp)
 	{
-		if ((temp->type == FILE || temp->type == NFILE)
+		if ((temp->type == FILE || temp->type == NFILE || temp->type == NO_PERM)
 			&& (temp->prev->type == OUTPUT || temp->prev->type == APPEND))
+		{
 			file = temp;
+			break ;
+		}
 		temp = temp->next;
 	}
 	return (file);
