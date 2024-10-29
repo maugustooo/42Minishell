@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/15 13:39:58 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/29 10:56:26 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ int	check_input(t_token *token, t_mini *mini)
 {
 	t_token	*temp;
 	t_token	*file;
-	int		output_return;
 
-	output_return = 0;
 	temp = token;
 	file = ft_finde_file(token);
 	while (temp && temp->type != PIPE)

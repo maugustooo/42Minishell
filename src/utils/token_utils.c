@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/17 11:52:04 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/29 10:56:57 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ t_token	*ft_last_redir(t_token *token)
 void	count_redirections(t_token *token, t_mini *mini)
 {
 	t_token	*temp;
-	int		i;
 
-	i = 0;
 	temp = token;
 	while (temp)
 	{
