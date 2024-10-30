@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/29 11:58:18 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:41:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,25 @@ int	check_input(t_token *token, t_mini *mini)
 {
 	t_token	*temp;
 	t_token	*file;
+	int return_value;
 
+	return_value = 0;
 	temp = token;
-	file = ft_finde_file(token);
 	while (temp && temp->type != PIPE)
 	{
+		file = ft_finde_file(temp);
 		if ((temp->type == OUTPUT || temp->type == APPEND)
 			&& !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
-			return (check_input2(token, mini, file, temp));
+			{
+				check_input2(token, mini, file, temp);
+				return_value = 1;
+			}
 		if (temp->type == HERE && !ft_find_c('"', temp->text)
 			&& !ft_find_c('\'', temp->text))
 			heredoc(token, file);
 		temp = temp->next;
 	}
-	return (0);
+	return (return_value);
 }
 
 int	check_valid_n_flag(char *str)

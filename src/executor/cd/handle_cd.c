@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_cd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 15:02:35 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/23 12:40:23 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:29:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handle_dir(t_token *token, char **tgt_dir, t_mini *mini)
 		if (!tgt_dir)
 		{
 			free(tgt_dir);
-			*tgt_dir = NULL;
+			tgt_dir = NULL;
 		}
 	}
 	else if (ft_strncmp(token->next->text, "-",

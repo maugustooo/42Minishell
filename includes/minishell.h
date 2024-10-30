@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/23 12:31:49 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:19:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,8 @@ void	free_in_main(t_token **token, t_mini *mini);
 void	badjeras(t_token **token, t_mini *mini);
 void	badjeras2(t_token **token, t_mini *mini);
 void	cd_env(t_mini *mini);
+int		parse_echo(t_token *token, t_mini *mini);
+void	handle_permission_error(char ***args, int *i, enum e_error error);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

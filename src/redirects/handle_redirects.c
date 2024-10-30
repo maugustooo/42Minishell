@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/18 09:56:31 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:17:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,15 +108,19 @@ int	handle_input(char ***args, int *i, t_mini *mini)
 int	handle_output(char ***args, int	*i, t_mini *mini)
 {
 	int	fd_out;
-
+	struct stat	path_stat;
+	
 	fd_out = 0;
 	mini->redirect = 1;
 	if (ft_strcmp((*args)[*i], ">") == 0)
 		fd_out = open((*args)[*i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (ft_strcmp((*args)[*i], ">>") == 0)
 		fd_out = open((*args)[*i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+	if (stat((*args)[*i + 1], &path_stat) != -1
+		&& access((*args)[*i + 1], W_OK) != 0)
+		return(handle_permission_error(args, i, ERROR_PERMS), 0);
 	if (fd_out == -1)
-		return (0);
+		return(handle_permission_error(args, i, ERROR_NFILE), 0);
 	dup2(fd_out, STDOUT_FILENO);
 	if (fd_out)
 		close(fd_out);
