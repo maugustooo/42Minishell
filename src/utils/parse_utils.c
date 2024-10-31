@@ -6,18 +6,15 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:56:12 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/16 12:04:40 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/31 22:33:55 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_perms(t_token *temp, int input)
+int	check_perms(t_token *temp, int input, t_mini *mini)
 {
-	if (temp->type == NO_PERM && (input || (ft_find_c('<', temp->text)
-				|| ft_find_c('>', temp->text)
-				|| (ft_find_c('<', temp->text)
-					&& ft_find_c('<', temp->text + 1)))))
+	if (temp->type == NO_PERM && (input || (temp->prev && return_redirect(temp->prev) && !mini->echo)))
 	{
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_PERMS), temp->text);
 		return (0);

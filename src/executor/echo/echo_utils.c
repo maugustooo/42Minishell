@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/30 08:41:14 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/31 22:04:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,37 @@ void	heredoc(t_token *token, t_token *last)
 	}
 	close(fd);
 }
-
-int	check_input2(t_token *token, t_mini *mini, t_token *file, t_token *temp)
+void output2(t_token *token)
 {
-	int	output_return;
+    int after_file;
+    int first_arg;
+	
+	after_file = 0;
+	first_arg = 1;
+    while (token && token->type != PIPE)
+    {
+        if (token->type == FILE)
+            after_file = 1;
+        if (token->type != ARG)
+        {
+            token = token->next;
+            continue;
+        }
+        if (!first_arg)
+            ft_printf_fd(STDOUT_FILENO, " ");
+        ft_printf_fd(STDOUT_FILENO, "%s", token->text);
+        first_arg = 0;
+        token = token->next;
+    }
+    ft_printf_fd(STDOUT_FILENO, "\n");
+}
 
+void	check_input2(t_token *token, t_mini *mini)
+{
 	mini->echo_flag = true;
-	output_return = output(token, mini, file, temp->type);
-	if (output_return == 0)
-	{
-		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_PERMS), temp->next->text);
-		mini->return_code = 1;
-	}
-	else if (output_return == 2)
-	{
-		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_ECHO_RED));
-		mini->return_code = 2;
-	}
-	return (1);
+	output2(token);
+	dup2(mini->saved_stdout, STDOUT_FILENO);
+	close(mini->saved_stdout);
 }
 
 int	check_input(t_token *token, t_mini *mini)
@@ -67,9 +80,10 @@ int	check_input(t_token *token, t_mini *mini)
 	{
 		file = ft_finde_file(temp);
 		if ((temp->type == OUTPUT || temp->type == APPEND)
-			&& !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text))
+			&& !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text)
+			&& mini->num_outs-- == 1)
 			{
-				check_input2(token, mini, file, temp);
+				check_input2(token, mini);
 				return_value = 1;
 			}
 		if (temp->type == HERE && !ft_find_c('"', temp->text)

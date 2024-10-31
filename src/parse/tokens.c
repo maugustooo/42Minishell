@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/18 09:41:53 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/31 22:34:15 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ void	get_tokens(t_token **token, t_mini *mini)
 	int	i;
 
 	i = 0;
+	mini->echo = 0;
+	if(ft_strcmp(mini->splited[i], "echo") == 0)
+		mini->echo = 1;
 	ft_tokenadd_back(token, ft_newnode(CMD, mini->splited[i]));
 	while (mini->splited[++i])
 		init_token(token, mini->splited[i], mini);

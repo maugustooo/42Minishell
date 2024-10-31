@@ -30,9 +30,9 @@ void	handle_output_echo(t_mini *mini, t_token *token)
 		return ;
     if(fd_out != 0)
     {
+		mini->num_outs++;
 	    dup2(fd_out, STDOUT_FILENO);
-	    if (fd_out)
-		    close(fd_out);
+		close(fd_out);
     }
 }
 
@@ -84,6 +84,7 @@ int	parse_echo(t_token *token, t_mini *mini)
     t_token	*temp;
 
     temp = token;
+	mini->num_outs = 0;
     while (temp && temp->type != PIPE)
     {
         if(return_file(temp))

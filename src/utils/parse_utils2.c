@@ -6,11 +6,41 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:20:31 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/17 17:41:06 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/31 22:22:15 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	find_red(t_token *tmp)
+{
+	return (((!ft_find_c('>', tmp->text) || !ft_find_c('<', tmp->text))
+				|| (!ft_find_c('>', tmp->text) && ft_find_c('>', tmp->text + 1)))
+			&& !tmp->next);
+}
+void create_outfiles(t_token *tokens)
+{
+	int fd;
+    t_token *current;
+	
+	current = tokens;
+	fd = 0;
+    while (current && current->type != NFILE)
+	{
+        if ((current->type == OUTPUT || current->type == APPEND) && current->next)
+		{
+			if(current->type == OUTPUT)
+            	fd = open(current->next->text, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			else
+				fd = open(current->next->text, O_CREAT | O_WRONLY | O_APPEND, 0644);
+            if (fd == -1)
+				return ;
+			else
+				close(fd);
+        }
+        current = current->next;
+    }
+}
 
 int	return_dup_files(t_token **token)
 {

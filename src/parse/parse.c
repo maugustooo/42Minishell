@@ -45,7 +45,7 @@ static int	check_no_file(t_token *token, t_mini *mini)
 			input = 1;
 		if (temp->type == APPEND || temp->type == OUTPUT)
 			input = 0;
-		if (temp->type == NFILE && (input || ft_find_c('<', temp->text)))
+		if (temp->type == NFILE && (input || (ft_find_c('<', temp->text))))
 		{
 			if (!mini->pipe)
 				ft_printf_fd(STDERR_FILENO, error_msg(ERROR_NFILE), temp->text);
@@ -54,7 +54,7 @@ static int	check_no_file(t_token *token, t_mini *mini)
 				mini->return_code = 2;
 			return (0);
 		}
-		if (!check_perms(temp, input))
+		if (!check_perms(temp, input, mini))
 			return (0);
 		temp = temp->next;
 	}
@@ -144,12 +144,14 @@ int	parse(t_mini *mini, t_token	**token, char **envp)
 	{
 		if (mini->return_code != 2)
 			mini->return_code = 1;
+		create_outfiles(*token);
 		return (0);
 	}
 	remove_dup_files(token);
 	check_red_cmd(token);
 	if (!token || !*token)
 		return (0);
+	mini->saved_stdout = dup(STDOUT_FILENO);
 	if (mini->after_pipe == false)
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_UNCLOSED_PIPE));
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:19:07 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/15 14:38:40 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/10/31 21:56:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	handle_parent_process(int pipefd[2], int *fd_in, t_mini *mini,
 
 int	setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_mini *mini)
 {
-	mini->saved_stdout = dup(STDOUT_FILENO);
 	if (*fd_in != 0)
 	{
 		dup2(*fd_in, STDIN_FILENO);

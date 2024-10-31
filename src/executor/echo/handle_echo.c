@@ -3,63 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_echo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:04:24 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/30 10:31:32 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/31 22:01:41 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	output2(t_token *token, t_mini *mini, int after_file, int fd)
-{
-	while (token)
-	{
-		if (token->type == FILE)
-			after_file = 1;
-		if (token->type != ARG)
-		{
-			token = token->next;
-			continue ;
-		}
-		if ((token->type == ARG || token->type == FILE)
-			&& ft_strcmp(token->text, "-n") != 0)
-			ft_printf_fd(fd, "%s ", token->text);
-		else if (!mini->echo_flag || after_file)
-			ft_printf_fd(fd, "%s\n", token->text);
-		else if (token->type == ARG && ft_strcmp(token->text, "-n") != 0)
-			ft_printf_fd(fd, token->text);
-		token = token->next;
-	}
-}
-
-int	output(t_token *token, t_mini *mini, t_token *file_node, int type)
-{
-	int		fd;
-	char	*file;
-	int		after_file;
-
-	after_file = 0;
-	fd = 0;
-	if (!file_node)
-		return (2);
-	if (file_node->type == ARG || file_node->type == FILE
-		|| file_node->type == NFILE)
-		file = file_node->text;
-	if (!check_file_perms(file_node))
-		return (0);
-	if (type == OUTPUT)
-		fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	else if (type == APPEND)
-		fd = open(file, O_WRONLY | O_CREAT | O_APPEND, 0666);
-	if (fd)
-		output2(token, mini, after_file, fd);
-	else
-		check_access(token->text);
-	ft_printf_fd(fd, "\n");
-	return (1);
-}
 
 int	print_echo2(t_token **next, t_mini *mini)
 {

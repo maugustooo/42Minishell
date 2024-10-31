@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/30 11:19:17 by marvin           ###   ########.fr       */
+/*   Updated: 2024/10/31 22:32:38 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,12 @@ typedef struct s_mini
 	int		num_redir;
 	int		len;
 	int		saved_stdout;
+	int		echo_stdout;
 	int		i;
 	int		j;
+	int		in;
+	int		num_outs;
+	int		echo;
 }	t_mini;
 
 //--------------Utils-------------//
@@ -212,7 +216,7 @@ void	handle_sigint_heredoc(int sig);
 int		condition_hereoc(char *buffer, char *delimiter);
 void	move_left_heredoc(char **args, int start_index, int here_count,
 			t_mini *mini);
-int		check_perms(t_token *temp, int input);
+int		check_perms(t_token *temp, int input, t_mini *mini);
 int		return_redirect(t_token *token);
 int		pipes_and_red(char line);
 int		check_redirects(char line);
@@ -228,6 +232,7 @@ void	badjeras2(t_token **token, t_mini *mini);
 void	cd_env(t_mini *mini);
 int		parse_echo(t_token *token, t_mini *mini);
 void	handle_permission_error(char ***args, int *i, enum e_error error);
+int		find_red(t_token *tmp);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
@@ -236,7 +241,7 @@ void	ft_signals(void);
 void	handle_eof(t_token **token, t_mini *mini);
 void	split_to_tokens(char *line, t_mini *mini);
 int		count_tokens(char *line, t_mini *mini);
-
+void	create_outfiles(t_token *tokens);
 //------------Expander-----------//
 
 void	expander(t_token **token, t_mini *mini);
