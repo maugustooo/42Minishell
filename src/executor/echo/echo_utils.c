@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/31 22:04:05 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:17:58 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,11 @@ void	heredoc(t_token *token, t_token *last)
 }
 void output2(t_token *token)
 {
-    int after_file;
     int first_arg;
 	
-	after_file = 0;
 	first_arg = 1;
     while (token && token->type != PIPE)
     {
-        if (token->type == FILE)
-            after_file = 1;
         if (token->type != ARG)
         {
             token = token->next;

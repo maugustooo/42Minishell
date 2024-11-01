@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 10:13:27 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/22 10:58:04 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:58:49 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_file_perms(t_token *token)
 		return (1);
 	if (S_ISREG(path_stat.st_mode))
 	{
-		if (access(token->text, W_OK) != 0)
+		if (access(token->text, W_OK) == 0)
 			return (0);
 	}
 	else if (S_ISDIR(path_stat.st_mode))
