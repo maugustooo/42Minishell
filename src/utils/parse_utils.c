@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:56:12 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/31 22:33:55 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:38:09 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	check_perms(t_token *temp, int input, t_mini *mini)
 {
-	if (temp->type == NO_PERM && (input || (temp->prev && return_redirect(temp->prev) && !mini->echo)))
+	if (temp->type == NO_PERM && (input || (temp->prev && return_redirect(temp->prev)
+		&& !mini->echo)))
 	{
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_PERMS), temp->text);
 		return (0);

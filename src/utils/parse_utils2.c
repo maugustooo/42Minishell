@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:20:31 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/31 22:22:15 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:40:50 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,32 @@
 int	find_red(t_token *tmp)
 {
 	return (((!ft_find_c('>', tmp->text) || !ft_find_c('<', tmp->text))
-				|| (!ft_find_c('>', tmp->text) && ft_find_c('>', tmp->text + 1)))
-			&& !tmp->next);
+			|| (!ft_find_c('>', tmp->text) && ft_find_c('>', tmp->text + 1)))
+		&& !tmp->next);
 }
-void create_outfiles(t_token *tokens)
+
+void	create_outfiles(t_token *tokens)
 {
 	int fd;
-    t_token *current;
+	t_token *current;
 	
 	current = tokens;
 	fd = 0;
-    while (current && current->type != NFILE)
+	while (current && current->type != NFILE)
 	{
-        if ((current->type == OUTPUT || current->type == APPEND) && current->next)
+		if ((current->type == OUTPUT || current->type == APPEND) && current->next)
 		{
 			if(current->type == OUTPUT)
-            	fd = open(current->next->text, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+				fd = open(current->next->text, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			else
 				fd = open(current->next->text, O_CREAT | O_WRONLY | O_APPEND, 0644);
-            if (fd == -1)
+			if (fd == -1)
 				return ;
 			else
 				close(fd);
-        }
-        current = current->next;
-    }
+		}
+		current = current->next;
+	}
 }
 
 int	return_dup_files(t_token **token)

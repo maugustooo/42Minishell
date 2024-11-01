@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/11/01 15:17:58 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:37:16 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,26 @@ void	heredoc(t_token *token, t_token *last)
 	}
 	close(fd);
 }
-void output2(t_token *token)
+
+void	output2(t_token *token)
 {
-    int first_arg;
-	
+    int	first_arg;
+
 	first_arg = 1;
-    while (token && token->type != PIPE)
-    {
-        if (token->type != ARG)
-        {
-            token = token->next;
-            continue;
-        }
-        if (!first_arg)
-            ft_printf_fd(STDOUT_FILENO, " ");
-        ft_printf_fd(STDOUT_FILENO, "%s", token->text);
-        first_arg = 0;
-        token = token->next;
-    }
-    ft_printf_fd(STDOUT_FILENO, "\n");
+	while (token && token->type != PIPE)
+	{
+		if (token->type != ARG)
+		{
+			token = token->next;
+			continue ;
+		}
+		if (!first_arg)
+			ft_printf_fd(STDOUT_FILENO, " ");
+		ft_printf_fd(STDOUT_FILENO, "%s", token->text);
+		first_arg = 0;
+		token = token->next;
+	}
+	ft_printf_fd(STDOUT_FILENO, "\n");
 }
 
 void	check_input2(t_token *token, t_mini *mini)

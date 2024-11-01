@@ -144,8 +144,7 @@ int	parse(t_mini *mini, t_token	**token, char **envp)
 	{
 		if (mini->return_code != 2)
 			mini->return_code = 1;
-		create_outfiles(*token);
-		return (0);
+		return (create_outfiles(*token), 0);
 	}
 	remove_dup_files(token);
 	check_red_cmd(token);

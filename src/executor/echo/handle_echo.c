@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_echo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:04:24 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/31 22:01:41 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:31:46 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	handle_echo(t_token **token, t_mini *mini)
 	check_input_return = 0;
 	temp = *token;
 	first = 0;
-	if(parse_echo(temp, mini) == 1)
+	if (parse_echo(temp, mini) == 1)
 		return ;
 	if (temp->next)
 	{
