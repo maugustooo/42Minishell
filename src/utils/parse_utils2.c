@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:20:31 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/01 15:40:50 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:49:50 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,22 @@ int	find_red(t_token *tmp)
 
 void	create_outfiles(t_token *tokens)
 {
-	int fd;
-	t_token *current;
-	
+	int		fd;
+	t_token	*current;
+
 	current = tokens;
 	fd = 0;
 	while (current && current->type != NFILE)
 	{
-		if ((current->type == OUTPUT || current->type == APPEND) && current->next)
+		if ((current->type == OUTPUT || current->type == APPEND)
+			&& current->next)
 		{
-			if(current->type == OUTPUT)
-				fd = open(current->next->text, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			if (current->type == OUTPUT)
+				fd = open(current->next->text, O_CREAT | O_WRONLY
+						| O_TRUNC, 0644);
 			else
-				fd = open(current->next->text, O_CREAT | O_WRONLY | O_APPEND, 0644);
+				fd = open(current->next->text, O_CREAT | O_WRONLY
+						| O_APPEND, 0644);
 			if (fd == -1)
 				return ;
 			else

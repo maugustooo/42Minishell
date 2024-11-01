@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 10:11:25 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/11/01 15:37:16 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/01 16:03:02 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	heredoc(t_token *token, t_token *last)
 
 void	output2(t_token *token)
 {
-    int	first_arg;
+	int	first_arg;
 
 	first_arg = 1;
 	while (token && token->type != PIPE)
@@ -69,7 +69,7 @@ int	check_input(t_token *token, t_mini *mini)
 {
 	t_token	*temp;
 	t_token	*file;
-	int return_value;
+	int		return_value;
 
 	return_value = 0;
 	temp = token;
@@ -79,42 +79,14 @@ int	check_input(t_token *token, t_mini *mini)
 		if ((temp->type == OUTPUT || temp->type == APPEND)
 			&& !ft_find_c('"', temp->text) && !ft_find_c('\'', temp->text)
 			&& mini->num_outs-- == 1)
-			{
-				check_input2(token, mini);
-				return_value = 1;
-			}
+		{
+			check_input2(token, mini);
+			return_value = 1;
+		}
 		if (temp->type == HERE && !ft_find_c('"', temp->text)
 			&& !ft_find_c('\'', temp->text))
 			heredoc(token, file);
 		temp = temp->next;
 	}
 	return (return_value);
-}
-
-int	check_valid_n_flag(char *str)
-{
-	int	i;
-
-	i = 1;
-	if (str[0] == '-')
-	{
-		while (str[i] && str[i] == 'n')
-			i++;
-		return (str[i] == '\0');
-	}
-	return (0);
-}
-
-int	handle_n_flag(t_token **next)
-{
-	int	n_flag;
-
-	n_flag = 0;
-	while ((*next) && (ft_strncmp((*next)->text, "-n", 2) == 0)
-		&& check_valid_n_flag((*next)->text))
-	{
-		n_flag++;
-		(*next) = (*next)->next;
-	}
-	return (n_flag);
 }
