@@ -63,6 +63,7 @@ static int	check_perms_echo(t_token *token)
 
 	if (stat(token->text, &path_stat) == -1)
 	{
+		print_error(token->text, ": Not a directory\n");
 		return (1);
 	}
 	if (S_ISREG(path_stat.st_mode))
