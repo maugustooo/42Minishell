@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:29:22 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/30 11:27:49 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/02 11:35:23 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	handle_redirection(char **args, t_mini *mini, t_token **token)
 	t_redirection_data	data;
 
 	ft_memset(&data, 0, sizeof(t_redirection_data));
+	count_redirections(*token, mini);
 	if (mini->input_count > 1)
 	{
 		if (!handle_mult_redirections(args, mini, ft_last_redir(*token), data))
