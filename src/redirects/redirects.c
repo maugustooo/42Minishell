@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:29:22 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/02 11:35:23 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/02 12:07:05 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static int	handle_single_redirection(char **args, t_mini *mini,
 {
 	while (args[data.i])
 	{
-		if (!ft_strcmp(args[data.i], "<") && args[data.i]
-			&& ft_strcmp(args[data.i], "|") != 0)
+		if (!ft_strcmp(args[data.i], "<") && args[data.i + 1]
+			&& ft_strcmp(args[data.i + 1], "|") != 0)
 		{
 			data.i ++;
 			if (!handle_input(&args, &data.i, mini))
@@ -57,14 +57,14 @@ static int	handle_single_redirection(char **args, t_mini *mini,
 		}
 		else if (((ft_strcmp(args[data.i], ">") == 0
 					|| ft_strcmp(args[data.i], ">>") == 0))
-			&& args[data.i] && ft_strcmp(args[data.i], "|") != 0)
+			&& args[data.i + 1] && ft_strcmp(args[data.i + 1], "|") != 0)
 		{
 			if (!handle_output(&args, &data.i, mini))
 				return (0);
 			data.file = 1;
 		}
 		else if (args[data.i] && ft_strcmp(args[data.i], "<<") == 0
-			&& ft_strcmp(args[data.i], "|") != 0)
+			&& (args[data.i + 1] && ft_strcmp(args[data.i + 1], "|") != 0))
 			handle_heredoc(&args, &data.i, mini);
 		else
 			data.i ++;

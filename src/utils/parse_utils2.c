@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:20:31 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/01 15:49:50 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/02 13:55:34 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	return_dup_files(t_token **token)
 			|| ((*token)->type == INPUT)
 			|| ((*token)->type == HERE)
 			|| (*token)->prev->type == HERE) && ((*token)->next
-			&& ((*token)->next->type != PIPE)));
+			&& ((*token)->next->type != PIPE && ((*token)->next->type != OUTPUT
+			&& (*token)->next->type != APPEND))));
 }
 
 int	next(t_token *tmp)
