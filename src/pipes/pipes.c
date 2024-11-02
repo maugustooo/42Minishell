@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:19:07 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/31 21:56:05 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/02 19:33:20 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@ int	setup_pipes(int *fd_in, int pipefd[2], t_token *start, t_mini *mini)
 	{
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[1]);
-	}
-	if (mini->is_pipe == 1)
 		close(pipefd[0]);
+	}
 	if (is_built_in(start))
 	{
 		handle_built_ins(&start, mini);

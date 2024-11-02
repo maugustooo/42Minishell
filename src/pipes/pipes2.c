@@ -1,16 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pipes2.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 08:58:30 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/11 11:07:02 by gude-jes         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+	/* ************************************************************************** */
+	/*                                                                            */
+	/*                                                        :::      ::::::::   */
+	/*   pipes2.c                                           :+:      :+:    :+:   */
+	/*                                                    +:+ +:+         +:+     */
+	/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+	/*                                                +#+#+#+#+#+   +#+           */
+	/*   Created: 2024/10/04 08:58:30 by gude-jes          #+#    #+#             */
+	/*   Updated: 2024/10/11 11:07:02 by gude-jes         ###   ########.fr       */
+	/*                                                                            */
+	/* ************************************************************************** */
 
-#include "minishell.h"
+	#include "minishell.h"
 
 void	process_segment_iteration(t_token **temp, t_mini *mini,
 	t_pipe_info *pipe_info)
@@ -48,9 +48,10 @@ void	wait_for_children(pid_t *child_pids, int pid_count, t_mini *mini)
 	int	i;
 
 	status = 0;
-	i = 0;
-	while (i++ < pid_count)
+	i = pid_count;
+	while (i-- > 0)
 	{
+		signal(SIGINT, handle_sigint2);
 		waitpid(child_pids[i], &status, 0);
 		if ((i == pid_count -1) && WIFEXITED(status))
 			mini->return_code = WEXITSTATUS(status);

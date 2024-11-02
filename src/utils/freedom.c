@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freedom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/29 10:57:17 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/02 19:05:30 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	free_key(char **key)
 
 void	free_things(t_mini *mini)
 {
+	if(mini->saved_stdout)
+		close(mini->saved_stdout);
 	if (mini->penv)
 	{
 		free_penv(mini);

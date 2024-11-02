@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/01 15:42:06 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/02 20:00:49 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ void	move_left(char **args, int start_index)
 	args[i] = NULL;
 }
 
+void close_and_move_left(char **args, int *i, t_mini *mini, int pipefd[2])
+{
+	close(pipefd[1]);
+	dup2(pipefd[0], STDIN_FILENO);
+	close(pipefd[0]);
+	move_left_heredoc(args, *i, mini->here_count, mini);
+}
 void	handle_heredoc(char ***args, int *i, t_mini *mini)
 {
 	char	buffer[1024];
@@ -57,23 +64,24 @@ void	handle_heredoc(char ***args, int *i, t_mini *mini)
 
 	mini->redirect = 1;
 	pipe(pipefd);
-	delimiter = set_delimiter(*args, i, mini);
 	signal(SIGINT, handle_sigint_heredoc);
-	while (1)
+	while (mini->here_count > 0)
 	{
+		delimiter = set_delimiter(*args, i, mini);
 		ft_printf_fd(mini->saved_stdout, "> ");
 		bytes_read = read(STDIN_FILENO, buffer, sizeof(buffer) - 1);
 		if (bytes_read <= 0)
 			break ;
 		buffer[bytes_read] = '\0';
 		if (condition_hereoc(buffer, delimiter))
-			break ;
-		ft_printf_fd(pipefd[1], buffer);
+		{
+			mini->here_count--;
+			move_left_heredoc((*args), *i, mini->here_count, mini);
+		}
+		else
+			ft_printf_fd(pipefd[1], buffer);
 	}
-	close(pipefd[1]);
-	dup2(pipefd[0], STDIN_FILENO);
-	close(pipefd[0]);
-	move_left_heredoc((*args), *i, mini->here_count, mini);
+	close_and_move_left(*args, i, mini, pipefd);
 }
 
 int	handle_input(char ***args, int *i, t_mini *mini)

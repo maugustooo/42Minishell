@@ -6,7 +6,7 @@
 /*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:29:22 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/02 12:07:05 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/02 19:56:13 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 void	move_left_heredoc(char **args, int start_index, int here_count,
 t_mini *mini)
 {
+	here_count = 0;
 	mini->i = start_index;
-	while (here_count-- > 0)
-	{
 		while (args[mini->i] && ft_strcmp(args[mini->i], "<<") != 0)
 			mini->i++;
 		if (args[mini->i] && ft_strcmp(args[mini->i], "<<") == 0)
@@ -39,7 +38,6 @@ t_mini *mini)
 			}
 			args[mini->i] = NULL;
 		}
-	}
 }
 
 static int	handle_single_redirection(char **args, t_mini *mini,

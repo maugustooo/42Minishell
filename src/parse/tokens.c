@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 12:04:18 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/01 15:42:33 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/02 19:53:40 by maugusto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,7 @@ void	remove_dup_files(t_token **token)
 			(*token) = (*token)->next;
 			while ((*token)->next && ((*token)->type == FILE
 					|| (*token)->type == NFILE || (*token)->next->type == INPUT
-					|| (*token)->type == INPUT || (*token)->type == HERE
-					|| (*token)->prev->type == HERE) && ((*token)->next
+					|| (*token)->type == INPUT) && ((*token)->next
 					&& (*token)->next->type != PIPE))
 			{
 				if (return_dup_files(token))
