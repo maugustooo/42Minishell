@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:19:07 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/02 19:33:20 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/03 18:58:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ void	process_pipe_segment(t_token **temp, int *fd_in, t_mini *mini)
 	pipe_info.pid_count = &pid_count;
 	pipe_info.child_pids = child_pids;
 	pipe_info.pid = pid;
+	count_redirections(*temp, mini);
+	if (mini->here_count >= 1)
+		heredoc_pipe(temp, mini);
 	while (temp && *temp)
 		process_segment_iteration(temp, mini, &pipe_info);
 	wait_for_children(child_pids, pid_count, mini);
@@ -87,4 +90,5 @@ void	pipes(t_token **token, t_mini *mini)
 		mini->return_code = 0;
 		mini->final_pipe = 0;
 	}
+	dup2(mini->saved_stdin, STDIN_FILENO);
 }

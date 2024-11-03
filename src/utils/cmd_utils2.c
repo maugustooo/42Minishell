@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 10:13:27 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/10/30 08:58:49 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/03 14:52:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,25 @@ void	copy_args(char **nargs, char **args, t_mini *mini, size_t start)
 		i++;
 	}
 	nargs[start] = NULL;
+}
+
+char	*last_delimiter(char **args)
+{
+	char	**tmp;
+	int		j;
+	char	*delimiter;
+
+	delimiter = NULL;
+	j = 0;
+	tmp = args;
+	while (tmp[j])
+	{
+		if (ft_strcmp(tmp[j], "<<") == 0)
+		{
+			if (tmp[j + 1])
+				delimiter = tmp[j + 1];
+		}
+		j++;
+	}
+	return (delimiter);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/10/31 22:32:38 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/03 18:23:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ typedef struct s_mini
 	int		num_redir;
 	int		len;
 	int		saved_stdout;
+	int		saved_stdin;
 	int		echo_stdout;
 	int		i;
 	int		j;
@@ -214,8 +215,7 @@ void	handle_sigint2(int sig);
 char	*error_msg(enum e_error i);
 void	handle_sigint_heredoc(int sig);
 int		condition_hereoc(char *buffer, char *delimiter);
-void	move_left_heredoc(char **args, int start_index, int here_count,
-			t_mini *mini);
+void	move_left_heredoc(char **args, int start_index, t_mini *mini);
 int		check_perms(t_token *temp, int input, t_mini *mini);
 int		return_redirect(t_token *token);
 int		pipes_and_red(char line);
@@ -233,6 +233,7 @@ void	cd_env(t_mini *mini);
 int		parse_echo(t_token *token, t_mini *mini);
 void	handle_permission_error(char ***args, int *i, enum e_error error);
 int		find_red(t_token *tmp);
+char	*last_delimiter(char **args);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);
@@ -242,6 +243,7 @@ void	handle_eof(t_token **token, t_mini *mini);
 void	split_to_tokens(char *line, t_mini *mini);
 int		count_tokens(char *line, t_mini *mini);
 void	create_outfiles(t_token *tokens);
+void	heredoc_pipe(t_token **current_token, t_mini *mini);
 //------------Expander-----------//
 
 void	expander(t_token **token, t_mini *mini);

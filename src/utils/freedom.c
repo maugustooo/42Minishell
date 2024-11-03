@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   freedom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 17:05:26 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/02 19:05:30 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/03 18:35:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	free_things(t_mini *mini)
 {
 	if(mini->saved_stdout)
 		close(mini->saved_stdout);
+	if(mini->saved_stdin)
+		close(mini->saved_stdin);
 	if (mini->penv)
 	{
 		free_penv(mini);

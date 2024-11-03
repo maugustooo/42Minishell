@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:29:22 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/02 19:56:13 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/03 17:47:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	move_left_heredoc(char **args, int start_index, int here_count,
-t_mini *mini)
+void	move_left_heredoc(char **args, int start_index, t_mini *mini)
 {
-	here_count = 0;
 	mini->i = start_index;
 		while (args[mini->i] && ft_strcmp(args[mini->i], "<<") != 0)
 			mini->i++;

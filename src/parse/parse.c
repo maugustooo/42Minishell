@@ -12,23 +12,27 @@
 
 #include "minishell.h"	
 
-static int	have_pipe(t_token *token, t_mini *mini)
+static int	have_pipe(t_token **token, t_mini *mini)
 {
 	int	flag;
+	t_token *temp;
 
+	temp = *token;
 	mini->after_pipe = true;
 	flag = 0;
-	while (token)
+	while (temp)
 	{
-		if (token->type == PIPE)
+		if (temp->type == PIPE)
 		{
-			if (!token->next)
+			if (!temp->next)
 				mini->after_pipe = false;
 			mini->num_pipes++;
 			flag = 1;
 		}
-		token = token ->next;
+		temp = temp->next;
 	}
+	mini->saved_stdout = dup(STDOUT_FILENO);
+	mini->saved_stdin = dup(STDIN_FILENO);
 	return (flag);
 }
 
@@ -138,7 +142,7 @@ int	parse(t_mini *mini, t_token	**token, char **envp)
 		if (ft_strncmp((*token)->next->text, "-n", 2) == 0)
 			mini->echo_flag = true;
 	getcwd(mini->curr_dir, sizeof(mini->curr_dir));
-	if (have_pipe(*token, mini) || mini->final_pipe)
+	if (have_pipe(token, mini) || mini->final_pipe)
 		mini->pipe = true;
 	if (!check_no_file(*token, mini) && !mini->pipe)
 	{
@@ -150,7 +154,6 @@ int	parse(t_mini *mini, t_token	**token, char **envp)
 	check_red_cmd(token);
 	if (!token || !*token)
 		return (0);
-	mini->saved_stdout = dup(STDOUT_FILENO);
 	if (mini->after_pipe == false)
 		ft_printf_fd(STDERR_FILENO, error_msg(ERROR_UNCLOSED_PIPE));
 	return (1);

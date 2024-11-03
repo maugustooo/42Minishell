@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 14:10:34 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/02 20:00:49 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/03 14:26:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void close_and_move_left(char **args, int *i, t_mini *mini, int pipefd[2])
 	close(pipefd[1]);
 	dup2(pipefd[0], STDIN_FILENO);
 	close(pipefd[0]);
-	move_left_heredoc(args, *i, mini->here_count, mini);
+	move_left_heredoc(args, *i, mini);
 }
 void	handle_heredoc(char ***args, int *i, t_mini *mini)
 {
@@ -76,9 +76,9 @@ void	handle_heredoc(char ***args, int *i, t_mini *mini)
 		if (condition_hereoc(buffer, delimiter))
 		{
 			mini->here_count--;
-			move_left_heredoc((*args), *i, mini->here_count, mini);
+			move_left_heredoc((*args), *i, mini);
 		}
-		else
+		else if(strcmp(delimiter, last_delimiter(*args)) == 0)
 			ft_printf_fd(pipefd[1], buffer);
 	}
 	close_and_move_left(*args, i, mini, pipefd);
