@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:36:54 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/04 09:07:40 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/04 09:15:14 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	count_redirections(t_token *token, t_mini *mini)
 
 	temp = token;
 	mini->input_count = 0;
+	mini->here_count = 0;
 	while (temp)
 	{
 		if (temp->type == INPUT)

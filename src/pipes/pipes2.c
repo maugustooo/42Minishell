@@ -51,7 +51,6 @@ void	wait_for_children(pid_t *child_pids, int pid_count, t_mini *mini)
 	i = pid_count;
 	while (i-- > 0)
 	{
-		signal(SIGINT, handle_sigint2);
 		waitpid(child_pids[i], &status, 0);
 		if ((i == pid_count -1) && WIFEXITED(status))
 			mini->return_code = WEXITSTATUS(status);
