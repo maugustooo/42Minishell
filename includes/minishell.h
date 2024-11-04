@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 14:35:41 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/04 09:06:21 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:29:12 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,7 @@ int		parse_echo(t_token *token, t_mini *mini);
 void	handle_permission_error(char ***args, int *i, enum e_error error);
 int		find_red(t_token *tmp);
 char	*last_delimiter(char **args);
+char	*remove_quotes(char *str);
 //--------------Parser------------//
 
 int		parse(t_mini *mini, t_token	**token, char **envp);

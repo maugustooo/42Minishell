@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:07:34 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/11/04 09:07:35 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:05:19 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	free_key(char **key)
 
 void	free_things(t_mini *mini)
 {
-	if(mini->saved_stdout)
+	if (mini->saved_stdout)
 		close(mini->saved_stdout);
-	if(mini->saved_stdin)
+	if (mini->saved_stdin)
 		close(mini->saved_stdin);
 	if (mini->penv)
 	{

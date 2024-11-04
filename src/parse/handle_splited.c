@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_splited.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maugusto <maugusto@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 14:53:00 by maugusto          #+#    #+#             */
-/*   Updated: 2024/11/02 12:20:15 by maugusto         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:29:41 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	handle_redirects(char **line, t_mini *mini, t_splited_data *data,
 	{
 		while ((*line) && check_redirects(**line))
 		{
-			if (*(*line + 1) && ((*(*line + 1) == '<' || *(*line + 1) == '<')
-					|| (*(*line + 1) == '>' || *(*line + 1) == '>') || (*(*line) == '|')))
+			if (*(*line + 1) && ((*(*line + 1) == '<'
+						|| *(*line + 1) == '>') || (*(*line) == '|')))
 				add_token(mini, *line, 2, data);
 			else
 				add_token(mini, *line, 1, data);

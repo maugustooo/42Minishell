@@ -18,3 +18,22 @@ void	handle_permission_error(char ***args, int *i, enum e_error error)
 	move_left((*args), *i);
 	move_left((*args), *i);
 }
+
+char	*remove_quotes(char *str)
+{
+	int		len;
+	char	*new_str;
+
+	len = ft_strlen(str);
+	if ((str[0] == '"' && str[len - 1] == '"') || (str[0] == '\''
+			&& str[len - 1] == '\''))
+	{
+		new_str = malloc(len - 1);
+		if (!new_str)
+			return (NULL);
+		ft_strncpy(new_str, str + 1, len - 2);
+		new_str[len - 2] = '\0';
+		return (new_str);
+	}
+	return (str);
+}

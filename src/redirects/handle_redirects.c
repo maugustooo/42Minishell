@@ -6,30 +6,11 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:07:13 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/11/04 09:07:14 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:06:30 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*remove_quotes(char *str)
-{
-	int		len;
-	char	*new_str;
-
-	len = ft_strlen(str);
-	if ((str[0] == '"' && str[len - 1] == '"') || (str[0] == '\''
-			&& str[len - 1] == '\''))
-	{
-		new_str = malloc(len - 1);
-		if (!new_str)
-			return (NULL);
-		ft_strncpy(new_str, str + 1, len - 2);
-		new_str[len - 2] = '\0';
-		return (new_str);
-	}
-	return (str);
-}
 
 void	move_left(char **args, int start_index)
 {
@@ -48,13 +29,14 @@ void	move_left(char **args, int start_index)
 	args[i] = NULL;
 }
 
-void close_and_move_left(char **args, int *i, t_mini *mini, int pipefd[2])
+void	close_and_move_left(char **args, int *i, t_mini *mini, int pipefd[2])
 {
 	close(pipefd[1]);
 	dup2(pipefd[0], STDIN_FILENO);
 	close(pipefd[0]);
 	move_left_heredoc(args, *i, mini);
 }
+
 void	handle_heredoc(char ***args, int *i, t_mini *mini)
 {
 	char	buffer[1024];
@@ -78,7 +60,7 @@ void	handle_heredoc(char ***args, int *i, t_mini *mini)
 			mini->here_count--;
 			move_left_heredoc((*args), *i, mini);
 		}
-		else if(strcmp(delimiter, last_delimiter(*args)) == 0)
+		else if (strcmp(delimiter, last_delimiter(*args)) == 0)
 			ft_printf_fd(pipefd[1], buffer);
 	}
 	close_and_move_left(*args, i, mini, pipefd);

@@ -14,8 +14,8 @@
 
 static int	have_pipe(t_token **token, t_mini *mini)
 {
-	int	flag;
-	t_token *temp;
+	int		flag;
+	t_token	*temp;
 
 	temp = *token;
 	mini->after_pipe = true;

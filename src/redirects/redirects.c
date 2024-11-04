@@ -6,7 +6,7 @@
 /*   By: gude-jes <gude-jes@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 09:07:24 by gude-jes          #+#    #+#             */
-/*   Updated: 2024/11/04 09:07:24 by gude-jes         ###   ########.fr       */
+/*   Updated: 2024/11/04 10:03:59 by gude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,27 @@
 void	move_left_heredoc(char **args, int start_index, t_mini *mini)
 {
 	mini->i = start_index;
-		while (args[mini->i] && ft_strcmp(args[mini->i], "<<") != 0)
-			mini->i++;
-		if (args[mini->i] && ft_strcmp(args[mini->i], "<<") == 0)
+	while (args[mini->i] && ft_strcmp(args[mini->i], "<<") != 0)
+		mini->i++;
+	if (args[mini->i] && ft_strcmp(args[mini->i], "<<") == 0)
+	{
+		free(args[mini->i]);
+		args[mini->i] = NULL;
+		if (args[mini->i + 1])
 		{
-			free(args[mini->i]);
-			args[mini->i] = NULL;
-			if (args[mini->i + 1])
-			{
-				free(args[mini->i + 1]);
-				args[mini->i + 1] = NULL;
-			}
-			mini->j = mini->i + 2;
-			while (args[mini->j])
-			{
-				args[mini->i] = args[mini->j];
-				args[mini->j] = NULL;
-				mini->i++;
-				mini->j++;
-			}
-			args[mini->i] = NULL;
+			free(args[mini->i + 1]);
+			args[mini->i + 1] = NULL;
 		}
+		mini->j = mini->i + 2;
+		while (args[mini->j])
+		{
+			args[mini->i] = args[mini->j];
+			args[mini->j] = NULL;
+			mini->i++;
+			mini->j++;
+		}
+		args[mini->i] = NULL;
+	}
 }
 
 static int	handle_single_redirection(char **args, t_mini *mini,
