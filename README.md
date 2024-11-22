@@ -9,7 +9,7 @@ Minishell is a 42 school team project to create a basic shell program in C. It i
 
 Clone the repository with the [minitester](https://github.com/mcombeau/minitester-minishell-tester) submodule:
 ```
-git clone [--recurse-submodules git@github.com:mcombeau/minishell.git](https://github.com/maugustooo/42Minishell.git)
+git clone [(https://github.com/maugustooo/42Minishell.git)]
 ```
 
 To compile:
