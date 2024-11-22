@@ -2,10 +2,7 @@
 
 Minishell is a 42 school team project to create a basic shell program in C. It implements redirections and pipes, as well as environment variable expansions and the `cd`, `echo`, `env`, `exit`, `export`, `pwd` and `unset` builtin commands.
 
-## Status![Capturar](https://github.com/user-attachments/assets/970ac701-3694-443d-b1b1-d221bf3391fd)
-
-
-Validated 11/11/2022. Grade: 99%.
+![Capturar](https://github.com/user-attachments/assets/970ac701-3694-443d-b1b1-d221bf3391fd)
 
 ## Usage
 
