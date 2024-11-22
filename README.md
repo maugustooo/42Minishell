@@ -6,7 +6,7 @@ Minishell is a 42 school team project to create a basic shell program in C. It i
 ![Capturar](https://github.com/user-attachments/assets/970ac701-3694-443d-b1b1-d221bf3391fd)
 
 <div align="center">
-	<h1><a href="https://github.com/maugustooo/42minishell/blob/main/en.subject.pdf">Subject</a></h1>
+	<h1><a href="https://github.com/maugustooo/42minishell/blob/main/en.subject .pdf">Subject</a></h1>
 </div>
 
 ## Usage
