@@ -24,13 +24,6 @@ To run the program:
 ./minishell
 ```
 
-A prompt will appear. You may enter your commands to be executed.
-
-To run the included tester:
-```shell
-cd minitester/ && bash minitester.sh
-```
-
 ## Supported Features
 
 Minishell is a miniature shell program based on Bash. Minishell supports:
