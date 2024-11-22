@@ -7,7 +7,7 @@ Minishell is a 42 school team project to create a basic shell program in C. It i
 
 ## Usage
 
-Clone the repository with the [minitester](https://github.com/mcombeau/minitester-minishell-tester) submodule:
+Clone the repository
 ```
 git clone https://github.com/maugustooo/42Minishell.git
 ```
@@ -15,7 +15,7 @@ git clone https://github.com/maugustooo/42Minishell.git
 To compile:
 
 ```shell
-cd minishell && make
+cd 42Minishell && make
 ```
 
 To run the program:
